@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 2 - Installation de Django</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #092e20;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #092e20;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #092e20;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #092e20;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 2 : Installation de Django 🛠️</h1>
+    <p>Apprends à configurer ton environnement et à installer Django pour démarrer ton projet.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Pourquoi configurer un environnement ?</h2>
+    <p>Avant de coder avec Django, tu dois installer Python, un environnement virtuel pour isoler les dépendances, et Django lui-même. Cela garantit que ton projet est portable et sans conflits de versions.</p>
+    <p><strong>Prérequis :</strong></p>
+    <ul>
+      <li><strong>Python 3.9+</strong> : Django 5.x nécessite une version récente de Python.</li>
+      <li><strong>pip</strong> : Gestionnaire de packages Python pour installer Django.</li>
+      <li><strong>virtualenv</strong> : Pour créer un environnement isolé.</li>
+      <li><strong>Éditeur de code</strong> : VS Code, PyCharm, ou tout autre IDE.</li>
+      <li><strong>Base de données</strong> : SQLite (inclus par défaut) ou PostgreSQL/MySQL pour des projets plus complexes.</li>
+    </ul>
+
+    <h2>🔹 Étape 1 : Installer Python</h2>
+    <p>Télécharge Python depuis <a href="https://www.python.org">python.org</a>. Vérifie la version :</p>
+    <pre><code>
+python --version
+    </code></pre>
+    <p><strong>Résultat attendu</strong> : <code>Python 3.9.x</code> ou supérieur. Sur Windows, assure-toi d’ajouter Python au PATH lors de l’installation.</p>
+
+    <h2>🔹 Étape 2 : Créer un environnement virtuel</h2>
+    <p>Un environnement virtuel isole les dépendances de ton projet. Crée et active un environnement :</p>
+    <pre><code>
+python -m venv monenv
+source monenv/bin/activate  # Linux/Mac
+monenv\Scripts\activate    # Windows
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>python -m venv monenv</code> : Crée un dossier <code>monenv</code> pour l’environnement.</li>
+      <li><code>source monenv/bin/activate</code> : Active l’environnement (prompt change, ex. <code>(monenv)</code>).</li>
+    </ul>
+    <p><strong>Résultat</strong> : Les commandes <code>pip</code> et <code>python</code> utilisent désormais l’environnement isolé.</p>
+
+    <h2>🔹 Étape 3 : Installer Django</h2>
+    <p>Dans l’environnement activé, installe Django avec pip :</p>
+    <pre><code>
+pip install django
+    </code></pre>
+    <p>Vérifie l’installation :</p>
+    <pre><code>
+django-admin --version
+    </code></pre>
+    <p><strong>Résultat attendu</strong> : <code>5.x.x</code> (version actuelle de Django).</p>
+    <p><strong>Exemple alternatif</strong> : Pour installer une version spécifique (ex. 5.0) :</p>
+    <pre><code>
+pip install django==5.0
+    </code></pre>
+
+    <h2>🔹 Étape 4 : Créer un projet pour tester</h2>
+    <p>Crée un projet Django pour vérifier l’installation :</p>
+    <pre><code>
+django-admin startproject monprojet
+cd monprojet
+python manage.py runserver
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>startproject</code> : Crée un dossier <code>monprojet</code> avec la structure de base.</li>
+      <li><code>runserver</code> : Lance un serveur local à <code>http://localhost:8000</code>.</li>
+    </ul>
+    <p><strong>Résultat</strong> : Ouvre <code>http://localhost:8000</code> dans ton navigateur pour voir la page de bienvenue de Django ("The install worked successfully!").</p>
+
+    <h2>🔹 Exemple pratique : Vérifier les dépendances</h2>
+    <p>Liste les packages installés dans l’environnement :</p>
+    <pre><code>
+pip list
+    </code></pre>
+    <p><strong>Résultat attendu</strong> :</p>
+    <pre><code>
+Package    Version
+---------- -------
+Django     5.x.x
+pip        x.x.x
+setuptools x.x.x
+    </code></pre>
+    <p><strong>Explication</strong> : Confirme que Django est bien installé et à la bonne version.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>"python: command not found"</strong> : Ajoute Python au PATH ou réinstalle-le.</li>
+      <li><strong>Environnement non activé</strong> : Active l’environnement virtuel avant d’installer Django.</li>
+      <li><strong>Port occupé</strong> : Si <code>8000</code> est pris, utilise <code>python manage.py runserver 8001</code>.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Installe Python 3.9+ et vérifie la version avec <code>python --version</code>.<br>
+    2. Crée un environnement virtuel nommé <code>djenv</code> et active-le.<br>
+    3. Installe Django et vérifie la version avec <code>django-admin --version</code>.<br>
+    4. Crée un projet test nommé <code>siteweb</code> et lance le serveur.<br>
+    5. Ouvre <code>http://localhost:8000</code> et note dans un fichier texte ce que tu vois.</p>
+
+    <a href="django3.html" class="btn">➡️ Chapitre 3 : Création d’un projet Django</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Django</a></p>
+  </footer>
+</body>
+</html>

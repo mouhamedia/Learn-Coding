@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 3 - Création d’un projet Django</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #092e20;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #092e20;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #092e20;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #092e20;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 3 : Création d’un projet Django 🏗️</h1>
+    <p>Apprends à créer et configurer un projet Django pour démarrer ton développement.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un projet Django ?</h2>
+    <p>Un projet Django est un ensemble de configurations et d’applications qui forment une application web. Il inclut les fichiers de configuration globale (comme la base de données et les URLs) et peut contenir plusieurs applications pour des fonctionnalités spécifiques.</p>
+    <p><strong>Différence projet vs application :</strong></p>
+    <ul>
+      <li><strong>Projet</strong> : Conteneur global (ex. un site web complet).</li>
+      <li><strong>Application</strong> : Module spécifique (ex. blog, boutique) réutilisable dans plusieurs projets.</li>
+    </ul>
+
+    <h2>🔹 Exemple 1 : Créer un projet</h2>
+    <p>Dans ton environnement virtuel activé, crée un projet :</p>
+    <pre><code>
+django-admin startproject monprojet
+    </code></pre>
+    <p><strong>Résultat</strong> : Crée un dossier <code>monprojet</code> avec :</p>
+    <pre><code>
+monprojet/
+├── manage.py
+├── monprojet/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>manage.py</code> : Script pour gérer le projet (serveur, migrations, etc.).</li>
+      <li><code>settings.py</code> : Configure la base de données, les applications installées, et les paramètres.</li>
+      <li><code>urls.py</code> : Définit les routes du projet.</li>
+    </ul>
+
+    <h2>🔹 Exemple 2 : Lancer le serveur</h2>
+    <p>Accède au dossier du projet et lance le serveur de développement :</p>
+    <pre><code>
+cd monprojet
+python manage.py runserver
+    </code></pre>
+    <p><strong>Résultat</strong> : Ouvre <code>http://localhost:8000</code> pour voir la page par défaut de Django.</p>
+    <p><strong>Exemple alternatif</strong> : Si le port 8000 est occupé :</p>
+    <pre><code>
+python manage.py runserver 8001
+    </code></pre>
+    <p><strong>Résultat</strong> : Serveur accessible à <code>http://localhost:8001</code>.</p>
+
+    <h2>🔹 Exemple 3 : Configurer la base de données</h2>
+    <p>Par défaut, Django utilise SQLite. Vérifie la configuration dans <code>monprojet/settings.py</code> :</p>
+    <pre><code>
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+    </code></pre>
+    <p><strong>Explication</strong> : SQLite est une base légère stockée dans <code>db.sqlite3</code>. Pour une base MySQL ou PostgreSQL, modifie ainsi (exemple avec MySQL) :</p>
+    <pre><code>
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mabase',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+    </code></pre>
+    <p>Installe le pilote MySQL :</p>
+    <pre><code>
+pip install mysqlclient
+    </code></pre>
+    <p><strong>Résultat</strong> : Le projet est prêt à utiliser MySQL après configuration.</p>
+
+    <h2>🔹 Exemple 4 : Appliquer les migrations initiales</h2>
+    <p>Django inclut des migrations pour les fonctionnalités de base (ex. utilisateurs). Applique-les :</p>
+    <pre><code>
+python manage.py migrate
+    </code></pre>
+    <p><strong>Résultat</strong> : Crée la base <code>db.sqlite3</code> et les tables nécessaires (ex. <code>auth_user</code> pour les utilisateurs).</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Commande exécutée hors du dossier</strong> : Assure-toi d’être dans le dossier contenant <code>manage.py</code>.</li>
+      <li><strong>Base de données mal configurée</strong> : Vérifie <code>settings.py</code> et installe les pilotes nécessaires.</li>
+      <li><strong>Permissions manquantes</strong> : Accorde les droits d’écriture au dossier du projet si SQLite échoue.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée un projet Django nommé <code>blog</code> avec <code>django-admin startproject</code>.<br>
+    2. Lance le serveur et vérifie que la page par défaut s’affiche à <code>http://localhost:8000</code>.<br>
+    3. Ouvre <code>settings.py</code> et note les valeurs de <code>INSTALLED_APPS</code> et <code>DATABASES</code>.<br>
+    4. Applique les migrations initiales avec <code>python manage.py migrate</code>.<br>
+    5. Crée un fichier texte décrivant la structure du dossier <code>blog</code>.</p>
+
+    <a href="django4.html" class="btn">➡️ Chapitre 4 : Applications et structure du projet</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Django</a></p>
+  </footer>
+</body>
+</html>

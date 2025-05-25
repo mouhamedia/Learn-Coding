@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 4 - Conditions</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 4 : Conditions 🎯</h1>
+    <p>Apprends à exécuter du code en fonction de conditions avec <code>if</code> et <code>switch</code>.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les conditions</h2>
+    <p>Les structures conditionnelles contrôlent le flux du programme avec <code>if</code>, <code>else if</code>, et <code>else</code>.</p>
+    <pre><code>
+using System;
+
+class Program {
+  static void Main() {
+    int note = 85;
+    if (note >= 90) {
+      Console.WriteLine("Excellent !");
+    } else if (note >= 70) {
+      Console.WriteLine("Bien !");
+    } else {
+      Console.WriteLine("À améliorer.");
+    }
+  }
+}
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche "Bien !".</p>
+
+    <h2>🔹 La structure switch</h2>
+    <p><code>switch</code> est utile pour gérer plusieurs cas.</p>
+    <pre><code>
+using System;
+
+class Program {
+  static void Main() {
+    string jour = "lundi";
+    switch (jour) {
+      case "lundi":
+        Console.WriteLine("Début de semaine !");
+        break;
+      case "vendredi":
+        Console.WriteLine("Fin de semaine !");
+        break;
+      default:
+        Console.WriteLine("Autre jour.");
+        break;
+    }
+  }
+}
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche "Début de semaine !".</p>
+
+    <h2>🧪 Exercice</h2>
+    <p>Crée un programme qui utilise <code>if</code> pour afficher un message selon l’âge : "Mineur" (< 18), "Majeur" (≥ 18), ou "Senior" (≥ 65).</p>
+
+    <a href="chapitre5-cs.html" class="btn">➡️ Chapitre 5 : Boucles</a>
+  </main>
+
+  <footer>
+    <p><a href="indexcs.html">← Retour au menu C#</a></p>
+  </footer>
+</body>
+</html>

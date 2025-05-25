@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 14 - Packages</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 14 : Packages ☕</h1>
+    <p>Organise ton code avec des packages.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un package ?</h2>
+    <p>Un package est comme un dossier qui regroupe des classes pour mieux organiser ton code.</p>
+
+    <h2>📌 Créer un package</h2>
+    <p>Déclare un package avec <code>package</code> en haut du fichier.</p>
+    <pre><code>
+// Fichier : monpackage/Voiture.java
+package monpackage;
+
+public class Voiture {
+    private String marque;
+
+    public Voiture(String m) {
+        marque = m;
+    }
+
+    public void afficher() {
+        System.out.println("Voiture : " + marque);
+    }
+}
+</code></pre>
+
+    <h2>💻 Utiliser un package</h2>
+    <p>Importe une classe avec <code>import</code>.</p>
+    <pre><code>
+// Fichier : Main.java
+import monpackage.Voiture;
+
+public class Main {
+    public static void main(String[] args) {
+        Voiture voiture = new Voiture("Toyota");
+        voiture.afficher();
+    }
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un package <code>personnes</code> avec une classe <code>Etudiant</code> et utilise-la dans un autre fichier.</p>
+    <pre><code>
+// Fichier : personnes/Etudiant.java
+package personnes;
+
+public class Etudiant {
+    private String nom;
+
+    public Etudiant(String n) {
+        nom = n;
+    }
+
+    public void afficher() {
+        System.out.println("Étudiant : " + nom);
+    }
+}
+
+// Fichier : Main.java
+import personnes.Etudiant;
+
+public class Main {
+    public static void main(String[] args) {
+        Etudiant e = new Etudiant("Alice");
+        e.afficher();
+    }
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a> !</p>
+
+    <a href="chapitre15-java.html" class="btn">➡️ Chapitre 15 : Collections</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre13-java.html">← Chapitre 13 : Exceptions</a> |
+      <a href="index.html">Retour au menu Java</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 10 - Introduction à la POO</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 10 : Introduction à la POO ⚙️</h1>
+    <p>Crée des objets avec des classes pour organiser ton code.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que la POO ?</h2>
+    <p>La programmation orientée objet (POO) utilise des "objets" qui combinent des données (attributs) et des actions (méthodes).</p>
+
+    <h2>📌 Définir une classe</h2>
+    <p>Une classe est un modèle pour créer des objets, comme un plan pour une maison.</p>
+    <pre><code>
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Voiture {
+public:
+    string marque;
+    int vitesse;
+
+    void afficher() {
+        cout << "Voiture : " << marque << ", Vitesse : " << vitesse << endl;
+    }
+};
+
+int main() {
+    Voiture maVoiture;
+    maVoiture.marque = "Toyota";
+    maVoiture.vitesse = 120;
+    maVoiture.afficher();
+    return 0;
+}
+</code></pre>
+
+    <h2>💻 Créer un objet</h2>
+    <p>Un objet est une instance d’une classe, comme une maison construite à partir du plan.</p>
+    <pre><code>
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Personne {
+public:
+    string nom;
+    void saluer() {
+        cout << "Bonjour, je suis " << nom << " !" << endl;
+    }
+};
+
+int main() {
+    Personne p;
+    p.nom = "Alice";
+    p.saluer();
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une classe <code>Animal</code> avec un attribut <code>nom</code> et une méthode pour afficher un message.</p>
+    <pre><code>
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Animal {
+public:
+    string nom;
+    void presenter() {
+        cout << "Je suis un animal nommé " << nom << "." << endl;
+    }
+};
+
+int main() {
+    Animal a;
+    a.nom = "Rex";
+    a.presenter();
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre11-cpp.html" class="btn">➡️ Chapitre 11 : Constructeurs et destructeurs</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre9-cpp.html">← Chapitre 9 : Structures et énumérations</a> |
+      <a href="index.html">Retour au menu C++</a>
+    </p>
+  </footer>
+</body>
+</html>

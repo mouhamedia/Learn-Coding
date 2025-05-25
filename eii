@@ -1,0 +1,14 @@
+learn-coding/
+│
+├── index.html               (Accueil du site)
+├── style.css                (Feuille de style)
+├── script.js                (Logique JS pour l’interactivité)
+├── cours/
+│   ├── c.html
+│   ├── cpp.html
+│   ├── csharp.html
+│   ├── java.html
+│   ├── php.html
+│   └── python.html
+└── assets/
+    └── images/              (Images si besoin)

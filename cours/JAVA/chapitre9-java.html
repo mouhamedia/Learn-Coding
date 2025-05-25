@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 9 - Encapsulation</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Encapsulation ☕</h1>
+    <p>Protège les données de tes objets avec l’encapsulation.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que l’encapsulation ?</h2>
+    <p>L’encapsulation consiste à cacher les données d’un objet et à n’y accéder qu’à travers des méthodes spéciales (getters et setters).</p>
+
+    <h2>📌 Attributs privés</h2>
+    <p>Utilise <code>private</code> pour limiter l’accès direct aux attributs.</p>
+    <pre><code>
+public class Compte {
+    private double solde;
+
+    public Compte(double s) {
+        solde = s;
+    }
+}
+</code></pre>
+
+    <h2>💻 Getters et setters</h2>
+    <p>Les getters récupèrent la valeur, les setters la modifient.</p>
+    <pre><code>
+public class Compte {
+    private double solde;
+
+    public Compte(double s) {
+        solde = s;
+    }
+
+    public double getSolde() {
+        return solde;
+    }
+
+    public void setSolde(double s) {
+        if (s >= 0) {
+            solde = s;
+        }
+    }
+
+    public static void main(String[] args) {
+        Compte compte = new Compte(100.0);
+        compte.setSolde(150.0);
+        System.out.println("Solde : " + compte.getSolde());
+    }
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une classe <code>Etudiant</code> avec un attribut privé <code>note</code> et des getters/setters pour y accéder.</p>
+    <pre><code>
+public class Etudiant {
+    private int note;
+
+    public Etudiant(int n) {
+        note = n;
+    }
+
+    public int getNote() {
+        return note;
+    }
+
+    public void setNote(int n) {
+        if (n >= 0 && n <= 20) {
+            note = n;
+        }
+    }
+
+    public static void main(String[] args) {
+        Etudiant e = new Etudiant(15);
+        e.setNote(18);
+        System.out.println("Note : " + e.getNote());
+    }
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a> !</p>
+
+    <a href="chapitre10-java.html" class="btn">➡️ Chapitre 10 : Héritage</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre8-java.html">← Chapitre 8 : Introduction à la POO en Java</a> |
+      <a href="index.html">Retour au menu Java</a>
+    </p>
+  </footer>
+</body>
+</html>

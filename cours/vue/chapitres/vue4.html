@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 4 - Directives et binding Vue.js</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #42b883;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(66, 184, 131, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+    }
+    main h2 {
+      color: #1b684f;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #42b883;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f7f2;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #2a9a78;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 4 : Directives et binding</h1>
+    <p>Apprends à utiliser les directives Vue.js pour rendre ton interface dynamique et réactive.</p>
+  </header>
+
+  <main>
+    <h2>Qu’est-ce qu’une directive ?</h2>
+    <p>Les directives sont des attributs spéciaux commençant par <code>v-</code>, qui permettent d’ajouter des comportements dynamiques au DOM. Elles sont au cœur de la réactivité de Vue.js, permettant de lier les données aux éléments HTML, de gérer des conditions, ou de boucler sur des listes.</p>
+
+    <h2>Les principales directives</h2>
+    <p>Voici un aperçu des directives les plus utilisées :</p>
+    <ul>
+      <li><strong>v-bind</strong> : Lie dynamiquement des attributs ou propriétés à des données.</li>
+      <li><strong>v-if</strong>, <strong>v-else</strong>, <strong>v-else-if</strong> : Affiche ou masque des éléments selon une condition.</li>
+      <li><strong>v-for</strong> : Itère sur un tableau ou un objet pour rendre des listes.</li>
+      <li><strong>v-model</strong> : Crée une liaison bidirectionnelle pour les formulaires.</li>
+    </ul>
+
+    <h2>Directive v-bind</h2>
+    <p>La directive <code>v-bind</code> permet de lier dynamiquement un attribut HTML (comme <code>src</code>, <code:class</code>, ou <code:style</code>) à une expression JavaScript. Son raccourci est <code>:attribut</code>.</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;img :src="imageUrl" alt="Image dynamique" /&gt;
+    &lt;p :class="{ active: isActive }"&gt;Classe conditionnelle&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      imageUrl: 'https://via.placeholder.com/150',
+      isActive: true
+    };
+  }
+};
+&lt;/script&gt;
+&lt;style scoped&gt;
+.active {
+  color: #42b883;
+  font-weight: bold;
+}
+&lt;/style&gt;
+</code></pre>
+    <p>Dans cet exemple, <code>:src</code> lie l’attribut <code>src</code> de l’image à <code>imageUrl</code>, et <code>:class</code> applique la classe <code>active</code> si <code>isActive</code> est vrai.</p>
+
+    <h2>Directives conditionnelles : v-if, v-else, v-else-if</h2>
+    <p>Les directives conditionnelles permettent d’afficher ou de masquer des éléments en fonction d’une condition. <code>v-if</code> supprime l’élément du DOM si la condition est fausse, contrairement à <code>v-show</code> qui le masque uniquement.</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;p v-if="score >= 90"&gt;Excellent !&lt;/p&gt;
+    &lt;p v-else-if="score >= 60"&gt;Bien !&lt;/p&gt;
+    &lt;p v-else&gt;À améliorer !&lt;/p&gt;
+    &lt;button @click="changeScore"&gt;Changer le score&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      score: 85
+    };
+  },
+  methods: {
+    changeScore() {
+      this.score = Math.floor(Math.random() * 100);
+    }
+  }
+};
+&lt;/script&gt;
+</code></pre>
+    <p>Cet exemple affiche un message en fonction du score, qui change aléatoirement lorsqu’on clique sur le bouton.</p>
+
+    <h2>Directive v-for</h2>
+    <p>La directive <code>v-for</code> permet de rendre une liste d’éléments à partir d’un tableau ou d’un objet. L’attribut <code>:key</code> est essentiel pour optimiser le rendu.</p>
+    <pre><code>&lt;template&gt;
+  &lt;ul&gt;
+    &lt;li v-for="fruit in fruits" :key="fruit.id"&gt;{{ fruit.name }}&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      fruits: [
+        { id: 1, name: 'Pomme' },
+        { id: 2, name: 'Banane' },
+        { id: 3, name: 'Orange' }
+      ]
+    };
+  }
+};
+&lt;/script&gt;
+</code></pre>
+
+    <h2>Directive v-model</h2>
+    <p>La directive <code>v-model</code> synchronise les données d’un formulaire avec l’état du composant, créant une liaison bidirectionnelle.</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;input v-model="message" placeholder="Tapez un message" /&gt;
+    &lt;p&gt;Message saisi : {{ message }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      message: ''
+    };
+  }
+};
+&lt;/script&gt;
+</code></pre>
+
+    <h2>Exemple pratique : Liste de tâches</h2>
+    <p>Voici une application de liste de tâches combinant <code>v-model</code>, <code>v-for</code>, et <code>v-if</code> :</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;input v-model="newTask" placeholder="Ajouter une tâche" @keyup.enter="addTask"&gt;
+    &lt;ul&gt;
+      &lt;li v-for="task in tasks" :key="task.id"&gt;
+        &lt;span :class="{ completed: task.completed }"&gt;{{ task.text }}&lt;/span&gt;
+        &lt;button v-if="!task.completed" @click="toggleTask(task)"&gt;Terminer&lt;/button&gt;
+        &lt;button v-else @click="toggleTask(task)"&gt;Annuler&lt;/button&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      newTask: '',
+      tasks: [
+        { id: 1, text: 'Apprendre Vue.js', completed: false },
+        { id: 2, text: 'Créer une app', completed: false }
+      ]
+    };
+  },
+  methods: {
+    addTask() {
+      if (this.newTask) {
+        this.tasks.push({ id: this.tasks.length + 1, text: this.newTask, completed: false });
+        this.newTask = '';
+      }
+    },
+    toggleTask(task) {
+      task.completed = !task.completed;
+    }
+  }
+};
+&lt;/script&gt;
+&lt;style scoped&gt;
+.completed {
+  text-decoration: line-through;
+  color: #888;
+}
+button {
+  margin-left: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background-color: #42b883;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+button:hover {
+  background-color: #2a9a78;
+}
+&lt;/style&gt;
+</code></pre>
+    <p>Cet exemple permet d’ajouter des tâches, de les marquer comme terminées, et d’afficher leur état avec une mise en forme conditionnelle.</p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Toujours utiliser <code>:key</code> avec <code>v-for</code> pour optimiser les mises à jour du DOM.</li>
+          <li>Préférer <code>v-show</code> à <code>v-if</code> pour les changements fréquents de visibilité (moins coûteux).</li>
+          <li>Utiliser les raccourcis <code>:attr</code> et <code>@event</code> pour un code plus clair.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="vue3.html">← Chapitre précédent</a>
+      <a href="vue5.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

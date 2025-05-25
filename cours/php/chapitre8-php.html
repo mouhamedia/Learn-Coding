@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapitre 8 - Superglobales</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #003049;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f0fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #003049;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #002030;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    .navigation a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .navigation a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+      background-color: #f7f9ff;
+    }
+    footer a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 8 : Superglobales 🐘</h1>
+    <p>Explore les variables superglobales pour interagir avec les données du serveur et des utilisateurs.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une superglobale ?</h2>
+    <p>Les superglobales sont des tableaux prédéfinis en PHP, accessibles partout, qui contiennent des informations sur la requête, le serveur, etc. Exemples : <code>$_GET</code>, <code>$_POST</code>, <code>$_SERVER</code>.</p>
+
+    <h2>📌 Utiliser $_GET</h2>
+    <p><code>$_GET</code> récupère les données envoyées via l’URL (query string).</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Test GET&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;?php
+    if (isset($_GET["name"])) {
+        $name = $_GET["name"];
+        echo "&lt;p&gt;Bonjour, $name !&lt;/p&gt;";
+    } else {
+        echo "&lt;p&gt;Veuillez fournir un nom dans l’URL.&lt;/p&gt;";
+    }
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste via <code>http://localhost/get.php?name=Jean</code>. Résultat : <code>Bonjour, Jean !</code></p>
+
+    <h2>💻 Exemple pratique : Informations serveur</h2>
+    <p>Crée un fichier <code>server.php</code> pour afficher des informations avec <code>$_SERVER</code> :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Infos serveur&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Informations serveur&lt;/h1&gt;
+  &lt;?php
+    echo "&lt;p&gt;Adresse IP : " . $_SERVER["REMOTE_ADDR"] . "&lt;/p&gt;";
+    echo "&lt;p&gt;Méthode HTTP : " . $_SERVER["REQUEST_METHOD"] . "&lt;/p&gt;";
+    echo "&lt;p&gt;Navigateur : " . $_SERVER["HTTP_USER_AGENT"] . "&lt;/p&gt;";
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste via <code>http://localhost/server.php</code>. Résultat (exemple) :</p>
+    <pre><code>Informations serveur
+Adresse IP : 127.0.0.1
+Méthode HTTP : GET
+Navigateur : Mozilla/5.0 ...
+</code></pre>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise <code>isset()</code> pour vérifier l’existence des clés dans les superglobales.</li>
+          <li>Valide et nettoie les données de <code>$_GET</code> ou <code>$_POST</code> pour des raisons de sécurité (voir Chapitre 14).</li>
+          <li>Consulte la documentation PHP pour explorer d’autres superglobales comme <code>$_SESSION</code>.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="chapitre7-php.html">← Chapitre précédent</a>
+      <a href="chapitre9-php.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="index.html">Retour au menu PHP</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

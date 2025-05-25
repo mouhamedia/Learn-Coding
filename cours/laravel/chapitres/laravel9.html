@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 9 - Middleware</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Middleware 🛡️</h1>
+    <p>Apprends à utiliser les middleware pour filtrer les requêtes et sécuriser tes routes dans Laravel.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un middleware ?</h2>
+    <p>Un middleware est une couche logicielle qui s’exécute avant ou après une requête HTTP. Il peut vérifier des conditions (ex. : utilisateur connecté), modifier la requête, ou bloquer l’accès.</p>
+    <p><strong>Types de middleware</strong> :</p>
+    <ul>
+      <li><strong>Globaux</strong> : S’appliquent à toutes les requêtes (ex. : protection CSRF).</li>
+      <li><strong>Route</strong> : S’appliquent à des routes spécifiques (ex. : <code>auth</code>).</li>
+      <li><strong>Groupe</strong> : S’appliquent à un ensemble de routes.</li>
+    </ul>
+    <p><strong>Exemples d’utilisation</strong> :</p>
+    <ul>
+      <li>Vérifier si un utilisateur est connecté.</li>
+      <li>Restreindre l’accès à certaines pages (ex. : administrateurs).</li>
+      <li>Journaliser les requêtes.</li>
+    </ul>
+
+    <h2>🔹 Exemple 1 : Utiliser un middleware intégré</h2>
+    <p>Laravel fournit des middleware comme <code>auth</code> pour protéger les routes :</p>
+    <pre><code>
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth');
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>auth</code> vérifie si l’utilisateur est connecté.</li>
+      <li>Si non, il redirige vers la page de connexion.</li>
+    </ul>
+    <p><strong>Résultat</strong> : Seuls les utilisateurs connectés accèdent à <code>/dashboard</code>.</p>
+
+    <h2>🔹 Exemple 2 : Créer un middleware personnalisé</h2>
+    <p>Crée un middleware pour restreindre l’accès aux administrateurs :</p>
+    <pre><code>
+php artisan make:middleware RestrictAdmin
+    </code></pre>
+    <p>Modifie <code>app/Http/Middleware/RestrictAdmin.php</code> :</p>
+    <pre><code>
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class RestrictAdmin
+{
+    public function handle(Request $request, Closure $next)
+    {
+        if ($request->user() && $request->user()->role == 'admin') {
+            return $next($request);
+        }
+        return redirect('/')->with('error', 'Accès réservé aux administrateurs');
+    }
+}
+    </code></pre>
+    <p>Enregistre le middleware dans <code>app/Http/Kernel.php</code> :</p>
+    <pre><code>
+protected $routeMiddleware = [
+    // ...
+    'restrict.admin' => \App\Http\Middleware\RestrictAdmin::class,
+];
+    </code></pre>
+    <p>Applique-le à une route :</p>
+    <pre><code>
+Route::get('/admin', function () {
+    return 'Panneau d’administration';
+})->middleware('restrict.admin');
+    </code></pre>
+    <p><strong>Résultat</strong> : Seuls les utilisateurs avec <code>role='admin'</code> accèdent à <code>/admin</code>.</p>
+
+    <h2>🔹 Exemple 3 : Middleware avec paramètre</h2>
+    <p>Crée un middleware qui vérifie l’âge minimum :</p>
+    <pre><code>
+class CheckAge
+{
+    public function handle(Request $request, Closure $next, $ageMinimum)
+    {
+        if ($request->query('age') >= $ageMinimum) {
+            return $next($request);
+        }
+        return redirect('/')->with('error', 'Âge minimum requis : ' . $ageMinimum);
+    }
+}
+    </code></pre>
+    <p>Enregistre-le dans <code>Kernel.php</code> :</p>
+    <pre><code>
+'check.age' => \App\Http\Middleware\CheckAge::class,
+    </code></pre>
+    <p>Applique-le :</p>
+    <pre><code>
+Route::get('/contenu-adulte', function () {
+    return 'Contenu pour adultes';
+})->middleware('check.age:18');
+    </code></pre>
+    <p><strong>Résultat</strong> : <code>/contenu-adulte?age=20</code> donne accès, mais <code>?age=15</code> redirige.</p>
+
+    <h2>🔹 Exemple 4 : Groupe de routes</h2>
+    <p>Applique un middleware à plusieurs routes :</p>
+    <pre><code>
+Route::middleware('auth')->group(function () {
+    Route::get('/profil', fn() => 'Mon profil');
+    Route::get('/parametres', fn() => 'Mes paramètres');
+});
+    </code></pre>
+    <p><strong>Résultat</strong> : <code>/profil</code> et <code>/parametres</code> sont protégés par <code>auth</code>.</p>
+
+    <h2>🔹 Erreurs courantes et solutions</h2>
+    <ul>
+      <li><strong>"Middleware not found"</strong> : Vérifie l’enregistrement dans <code>Kernel.php</code>.</li>
+      <li><strong>"Undefined property: user"</strong> : Assure-toi que l’utilisateur est connecté avant d’accéder à <code>$request->user()</code>.</li>
+      <li><strong>"Redirect loop"</strong> : Vérifie la logique de redirection dans le middleware.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>Crée un middleware pour restreindre l’accès :</p>
+    <ol>
+      <li>Crée un middleware <code>CheckToken</code> qui vérifie si un paramètre <code>token=secret</code> est présent dans l’URL.</li>
+      <li>Enregistre le middleware dans <code>Kernel.php</code>.</li>
+      <li>Applique-le à une route <code>/securise</code> qui affiche "Accès sécurisé".</li>
+      <li>Teste avec <code>/securise?token=secret</code> et <code>/securise?token=mauvais</code>.</li>
+      <li>Ajoute un message flash pour les erreurs.</li>
+    </ol>
+
+    <a href="laravel10.html" class="btn">➡️ Chapitre 10 : Authentification et sécurité</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Laravel</a></p>
+  </footer>
+</body>
+</html>

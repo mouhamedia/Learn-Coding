@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 3 - Types de données et contraintes</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 3 : Types de données et contraintes 🔍</h1>
+    <p>Apprends à définir les types de données et à ajouter des contraintes aux tables.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Types de données</h2>
+    <p>SQL propose plusieurs types de données pour les colonnes :</p>
+    <ul>
+      <li><code>INT</code> : Entiers (ex. : 42)</li>
+      <li><code>VARCHAR(n)</code> : Texte de longueur variable (ex. : "Alice")</li>
+      <li><code>DATE</code> : Dates (ex. : 2023-10-15)</li>
+      <li><code>DECIMAL(m,n)</code> : Nombres décimaux (ex. : 19.99)</li>
+      <li><code>BOOLEAN</code> : Vrai ou faux</li>
+    </ul>
+
+    <h2>🔹 Contraintes</h2>
+    <p>Les contraintes garantissent l'intégrité des données :</p>
+    <ul>
+      <li><code>PRIMARY KEY</code> : Identifiant unique</li>
+      <li><code>NOT NULL</code> : Valeur obligatoire</li>
+      <li><code>FOREIGN KEY</code> : Lien avec une autre table</li>
+    </ul>
+    <pre><code>
+CREATE TABLE Etudiants (
+    id INT PRIMARY KEY,
+    nom VARCHAR(50) NOT NULL,
+    age INT
+);
+    </code></pre>
+    <p><strong>Résultat</strong> : Crée une table avec <code>id</code> comme clé primaire et <code>nom</code> obligatoire.</p>
+
+    <h2>📝 Exercice</h2>
+    <p>Crée une table "Cours" avec les colonnes <code>id</code> (INT, clé primaire), <code>nom</code> (VARCHAR(50), non nul), et <code>credits</code> (INT).</p>
+
+    <a href="chapitre4-sql.html" class="btn">➡️ Chapitre 4 : Insertion de données</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu SQL</a></p>
+  </footer>
+</body>
+</html>

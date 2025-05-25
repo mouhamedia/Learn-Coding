@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 11 - Polymorphisme</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 11 : Polymorphisme ☕</h1>
+    <p>Permets à des objets de se comporter différemment selon leur type.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que le polymorphisme ?</h2>
+    <p>Le polymorphisme permet à une méthode d’avoir des comportements différents selon la classe de l’objet.</p>
+
+    <h2>📌 Surcharge de méthodes</h2>
+    <p>La surcharge consiste à créer plusieurs méthodes avec le même nom mais des paramètres différents.</p>
+    <pre><code>
+public class Calcul {
+    public int addition(int a, int b) {
+        return a + b;
+    }
+
+    public double addition(double a, double b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        Calcul calc = new Calcul();
+        System.out.println(calc.addition(5, 3));
+        System.out.println(calc.addition(5.5, 3.2));
+    }
+}
+</code></pre>
+
+    <h2>💻 Redéfinition de méthodes</h2>
+    <p>Une sous-classe peut redéfinir une méthode de sa superclasse avec <code>@Override</code>.</p>
+    <pre><code>
+public class Animal {
+    public void faireSon() {
+        System.out.println("Son d'animal");
+    }
+}
+
+public class Chat extends Animal {
+    @Override
+    public void faireSon() {
+        System.out.println("Miaou !");
+    }
+
+    public static void main(String[] args) {
+        Chat monChat = new Chat();
+        monChat.faireSon();
+    }
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une classe <code>Forme</code> avec une méthode <code>aire</code>, et redéfinis-la dans une sous-classe <code>Cercle</code>.</p>
+    <pre><code>
+public class Forme {
+    public double aire() {
+        return 0.0;
+    }
+}
+
+public class Cercle extends Forme {
+    private double rayon;
+
+    public Cercle(double r) {
+        rayon = r;
+    }
+
+    @Override
+    public double aire() {
+        return 3.14 * rayon * rayon;
+    }
+
+    public static void main(String[] args) {
+        Cercle cercle = new Cercle(5);
+        System.out.println("Aire du cercle : " + cercle.aire());
+    }
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a> !</p>
+
+    <a href="chapitre12-java.html" class="btn">➡️ Chapitre 12 : Abstraction et interfaces</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre10-java.html">← Chapitre 10 : Héritage</a> |
+      <a href="index.html">Retour au menu Java</a>
+    </p>
+  </footer>
+</body>
+</html>

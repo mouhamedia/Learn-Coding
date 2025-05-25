@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 9 - Middleware et gestion des erreurs</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #026e00;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(2, 110, 0, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #e8f9e6cc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    main h2 {
+      color: #026e00;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #026e00;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e8f9e6;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #026e00;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #026e00;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #014d00;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #026e00;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #014d00;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Middleware et gestion des erreurs</h1>
+    <p>Apprends à utiliser les middlewares et à gérer les erreurs dans Express.js.</p>
+  </header>
+
+  <main>
+    <h2>Qu’est-ce qu’un middleware ?</h2>
+    <p>Un middleware est une fonction qui s’exécute entre la réception d’une requête et l’envoi d’une réponse. Il peut modifier la requête/réponse, ajouter des fonctionnalités, ou gérer des erreurs.</p>
+
+    <h2>Utiliser un middleware</h2>
+    <p>Voici un middleware qui logue les requêtes :</p>
+    <pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+const logger = (req, res, next) => {
+  console.log(`${req.method} ${req.url} - ${new Date().toISOString()}`);
+  next();
+};
+
+app.use(logger);
+
+app.get('/', (req, res) => {
+  res.send('Accueil');
+});
+
+app.listen(port, () => {
+  console.log(`Serveur démarré sur http://localhost:${port}`);
+});
+</code></pre>
+    <p>Chaque requête affiche une entrée dans la console, par exemple :</p>
+    <pre><code>GET / - 2025-05-25T07:00:00.000Z
+</code></pre>
+
+    <h2>Gérer les erreurs</h2>
+    <p>Un middleware d’erreur a quatre paramètres : <code>(err, req, res, next)</code>.</p>
+    <pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/error', (req, res, next) => {
+  const err = new Error('Erreur simulée');
+  next(err);
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Quelque chose s’est mal passé !' });
+});
+
+app.listen(port, () => {
+  console.log(`Serveur démarré sur http://localhost:${port}`);
+});
+</code></pre>
+    <p>Visite <code>http://localhost:3000/error</code> pour voir la réponse d’erreur.</p>
+
+    <h2>Exemple pratique : Authentification simple</h2>
+    <p>Voici un middleware qui vérifie un token dans les en-têtes :</p>
+    <pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+const authMiddleware = (req, res, next) => {
+  const token = req.headers['authorization'];
+  if (token === 'mon-token-secret') {
+    next();
+  } else {
+    res.status(401).json({ error: 'Accès non autorisé' });
+  }
+};
+
+app.get('/protected', authMiddleware, (req, res) => {
+  res.json({ message: 'Contenu protégé' });
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Erreur serveur' });
+});
+
+app.listen(port, () => {
+  console.log(`Serveur démarré sur http://localhost:${port}`);
+});
+</code></pre>
+    <p>Teste avec :
+      <ul>
+        <li><code>curl -H "Authorization: mon-token-secret" http://localhost:3000/protected</code> (succès).</li>
+        <li><code>curl http://localhost:3000/protected</code> (erreur 401).</li>
+      </ul>
+    </p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Place les middlewares globaux (comme <code>express.json</code>) au début de l’application.</li>
+          <li>Utilise des middlewares spécifiques pour des routes sensibles (ex. : authentification).</li>
+          <li>Toujours inclure un middleware d’erreur à la fin de la pile.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="node8.html">← Chapitre précédent</a>
+      <a href="node10.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

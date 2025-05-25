@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 4 - Fonctions en C</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 4 : Fonctions en C 🛠</h1>
+    <p>Organise ton code avec des fonctions réutilisables.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une fonction ?</h2>
+    <p>Une fonction est un bloc de code qui effectue une tâche spécifique et peut être appelé plusieurs fois.</p>
+    <pre><code>
+#include <stdio.h>
+
+void saluer() {
+    printf("Bonjour, monde !\n");
+}
+
+int main() {
+    saluer();
+    return 0;
+}
+</code></pre>
+
+    <h2>📌 Fonctions avec paramètres</h2>
+    <p>Les paramètres permettent de passer des données à une fonction.</p>
+    <pre><code>
+#include <stdio.h>
+
+void saluer_personne(char *nom) {
+    printf("Bonjour, %s !\n", nom);
+}
+
+int main() {
+    saluer_personne("Alice");
+    return 0;
+}
+</code></pre>
+
+    <h2>💻 Valeur de retour</h2>
+    <p>Une fonction peut renvoyer une valeur avec <code>return</code>.</p>
+    <pre><code>
+#include <stdio.h>
+
+int carre(int n) {
+    return n * n;
+}
+
+int main() {
+    int resultat = carre(5);
+    printf("Carré de 5 : %d\n", resultat);
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une fonction qui calcule l’aire d’un rectangle (longueur × largeur) et affiche le résultat.</p>
+    <pre><code>
+#include <stdio.h>
+
+int aire_rectangle(int longueur, int largeur) {
+    return longueur * largeur;
+}
+
+int main() {
+    int l = 5, lrg = 3;
+    printf("Aire : %d\n", aire_rectangle(l, lrg));
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre5-c.html" class="btn">➡️ Chapitre 5 : Tableaux et pointeurs</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre3-c.html">← Chapitre 3 : Conditions et boucles</a> |
+      <a href="index.html">Retour au menu C</a>
+    </p>
+  </footer>
+</body>
+</html>

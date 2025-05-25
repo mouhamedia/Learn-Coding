@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 9 - Cycle de vie des composants</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #42b883;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(66, 184, 131, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+    }
+    main h2 {
+      color: #1b684f;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #42b883;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f7f2;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #2a9a78;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Cycle de vie des composants</h1>
+    <p>Comprends les étapes du cycle de vie d’un composant Vue.js et comment les utiliser.</p>
+  </header>
+
+  <main>
+    <h2>Qu’est-ce que le cycle de vie ?</h2>
+    <p>Chaque composant Vue.js passe par une série d’étapes, de sa création à sa destruction. Ces étapes, appelées hooks de cycle de vie, permettent d’exécuter du code à des moments précis, comme l’initialisation, le rendu, ou la destruction.</p>
+
+    <h2>Les hooks de cycle de vie</h2>
+    <p>Voici les principaux hooks dans Vue 3 :</p>
+    <ul>
+      <li><strong>beforeCreate</strong> : Avant l’initialisation des données et des événements.</li>
+      <li><strong>created</strong> : Après l’initialisation, mais avant le rendu dans le DOM.</li>
+      <li><strong>beforeMount</strong> : Juste avant que le composant ne soit ajouté au DOM.</li>
+      <li><strong>mounted</strong> : Après l’ajout du composant au DOM.</li>
+      <li><strong>beforeUpdate</strong> : Avant une mise à jour due à un changement d’état.</li>
+      <li><strong>updated</strong> : Après la mise à jour du DOM.</li>
+      <li><strong>beforeUnmount</strong> : Avant la destruction du composant.</li>
+      <li><strong>unmounted</strong> : Après la destruction du composant.</li>
+    </ul>
+
+    <h2>Exemple : Utilisation des hooks</h2>
+    <p>Voici un composant qui utilise plusieurs hooks pour illustrer leur fonctionnement :</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;p&gt;{{ message }}&lt;/p&gt;
+    &lt;button @click="updateMessage"&gt;Mettre à jour&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      message: 'Initialisation...'
+    };
+  },
+  beforeCreate() {
+    console.log('beforeCreate : Le composant est sur le point d’être créé');
+  },
+  created() {
+    console.log('created : Le composant est créé');
+    this.message = 'Composant créé !';
+  },
+  beforeMount() {
+    console.log('beforeMount : Le composant va être ajouté au DOM');
+  },
+  mounted() {
+    console.log('mounted : Le composant est dans le DOM');
+    this.message = 'Composant monté !';
+  },
+  beforeUpdate() {
+    console.log('beforeUpdate : Le DOM va être mis à jour');
+  },
+  updated() {
+    console.log('updated : Le DOM a été mis à jour');
+  },
+  beforeUnmount() {
+    console.log('beforeUnmount : Le composant va être détruit');
+  },
+  unmounted() {
+    console.log('unmounted : Le composant est détruit');
+  },
+  methods: {
+    updateMessage() {
+      this.message = 'Message mis à jour !';
+    }
+  }
+};
+&lt;/script&gt;
+&lt;style scoped&gt;
+button {
+  padding: 0.5rem 1rem;
+  background-color: #42b883;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+button:hover {
+  background-color: #2a9a78;
+}
+&lt;/style&gt;
+</code></pre>
+    <p>Ce composant affiche un message qui change à chaque étape du cycle de vie et lors d’un clic sur le bouton. Les hooks sont tracés dans la console.</p>
+
+    <h2>Exemple pratique : Chargement de données</h2>
+    <p>Voici un exemple réaliste où un composant charge des données utilisateur depuis une API fictive dans le hook <code>mounted</code> :</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;p v-if="user"&gt;Utilisateur : {{ user.name }}&lt;/p&gt;
+    &lt;p v-else&gt;Chargement...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      user: null
+    };
+  },
+  mounted() {
+    console.log('mounted : Chargement des données');
+    // Simulation d’un appel API
+    setTimeout(() => {
+      this.user = { name: 'Jean Dupont' };
+      console.log('Données chargées !');
+    }, 1000);
+  },
+  beforeUnmount() {
+    console.log('beforeUnmount : Nettoyage avant destruction');
+  }
+};
+&lt;/script&gt;
+&lt;style scoped&gt;
+p {
+  font-size: 1.2rem;
+  color: #333;
+}
+&lt;/style&gt;
+</code></pre>
+    <p>Cet exemple simule un appel API avec un délai d’une seconde, mettant à jour l’interface une fois les données reçues.</p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise <code>mounted</code> pour les opérations liées au DOM ou les appels API.</li>
+          <li>Nettoie les ressources (ex. : timers, écouteurs d’événements) dans <code>beforeUnmount</code> pour éviter les fuites de mémoire.</li>
+          <li>Évite les calculs lourds dans <code>beforeCreate</code> ou <code>created</code>, car le composant n’est pas encore rendu.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="vue8.html">← Chapitre précédent</a>
+      <a href="vue10.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

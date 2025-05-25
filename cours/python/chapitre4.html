@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 4 - Boucles (for, while)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 4 : Boucles (for, while) 🔄</h1>
+    <p>Répète des actions facilement avec les boucles en Python.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une boucle ?</h2>
+    <p>Les boucles permettent d’exécuter un bloc de code plusieurs fois. Python propose deux types de boucles : <code>for</code> et <code>while</code>.</p>
+
+    <h2>📌 Boucle <code>for</code></h2>
+    <p>La boucle <code>for</code> est utilisée pour parcourir une séquence (comme une liste, une chaîne, ou une plage de nombres).</p>
+    <pre><code>
+for i in range(5):  # De 0 à 4
+    print(i)
+</code></pre>
+    <p>Ce code affiche : <code>0 1 2 3 4</code>. La fonction <code>range(n)</code> génère une séquence de nombres de 0 à <code>n-1</code>.</p>
+    <p><strong>Exemple avec une liste :</strong></p>
+    <pre><code>
+fruits = ["pomme", "banane", "orange"]
+for fruit in fruits:
+    print("J’aime les", fruit)
+</code></pre>
+    <p>Sortie : <code>J’aime les pomme</code>, <code>J’aime les banane</code>, <code>J’aime les orange</code>.</p>
+
+    <h2>📌 Boucle <code>while</code></h2>
+    <p>La boucle <code>while</code> répète un bloc tant qu’une condition est vraie.</p>
+    <pre><code>
+compteur = 1
+while compteur <= 5:
+    print(compteur)
+    compteur += 1  # Incrémente le compteur
+</code></pre>
+    <p>Ce code affiche : <code>1 2 3 4 5</code>. Attention à toujours mettre à jour la condition pour éviter une boucle infinie !</p>
+
+    <h2>💻 Contrôle des boucles</h2>
+    <p>Tu peux modifier le flux d’une boucle avec :</p>
+    <ul>
+      <li><code>break</code> : Sort de la boucle immédiatement.</li>
+      <li><code>continue</code> : Passe à l’itération suivante.</li>
+    </ul>
+    <pre><code>
+for i in range(10):
+    if i == 3:
+        continue  # Ignore 3
+    if i == 7:
+        break    # Arrête à 7
+    print(i)
+</code></pre>
+    <p>Sortie : <code>0 1 2 4 5 6</code>.</p>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui demande un nombre à l’utilisateur et affiche la table de multiplication de ce nombre (de 1 à 10).</p>
+    <pre><code>
+nombre = int(input("Entrez un nombre : "))
+for i in range(1, 11):
+    print(nombre, "x", i, "=", nombre * i)
+</code></pre>
+    <p>Teste ce code sur <a href="https://replit.com" target="_blank">Replit</a> !</p>
+
+    <a href="chapitre5.html" class="btn">➡️ Chapitre 5 : Fonctions</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre3.html">← Chapitre 3 : Conditions (if, elif, else)</a> |
+      <a href="index.html">Retour au menu Python</a>
+    </p>
+  </footer>
+</body>
+</html>

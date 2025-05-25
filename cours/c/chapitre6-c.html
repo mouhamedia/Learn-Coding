@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 6 - Structures et fichiers</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 6 : Structures et fichiers 📂</h1>
+    <p>Organise des données complexes et sauvegarde-les dans des fichiers.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les structures</h2>
+    <p>Une structure (<code>struct</code>) regroupe plusieurs variables de types différents.</p>
+    <pre><code>
+#include <stdio.h>
+
+struct Etudiant {
+    char nom[50];
+    int age;
+};
+
+int main() {
+    struct Etudiant e = {"Alice", 20};
+    printf("Nom : %s, Âge : %d\n", e.nom, e.age);
+    return 0;
+}
+</code></pre>
+
+    <h2>📌 Fichiers</h2>
+    <p>Utilise <code>fopen</code>, <code>fprintf</code>, <code>fscanf</code>, et <code>fclose</code> pour lire/écrire dans des fichiers.</p>
+    <pre><code>
+#include <stdio.h>
+
+int main() {
+    FILE *f = fopen("etudiants.txt", "w");
+    if (f == NULL) {
+        printf("Erreur d'ouverture.\n");
+        return 1;
+    }
+    fprintf(f, "Alice 20\n");
+    fclose(f);
+    return 0;
+}
+</code></pre>
+
+    <h2>💻 Lire un fichier</h2>
+    <p>Lis des données depuis un fichier avec <code>fscanf</code>.</p>
+    <pre><code>
+#include <stdio.h>
+
+int main() {
+    FILE *f = fopen("etudiants.txt", "r");
+    if (f == NULL) {
+        printf("Fichier non trouvé.\n");
+        return 1;
+    }
+    char nom[50];
+    int age;
+    fscanf(f, "%s %d", nom, &age);
+    printf("Nom : %s, Âge : %d\n", nom, age);
+    fclose(f);
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une structure <code>Produit</code> avec un nom et un prix, sauvegarde-la dans un fichier, puis lis et affiche son contenu.</p>
+    <pre><code>
+#include <stdio.h>
+
+struct Produit {
+    char nom[50];
+    float prix;
+};
+
+int main() {
+    struct Produit p = {"Lait", 2.5};
+    FILE *f = fopen("produits.txt", "w");
+    if (f == NULL) {
+        printf("Erreur.\n");
+        return 1;
+    }
+    fprintf(f, "%s %.2f\n", p.nom, p.prix);
+    fclose(f);
+
+    f = fopen("produits.txt", "r");
+    if (f == NULL) {
+        printf("Fichier non trouvé.\n");
+        return 1;
+    }
+    fscanf(f, "%s %f", p.nom, &p.prix);
+    printf("Produit : %s, Prix : %.2f\n", p.nom, p.prix);
+    fclose(f);
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre7-c.html" class="btn">➡️ Chapitre 7 : Chaînes de caractères</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre5-c.html">← Chapitre 5 : Tableaux et pointeurs</a> |
+      <a href="index.html">Retour au menu C</a>
+    </p>
+  </footer>
+</body>
+</html>

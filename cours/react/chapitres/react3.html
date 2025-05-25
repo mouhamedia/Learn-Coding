@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 3 - JSX et rendu</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background-color: #4a54f1;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(74, 84, 241, 0.4);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f0f4ff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(74, 84, 241, 0.15);
+    }
+    h1, h2 {
+      color: #2c3e95;
+    }
+    pre {
+      background: #e6eaff;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #4a54f1;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+    }
+    a {
+      color: #4a54f1;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 3 : JSX et rendu 📄</h1>
+    <p>Maîtrise JSX, la syntaxe qui combine HTML et JavaScript, pour créer des interfaces utilisateur dynamiques.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu'est-ce que JSX ?</h2>
+    <p>JSX (JavaScript XML) est une extension de syntaxe qui permet d’écrire du code semblable à HTML dans JavaScript. Il est utilisé par React pour décrire l’interface utilisateur de manière déclarative, rendant le code plus lisible et maintenable.</p>
+    <p><strong>Caractéristiques principales :</strong></p>
+    <ul>
+      <li><strong>Syntaxe HTML-like</strong>: Écriture intuitive, comme <code>&lt;div&gt;Bonjour&lt;/div&gt;</code>.</li>
+      <li><strong>Expressions JavaScript</strong>: Intègre des variables ou calculs avec <code>{}</code>.</li>
+      <li><strong>Virtual DOM</strong>: JSX est converti en appels JavaScript pour mettre à jour l’interface efficacement.</li>
+    </ul>
+
+    <h2>🔹 Pourquoi utiliser JSX ?</h2>
+    <p>JSX simplifie la création d’interfaces en combinant la logique et la présentation. Il est compilé par des outils comme Babel en code JavaScript pur, compatible avec le Virtual DOM de React.</p>
+    <p><strong>Règles de JSX :</strong></p>
+    <ul>
+      <li>Chaque élément doit avoir un parent unique.</li>
+      <li>Utilise <code>className</code> au lieu de <code>class</code> et <code>htmlFor</code> au lieu de <code>for</code>.</li>
+      <li>Les balises doivent être fermées (ex. <code>&lt;img /&gt;</code>).</li>
+    </ul>
+
+    <h2>🔹 Exemple 1 : JSX avec expressions</h2>
+    <p>Affiche des données dynamiques avec JSX :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+function App() {
+  const user = { name: 'Alice', age: 25 };
+  return (
+    <div>
+      <h1>Salut, {user.name} !</h1>
+      <p>Âge : {user.age}</p>
+    </div>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Explication</strong>:</p>
+    <ul>
+      <li><code>{user.name}</code>: Insère la valeur de la variable dans le JSX.</li>
+      <li><code>&lt;div&gt;</code>: Parent unique requis pour le rendu.</li>
+    </ul>
+    <p><strong>Résultat</strong>: Affiche “Salut, Alice !” et “Âge : 25” à <code>http://localhost:3000</code>.</p>
+
+    <h2>🔹 Exemple 2 : Rendu conditionnel</h2>
+    <p>Affiche un message selon une condition :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+function App() {
+  const isLoggedIn = true;
+  return (
+    <div>
+      <h1>Statut</h1>
+      {isLoggedIn ? <p>Connecté</p> : <p>Déconnecté</p>}
+    </div>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche “Connecté”.</p>
+
+    <h2>🔹 Exemple 3 : Attributs dynamiques</h2>
+    <p>Utilise des variables pour les attributs HTML :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+function App() {
+  const imageUrl = 'https://via.placeholder.com/150';
+  return (
+    <div>
+      <h1>Image</h1>
+      <img src={imageUrl} alt="Placeholder" />
+    </div>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche une image de 150x150 pixels.</p>
+
+    <h2>🔹 Exemple 4 : Styles inline</h2>
+    <p>Applique des styles avec JSX :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+function App() {
+  const style = { color: 'blue', fontSize: '20px' };
+  return (
+    <div>
+      <h1 style={{ color: 'red' }}>Titre</h1>
+      <p style={style}>Texte stylé</p>
+    </div>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche un titre rouge et un texte bleu.</p>
+
+    <h2>🔹 Exemple 5 : Fragments</h2>
+    <p>Utilise des fragments pour éviter des divs inutiles :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+function App() {
+  return (
+    <>
+      <h1>Titre</h1>
+      <p>Paragraphe</p>
+    </>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche “Titre” et “Paragraphe” sans div englobant.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Utiliser <code>class</code> au lieu de <code>className</code></strong>: JSX utilise les conventions JavaScript.</li>
+      <li><strong>Oublier la clé dans les listes</strong>: Ajoute <code>key</code> dans <code>map()</code> pour les performances.</li>
+      <li><strong>Balises non fermées</strong>: Assure-toi que chaque balise est fermée (ex. <code>&lt;img /&gt;</code>).</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée un projet React avec <code>npx create-react-app mon-app</code>.<br>
+    2. Crée un composant <code>ProductCard</code> qui affiche le nom, le prix et une image d’un produit en JSX.<br>
+    3. Ajoute un rendu conditionnel pour afficher “En stock” si <code>stock &gt; 0</code>, sinon “Rupture”.<br>
+    4. Crée un fichier texte expliquant en 3 phrases ce que fait JSX.</p>
+
+    <a href="react2.html" class="btn">⬅️ Chapitre 2 : Installation et configuration</a>
+    <a href="react4.html" class="btn">➡️ Chapitre 4 : Composants fonctionnels et classes</a>
+  </main>
+
+  <footer>
+    <p><a href="../index .html">← Retour au menu React</a></p>
+  </footer>
+</body>
+</html>   

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 6 - npm et modules externes</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #026e00;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(2, 110, 0, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #e8f9e6cc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    main h2 {
+      color: #026e00;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #026e00;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e8f9e6;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #026e00;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #026e00;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #014d00;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #026e00;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #014d00;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 6 : npm et modules externes</h1>
+    <p>Apprends à utiliser npm pour gérer les dépendances et intégrer des modules externes.</p>
+  </header>
+
+  <main>
+    <h2>Qu’est-ce que npm ?</h2>
+    <p>npm (Node Package Manager) est le gestionnaire de paquets par défaut de Node.js. Il permet d’installer, gérer, et partager des modules externes pour enrichir tes projets.</p>
+
+    <h2>Initialiser un projet</h2>
+    <p>Pour commencer un projet Node.js, crée un fichier <code>package.json</code> avec :</p>
+    <pre><code>npm init -y
+</code></pre>
+    <p>Cela génère un fichier <code>package.json</code> avec les configurations par défaut :</p>
+    <pre><code>{
+  "name": "mon-projet",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+</code></pre>
+
+    <h2>Installer un module externe</h2>
+    <p>Pour installer un module, utilise <code>npm install</code>. Par exemple, installons <code>chalk</code> pour colorer les logs :</p>
+    <pre><code>npm install chalk
+</code></pre>
+    <p>Utilise <code>chalk</code> dans un script :</p>
+    <pre><code>const chalk = require('chalk');
+
+console.log(chalk.green('Succès !'));
+console.log(chalk.red('Erreur !'));
+console.log(chalk.blue.bold('Information'));
+</code></pre>
+    <p>Exécute avec <code>node script.js</code>. Les messages s’affichent en couleur dans le terminal.</p>
+
+    <h2>Exemple pratique : Générateur de salutations</h2>
+    <p>Voici un script utilisant <code>chalk</code> et <code>figlet</code> (pour du texte ASCII) :</p>
+    <pre><code>npm install chalk figlet
+</code></pre>
+    <pre><code>const chalk = require('chalk');
+const figlet = require('figlet');
+
+const greet = (name) => {
+  figlet.text(`Salut ${name} !`, (err, data) => {
+    if (err) {
+      console.error('Erreur :', err);
+      return;
+    }
+    console.log(chalk.green(data));
+  });
+};
+
+greet('Node.js');
+</code></pre>
+    <p>Exécute avec <code>node greet.js</code>. Sortie (exemple) :</p>
+    <pre><code>  ____          _ _         _          _ _       
+ |  _ \   ___  | | | ___   | |__   ___| | | ___  
+ | | | | / __| | | |/ _ \  | '_ \ / __| | |/ _ \ 
+ | |_| | \__ \ | | | (_) | | | | | (__| | | (_) |
+ |____/  |___/ |_|_|\___/  |_| |_| \___|_|_|\___/
+</code></pre>
+    <p>Le texte est affiché en vert avec un style ASCII.</p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise <code>npm install --save-dev</code> pour les dépendances de développement (ex. : outils de test).</li>
+          <li>Vérifie les versions des modules dans <code>package.json</code> pour éviter les incompatibilités.</li>
+          <li>Consulte <a href="https://www.npmjs.com">npmjs.com</a> pour trouver des modules fiables.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="node5.html">← Chapitre précédent</a>
+      <a href="node7.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

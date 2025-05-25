@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 8 - Jointures entre tables</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 8 : Jointures entre tables 🔗</h1>
+    <p>Apprends à combiner des données de plusieurs tables avec <code>JOIN</code>.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les types de jointures</h2>
+    <p>Les jointures relient des tables via des clés. Les principaux types sont :</p>
+    <ul>
+      <li><code>INNER JOIN</code> : Lignes correspondantes dans les deux tables</li>
+      <li><code>LEFT JOIN</code> : Toutes les lignes de la table de gauche</li>
+      <li><code>RIGHT JOIN</code> : Toutes les lignes de la table de droite</li>
+    </ul>
+
+    <h2>🔹 Exemple d'INNER JOIN</h2>
+    <pre><code>
+CREATE TABLE Cours (
+    id INT PRIMARY KEY,
+    nom VARCHAR(50)
+);
+
+INSERT INTO Cours (id, nom) VALUES (1, 'Maths'), (2, 'SQL');
+
+CREATE TABLE Inscriptions (
+    etudiant_id INT,
+    cours_id INT
+);
+
+INSERT INTO Inscriptions (etudiant_id, cours_id) VALUES (1, 1), (1, 2);
+
+SELECT Etudiants.nom, Cours.nom
+FROM Etudiants
+INNER JOIN Inscriptions ON Etudiants.id = Inscriptions.etudiant_id
+INNER JOIN Cours ON Inscriptions.cours_id = Cours.id;
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche les noms des étudiants et leurs cours inscrits.</p>
+
+    <h2>📝 Exercice</h2>
+    <p>Crée une table "Auteurs" (id, nom) et relie-la à "Livres" via une clé étrangère. Écris une requête <code>INNER JOIN</code> pour afficher les titres des livres et les noms de leurs auteurs.</p>
+
+    <a href="chapitre9-sql.html" class="btn">➡️ Chapitre 9 : Fonctions d'agrégation</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu SQL</a></p>
+  </footer>
+</body>
+</html>

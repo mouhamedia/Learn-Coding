@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapitre 7 - Tableaux</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #003049;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f0fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #003049;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #002030;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    .navigation a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .navigation a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+      background-color: #f7f9ff;
+    }
+    footer a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 7 : Tableaux 🐘</h1>
+    <p>Apprends à stocker et manipuler des listes de données avec les tableaux.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Créer un tableau</h2>
+    <p>Les tableaux stockent plusieurs valeurs. Ils peuvent être indexés (numériques) ou associatifs (clés nommées).</p>
+    <pre><code>&lt;?php
+// Tableau indexé
+$fruits = ["Pomme", "Banane", "Orange"];
+
+// Tableau associatif
+$user = [
+    "name" => "Jean",
+    "age" => 25
+];
+echo $fruits[0]; // Pomme
+echo "&lt;br&gt;";
+echo $user["name"]; // Jean
+?&gt;
+</code></pre>
+
+    <h2>📌 Parcourir un tableau</h2>
+    <p>Utilise <code>foreach</code> pour parcourir un tableau :</p>
+    <pre><code>&lt;?php
+$colors = ["Rouge", "Bleu", "Vert"];
+foreach ($colors as $color) {
+    echo "$color&lt;br&gt;";
+}
+?&gt;
+</code></pre>
+
+    <h2>💻 Exemple pratique : Liste de produits</h2>
+    <p>Crée un fichier <code>products.php</code> pour afficher une liste de produits :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Liste de produits&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Produits&lt;/h1&gt;
+  &lt;?php
+    $products = [
+        ["name" => "Laptop", "price" => 999.99],
+        ["name" => "Smartphone", "price" => 499.99],
+        ["name" => "Tablette", "price" => 299.99]
+    ];
+    echo "&lt;ul&gt;";
+    foreach ($products as $product) {
+        echo "&lt;li&gt;" . $product["name"] . " : " . $product["price"] . " €&lt;/li&gt;";
+    }
+    echo "&lt;/ul&gt;";
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste via <code>http://localhost/products.php</code>. Résultat :</p>
+    <pre><code>Produits
+- Laptop : 999.99 €
+- Smartphone : 499.99 €
+- Tablette : 299.99 €
+</code></pre>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise des clés descriptives pour les tableaux associatifs.</li>
+          <li>Vérifie si un tableau est vide avant de le parcourir (<code>empty($array)</code>).</li>
+          <li>Utilise <code>count($array)</code> pour connaître la taille d’un tableau.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="chapitre6-php.html">← Chapitre précédent</a>
+      <a href="chapitre8-php.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="index.html">Retour au menu PHP</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

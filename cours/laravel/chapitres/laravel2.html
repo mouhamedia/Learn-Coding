@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 2 - Installation de Laravel</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 2 : Installation de Laravel 🛠️</h1>
+    <p>Configure ton environnement pour démarrer un projet Laravel et lancer ton premier serveur local.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Prérequis pour Laravel</h2>
+    <p>Avant d’installer Laravel, tu dois préparer ton environnement de développement. Laravel repose sur PHP et utilise Composer pour gérer les dépendances. Voici ce dont tu as besoin :</p>
+    <ul>
+      <li><strong>PHP 8.1 ou supérieur</strong> : Laravel 10.x nécessite une version récente de PHP. Vérifie avec <code>php -v</code>.</li>
+      <li><strong>Composer</strong> : Gestionnaire de dépendances PHP. Télécharge-le sur <a href="https://getcomposer.org">getcomposer.org</a> et vérifie avec <code>composer --version</code>.</li>
+      <li><strong>SGBD</strong> : MySQL, PostgreSQL, ou SQLite pour la base de données. MySQL est recommandé pour ce cours.</li>
+      <li><strong>Serveur local</strong> : Utilise XAMPP, WAMP, ou le serveur intégré de Laravel (<code>php artisan serve</code>).</li>
+      <li><strong>Éditeur de code</strong> : VS Code, PhpStorm, ou tout autre éditeur pour modifier les fichiers PHP.</li>
+    </ul>
+    <p><strong>Exemple</strong> : Sur Windows, installe XAMPP pour PHP et MySQL, puis ajoute Composer via son installateur. Sur Linux, utilise <code>sudo apt install php composer</code>.</p>
+
+    <h2>🔹 Installer Laravel</h2>
+    <p>Laravel s’installe via Composer, qui télécharge le framework et ses dépendances. Voici les étapes pour créer un projet :</p>
+    <ol>
+      <li>Ouvre un terminal dans le dossier où tu veux créer ton projet.</li>
+      <li>Exécute la commande suivante pour créer un projet nommé "blog" :</li>
+      <pre><code>
+composer create-project laravel/laravel blog
+      </code></pre>
+      <li>Accède au dossier du projet :</li>
+      <pre><code>
+cd blog
+      </code></pre>
+      <li>Lance le serveur local :</li>
+      <pre><code>
+php artisan serve
+      </code></pre>
+    </ol>
+    <p><strong>Résultat</strong> : Le serveur démarre à <code>http://localhost:8000</code>. Ouvre cette URL dans ton navigateur pour voir la page d’accueil par défaut de Laravel.</p>
+    <p><strong>Exemple alternatif</strong> : Si le port 8000 est occupé, utilise un autre port :</p>
+    <pre><code>
+php artisan serve --port=8001
+    </code></pre>
+    <p><strong>Résultat</strong> : Le serveur est accessible à <code>http://localhost:8001</code>.</p>
+
+    <h2>🔹 Configurer la base de données</h2>
+    <p>Laravel utilise un fichier <code>.env</code> pour configurer la connexion à la base de données. Ouvre <code>.env</code> dans ton projet et modifie les lignes suivantes :</p>
+    <pre><code>
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=blog
+DB_USERNAME=root
+DB_PASSWORD=
+    </code></pre>
+    <p><strong>Explications</strong> :</p>
+    <ul>
+      <li><code>DB_DATABASE</code> : Nom de la base de données. Crée-la d’abord dans MySQL (par exemple, via phpMyAdmin ou <code>CREATE DATABASE blog;</code>).</li>
+      <li><code>DB_USERNAME</code> et <code>DB_PASSWORD</code> : Identifiants de ton SGBD. Par défaut, XAMPP utilise "root" sans mot de passe.</li>
+      <li><code>DB_HOST</code> et <code>DB_PORT</code> : Laisse les valeurs par défaut sauf si ton serveur MySQL est configuré différemment.</li>
+    </ul>
+    <p><strong>Exemple</strong> : Si tu utilises SQLite, modifie <code>.env</code> ainsi :</p>
+    <pre><code>
+DB_CONNECTION=sqlite
+# Supprime les autres lignes DB_*
+    </code></pre>
+    <p>Crée un fichier <code>database/database.sqlite</code> vide, et Laravel le configurera automatiquement.</p>
+
+    <h2>🔹 Vérifier l’installation</h2>
+    <p>Pour confirmer que tout fonctionne :</p>
+    <ol>
+      <li>Assure-toi que le serveur est en cours d’exécution (<code>php artisan serve</code>).</li>
+      <li>Ouvre <code>http://localhost:8000</code> dans ton navigateur. Tu devrais voir une page avec le logo Laravel.</li>
+      <li>Teste la connexion à la base de données en exécutant :</li>
+      <pre><code>
+php artisan migrate
+      </code></pre>
+    </ol>
+    <p><strong>Résultat</strong> : Si aucune erreur n’apparaît, la migration crée des tables par défaut (comme <code>users</code>) dans ta base de données.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>"Composer not found"</strong> : Installe Composer globalement (<code>sudo apt install composer</code> ou via l’installateur Windows).</li>
+      <li><strong>"Database connection failed"</strong> : Vérifie que la base de données existe et que les identifiants dans <code>.env</code> sont corrects.</li>
+      <li><strong>"Permission denied"</strong> : Sur Linux/Mac, donne les permissions au dossier avec <code>chmod -R 775 storage</code> et <code>chown -R www-data:www-data storage</code>.</li>
+      <li><strong>"Port occupé"</strong> : Utilise <code>php artisan serve --port=8001</code>.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Installe Laravel dans un dossier nommé "mon-site" en utilisant <code>composer create-project</code>.<br>
+    2. Configure une base de données MySQL nommée "mon_site" et mets à jour <code>.env</code> avec les bons identifiants.<br>
+    3. Lance le serveur avec <code>php artisan serve</code> et vérifie que la page d’accueil s’affiche.<br>
+    4. Exécute <code>php artisan migrate</code> et vérifie dans phpMyAdmin (ou un autre outil) que les tables ont été créées.<br>
+    5. (Bonus) Essaie de lancer le serveur sur un autre port (par exemple, 8002) et accède à la page.</p>
+
+    <a href="laravel3.html" class="btn">➡️ Chapitre 3 : Les routes</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Laravel</a></p>
+  </footer>
+</body>
+</html>

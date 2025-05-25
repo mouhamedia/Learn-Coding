@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 8 - Classes et objets</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 8 : Classes et objets 🏗️</h1>
+    <p>Apprends les bases de la programmation orientée objet avec les classes et objets.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les classes</h2>
+    <p>Une classe est un modèle pour créer des objets avec des propriétés et des méthodes.</p>
+    <pre><code>
+using System;
+
+class Personne {
+  public string Nom;
+  public int Age;
+
+  public void Saluer() {
+    Console.WriteLine($"Bonjour, je suis {Nom} et j'ai {Age} ans.");
+  }
+}
+
+class Program {
+  static void Main() {
+    Personne p = new Personne();
+    p.Nom = "Alice";
+    p.Age = 25;
+    p.Saluer();
+  }
+}
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche "Bonjour, je suis Alice et j'ai 25 ans.".</p>
+
+    <h2>🔹 Constructeurs</h2>
+    <p>Un constructeur initialise un objet lors de sa création.</p>
+    <pre><code>
+using System;
+
+class Personne {
+  public string Nom;
+  public int Age;
+
+  public Personne(string nom, int age) {
+    Nom = nom;
+    Age = age;
+  }
+
+  public void Saluer() {
+    Console.WriteLine($"Bonjour, je suis {Nom} et j'ai {Age} ans.");
+  }
+}
+
+class Program {
+  static void Main() {
+    Personne p = new Personne("Bob", 30);
+    p.Saluer();
+  }
+}
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche "Bonjour, je suis Bob et j'ai 30 ans.".</p>
+
+    <h2>🧪 Exercice</h2>
+    <p>Crée une classe <code>Voiture</code> avec les propriétés <code>Marque</code> et <code>Vitesse</code>, et une méthode pour afficher ces informations.</p>
+
+    <a href="chapitre9-cs.html" class="btn">➡️ Chapitre 9 : Collections</a>
+  </main>
+
+  <footer>
+    <p><a href="indexcs.html">← Retour au menu C#</a></p>
+  </footer>
+</body>
+</html>

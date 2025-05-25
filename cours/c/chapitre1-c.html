@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 1 - Introduction au langage C</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 1 : Introduction au langage C 💾</h1>
+    <p>Découvre les bases du langage C, un langage puissant et polyvalent.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que le langage C ?</h2>
+    <p>Le C est un langage de programmation structuré, créé dans les années 1970 par Dennis Ritchie. Il est utilisé pour :</p>
+    <ul>
+      <li>Les systèmes d’exploitation (ex. : Linux, Windows).</li>
+      <li>Les applications embarquées (microcontrôleurs).</li>
+      <li>Les logiciels performants (jeux, bases de données).</li>
+      <li>La base de nombreux autres langages (C++, Python).</li>
+    </ul>
+
+    <h2>📌 Pourquoi apprendre le C ?</h2>
+    <ul>
+      <li>Performant et proche du matériel.</li>
+      <li>Base essentielle pour comprendre la programmation système.</li>
+      <li>Contrôle précis des ressources (mémoire, processeur).</li>
+    </ul>
+
+    <h2>💻 Premier programme en C</h2>
+    <p>Voici un programme simple qui affiche un message :</p>
+    <pre><code>
+#include <stdio.h>
+
+int main() {
+    printf("Bonjour, monde !\n");
+    return 0;
+}
+</code></pre>
+    <p><strong>Explications :</strong></p>
+    <ul>
+      <li><code>#include <stdio.h></code> : Inclut la bibliothèque pour les entrées/sorties.</li>
+      <li><code>int main()</code> : Point d’entrée du programme.</li>
+      <li><code>printf</code> : Affiche du texte à l’écran.</li>
+      <li><code>return 0</code> : Indique que le programme s’est terminé avec succès.</li>
+    </ul>
+
+    <h2>📥 Installer un compilateur C</h2>
+    <p>Pour exécuter du code C, tu as besoin d’un compilateur comme GCC :</p>
+    <ul>
+      <li><strong>Windows</strong> : Installe MinGW ou utilise WSL avec GCC.</li>
+      <li><strong>Mac/Linux</strong> : GCC est souvent préinstallé (vérifie avec <code>gcc --version</code>).</li>
+      <li><strong>En ligne</strong> : Utilise <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a>.</li>
+    </ul>
+    <p>Pour compiler et exécuter : <code>gcc programme.c -o programme && ./programme</code> (Linux/Mac) ou <code>programme.exe</code> (Windows).</p>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Modifie le programme ci-dessus pour afficher ton nom et ton âge.</p>
+    <pre><code>
+#include <stdio.h>
+
+int main() {
+    printf("Je m'appelle Alice et j'ai 25 ans.\n");
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre2-c.html" class="btn">➡️ Chapitre 2 : Variables et types de données</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="index.html">Retour au menu C</a>
+    </p>
+  </footer>
+</body>
+</html>

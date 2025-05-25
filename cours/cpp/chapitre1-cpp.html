@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 1 - Introduction à C++</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 1 : Introduction à C++ ⚙️</h1>
+    <p>Découvre les bases de C++, un langage puissant pour tout type de projets.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que C++ ?</h2>
+    <p>C++ est un langage de programmation créé dans les années 1980 par Bjarne Stroustrup, comme une extension de C. Il est utilisé pour :</p>
+    <ul>
+      <li>Les jeux vidéo (ex. : Unreal Engine).</li>
+      <li>Les systèmes embarqués (ex. : voitures, robots).</li>
+      <li>Les logiciels performants (ex. : navigateurs, bases de données).</li>
+      <li>La programmation orientée objet et système.</li>
+    </ul>
+    <p>C’est comme une boîte à outils : tu peux construire presque n’importe quoi !</p>
+
+    <h2>📌 Pourquoi apprendre C++ ?</h2>
+    <ul>
+      <li>Très rapide et efficace (proche du matériel).</li>
+      <li>Permet de comprendre la gestion de la mémoire.</li>
+      <li>Base pour apprendre d’autres langages (C#, Java).</li>
+    </ul>
+
+    <h2>💻 Installer un environnement C++</h2>
+    <p>Pour coder en C++, tu as besoin d’un compilateur (ex. : g++) et d’un éditeur :</p>
+    <ul>
+      <li><strong>Windows</strong> : Installe Code::Blocks avec MinGW ou Visual Studio Community.</li>
+      <li><strong>Mac/Linux</strong> : Installe g++ (vérifie avec <code>g++ --version</code>).</li>
+      <li><strong>En ligne</strong> : Utilise <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a>.</li>
+    </ul>
+    <p>Pour compiler et exécuter un programme :</p>
+    <ol>
+      <li>Écris ton code dans un fichier <code>monprogramme.cpp</code>.</li>
+      <li>Compile : <code>g++ monprogramme.cpp -o monprogramme</code>.</li>
+      <li>Exécute : <code>./monprogramme</code> (Linux/Mac) ou <code>monprogramme.exe</code> (Windows).</li>
+    </ol>
+
+    <h2>📥 Premier aperçu d’un programme</h2>
+    <p>Voici un programme C++ simple :</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Bonjour, C++ !" << endl;
+    return 0;
+}
+</code></pre>
+    <p><strong>Explications :</strong></p>
+    <ul>
+      <li><code>#include <iostream></code> : Ajoute la bibliothèque pour afficher ou lire du texte.</li>
+      <li><code>using namespace std;</code> : Simplifie l’utilisation de <code>cout</code> et <code>cin</code>.</li>
+      <li><code>int main()</code> : Le point de départ du programme.</li>
+      <li><code>cout</code> : Affiche du texte à l’écran.</li>
+      <li><code>return 0</code> : Indique que tout s’est bien passé.</li>
+    </ul>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Modifie le programme ci-dessus pour afficher ton prénom.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Je m'appelle Alice !" << endl;
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre2-cpp.html" class="btn">➡️ Chapitre 2 : Premier programme C++</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="index.html">Retour au menu C++</a>
+    </p>
+  </footer>
+</body>
+</html>

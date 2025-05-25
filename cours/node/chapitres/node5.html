@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 5 - HTTP et création d’un serveur</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #026e00;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(2, 110, 0, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #e8f9e6cc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    main h2 {
+      color: #026e00;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #026e00;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e8f9e6;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #026e00;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #026e00;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #014d00;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #026e00;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #014d00;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 5 : HTTP et création d’un serveur</h1>
+    <p>Apprends à créer un serveur web avec le module HTTP de Node.js.</p>
+  </header>
+
+  <main>
+    <h2>Le module HTTP</h2>
+    <p>Le module <code>http</code> permet de créer des serveurs web et de gérer des requêtes/réponses HTTP.</p>
+
+    <h2>Créer un serveur simple</h2>
+    <p>Voici un exemple de serveur HTTP de base :</p>
+    <pre><code>const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Bonjour depuis Node.js !');
+});
+
+server.listen(3000, () => {
+  console.log('Serveur démarré sur http://localhost:3000');
+});
+</code></pre>
+    <p>Exécute ce script (<code>node server.js</code>) et ouvre <code>http://localhost:3000</code> dans ton navigateur pour voir le message.</p>
+
+    <h2>Gérer les requêtes</h2>
+    <p>Tu peux inspecter <code>req.url</code> pour répondre différemment selon l’URL :</p>
+    <pre><code>const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.setHeader('Content-Type', 'text/html');
+  if (req.url === '/') {
+    res.statusCode = 200;
+    res.end('<h1>Accueil</h1>');
+  } else if (req.url === '/about') {
+    res.statusCode = 200;
+    res.end('<h1>À propos</h1>');
+  } else {
+    res.statusCode = 404;
+    res.end('<h1>Page non trouvée</h1>');
+  }
+});
+
+server.listen(3000, () => {
+  console.log('Serveur démarré sur http://localhost:3000');
+});
+</code></pre>
+    <p>Ce serveur répond avec des pages HTML différentes pour <code>/</code>, <code>/about</code>, ou une erreur 404.</p>
+
+    <h2>Exemple pratique : API simple</h2>
+    <p>Voici un serveur qui sert une API JSON :</p>
+    <pre><code>const http = require('http');
+
+const users = [
+  { id: 1, name: 'Jean' },
+  { id: 2, name: 'Marie' }
+];
+
+const server = http.createServer((req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  if (req.url === '/api/users' && req.method === 'GET') {
+    res.statusCode = 200;
+    res.end(JSON.stringify(users));
+  } else {
+    res.statusCode = 404;
+    res.end(JSON.stringify({ error: 'Ressource non trouvée' }));
+  }
+});
+
+server.listen(3000, () => {
+  console.log('Serveur démarré sur http://localhost:3000');
+});
+</code></pre>
+    <p>Teste avec <code>curl http://localhost:3000/api/users</code> ou un navigateur. Sortie :</p>
+    <pre><code>[{"id":1,"name":"Jean"},{"id":2,"name":"Marie"}]
+</code></pre>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Définit toujours le <code>Content-Type</code> approprié pour les réponses.</li>
+          <li>Utilise des frameworks comme Express.js pour des serveurs plus complexes (voir Chapitre 7).</li>
+          <li>Teste ton serveur avec des outils comme Postman ou curl.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="node4.html">← Chapitre précédent</a>
+      <a href="node6.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

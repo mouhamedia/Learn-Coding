@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 3 - Variables et types de données</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color
+
+: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 3 : Variables et types de données ☕</h1>
+    <p>Apprends à stocker des informations dans ton programme Java.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une variable ?</h2>
+    <p>Une variable est comme une boîte où tu peux stocker une valeur (comme un nombre ou du texte). En Java, tu dois indiquer le type de la variable avant de l’utiliser.</p>
+    <p>Exemple simple :</p>
+    <pre><code>
+public class Variables {
+    public static void main(String[] args) {
+        int age = 25; // Stocke un nombre entier
+        System.out.println("J'ai " + age + " ans.");
+    }
+}
+</code></pre>
+    <p>Dans cet exemple, <code>age</code> est une variable de type <code>int</code> qui contient 25.</p>
+
+    <h2>📌 Types de données</h2>
+    <p>Java a plusieurs types de données pour stocker différentes informations :</p>
+    <ul>
+      <li><code>int</code> : Pour les nombres entiers (ex. : 10, -5).</li>
+      <li><code>double</code> : Pour les nombres décimaux (ex. : 3.14).</li>
+      <li><code>char</code> : Pour un seul caractère (ex. : 'A').</li>
+      <li><code>boolean</code> : Pour vrai ou faux (<code>true</code>, <code>false</code>).</li>
+      <li><code>String</code> : Pour du texte (ex. : "Bonjour").</li>
+    </ul>
+
+    <h2>💻 Déclarer et utiliser des variables</h2>
+    <p>Pour utiliser une variable, tu dois la déclarer (dire son type et son nom) et lui donner une valeur.</p>
+    <pre><code>
+public class Exemple {
+    public static void main(String[] args) {
+        String nom = "Alice"; // Texte
+        double prix = 19.99;  // Décimal
+        boolean estEtudiant = true; // Vrai ou faux
+        System.out.println(nom + " a payé " + prix + " euros.");
+        System.out.println("Étudiant ? " + estEtudiant);
+    }
+}
+</code></pre>
+    <p>Sortie : <code>Alice a payé 19.99 euros. Étudiant ? true</code></p>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui stocke ton année de naissance et calcule ton âge en 2025.</p>
+    <pre><code>
+public class Age {
+    public static void main(String[] args) {
+        int anneeNaissance = 2000; // Change avec ton année
+        int anneeActuelle = 2025;
+        int age = anneeActuelle - anneeNaissance;
+        System.out.println("En 2025, j'aurai " + age + " ans.");
+    }
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a> !</p>
+
+    <a href="chapitre4-java.html" class="btn">➡️ Chapitre 4 : Opérateurs</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre2-java.html">← Chapitre 2 : Premier programme Java</a> |
+      <a href="index.html">Retour au menu Java</a>
+    </p>
+  </footer>
+</body>
+</html>

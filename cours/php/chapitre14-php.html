@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapitre 14 - Sécurité</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #003049;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f0fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #003049;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    .navigation a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .navigation a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+      background-color: #f7f9ff;
+    }
+    footer a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 14 : Sécurité 🐘</h1>
+    <p>Protège ton application PHP contre les vulnérabilités courantes.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Prévenir les injections SQL</h2>
+    <p>Utilise des requêtes préparées avec <code>PDO</code> pour sécuriser les interactions avec la base de données.</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Requête sécurisée&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Ajouter un utilisateur&lt;/h1&gt;
+  &lt;form method="post" action=""&gt;
+    &lt;label&gt;Nom : &lt;input type="text" name="name"&gt;&lt;/label&gt;
+    &lt;label&gt;Email : &lt;input type="email" name="email"&gt;&lt;/label&gt;
+    &lt;input type="submit" value="Ajouter"&gt;
+  &lt;/form&gt;
+  &lt;?php
+    $pdo = new PDO("mysql:host=localhost;dbname=myapp", "root", "");
+    $pdo-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $name = $_POST["name"];
+        $email = $_POST["email"];
+        $stmt = $pdo-&gt;prepare("INSERT INTO users (name, email) VALUES (?, ?)");
+        $stmt-&gt;execute([$name, $email]);
+        echo "&lt;p&gt;Utilisateur ajouté !&lt;/p&gt;";
+    }
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste via <code>http://localhost/secure.php</code> après avoir configuré la table <code>users</code> (voir Chapitre 12).</p>
+
+    <h2>📌 Protéger contre XSS</h2>
+    <p>Utilise <code>htmlspecialchars</code> pour échapper les données utilisateur affichées, empêchant l’exécution de scripts malveillants.</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Protection XSS&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Commentaire&lt;/h1&gt;
+  &lt;form method="post" action=""&gt;
+    &lt;label&gt;Commentaire : &lt;input type="text" name="comment"&gt;&lt;/label&gt;
+    &lt;input type="submit" value="Envoyer"&gt;
+  &lt;/form&gt;
+  &lt;?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $comment = $_POST["comment"];
+        $safe_comment = htmlspecialchars($comment, ENT_QUOTES, "UTF-8");
+        echo "&lt;p&gt;Commentaire : $safe_comment&lt;/p&gt;";
+    }
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p><strong>Instructions pour tester :</strong></p>
+    <ul>
+      <li>Sauve ce code dans <code>xss.php</code>.</li>
+      <li>Teste via <code>http://localhost/xss.php</code>.</li>
+      <li>Entre un commentaire comme <code>&lt;script&gt;alert('Test')&lt;/script&gt;</code>.</li>
+      <li>Le résultat devrait afficher le texte brut <code>&lt;script&gt;alert('Test')&lt;/script&gt;</code> sans exécuter de script ou afficher "XSS".</li>
+    </ul>
+    <p><strong>Pourquoi cela fonctionne :</strong> <code>htmlspecialchars</code> convertit les caractères spéciaux (comme <code>&lt;</code> et <code>&gt;</code>) en entités HTML, empêchant le navigateur d’interpréter le code comme un script.</p>
+
+    <h2>💻 Exemple pratique : Formulaire sécurisé</h2>
+    <p>Crée un fichier <code>safe_form.php</code> combinant validation et protection XSS :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Formulaire sécurisé&lt;/title&gt;
+  &lt;style&gt;
+    form { margin: 1rem 0; }
+    label { display: block; margin: 0.5rem 0; }
+    input { padding: 0.5rem; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Formulaire sécurisé&lt;/h1&gt;
+  &lt;form method="post" action=""&gt;
+    &lt;label&gt;Nom : &lt;input type="text" name="name"&gt;&lt;/label&gt;
+    &lt;input type="submit" value="Envoyer"&gt;
+  &lt;/form&gt;
+  &lt;?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $name = $_POST["name"];
+        if (empty($name)) {
+            echo "&lt;p&gt;Erreur : le nom est requis.&lt;/p&gt;";
+        } elseif (!preg_match("/^[a-zA-Z ]*$/", $name)) {
+            echo "&lt;p&gt;Erreur : le nom ne doit contenir que des lettres et des espaces.&lt;/p&gt;";
+        } else {
+            $safe_name = htmlspecialchars($name, ENT_QUOTES, "UTF-8");
+            echo "&lt;p&gt;Bienvenue, $safe_name !&lt;/p&gt;";
+        }
+    }
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste via <code>http://localhost/safe_form.php</code>. Essaie des entrées comme <code>&lt;script&gt;alert('Test')&lt;/script&gt;</code> ou des caractères spéciaux pour voir la validation et l’échappement en action.</p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Toujours utiliser des requêtes préparées pour les interactions avec la base de données.</li>
+          <li>Échappe les données utilisateur avec <code>htmlspecialchars</code> avant affichage.</li>
+          <li>Valide les entrées avec <code>filter_var</code> ou des expressions régulières pour limiter les caractères autorisés.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="chapitre13-php.html">← Chapitre précédent</a>
+      <a href="chapitre15-php.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="index.html">Retour au menu PHP</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

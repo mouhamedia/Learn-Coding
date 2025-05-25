@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 9 - Programmation orientée objet (POO)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Programmation orientée objet (POO) 🏗</h1>
+    <p>Crée des objets pour structurer ton code de manière efficace.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que la POO ?</h2>
+    <p>La programmation orientée objet (POO) permet de modéliser des concepts du monde réel avec des <strong>classes</strong> et des <strong>objets</strong>. Une classe est un modèle, et un objet est une instance de ce modèle.</p>
+    <pre><code>
+class Chien:
+    def __init__(self, nom, age):
+        self.nom = nom
+        self.age = age
+
+    def aboyer(self):
+        print(f"{self.nom} dit : Wouf !")
+
+mon_chien = Chien("Rex", 3)
+mon_chien.aboyer()  # Affiche : Rex dit : Wouf !
+</code></pre>
+
+    <h2>📌 Concepts de base</h2>
+    <ul>
+      <li><strong>Classe</strong> : Plan pour créer des objets.</li>
+      <li><strong>Objet</strong> : Instance d’une classe.</li>
+      <li><strong>Attributs</strong> : Données associées à un objet (ex. : <code>nom</code>, <code>age</code>).</li>
+      <li><strong>Méthodes</strong> : Fonctions définies dans une classe.</li>
+    </ul>
+
+    <h2>💻 Héritage</h2>
+    <p>L’héritage permet à une classe d’hériter des attributs et méthodes d’une autre.</p>
+    <pre><code>
+class Animal:
+    def __init__(self, nom):
+        self.nom = nom
+
+    def manger(self):
+        print(f"{self.nom} mange.")
+
+class Chien(Animal):
+    def aboyer(self):
+        print(f"{self.nom} dit : Wouf !")
+
+mon_chien = Chien("Rex")
+mon_chien.manger()  # Affiche : Rex mange.
+mon_chien.aboyer()  # Affiche : Rex dit : Wouf !
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une classe <code>Voiture</code> avec des attributs <code>marque</code> et <code>vitesse</code>, et une méthode <code>description</code> qui affiche ces informations.</p>
+    <pre><code>
+class Voiture:
+    def __init__(self, marque, vitesse):
+        self.marque = marque
+        self.vitesse = vitesse
+
+    def description(self):
+        print(f"C’est une {self.marque} avec une vitesse de {self.vitesse} km/h.")
+
+ma_voiture = Voiture("Toyota", 180)
+ma_voiture.description()
+</code></pre>
+    <p>Teste ce code sur <a href="https://replit.com" target="_blank">Replit</a> !</p>
+
+    <a href="chapitre10.html" class="btn">➡️ Chapitre 10 : Projet final</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre8.html">← Chapitre 8 : Exceptions (gestion des erreurs)</a> |
+      <a href="index.html">Retour au menu Python</a>
+    </p>
+  </footer>
+</body>
+</html>

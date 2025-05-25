@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 9 - Préprocesseur et macros</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Préprocesseur et macros ⚙️</h1>
+    <p>Utilise le préprocesseur pour simplifier et organiser ton code C.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que le préprocesseur ?</h2>
+    <p>Le préprocesseur est une étape de compilation qui traite les directives commençant par <code>#</code> avant que le code ne soit compilé. Il permet d’inclure des fichiers, de définir des constantes, et de créer des macros.</p>
+
+    <h2>📌 Directive <code>#include</code></h2>
+    <p>Inclut des fichiers comme des bibliothèques ou des en-têtes personnalisés.</p>
+    <pre><code>
+#include <stdio.h>  // Bibliothèque standard
+#include "mon_fichier.h"  // Fichier local
+</code></pre>
+
+    <h2>💻 Directive <code>#define</code></h2>
+    <p>Permet de définir des constantes ou des macros.</p>
+    <pre><code>
+#include <stdio.h>
+
+#define PI 3.14159
+#define CARRE(x) ((x) * (x))
+
+int main() {
+    printf("Valeur de PI : %f\n", PI);
+    printf("Carré de 5 : %d\n", CARRE(5)); // Affiche : 25
+    return 0;
+}
+</code></pre>
+    <p><strong>Attention :</strong> Les macros ne sont pas des fonctions, elles sont remplacées textuellement avant compilation.</p>
+
+    <h2>📌 Directives conditionnelles</h2>
+    <p>Utilise <code>#ifdef</code>, <code>#ifndef</code>, <code>#else</code>, et <code>#endif</code> pour inclure du code conditionnellement.</p>
+    <pre><code>
+#include <stdio.h>
+
+#define DEBUG
+
+int main() {
+    #ifdef DEBUG
+        printf("Mode débogage activé.\n");
+    #else
+        printf("Mode normal.\n");
+    #endif
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une macro pour calculer le maximum de deux nombres et utilise-la dans un programme.</p>
+    <pre><code>
+#include <stdio.h>
+
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+
+int main() {
+    int x = 10, y = 20;
+    printf("Le maximum de %d et %d est : %d\n", x, y, MAX(x, y));
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre10-c.html" class="btn">➡️ Chapitre 10 : Projet final</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre8-c.html">← Chapitre 8 : Programmation orientée objet en C</a> |
+      <a href="index.html">Retour au menu C</a>
+    </p>
+  </footer>
+</body>
+</html>

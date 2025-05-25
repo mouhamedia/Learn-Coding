@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 4 - Opérateurs</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 4 : Opérateurs ⚙️</h1>
+    <p>Utilise des opérateurs pour faire des calculs et des comparaisons.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un opérateur ?</h2>
+    <p>Les opérateurs sont des symboles qui permettent de manipuler des variables, comme additionner des nombres ou vérifier si une condition est vraie.</p>
+
+    <h2>📌 Opérateurs arithmétiques</h2>
+    <p>Pour faire des calculs :</p>
+    <ul>
+      <li><code>+</code> : Addition (ex. : 5 + 2 = 7).</li>
+      <li><code>-</code> : Soustraction (ex. : 5 - 2 = 3).</li>
+      <li><code>*</code> : Multiplication (ex. : 5 * 2 = 10).</li>
+      <li><code>/</code> : Division (ex. : 6 / 2 = 3).</li>
+      <li><code>%</code> : Modulo (reste, ex. : 7 % 2 = 1).</li>
+    </ul>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 10, b = 3;
+    cout << "Addition : " << a + b << endl;
+    cout << "Modulo : " << a % b << endl;
+    return 0;
+}
+</code></pre>
+
+    <h2>💻 Opérateurs de comparaison et logiques</h2>
+    <p>Pour tester des conditions :</p>
+    <ul>
+      <li><code>==</code> : Égal à.</li>
+      <li><code>!=</code> : Différent de.</li>
+      <li><code>></code>, <code><</code>, <code>>=</code>, <code><=</code> : Comparaisons.</li>
+      <li><code>&&</code> : Et (les deux conditions sont vraies).</li>
+      <li><code>||</code> : Ou (au moins une condition est vraie).</li>
+      <li><code>!</code> : Non (inverse une condition).</li>
+    </ul>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+int main() {
+    int age = 20;
+    bool peutVoter = age >= 18;
+    cout << "Peut voter ? " << peutVoter << endl; // Affiche 1 (true)
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui calcule le prix total d’un achat avec une remise de 10 % si le montant dépasse 50 euros.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+int main() {
+    float prix = 60.0;
+    float prixFinal = prix > 50 ? prix * 0.9 : prix;
+    cout << "Prix final : " << prixFinal << " euros" << endl;
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre5-cpp.html" class="btn">➡️ Chapitre 5 : Structures de contrôle</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre3-cpp.html">← Chapitre 3 : Variables et types de données</a> |
+      <a href="index.html">Retour au menu C++</a>
+    </p>
+  </footer>
+</body>
+</html>

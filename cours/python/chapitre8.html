@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 8 - Exceptions (gestion des erreurs)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 8 : Exceptions (gestion des erreurs) 🚨</h1>
+    <p>Gère les erreurs pour rendre ton programme robuste.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une exception ?</h2>
+    <p>Une exception est une erreur qui survient pendant l’exécution du programme, comme diviser par zéro ou ouvrir un fichier inexistant.</p>
+    <pre><code>
+# Exemple d’erreur
+nombre = 10 / 0  # Erreur : ZeroDivisionError
+</code></pre>
+
+    <h2>📌 Gérer les exceptions</h2>
+    <p>Utilise <code>try</code> et <code>except</code> pour gérer les erreurs.</p>
+    <pre><code>
+try:
+    nombre = int(input("Entrez un nombre : "))
+    resultat = 10 / nombre
+    print("Résultat :", resultat)
+except ZeroDivisionError:
+    print("Erreur : Division par zéro !")
+except ValueError:
+    print("Erreur : Veuillez entrer un nombre valide.")
+</code></pre>
+
+    <h2>💻 Blocs <code>else</code> et <code>finally</code></h2>
+    <p><code>else</code> s’exécute si aucune erreur n’est levée, et <code>finally</code> s’exécute toujours.</p>
+    <pre><code>
+try:
+    fichier = open("fichier.txt", "r")
+except FileNotFoundError:
+    print("Fichier non trouvé.")
+else:
+    contenu = fichier.read()
+    print(contenu)
+    fichier.close()
+finally:
+    print("Opération terminée.")
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui demande deux nombres à l’utilisateur et affiche leur division, en gérant les erreurs possibles.</p>
+    <pre><code>
+try:
+    a = int(input("Entrez le premier nombre : "))
+    b = int(input("Entrez le second nombre : "))
+    resultat = a / b
+except ZeroDivisionError:
+    print("Erreur : Division par zéro !")
+except ValueError:
+    print("Erreur : Entrez des nombres valides.")
+else:
+    print("Résultat :", resultat)
+</code></pre>
+    <p>Teste ce code sur <a href="https://replit.com" target="_blank">Replit</a> !</p>
+
+    <a href="chapitre9.html" class="btn">➡️ Chapitre 9 : Programmation orientée objet (POO)</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre7.html">← Chapitre 7 : Fichiers (lecture/écriture)</a> |
+      <a href="index.html">Retour au menu Python</a>
+    </p>
+  </footer>
+</body>
+</html>

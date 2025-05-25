@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 8 - Formulaires et validation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 8 : Formulaires et validation 📝</h1>
+    <p>Apprends à créer des formulaires interactifs et à valider les données avec Laravel.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Pourquoi valider les formulaires ?</h2>
+    <p>Les formulaires permettent aux utilisateurs d’envoyer des données (ex. : inscription, ajout d’un article). La validation garantit que ces données sont correctes et sécurisées avant de les traiter ou de les enregistrer.</p>
+    <p><strong>Fonctionnalités de Laravel</strong> :</p>
+    <ul>
+      <li>Validation des données avec des règles simples (ex. : requis, email valide).</li>
+      <li>Affichage automatique des erreurs dans les vues.</li>
+      <li>Protection CSRF intégrée pour sécuriser les formulaires.</li>
+    </ul>
+
+    <h2>🔹 Exemple 1 : Créer un formulaire</h2>
+    <p>Crée <code>resources/views/articles/creer.blade.php</code> pour ajouter un article :</p>
+    <pre><code>
+<form method="POST" action="/articles">
+    @csrf
+    <label for="titre">Titre :</label>
+    <input type="text" name="titre" id="titre">
+    @error('titre')
+        <span style="color: red;">{{ $message }}</span>
+    @enderror
+    <label for="contenu">Contenu :</label>
+    <textarea name="contenu" id="contenu"></textarea>
+    @error('contenu')
+        <span style="color: red;">{{ $message }}</span>
+    @enderror
+    <button type="submit">Créer l’article</button>
+</form>
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>@csrf</code> ajoute un token CSRF pour sécuriser le formulaire.</li>
+      <li><code>@error</code> affiche les messages d’erreur pour chaque champ.</li>
+      <li><code>action="/articles"</code> envoie les données à la route <code>/articles</code>.</li>
+    </ul>
+    <p>Crée une route pour afficher le formulaire :</p>
+    <pre><code>
+Route::get('/articles/creer', function () {
+    return view('articles.creer');
+});
+    </code></pre>
+
+    <h2>🔹 Exemple 2 : Valider les données</h2>
+    <p>Crée un contrôleur pour traiter le formulaire :</p>
+    <pre><code>
+php artisan make:controller ArticleController
+    </code></pre>
+    <p>Modifie <code>app/Http/Controllers/ArticleController.php</code> :</p>
+    <pre><code>
+namespace App\Http\Controllers;
+
+use App\Models\Article;
+use Illuminate\Http\Request;
+
+class ArticleController extends Controller
+{
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'titre' => 'required|max:255',
+            'contenu' => 'required'
+        ]);
+
+        Article::create($validated);
+        return redirect('/articles')->with('success', 'Article créé !');
+    }
+}
+    </code></pre>
+    <p>Ajoute la route :</p>
+    <pre><code>
+Route::post('/articles', [ArticleController::class, 'store']);
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>validate</code> vérifie que <code>titre</code> est requis et ne dépasse pas 255 caractères, et que <code>contenu</code> est requis.</li>
+      <li><code>Article::create</code> enregistre les données validées.</li>
+      <li><code>with('success', ...)</code> ajoute un message flash à la redirection.</li>
+    </ul>
+    <p><strong>Résultat</strong> : Si les données sont valides, un article est créé ; sinon, les erreurs s’affichent dans le formulaire.</p>
+
+    <h2>🔹 Exemple 3 : Afficher un message de succès</h2>
+    <p>Modifie <code>articles/index.blade.php</code> pour afficher le message flash :</p>
+    <pre><code>
+@if(session('success'))
+    <p style="color: green;">{{ session('success') }}</p>
+@endif
+<h1>Articles</h1>
+<ul>
+    @foreach($articles as $article)
+        <li>{{ $article->titre }}</li>
+    @endforeach
+</ul>
+    </code></pre>
+    <p><strong>Résultat</strong> : Après avoir créé un article, la page <code>/articles</code> affiche "Article créé !".</p>
+
+    <h2>🔹 Exemple 4 : Validation personnalisée</h2>
+    <p>Ajoute une règle pour vérifier que le titre est unique :</p>
+    <pre><code>
+$validated = $request->validate([
+    'titre' => 'required|max:255|unique:articles,titre',
+    'contenu' => 'required|min:10'
+]);
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>unique:articles,titre</code> vérifie que le titre n’existe pas déjà dans la table <code>articles</code>.</li>
+      <li><code>min:10</code> exige que <code>contenu</code> ait au moins 10 caractères.</li>
+    </ul>
+
+    <h2>🔹 Erreurs courantes et solutions</h2>
+    <ul>
+      <li><strong>"CSRF token mismatch"</strong> : Ajoute <code>@csrf</code> dans le formulaire.</li>
+      <li><strong>"Validation errors not showing"</strong> : Vérifie que <code>@error</code> est présent pour chaque champ.</li>
+      <li><strong>"Mass assignment error"</strong> : Ajoute <code>protected $fillable = ['titre', 'contenu'];</code> dans le modèle.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>Crée un formulaire pour ajouter une tâche :</p>
+    <ol>
+      <li>Crée une vue <code>taches/creer.blade.php</code> avec un formulaire pour <code>titre</code> (text) et <code>description</code> (textarea).</li>
+      <li>Ajoute une route GET <code>/taches/creer</code> pour afficher le formulaire.</li>
+      <li>Crée une route POST <code>/taches</code> et une méthode dans <code>TacheController</code> pour valider (<code>titre</code> requis, <code>description</code> facultative) et enregistrer la tâche.</li>
+      <li>Affiche les erreurs dans le formulaire et un message de succès après création.</li>
+      <li>Teste le formulaire en soumettant des données valides et invalides.</li>
+    </ol>
+
+    <a href="laravel9.html" class="btn">➡️ Chapitre 9 : Middleware</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Laravel</a></p>
+  </footer>
+</body>
+</html>

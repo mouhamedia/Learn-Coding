@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 4 - Insertion de données</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 4 : Insertion de données ➕</h1>
+    <p>Apprends à ajouter des données dans une table avec <code>INSERT</code>.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Insérer une ligne</h2>
+    <p>Utilise <code>INSERT INTO</code> pour ajouter une ligne à une table.</p>
+    <pre><code>
+INSERT INTO Etudiants (id, nom, age)
+VALUES (1, 'Alice', 25);
+    </code></pre>
+    <p><strong>Résultat</strong> : Ajoute un étudiant avec <code>id=1</code>, <code>nom='Alice'</code>, et <code>age=25</code>.</p>
+
+    <h2>🔹 Insérer plusieurs lignes</h2>
+    <p>Tu peux insérer plusieurs lignes en une seule requête.</p>
+    <pre><code>
+INSERT INTO Etudiants (id, nom, age)
+VALUES 
+    (2, 'Bob', 30),
+    (3, 'Charlie', 22);
+    </code></pre>
+    <p><strong>Résultat</strong> : Ajoute deux étudiants supplémentaires.</p>
+
+    <h2>📝 Exercice</h2>
+    <p>Dans la table "Livres" créée précédemment, insère trois livres avec des valeurs pour <code>id</code>, <code>titre</code>, et <code>annee</code>.</p>
+
+    <a href="chapitre5-sql.html" class="btn">➡️ Chapitre 5 : Sélection de données</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu SQL</a></p>
+  </footer>
+</body>
+</html>

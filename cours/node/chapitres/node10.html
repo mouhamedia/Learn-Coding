@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 10 - Connexion à une base de données (MongoDB)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #026e00;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(2, 110, 0, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #e8f9e6cc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    main h2 {
+      color: #026e00;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #026e00;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e8f9e6;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #026e00;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #026e00;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #014d00;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #026e00;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #014d00;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 10 : Connexion à une base de données (MongoDB)</h1>
+    <p>Apprends à connecter ton application Node.js à MongoDB.</p>
+  </header>
+
+  <main>
+    <h2>Pourquoi MongoDB ?</h2>
+    <p>MongoDB est une base de données NoSQL orientée documents, idéale pour les applications Node.js grâce à sa flexibilité et son intégration avec JavaScript.</p>
+
+    <h2>Installer MongoDB et le pilote</h2>
+    <p>Installe MongoDB localement ou utilise un service comme MongoDB Atlas. Ensuite, installe le pilote Node.js :</p>
+    <pre><code>npm install mongodb
+</code></pre>
+
+    <h2>Connexion à MongoDB</h2>
+    <p>Voici comment se connecter à une base MongoDB :</p>
+    <pre><code>const { MongoClient } = require('mongodb');
+
+const uri = 'mongodb://localhost:27017';
+const client = new MongoClient(uri);
+
+async function connect() {
+  try {
+    await client.connect();
+    console.log('Connecté à MongoDB');
+    const db = client.db('mydb');
+    const collection = db.collection('users');
+    await collection.insertOne({ name: 'Jean', age: 30 });
+    console.log('Utilisateur inséré');
+  } catch (err) {
+    console.error('Erreur :', err);
+  } finally {
+    await client.close();
+  }
+}
+
+connect();
+</code></pre>
+    <p>Assure-toi que MongoDB est en cours d’exécution (<code>mongod</code>) avant d’exécuter ce script.</p>
+
+    <h2>Exemple pratique : API avec MongoDB</h2>
+    <p>Voici une API Express qui interagit avec MongoDB :</p>
+    <pre><code>const express = require('express');
+const { MongoClient } = require('mongodb');
+const app = express();
+const port = 3000;
+
+const uri = 'mongodb://localhost:27017';
+const client = new MongoClient(uri);
+
+app.use(express.json());
+
+app.get('/api/users', async (req, res) => {
+  try {
+    await client.connect();
+    const db = client.db('mydb');
+    const users = await db.collection('users').find().toArray();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: 'Erreur serveur' });
+  } finally {
+    await client.close();
+  }
+});
+
+app.post('/api/users', async (req, res) => {
+  try {
+    await client.connect();
+    const db = client.db('mydb');
+    const result = await db.collection('users').insertOne(req.body);
+    res.status(201).json({ id: result.insertedId });
+  } catch (err) {
+    res.status(500).json({ error: 'Erreur serveur' });
+  } finally {
+    await client.close();
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Serveur démarré sur http://localhost:${port}`);
+});
+</code></pre>
+    <p>Teste avec :
+      <ul>
+        <li><code>curl http://localhost:3000/api/users</code> pour lister les utilisateurs.</li>
+        <li><code>curl -X POST -H "Content-Type: application/json" -d '{"name":"Marie","age":25}' http://localhost:3000/api/users</code> pour ajouter un utilisateur.</li>
+      </ul>
+    </p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise des connexions persistantes dans une application réelle (plutôt que <code>connect/close</code> par requête).</li>
+          <li>Valide les données avant de les insérer dans MongoDB.</li>
+          <li>Considère un ORM comme Mongoose pour une gestion simplifiée des schémas.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="node9.html">← Chapitre précédent</a>
+      <a href="../index.html">Retour à l’accueil →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 4 - Conditions</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #306998;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #306998;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #306998;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #306998;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 4 : Conditions 🎯</h1>
+    <p>Apprends à exécuter du code en fonction de conditions avec <code>if</code> et <code>switch</code>.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les conditions</h2>
+    <p>Les structures conditionnelles permettent d’exécuter du code uniquement si certaines conditions sont remplies. JavaScript utilise <code>if</code>, <code>else if</code>, et <code>else</code>.</p>
+    <pre><code>
+let note = 85;
+if (note >= 90) {
+  console.log("Excellent !");
+} else if (note >= 70) {
+  console.log("Bien !");
+} else {
+  console.log("À améliorer.");
+}
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche "Bien !" dans la console.</p>
+
+    <h2>🔹 La structure switch</h2>
+    <p><code>switch</code> est une alternative pour gérer plusieurs cas possibles.</p>
+    <pre><code>
+let jour = "lundi";
+switch (jour) {
+  case "lundi":
+    console.log("Début de semaine !");
+    break;
+  case "vendredi":
+    console.log("Fin de semaine !");
+    break;
+  default:
+    console.log("Autre jour.");
+}
+    </code></pre>
+    <p><strong>Essaie ici :</strong></p>
+    <input type="text" id="jourInput" placeholder="Entre un jour (ex. : lundi)">
+    <button onclick="verifierJour()">Vérifier</button>
+    <p id="jourResultat">Résultat : </p>
+    <script>
+      function verifierJour() {
+        let jour = document.getElementById("jourInput").value.toLowerCase();
+        let message;
+        switch (jour) {
+          case "lundi":
+            message = "Début de semaine !";
+            break;
+          case "vendredi":
+            message = "Fin de semaine !";
+            break;
+          default:
+            message = "Autre jour.";
+        }
+        document.getElementById("jourResultat").innerText = "Résultat : " + message;
+      }
+    </script>
+
+    <h2>📝 Exercice</h2>
+    <p>Crée un script qui affiche un message selon l’heure (par exemple, "Bon matin" avant 12h, "Bon après-midi" avant 18h, "Bonsoir" après) avec :</p>
+    <pre><code>
+let heure = 14;
+if (heure < 12) {
+  console.log("Bon matin");
+} // Complète le reste
+    </code></pre>
+
+    <a href="chapitre5-js.html" class="btn">➡️ Chapitre 5 : Boucles</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu JavaScript</a></p>
+  </footer>
+</body>
+</html>

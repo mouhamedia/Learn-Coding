@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 5 - Sélection de données</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 5 : Sélection de données 🔎</h1>
+    <p>Apprends à récupérer des données avec <code>SELECT</code>.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Sélectionner toutes les colonnes</h2>
+    <p>Utilise <code>SELECT *</code> pour récupérer toutes les colonnes d'une table.</p>
+    <pre><code>
+SELECT * FROM Etudiants;
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche toutes les lignes de la table <code>Etudiants</code>.</p>
+
+    <h2>🔹 Sélectionner des colonnes spécifiques</h2>
+    <p>Indique les colonnes que tu veux récupérer.</p>
+    <pre><code>
+SELECT nom, age FROM Etudiants;
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche uniquement les colonnes <code>nom</code> et <code>age</code> pour chaque étudiant.</p>
+
+    <h2>📝 Exercice</h2>
+    <p>Écris une requête pour sélectionner les colonnes <code>titre</code> et <code>annee</code> de la table "Livres".</p>
+
+    <a href="chapitre6-sql.html" class="btn">➡️ Chapitre 6 : Mise à jour et suppression</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu SQL</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 9 - Structures et énumérations</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Structures et énumérations ⚙️</h1>
+    <p>Organise tes données avec des structures et des énumérations.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les structures</h2>
+    <p>Une <code>struct</code> regroupe plusieurs variables pour représenter un objet, comme une fiche d’identité.</p>
+    <pre><code>
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Etudiant {
+    string nom;
+    int age;
+};
+
+int main() {
+    Etudiant e;
+    e.nom = "Alice";
+    e.age = 20;
+    cout << "Nom : " << e.nom << ", Âge : " << e.age << endl;
+    return 0;
+}
+</code></pre>
+
+    <h2>📌 Énumérations</h2>
+    <p>Une <code>enum</code> définit un ensemble de valeurs nommées, comme une liste d’options.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+enum Jour { LUNDI, MARDI, MERCREDI };
+
+int main() {
+    Jour aujourdHui = MARDI;
+    if (aujourdHui == MARDI) {
+        cout << "C'est mardi !" << endl;
+    }
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une structure <code>Livre</code> avec un titre et une année, et affiche ses informations.</p>
+    <pre><code>
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Livre {
+    string titre;
+    int annee;
+};
+
+int main() {
+    Livre livre;
+    livre.titre = "Le Petit Prince";
+    livre.annee = 1943;
+    cout << "Titre : " << livre.titre << ", Année : " << livre.annee << endl;
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre10-cpp.html" class="btn">➡️ Chapitre 10 : Introduction à la POO</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre8-cpp.html">← Chapitre 8 : Pointeurs et références</a> |
+      <a href="index.html">Retour au menu C++</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 14 - Polymorphisme</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 14 : Polymorphisme ⚙️</h1>
+    <p>Permets à des objets de se comporter différemment.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que le polymorphisme ?</h2>
+    <p>Le polymorphisme permet à une même méthode d’avoir des comportements différents selon l’objet.</p>
+
+    <h2>📌 Méthodes virtuelles</h2>
+    <p>Utilise <code>virtual</code> pour permettre à une sous-classe de redéfinir une méthode.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+class Animal {
+public:
+    virtual void faireSon() {
+        cout << "Son d'animal" << endl;
+    }
+};
+
+class Chat : public Animal {
+public:
+    void faireSon() override {
+        cout << "Miaou !" << endl;
+    }
+};
+
+int main() {
+    Animal* animal = new Chat();
+    animal->faireSon();
+    delete animal;
+    return 0;
+}
+</code></pre>
+
+    <h2>💻 Surcharge de méthodes</h2>
+    <p>La surcharge utilise le même nom de méthode avec des paramètres différents.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+class Calcul {
+public:
+    int addition(int a, int b) {
+        return a + b;
+    }
+    double addition(double a, double b) {
+        return a + b;
+    }
+};
+
+int main() {
+    Calcul c;
+    cout << c.addition(5, 3) << endl;
+    cout << c.addition(5.5, 3.2) << endl;
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une classe <code>Forme</code> avec une méthode virtuelle <code>aire</code>, redéfinie dans une classe <code>Cercle</code>.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+class Forme {
+public:
+    virtual double aire() {
+        return 0.0;
+    }
+};
+
+class Cercle : public Forme {
+private:
+    double rayon;
+public:
+    Cercle(double r) : rayon(r) {}
+    double aire() override {
+        return 3.14 * rayon * rayon;
+    }
+};
+
+int main() {
+    Forme* forme = new Cercle(5);
+    cout << "Aire : " << forme->aire() << endl;
+    delete forme;
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre15-cpp.html" class="btn">➡️ Chapitre 15 : Fichiers</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre13-cpp.html">← Chapitre 13 : Héritage</a> |
+      <a href="index.html">Retour au menu C++</a>
+    </p>
+  </footer>
+</body>
+</html>

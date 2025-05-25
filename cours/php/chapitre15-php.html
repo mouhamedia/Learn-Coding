@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapitre 15 - Projet mini-site dynamique</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #003049;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f0fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #003049;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    .navigation a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .navigation a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+      background-color: #f7f9ff;
+    }
+    footer a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 15 : Projet mini-site dynamique 🐘</h1>
+    <p>Construis un petit site web dynamique avec PHP et MySQL.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Objectif du projet</h2>
+    <p>Créer un site de gestion de tâches avec une page pour lister, ajouter et supprimer des tâches, en utilisant MySQL pour stocker les données.</p>
+
+    <h2>📌 Structure du projet</h2>
+    <p>Crée une base de données <code>tasks_db</code> et une table <code>tasks</code> :</p>
+    <pre><code>CREATE DATABASE tasks_db;
+USE tasks_db;
+CREATE TABLE tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+</code></pre>
+
+    <h2>💻 Code du projet</h2>
+    <p>Crée un fichier <code>tasks.php</code> pour le site :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Gestion des tâches&lt;/title&gt;
+  &lt;style&gt;
+    body { font-family: Arial, sans-serif; margin: 0; padding: 2rem; }
+    form { margin: 1rem 0; }
+    label { display: block; margin: 0.5rem 0; }
+    input { padding: 0.5rem; width: 100%; max-width: 300px; }
+    ul { list-style: none; padding: 0; }
+    li { padding: 0.5rem 0; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Mes tâches&lt;/h1&gt;
+  &lt;form method=&quot;post&quot; action=&quot;&quot;&gt;
+    &lt;label&gt;Nouvelle tâche : &lt;input type=&quot;text&quot; name=&quot;title&quot;&gt;&lt;/label&gt;
+    &lt;input type=&quot;submit&quot; name=&quot;add&quot; value=&quot;Ajouter&quot;&gt;
+  &lt;/form&gt;
+  &lt;form method=&quot;post&quot; action=&quot;&quot;&gt;
+    &lt;label&gt;Supprimer (ID) : &lt;input type=&quot;number&quot; name=&quot;id&quot;&gt;&lt;/label&gt;
+    &lt;input type=&quot;submit&quot; name=&quot;delete&quot; value=&quot;Supprimer&quot;&gt;
+  &lt;/form&gt;
+  &lt;?php
+    try {
+        $pdo = new PDO(&quot;mysql:host=localhost;dbname=tasks_db&quot;, &quot;root&quot;, &quot;&quot;);
+        $pdo-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // Ajouter une tâche
+        if (isset($_POST[&quot;add&quot;]) &amp;&amp; $_POST[&quot;title&quot;]) {
+            $title = $_POST[&quot;title&quot;];
+            $stmt = $pdo-&gt;prepare(&quot;INSERT INTO tasks (title) VALUES (?)&quot;);
+            $stmt-&gt;execute([$title]);
+            header(&quot;Location: tasks.php&quot;);
+        }
+        // Supprimer une tâche
+        if (isset($_POST[&quot;delete&quot;]) &amp;&amp; $_POST[&quot;id&quot;]) {
+            $id = (int)$_POST[&quot;id&quot;];
+            $stmt = $pdo-&gt;prepare(&quot;DELETE FROM tasks WHERE id = ?&quot;);
+            $stmt-&gt;execute([$id]);
+            header(&quot;Location: tasks.php&quot;);
+        }
+        // Lister les tâches
+        $stmt = $pdo-&gt;query(&quot;SELECT * FROM tasks ORDER BY created_at DESC&quot;);
+        echo &quot;&lt;ul&gt;&quot;;
+        while ($row = $stmt-&gt;fetch(PDO::FETCH_ASSOC)) {
+            echo &quot;&lt;li&gt;[ID: &quot; . $row[&quot;id&quot;] . &quot;] &quot; . htmlspecialchars($row[&quot;title&quot;]) . &quot; (&quot; . $row[&quot;created_at&quot;] . &quot;)&lt;/li&gt;&quot;;
+        }
+        echo &quot;&lt;/ul&gt;&quot;;
+    } catch (PDOException $e) {
+        echo &quot;&lt;p&gt;Erreur : &quot; . $e-&gt;getMessage() . &quot;&lt;/p&gt;&quot;;
+    }
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p><strong>Instructions :</strong></p>
+    <ul>
+      <li>Configure la base de données <code>tasks_db</code>.</li>
+      <li>Sauve le code dans <code>tasks.php</code>.</li>
+      <li>Teste via <code>http://localhost/tasks.php</code>.</li>
+      <li>Ajoute et supprime des tâches pour voir les changements.</li>
+    </ul>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Structure ton projet avec des fichiers séparés pour la logique et les vues.</li>
+          <li>Utilise un framework comme Laravel pour des projets plus complexes.</li>
+          <li>Teste chaque fonctionnalité individuellement pour éviter les erreurs.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="chapitre14-php.html">← Chapitre précédent</a>
+      <a href="index.html">Retour au menu →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="index.html">Retour au menu PHP</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

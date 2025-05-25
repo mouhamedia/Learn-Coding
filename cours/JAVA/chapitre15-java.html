@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 15 - Collections</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 15 : Collections ☕</h1>
+    <p>Gère des listes dynamiques avec les collections.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une collection ?</h2>
+    <p>Une collection est une structure pour stocker plusieurs éléments, comme une liste ou un dictionnaire.</p>
+
+    <h2>📌 ArrayList</h2>
+    <p><code>ArrayList</code> est une liste dynamique qui peut grandir ou rétrécir.</p>
+    <pre><code>
+import java.util.ArrayList;
+
+public class Liste {
+    public static void main(String[] args) {
+        ArrayList<String> noms = new ArrayList<>();
+        noms.add("Alice");
+        noms.add("Bob");
+        System.out.println("Noms : " + noms);
+    }
+}
+</code></pre>
+
+    <h2>💻 HashMap</h2>
+    <p><code>HashMap</code> associe des clés à des valeurs, comme un dictionnaire.</p>
+    <pre><code>
+import java.util.HashMap;
+
+public class Dictionnaire {
+    public static void main(String[] args) {
+        HashMap<String, Integer> ages = new HashMap<>();
+        ages.put("Alice", 25);
+        ages.put("Bob", 30);
+        System.out.println("Âge d'Alice : " + ages.get("Alice"));
+    }
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un <code>ArrayList</code> pour stocker des notes et affiche leur moyenne.</p>
+    <pre><code>
+import java.util.ArrayList;
+
+public class Moyenne {
+    public static void main(String[] args) {
+        ArrayList<Integer> notes = new ArrayList<>();
+        notes.add(12);
+        notes.add(15);
+        notes.add(18);
+        int somme = 0;
+        for (int note : notes) {
+            somme += note;
+        }
+        double moyenne = (double) somme / notes.size();
+        System.out.println("Moyenne : " + moyenne);
+    }
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a> !</p>
+
+    <a href="chapitre16-java.html" class="btn">➡️ Chapitre 16 : Fichiers</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre14-java.html">← Chapitre 14 : Packages</a> |
+      <a href="index.html">Retour au menu Java</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 3 - Les routes</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 3 : Les routes 🛤️</h1>
+    <p>Apprends à définir des routes pour gérer les requêtes HTTP et diriger les utilisateurs vers les bonnes pages.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une route ?</h2>
+    <p>Dans Laravel, une route associe une URL (comme <code>/accueil</code>) à une action, comme afficher une page ou exécuter une fonction. Les routes sont définies dans <code>routes/web.php</code> pour les applications web ou <code>routes/api.php</code> pour les API.</p>
+    <p><strong>Types de requêtes HTTP</strong> :</p>
+    <ul>
+      <li><code>GET</code> : Récupérer des données (ex. : afficher une page).</li>
+      <li><code>POST</code> : Envoyer des données (ex. : soumettre un formulaire).</li>
+      <li><code>PUT/PATCH</code> : Mettre à jour des données.</li>
+      <li><code>DELETE</code> : Supprimer des données.</li>
+    </ul>
+    <p><strong>Exemple</strong> : Une route GET pour la page d’accueil affiche un message simple.</p>
+
+    <h2>🔹 Définir une route simple</h2>
+    <p>Les routes les plus simples utilisent une fonction anonyme (closure) pour retourner une réponse. Modifie <code>routes/web.php</code> :</p>
+    <pre><code>
+use Illuminate\Support\Facades\Route;
+
+Route::get('/accueil', function () {
+    return 'Bienvenue sur la page d’accueil !';
+});
+    </code></pre>
+    <p><strong>Explications</strong> :</p>
+    <ul>
+      <li><code>Route::get</code> : Définit une route pour les requêtes GET.</li>
+      <li><code>'/accueil'</code> : L’URL accessible (ex. : <code>http://localhost:8000/accueil</code>).</li>
+      <li><code>return</code> : La réponse envoyée au navigateur (ici, du texte brut).</li>
+    </ul>
+    <p><strong>Résultat</strong> : Accède à <code>/accueil</code> dans ton navigateur pour voir "Bienvenue sur la page d’accueil !".</p>
+
+    <h2>🔹 Routes avec paramètres</h2>
+    <p>Les routes peuvent inclure des paramètres dynamiques, comme un ID ou un nom, pour personnaliser la réponse.</p>
+    <p><strong>Exemple 1</strong> : Route avec un paramètre obligatoire :</p>
+    <pre><code>
+Route::get('/utilisateur/{nom}', function ($nom) {
+    return "Bonjour, $nom !";
+});
+    </code></pre>
+    <p><strong>Résultat</strong> : Une requête à <code>/utilisateur/Alice</code> affiche "Bonjour, Alice !".</p>
+    <p><strong>Exemple 2</strong> : Route avec un paramètre optionnel :</p>
+    <pre><code>
+Route::get('/salut/{nom?}', function ($nom = 'Visiteur') {
+    return "Salut, $nom !";
+});
+    </code></pre>
+    <p><strong>Résultat</strong> :</p>
+    <ul>
+      <li><code>/salut</code> affiche "Salut, Visiteur !".</li>
+      <li><code>/salut/Bob</code> affiche "Salut, Bob !".</li>
+    </ul>
+    <p><strong>Exemple 3</strong> : Route avec plusieurs paramètres :</p>
+    <pre><code>
+Route::get('/article/{id}/{titre}', function ($id, $titre) {
+    return "Article #$id : $titre";
+});
+    </code></pre>
+    <p><strong>Résultat</strong> : <code>/article/1/Premier-Article</code> affiche "Article #1 : Premier-Article".</p>
+
+    <h2>🔹 Routes avec contraintes</h2>
+    <p>Tu peux restreindre les paramètres avec des expressions régulières pour éviter des valeurs invalides.</p>
+    <pre><code>
+Route::get('/article/{id}', function ($id) {
+    return "Article #$id";
+})->where('id', '[0-9]+');
+    </code></pre>
+    <p><strong>Explications</strong> :</p>
+    <ul>
+      <li><code>where('id', '[0-9]+')</code> : Limite <code>id</code> à des chiffres.</li>
+      <li>Une requête à <code>/article/abc</code> renverra une erreur 404.</li>
+    </ul>
+    <p><strong>Résultat</strong> : <code>/article/123</code> fonctionne, mais <code>/article/texte</code> échoue.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Route non trouvée (404)</strong> : Vérifie l’URL et assure-toi que <code>php artisan serve</code> est en cours.</li>
+      <li><strong>Oubli d’importer Route</strong> : Ajoute <code>use Illuminate\Support\Facades\Route;</code> en haut de <code>web.php</code>.</li>
+      <li><strong>Paramètres non validés</strong> : Utilise <code>where</code> pour limiter les valeurs acceptées.</li>
+      <li><strong>Conflit de routes</strong> : Place les routes spécifiques (ex. : <code>/article/1</code>) avant les routes génériques (ex. : <code>/article/{id}</code>).</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée une route GET pour <code>/</code> qui affiche "Page d’accueil".<br>
+    2. Crée une route GET pour <code>/profil/{id}</code> qui affiche "Profil utilisateur ID : [id]". Restreins <code>id</code> aux chiffres.<br>
+    3. Crée une route GET pour <code>/bienvenue/{nom?}</code> avec un nom optionnel (par défaut : "Invité").<br>
+    4. Teste chaque route dans ton navigateur (ex. : <code>/profil/42</code>, <code>/bienvenue/Alice</code>, <code>/bienvenue</code>).<br>
+    5. (Bonus) Crée une route POST pour <code>/contact</code> qui retourne "Message envoyé" (teste avec un outil comme Postman).</p>
+
+    <a href="laravel4.html" class="btn">➡️ Chapitre 4 : Les vues avec Blade</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Laravel</a></p>
+  </footer>
+</body>
+</html>

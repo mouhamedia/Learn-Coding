@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 2 - Variables et types</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 2 : Variables et types 📚</h1>
+    <p>Apprends à stocker et manipuler des données avec les variables et les types en Python.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu'est-ce qu'une variable ?</h2>
+    <p>Une variable est comme une boîte où tu peux stocker une information (un nombre, du texte, etc.). En Python, pas besoin de déclarer le type de la variable à l'avance, Python le fait automatiquement !</p>
+    <p>Pour créer une variable, tu utilises un <strong>nom</strong> et une <strong>valeur</strong> avec le signe <code>=</code>.</p>
+    <pre><code>
+nom = "Alice"  # Une variable contenant du texte
+age = 25       # Une variable contenant un nombre
+</code></pre>
+    <p>Dans cet exemple, <code>nom</code> contient le texte <code>"Alice"</code>, et <code>age</code> contient le nombre <code>25</code>.</p>
+
+    <h2>📌 Règles pour nommer une variable</h2>
+    <ul>
+      <li>Utilise des lettres (a-z, A-Z), chiffres (0-9) ou underscores (_).</li>
+      <li>Ne commence pas par un chiffre.</li>
+      <li>Évite les mots réservés de Python (comme <code>if</code>, <code>for</code>, etc.).</li>
+      <li>Choisis des noms clairs et descriptifs (ex. : <code>prix_total</code> au lieu de <code>pt</code>).</li>
+    </ul>
+    <p><strong>Exemple :</strong></p>
+    <pre><code>
+# Correct
+mon_nom = "Bob"
+nombre_de_vies = 3
+
+# Incorrect
+2nom = "Charlie"  # Commence par un chiffre
+for = 5           # Mot réservé
+</code></pre>
+
+    <h2>💻 Les types de données en Python</h2>
+    <p>Les variables peuvent contenir différents types de données. Voici les principaux :</p>
+    <ul>
+      <li><strong>Entier (int)</strong> : Nombre sans décimale, ex. : <code>42</code>, <code>-10</code>.</li>
+      <li><strong>Flottant (float)</strong> : Nombre avec décimale, ex. : <code>3.14</code>, <code>-0.5</code>.</li>
+      <li><strong>Chaîne de caractères (str)</strong> : Texte, entouré de guillemets simples <code>' '</code> ou doubles <code>" "</code>, ex. : <code>"Bonjour"</code>.</li>
+      <li><strong>Booléen (bool)</strong> : Vrai ou Faux, noté <code>True</code> ou <code>False</code>.</li>
+    </ul>
+    <p>Pour vérifier le type d’une variable, utilise la fonction <code>type()</code> :</p>
+    <pre><code>
+nombre = 42
+print(type(nombre))  # Affiche : <class 'int'>
+
+texte = "Salut"
+print(type(texte))   # Affiche : <class 'str'>
+</code></pre>
+
+    <h2>🔄 Conversion de types</h2>
+    <p>Tu peux convertir un type en un autre avec des fonctions comme <code>int()</code>, <code>float()</code>, <code>str()</code> :</p>
+    <pre><code>
+age = "25"            # Chaîne de caractères
+age_nombre = int(age)  # Convertit en entier
+print(age_nombre + 5) # Affiche : 30
+
+nombre = 42
+texte = str(nombre)   # Convertit en texte
+print(texte + " ans") # Affiche : 42 ans
+</code></pre>
+    <p><strong>Attention :</strong> Certaines conversions peuvent causer des erreurs si les données ne sont pas compatibles (ex. : convertir <code>"abc"</code> en <code>int</code>).</p>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui stocke ton nom, ton âge, et ton poids dans des variables, puis affiche un message comme : <code>"Je m'appelle Alice, j'ai 25 ans et je pèse 60.5 kg."</code></p>
+    <pre><code>
+nom = "Alice"
+age = 25
+poids = 60.5
+print("Je m'appelle", nom, ", j'ai", age, "ans et je pèse", poids, "kg.")
+</code></pre>
+    <p>Essaie ce code sur <a href="https://replit.com" target="_blank">Replit</a> ou dans ton éditeur Python !</p>
+
+    <a href="chapitre3.html" class="btn">➡️ Chapitre 3 : Conditions (if, elif, else)</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre1.html">← Chapitre 1 : Introduction à Python</a> |
+      <a href="index.html">Retour au menu Python</a>
+    </p>
+  </footer>
+</body>
+</html>

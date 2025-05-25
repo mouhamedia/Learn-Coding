@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 7 - Express.js – Introduction</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #026e00;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(2, 110, 0, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #e8f9e6cc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    main h2 {
+      color: #026e00;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #026e00;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e8f9e6;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #026e00;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #026e00;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #014d00;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #026e00;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #014d00;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 7 : Express.js – Introduction</h1>
+    <p>Découvre Express.js, un framework pour créer des serveurs web rapidement.</p>
+  </header>
+
+  <main>
+    <h2>Qu’est-ce qu’Express.js ?</h2>
+    <p>Express.js est un framework minimaliste pour Node.js qui simplifie la création de serveurs web et d’APIs, avec un système de routing et de middleware robuste.</p>
+
+    <h2>Installer Express.js</h2>
+    <p>Crée un projet et installe Express :</p>
+    <pre><code>npm init -y
+npm install express
+</code></pre>
+
+    <h2>Premier serveur Express</h2>
+    <p>Voici un serveur Express de base :</p>
+    <pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+  res.send('Bienvenue sur Express !');
+});
+
+app.listen(port, () => {
+  console.log(`Serveur démarré sur http://localhost:${port}`);
+});
+</code></pre>
+    <p>Exécute avec <code>node app.js</code> et ouvre <code>http://localhost:3000</code>.</p>
+
+    <h2>Exemple pratique : API utilisateurs</h2>
+    <p>Voici une API simple pour gérer une liste d’utilisateurs :</p>
+    <pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+const users = [
+  { id: 1, name: 'Jean' },
+  { id: 2, name: 'Marie' }
+];
+
+app.get('/api/users', (req, res) => {
+  res.json(users);
+});
+
+app.get('/api/users/:id', (req, res) => {
+  const user = users.find(u => u.id === parseInt(req.params.id));
+  if (!user) {
+    res.status(404).json({ error: 'Utilisateur non trouvé' });
+  } else {
+    res.json(user);
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Serveur démarré sur http://localhost:${port}`);
+});
+</code></pre>
+    <p>Teste avec :
+      <ul>
+        <li><code>curl http://localhost:3000/api/users</code> pour tous les utilisateurs.</li>
+        <li><code>curl http://localhost:3000/api/users/1</code> pour un utilisateur spécifique.</li>
+      </ul>
+    </p>
+    <p>Sortie pour <code>/api/users</code> :</p>
+    <pre><code>[{"id":1,"name":"Jean"},{"id":2,"name":"Marie"}]
+</code></pre>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise <code>res.json</code> pour envoyer des réponses JSON.</li>
+          <li>Gère les erreurs (comme les 404) pour améliorer l’expérience utilisateur.</li>
+          <li>Organise ton code en modules pour les projets plus complexes.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="node6.html">← Chapitre précédent</a>
+      <a href="node8.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 1 - Introduction à Vue.js</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #42b883;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(66, 184, 131, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+    }
+    main h2 {
+      color: #1b684f;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #42b883;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f7f2;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #2a9a78;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 1 : Introduction à Vue.js</h1>
+    <p>Découvre les bases de Vue.js, un framework JavaScript moderne pour créer des interfaces utilisateur.</p>
+  </header>
+
+  <main>
+    <h2>Qu’est-ce que Vue.js ?</h2>
+    <p>Vue.js est un framework JavaScript progressif pour construire des interfaces utilisateur. Il est conçu pour être simple à adopter, flexible, et performant, tout en offrant une approche réactive pour créer des applications web dynamiques.</p>
+
+    <h2>Pourquoi utiliser Vue.js ?</h2>
+    <p>Vue.js est apprécié pour :</p>
+    <ul>
+      <li>Sa simplicité : Facile à apprendre pour les débutants.</li>
+      <li>Sa réactivité : Les changements dans les données se reflètent automatiquement dans l’interface.</li>
+      <li>Sa modularité : Peut être utilisé pour des projets simples ou complexes.</li>
+      <li>Sa communauté : Une vaste communauté et des outils comme Vue Router et Vuex.</li>
+    </ul>
+
+    <h2>Installer Vue.js</h2>
+    <p>Pour commencer avec Vue 3, tu peux utiliser un CDN pour des projets simples ou Vite pour des projets modernes.</p>
+    <p>Avec un CDN :</p>
+    <pre><code>&lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;
+</code></pre>
+    <p>Avec Vite, exécute :</p>
+    <pre><code>npm create vite@latest mon-projet -- --template vue
+cd mon-projet
+npm install
+npm run dev
+</code></pre>
+
+    <h2>Premier exemple : Hello Vue</h2>
+    <p>Voici un exemple simple d’une application Vue.js utilisant le CDN :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Hello Vue&lt;/title&gt;
+  &lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="app"&gt;
+    &lt;p&gt;{{ message }}&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+    Vue.createApp({
+      data() {
+        return {
+          message: 'Hello Vue.js !'
+        };
+      }
+    }).mount('#app');
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Cet exemple affiche un message réactif dans le DOM en utilisant la méthode <code>createApp</code> de Vue 3.</p>
+
+    <h2>Structure d’un composant Vue</h2>
+    <p>Un composant Vue combine HTML, JavaScript, et CSS. Voici un exemple de composant dans un fichier <code>.vue</code> :</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h1&gt;{{ greeting }}&lt;/h1&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      greeting: 'Bienvenue dans Vue.js !'
+    };
+  }
+};
+&lt;/script&gt;
+&lt;style scoped&gt;
+h1 {
+  color: #42b883;
+}
+&lt;/style&gt;
+</code></pre>
+    <p>Ce composant utilise la syntaxe des Single-File Components (SFC), avec un template, un script, et du CSS scopé.</p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise Vite ou un autre bundler pour les projets réels, car les CDN sont mieux adaptés aux prototypes.</li>
+          <li>Commence avec l’Options API pour sa simplicité avant d’explorer la Composition API.</li>
+          <li>Assure-toi que ton environnement Node.js est à jour pour éviter les problèmes de compatibilité.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="../index.html">← Retour à l'accueil</a>
+      <a href="vue2.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

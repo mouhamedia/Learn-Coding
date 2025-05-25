@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 6 - Mise à jour et suppression</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 6 : Mise à jour et suppression ✏️</h1>
+    <p>Apprends à modifier et supprimer des données avec <code>UPDATE</code> et <code>DELETE</code>.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Mettre à jour des données</h2>
+    <p>Utilise <code>UPDATE</code> pour modifier des lignes existantes.</p>
+    <pre><code>
+UPDATE Etudiants
+SET age = 26
+WHERE id = 1;
+    </code></pre>
+    <p><strong>Résultat</strong> : Met à jour l'âge de l'étudiant avec <code>id=1</code> à 26.</p>
+
+    <h2>🔹 Supprimer des données</h2>
+    <p>Utilise <code>DELETE</code> pour supprimer des lignes.</p>
+    <pre><code>
+DELETE FROM Etudiants
+WHERE id = 2;
+    </code></pre>
+    <p><strong>Résultat</strong> : Supprime l'étudiant avec <code>id=2</code>.</p>
+
+    <h2>📝 Exercice</h2>
+    <p>Écris une requête pour mettre à jour l'année d'un livre dans la table "Livres" et une autre pour supprimer un livre par son <code>id</code>.</p>
+
+    <a href="chapitre7-sql.html" class="btn">➡️ Chapitre 7 : Filtres et conditions</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu SQL</a></p>
+  </footer>
+</body>
+</html>

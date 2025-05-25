@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 6 - Gestion des événements</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background-color: #4a54f1;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(74, 84, 241, 0.4);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f0f4ff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(74, 84, 241, 0.15);
+    }
+    h1, h2 {
+      color: #2c3e95;
+    }
+    pre {
+      background: #e6eaff;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #4a54f1;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+    }
+    a {
+      color: #4a54f1;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 6 : Gestion des événements 🎯</h1>
+    <p>Apprends à gérer les interactions utilisateur, comme les clics et les saisies, pour rendre tes composants React interactifs.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu'est-ce que la gestion des événements ?</h2>
+    <p>En React, les événements permettent de répondre aux actions des utilisateurs, comme cliquer sur un bouton, saisir du texte ou soumettre un formulaire. Les gestionnaires d’événements sont des fonctions attachées à des éléments JSX via des attributs en camelCase (ex. <code>onClick</code>, <code>onChange</code>).</p>
+    <p><strong>Caractéristiques principales :</strong></p>
+    <ul>
+      <li><strong>Syntaxe</strong>: Utilise camelCase (ex. <code>onClick</code> au lieu de <code>onclick</code>).</li>
+      <li><strong>Objets événement</strong>: Fournissent des informations (ex. <code>event.target.value</code>).</li>
+      <li><strong>Binding</strong>: Nécessaire dans les composants de classe pour lier <code>this</code>.</li>
+    </ul>
+
+    <h2>🔹 Pourquoi gérer les événements ?</h2>
+    <p>Les événements rendent les applications interactives, permettant aux utilisateurs de déclencher des mises à jour de l’interface, comme soumettre des données ou basculer des états. En React, ils sont gérés de manière déclarative dans le JSX.</p>
+    <p><strong>Exemple</strong>: Un bouton qui incrémente un compteur ou un formulaire qui capture les saisies utilisateur.</p>
+
+    <h2>🔹 Exemple 1 : Gestion d’un champ de texte</h2>
+    <p>Met à jour l’état avec la saisie utilisateur :</p>
+    <pre><code>
+// src/App.js
+import React, { useState } from 'react';
+
+function Form() {
+  const [name, setName] = useState('');
+
+  const handleChange = (event) => {
+    setName(event.target.value);
+  };
+
+  return (
+    <div>
+      <input type="text" value={name} onChange={handleChange} />
+      <p>Nom : {name}</p>
+    </div>
+  );
+}
+
+export default Form;
+    </code></pre>
+    <p><strong>Explication</strong>:</p>
+    <ul>
+      <li><code>onChange</code>: Déclenché à chaque modification de l’input.</li>
+      <li><code>event.target.value</code>: Récupère la valeur saisie.</li>
+      <li><code>setName</code>: Met à jour l’état pour refléter la saisie.</li>
+    </ul>
+    <p><strong>Résultat</strong>: Affiche le texte saisi en temps réel sous l’input à <code>http://localhost:3000</code>.</p>
+
+    <h2>🔹 Exemple 2 : Soumission de formulaire</h2>
+    <p>Gère la soumission d’un formulaire :</p>
+    <pre><code>
+// src/App.js
+import React, { useState } from 'react';
+
+function Form() {
+  const [input, setInput] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert(`Soumis : ${input}`);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button type="submit">Soumettre</button>
+    </form>
+  );
+}
+
+export default Form;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche une alerte avec la valeur saisie lors de la soumission.</p>
+
+    <h2>🔹 Exemple 3 : Événement dans une classe</h2>
+    <p>Utilise le binding dans un composant de classe :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+class ButtonClass extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState({ count: this.state.count + 1 });
+  }
+
+  render() {
+    return (
+      <div>
+        <p>Compte : {this.state.count}</p>
+        <button onClick={this.handleClick}>Incrémenter</button>
+      </div>
+    );
+  }
+}
+
+export default ButtonClass;
+    </code></pre>
+    <p><strong>Résultat</strong>: Incrémente le compteur au clic.</p>
+
+    <h2>🔹 Exemple 4 : Gestion de plusieurs inputs</h2>
+    <p>Utilise un seul gestionnaire pour plusieurs champs :</p>
+    <pre><code>
+// src/App.js
+import React, { useState } from 'react';
+
+function Form() {
+  const [formData, setFormData] = useState({ name: '', email: '' });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+      />
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
+      <p>Nom : {formData.name}</p>
+      <p>Email : {formData.email}</p>
+    </div>
+  );
+}
+
+export default Form;
+    </code></pre>
+    <p><strong>Résultat</strong>: Met à jour et affiche les deux champs en temps réel.</p>
+
+    <h2>🔹 Exemple 5 : Événements de souris</h2>
+    <p>Gère les événements de survol :</p>
+    <pre><code>
+// src/App.js
+import React, { useState } from 'react';
+
+function Hover() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div>
+      <p
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{ background: isHovered ? 'lightblue' : 'white' }}
+      >
+        Survole-moi
+      </p>
+    </div>
+  );
+}
+
+export default Hover;
+    </code></pre>
+    <p><strong>Résultat</strong>: Change la couleur de fond au survol.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Appel direct du gestionnaire</strong>: Évite <code>onClick={handleClick()}</code>, utilise <code>onClick={handleClick}</code>.</li>
+      <li><strong>Oubli du binding</strong>: Dans les classes, lie les méthodes dans le constructeur.</li>
+      <li><strong>Oubli de preventDefault</strong>: Sans <code>event.preventDefault()</code>, les formulaires rechargent la page.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée un projet React avec <code>npx create-react-app mon-app</code>.<br>
+    2. Crée un composant <code>LoginForm</code> avec des inputs pour nom d’utilisateur et mot de passe.<br>
+    3. Ajoute un bouton qui affiche les données dans la console lors de la soumission.<br>
+    4. Crée un fichier texte expliquant en 3 phrases ce que fait <code>event.preventDefault()</code>.</p>
+
+    <a href="react5.html" class="btn">⬅️ Chapitre 5 : State et props</a>
+    <a href="react7.html" class="btn">➡️ Chapitre 7 : Cycle de vie des composants</a>
+  </main>
+
+  <footer>
+     <p><a href="../index .html">← Retour au menu React</a></p>
+  </footer>
+</body>
+</html>

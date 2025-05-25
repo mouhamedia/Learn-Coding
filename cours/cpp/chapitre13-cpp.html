@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 13 - Héritage</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 13 : Héritage ⚙️</h1>
+    <p>Partage des caractéristiques entre classes.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que l’héritage ?</h2>
+    <p>L’héritage permet à une classe (fille) de réutiliser le code d’une autre classe (mère).</p>
+
+    <h2>📌 Utiliser l’héritage</h2>
+    <p>Utilise <code>: public</code> pour hériter d’une classe.</p>
+    <pre><code>
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Vehicule {
+public:
+    string marque;
+    Vehicule(string m) {
+        marque = m;
+    }
+    void afficher() {
+        cout << "Marque : " << marque << endl;
+    }
+};
+
+class Voiture : public Vehicule {
+public:
+    Voiture(string m) : Vehicule(m) {}
+};
+
+int main() {
+    Voiture v("Toyota");
+    v.afficher();
+    return 0;
+}
+</code></pre>
+
+    <h2>💻 Ajouter des attributs</h2>
+    <p>La classe fille peut ajouter ses propres attributs et méthodes.</p>
+    <pre><code>
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Vehicule {
+public:
+    string marque;
+    Vehicule(string m) {
+        marque = m;
+    }
+};
+
+class Moto : public Vehicule {
+public:
+    int cylindree;
+    Moto(string m, int c) : Vehicule(m) {
+        cylindree = c;
+    }
+    void afficher() {
+        cout << "Moto : " << marque << ", Cylindrée : " << cylindree << endl;
+    }
+};
+
+int main() {
+    Moto m("Yamaha", 600);
+    m.afficher();
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une classe <code>Animal</code> et une classe <code>Chien</code> qui hérite de ses attributs.</p>
+    <pre><code>
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Animal {
+public:
+    string nom;
+    Animal(string n) {
+        nom = n;
+    }
+};
+
+class Chien : public Animal {
+public:
+    Chien(string n) : Animal(n) {}
+    void aboyer() {
+        cout << nom << " dit : Wouf !" << endl;
+    }
+};
+
+int main() {
+    Chien c("Rex");
+    c.aboyer();
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre14-cpp.html" class="btn">➡️ Chapitre 14 : Polymorphisme</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre12-cpp.html">← Chapitre 12 : Encapsulation</a> |
+      <a href="index.html">Retour au menu C++</a>
+    </p>
+  </footer>
+</body>
+</html>

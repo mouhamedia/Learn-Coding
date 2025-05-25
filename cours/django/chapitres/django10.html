@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 10 - Authentification et sécurité</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #092e20;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #092e20;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #092e20;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #092e20;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 10 : Authentification et sécurité 🔐</h1>
+    <p>Apprends à implémenter l’authentification des utilisateurs et à sécuriser ton application Django contre les attaques courantes.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Pourquoi l’authentification et la sécurité ?</h2>
+    <p>L’authentification permet de vérifier l’identité des utilisateurs (inscription, connexion, déconnexion) et de restreindre l’accès à certaines fonctionnalités. La sécurité protège contre des menaces comme les attaques CSRF, XSS, ou les injections SQL, garantissant la fiabilité et la confidentialité des données.</p>
+    <p><strong>Fonctionnalités clés de Django :</strong></p>
+    <ul>
+      <li><strong>Authentification intégrée</strong>: Module <code>django.contrib.auth</code> pour gérer les utilisateurs, sessions, et permissions.</li>
+      <li><strong>Vues prêtes à l’emploi</strong>: Connexion, déconnexion, et réinitialisation de mot de passe via <code>django.contrib.auth.views</code>.</li>
+      <li><strong>Protection CSRF</strong>: Token automatique pour sécuriser les formulaires.</li>
+      <li><strong>Échappement XSS</strong>: Templates Django échappent les données par défaut.</li>
+      <li><strong>Hachage des mots de passe</strong>: Stockage sécurisé avec PBKDF2/SHA256.</li>
+    </ul>
+
+    <h2>🔹 Exemple 1 : Configurer l’authentification intégrée</h2>
+    <p>Django inclut l’authentification par défaut. Vérifie que <code>django.contrib.auth</code> est dans <code>INSTALLED_APPS</code> (<code>monprojet/settings.py</code>):</p>
+    <pre><code>
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',  # Authentification
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'blog.apps.BlogConfig',
+]
+    </code></pre>
+    <p>Ajoute les URLs d’authentification dans <code>monprojet/urls.py</code>:</p>
+    <pre><code>
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),  # URLs d’auth
+    path('blog/', include('blog.urls')),
+]
+    </code></pre>
+    <p><strong>Explication</strong>:</p>
+    <ul>
+      <li><code>django.contrib.auth.urls</code>: Fournit des URLs comme <code>/accounts/login/</code>, <code>/accounts/logout/</code>, <code>/accounts/password_change/</code>.</li>
+      <li>Les vues associées utilisent des templates par défaut que nous personnaliserons.</li>
+    </ul>
+    <p><strong>Résultat</strong>: Accède à <code>/accounts/login/</code>. Sans template personnalisé, une erreur <code>TemplateDoesNotExist</code> peut apparaître (corrigé dans l’exemple suivant).</p>
+
+    <h2>🔹 Exemple 2 : Créer des templates pour l’authentification</h2>
+    <p>Crée <code>templates/registration/login.html</code> dans le dossier racine du projet (à côté de <code>manage.py</code>):</p>
+    <pre><code>
+{% extends 'base.html' %}
+
+{% block title %}Connexion{% endblock %}
+{% block content %}
+<h1>Connexion</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Se connecter</button>
+</form>
+<p><a href="{% url 'password_reset' %}">Mot de passe oublié ?</a></p>
+{% endblock %}
+    </code></pre>
+    <p>Assure-toi que <code>base.html</code> existe (voir chapitre 6) ou crée un fichier minimal:</p>
+    <pre><code>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Mon Blog{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
+    </code></pre>
+    <p>Configure <code>settings.py</code> pour indiquer où trouver les templates:</p>
+    <pre><code>
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates'],  # Dossier templates
+        'APP_DIRS': True,
+        ...
+    },
+]
+    </code></pre>
+    <p><strong>Explication</strong>:</p>
+    <ul>
+      <li><code>{% csrf_token %}</code>: Protège le formulaire contre les attaques CSRF.</li>
+      <li><code>{{ form.as_p }}</code>: Affiche le formulaire de connexion (email/mot de passe).</li>
+      <li><code>{% url 'password_reset' %}</code>: Lien vers la réinitialisation du mot de passe.</li>
+    </ul>
+    <p><strong>Résultat</strong>: <code>/accounts/login/</code> affiche un formulaire de connexion fonctionnel. Crée un utilisateur via <code>python manage.py createsuperuser</code> pour tester.</p>
+
+    <h2>🔹 Exemple 3 : Protéger une vue avec @login_required</h2>
+    <p>Crée une vue protégée dans <code>blog/views.py</code>:</p>
+    <pre><code>
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
+@login_required
+def dashboard(request):
+    return render(request, 'blog/dashboard.html', {'user': request.user})
+    </code></pre>
+    <p>Crée <code>blog/templates/blog/dashboard.html</code>:</p>
+    <pre><code>
+{% extends 'base.html' %}
+
+{% block title %}Tableau de bord{% endblock %}
+{% block content %}
+<h1>Tableau de bord</h1>
+<p>Bienvenue, {{ user.username }} !</p>
+<p>Email : {{ user.email }}</p>
+<a href="{% url 'logout' %}">Se déconnecter</a>
+{% endblock %}
+    </code></pre>
+    <p>Ajoute l’URL dans <code>blog/urls.py</code>:</p>
+    <pre><code>
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('dashboard/', views.dashboard, name='dashboard'),
+    # Autres URLs
+]
+    </code></pre>
+    <p>Configure la redirection après connexion dans <code>settings.py</code>:</p>
+    <pre><code>
+LOGIN_REDIRECT_URL = '/blog/dashboard/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
+    </code></pre>
+    <p><strong>Explication</strong>:</p>
+    <ul>
+      <li><code>@login_required</code>: Restreint l’accès aux utilisateurs connectés, sinon redirige vers <code>/accounts/login/</code>.</li>
+      <li><code>request.user</code>: Fournit les informations de l’utilisateur connecté.</li>
+      <li><code>LOGIN_REDIRECT_URL</code>: Définit où aller après connexion.</li>
+    </ul>
+    <p><strong>Résultat</strong>: <code>/blog/dashboard/</code> est accessible uniquement après connexion et affiche les informations de l’utilisateur.</p>
+
+    <h2>🔹 Exemple 4 : Inscription personnalisée</h2>
+    <p>Crée un formulaire d’inscription dans <code>blog/forms.py</code>:</p>
+    <pre><code>
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
+class InscriptionForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data['email']
+        if commit:
+            user.save()
+        return user
+    </code></pre>
+    <p>Crée une vue dans <code>blog/views.py</code>:</p>
+    <pre><code>
+from django.shortcuts import render, redirect
+from .forms import InscriptionForm
+
+def inscription(request):
+    if request.method == 'POST':
+        form = InscriptionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = InscriptionForm()
+    return render(request, 'registration/inscription.html', {'form': form})
+    </code></pre>
+    <p>Crée <code>templates/registration/inscription.html</code>:</p>
+    <pre><code>
+{% extends 'base.html' %}
+
+{% block title %}Inscription{% endblock %}
+{% block content %}
+<h1>Inscription</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">S’inscrire</button>
+</form>
+<p>Déjà un compte ? <a href="{% url 'login' %}">Se connecter</a></p>
+{% endblock %}
+    </code></pre>
+    <p>Ajoute l’URL dans <code>blog/urls.py</code>:</p>
+    <pre><code>
+urlpatterns = [
+    path('inscription/', views.inscription, name='inscription'),
+    # Autres URLs
+]
+    </code></pre>
+    <p><strong>Explication</strong>:</p>
+    <ul>
+      <li><code>UserCreationForm</code>: Fournit les champs pour le nom d’utilisateur et le mot de passe.</li>
+      <li><code>email</code>: Champ ajouté pour collecter l’email.</li>
+      <li>Redirection vers <code>login</code> après inscription.</li>
+    </ul>
+    <p><strong>Résultat</strong>: <code>/blog/inscription/</code> permet de créer un nouvel utilisateur.</p>
+
+    <h2>🔹 Exemple 5 : Sécuriser les formulaires et gérer les permissions</h2>
+    <p>Crée une vue réservée aux utilisateurs ayant une permission spécifique dans <code>blog/views.py</code>:</p>
+    <pre><code>
+from django.contrib.auth.decorators import permission_required
+
+@permission_required('blog.add_article')
+def ajouter_article_restreint(request):
+    return render(request, 'blog/ajouter_article.html')
+    </code></pre>
+    <p>Ajoute l’URL dans <code>blog/urls.py</code>:</p>
+    <pre><code>
+urlpatterns = [
+    path('articles/ajouter-restreint/', views.ajouter_article_restreint, name='ajouter_article_restreint'),
+]
+    </code></pre>
+    <p>Attribue la permission via l’admin (<code>/admin/</code>):</p>
+    <ol>
+      <li>Connecte-toi en tant que superutilisateur.</li>
+      <li>Va dans <code>Utilisateurs</code>, sélectionne un utilisateur, et ajoute la permission <code>blog | article | Can add article</code>.</li>
+    </ol>
+    <p><strong>Explication</strong>:</p>
+    <ul>
+      <li><code>@permission_required</code>: Restreint l’accès aux utilisateurs ayant la permission spécifiée.</li>
+      <li>Les permissions sont générées automatiquement pour chaque modèle (ex. <code>add_article</code>, <code>change_article</code>).</li>
+    </ul>
+    <p><strong>Résultat</strong>: Seuls les utilisateurs avec la permission <code>blog.add_article</code> accèdent à <code>/blog/articles/ajouter-restreint/</code>.</p>
+
+    <h2>🔹 Mesures de sécurité intégrées</h2>
+    <p>Django offre plusieurs protections par défaut:</p>
+    <ul>
+      <li><strong>CSRF</strong>: Tous les formulaires POST nécessitent <code>{% csrf_token %}</code>.</li>
+      <li><strong>XSS</strong>: Les templates échappent automatiquement les données avec <code>{{ }}</code> (utilise <code>{{ variable|safe }}</code> avec précaution).</li>
+      <li><strong>Injection SQL</strong>: L’ORM utilise des requêtes paramétrées.</li>
+      <li><strong>Hachage des mots de passe</strong>: Les mots de passe sont hachés avec PBKDF2/SHA256.</li>
+      <li><strong>Sessions sécurisées</strong>: Les sessions sont gérées via des cookies sécurisés.</li>
+    </ul>
+    <p><strong>Exemple de configuration sécurisée</strong> dans <code>settings.py</code>:</p>
+    <pre><code>
+# Activer HTTPS pour les cookies de session
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# Limiter les hôtes autorisés
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mon-domaine.com']
+    </code></pre>
+    <p><strong>Résultat</strong>: Renforce la sécurité des sessions et des formulaires.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Oubli de <code>{% csrf_token %}</code></strong>: Les formulaires POST échoueront avec une erreur 403.</li>
+      <li><strong>Template manquant</strong>: Crée les templates dans <code>templates/registration/</code> pour les vues d’authentification.</li>
+      <li><strong>Utilisateur non authentifié</strong>: Vérifie que <code>request.user.is_authenticated</code> est utilisé pour les vues protégées.</li>
+      <li><strong>Permissions mal configurées</strong>: Utilise l’admin pour assigner les permissions correctement.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Configure les URLs d’authentification avec <code>django.contrib.auth.urls</code> et crée un template pour <code>/accounts/login/</code>.<br>
+    2. Crée un superutilisateur et teste la connexion.<br>
+    3. Crée une vue protégée <code>/blog/profil/</code> qui affiche le nom et l’email de l’utilisateur connecté.<br>
+    4. Implémente une page d’inscription à <code>/blog/inscription/</code> avec un formulaire personnalisé.<br>
+    5. Crée une vue <code>/blog/articles/prive/</code> accessible uniquement aux utilisateurs avec la permission <code>blog.add_article</code>.<br>
+    6. Ajoute <code>SESSION_COOKIE_SECURE = True</code> dans <code>settings.py</code> et explique son effet dans un fichier texte.</p>
+
+    <a href="../index.html" class="btn">↩️ Retour au sommaire</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Django</a></p>
+  </footer>
+</body>
+</html>

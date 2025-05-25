@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 9 - Administration Django</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #092e20;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #092e20;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #092e20;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #092e20;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Administration Django 🖥️</h1>
+    <p>Apprends à utiliser l’interface d’administration de Django pour gérer tes données.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que l’administration Django ?</h2>
+    <p>L’interface d’administration de Django est une application intégrée qui génère automatiquement un panneau de gestion pour tes modèles. Elle permet de créer, modifier, et supprimer des données sans coder une interface.</p>
+    <p><strong>Avantages :</strong></p>
+    <ul>
+      <li>Rapide à configurer.</li>
+      <li>Personnalisable (filtres, recherche, affichage).</li>
+      <li>Sécurisée (réservée aux superutilisateurs).</li>
+    </ul>
+
+    <h2>🔹 Exemple 1 : Activer l’administration</h2>
+    <p>L’administration est déjà incluse dans <code>INSTALLED_APPS</code> (<code>django.contrib.admin</code>). Crée un superutilisateur:</p>
+    <pre><code>
+python manage.py createsuperuser
+    </code></pre>
+    <p>Suis les instructions pour définir un nom d’utilisateur, email, et mot de passe.</p>
+    <p><strong>Résultat</strong>: Accède à <code>/admin/</code> et connecte-toi avec ces identifiants.</p>
+
+    <h2>🔹 Exemple 2 : Enregistrer un modèle</h2>
+    <p>Modifie <code>blog/admin.py</code>:</p>
+    <pre><code>
+from django.contrib import admin
+from .models import Article
+
+admin.site.register(Article)
+    </code></pre>
+    <p><strong>Résultat</strong>: Le modèle <code>Article</code> apparaît dans l’interface <code>/admin/</code>, permettant de gérer les articles.</p>
+
+    <h2>🔹 Exemple 3 : Personnaliser l’administration</h2>
+    <p>Modifie <code>blog/admin.py</code>:</p>
+    <pre><code>
+from django.contrib import admin
+from .models import Article
+
+@admin.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ['titre', 'date_creation']
+    search_fields = ['titre', 'contenu']
+    list_filter = ['date_creation']
+    </code></pre>
+    <p><strong>Explication</strong>:</p>
+    <ul>
+      <li><code>list_display</code>: Affiche les colonnes dans la liste.</li>
+      <li><code>search_fields</code>: Ajoute une barre de recherche.</li>
+      <li><code>list_filter</code>: Ajoute des filtres.</li>
+    </ul>
+    <p><strong>Résultat</strong>: L’interface pour <code>Article</code> est plus conviviale.</p>
+
+    <h2>🔹 Exemple 4 : Ajouter des actions</h2>
+    <p>Ajoute une action dans <code>blog/admin.py</code>:</p>
+    <pre><code>
+@admin.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ['titre', 'date_creation']
+    actions = ['marquer_comme_publie']
+
+    def marquer_comme_publie(self, request, queryset):
+        queryset.update(contenu='[Publié] ' + queryset.values('contenu'))
+    marquer_comme_publie.short_description = "Marquer comme publié"
+    </code></pre>
+    <p><strong>Résultat</strong>: Permet de sélectionner des articles et d’ajouter "[Publié]" à leur contenu.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Superutilisateur non créé</strong>: Exécute <code>createsuperuser</code>.</li>
+      <li><strong>Modèle non enregistré</strong>: Vérifie <code>admin.site.register</code>.</li>
+      <li><strong>Admin non accessible</strong>: Assure-toi que <code>django.contrib.admin</code> est dans <code>INSTALLED_APPS</code>.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée un superutilisateur et connecte-toi à <code>/admin/</code>.<br>
+    2. Enregistre le modèle <code>Produit</code> dans <code>articles/admin.py</code>.<br>
+    3. Personnalise l’interface pour afficher <code>nom</code> et <code>prix</code>, avec une recherche sur <code>nom</code>.<br>
+    4. Ajoute une action pour augmenter le prix de 10 %.<br>
+    5. Teste la gestion des produits dans l’admin.</p>
+
+    <a href="django10.html" class="btn">➡️ Chapitre 10 : Authentification et sécurité</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Django</a></p>
+  </footer>
+</body>
+</html>

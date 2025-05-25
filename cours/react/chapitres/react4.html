@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 4 - Composants fonctionnels et classes</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background-color: #4a54f1;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(74, 84, 241, 0.4);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f0f4ff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(74, 84, 241, 0.15);
+    }
+    h1, h2 {
+      color: #2c3e95;
+    }
+    pre {
+      background: #e6eaff;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #4a54f1;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+    }
+    a {
+      color: #4a54f1;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 4 : Composants fonctionnels et classes 🧩</h1>
+    <p>Apprends à créer des composants React, les blocs de construction de ton interface, avec des fonctions ou des classes.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu'est-ce qu'un composant ?</h2>
+    <p>Les composants sont les éléments de base de React. Ils sont des blocs réutilisables qui définissent une partie de l’interface utilisateur, comme un bouton, un formulaire ou une barre de navigation. React propose deux types de composants : fonctionnels (modernes, avec hooks) et basés sur les classes (traditionnels).</p>
+    <p><strong>Caractéristiques principales :</strong></p>
+    <ul>
+      <li><strong>Composants fonctionnels</strong>: Simples, utilisent des hooks comme <code>useState</code> et <code>useEffect</code>.</li>
+      <li><strong>Composants de classe</strong>: Utilisent des méthodes de cycle de vie et <code>this.state</code>.</li>
+      <li><strong>Props</strong>: Données passées aux composants pour les personnaliser.</li>
+    </ul>
+
+    <h2>🔹 Pourquoi utiliser des composants ?</h2>
+    <p>Les composants rendent le code modulaire, réutilisable et facile à maintenir. Ils permettent de diviser une application complexe en petites parties indépendantes.</p>
+    <p><strong>Exemple</strong>: Une application peut avoir un composant <code>Header</code>, un <code>Sidebar</code>, et un <code>Content</code>, chacun gérant une partie de l’interface.</p>
+
+    <h2>🔹 Exemple 1 : Composant fonctionnel vs. classe</h2>
+    <p>Compare un composant fonctionnel et un composant de classe :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+function WelcomeFunc({ name }) {
+  return <h1>Salut, {name} !</h1>;
+}
+
+class WelcomeClass extends React.Component {
+  render() {
+    return <h1>Salut, {this.props.name} !</h1>;
+  }
+}
+
+function App() {
+  return (
+    <div>
+      <WelcomeFunc name="Alice" />
+      <WelcomeClass name="Bob" />
+    </div>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Explication</strong>:</p>
+    <ul>
+      <li><code>WelcomeFunc</code>: Composant fonctionnel, simple et direct.</li>
+      <li><code>WelcomeClass</code>: Composant de classe, utilise <code>this.props</code>.</li>
+      <li><code>props</code>: <code>name</code> est passé pour personnaliser le message.</li>
+    </ul>
+    <p><strong>Résultat</strong>: Affiche “Salut, Alice !” et “Salut, Bob !” à <code>http://localhost:3000</code>.</p>
+
+    <h2>🔹 Exemple 2 : Props par défaut</h2>
+    <p>Définit une valeur par défaut pour les props :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+function Welcome({ name }) {
+  return <h1>Salut, {name} !</h1>;
+}
+
+Welcome.defaultProps = {
+  name: 'Invité'
+};
+
+function App() {
+  return (
+    <div>
+      <Welcome name="Alice" />
+      <Welcome />
+    </div>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche “Salut, Alice !” et “Salut, Invité !”.</p>
+
+    <h2>🔹 Exemple 3 : Déstructuration des props</h2>
+    <p>Simplifie l’accès aux props :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+function User({ name, age }) {
+  return (
+    <div>
+      <h1>{name}</h1>
+      <p>Âge : {age}</p>
+    </div>
+  );
+}
+
+function App() {
+  return <User name="Alice" age={25} />;
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche “Alice” et “Âge : 25”.</p>
+
+    <h2>🔹 Exemple 4 : Composant de classe avec état</h2>
+    <p>Utilise un composant de classe avec un état initial :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
+
+  render() {
+    return (
+      <div>
+        <p>Compte : {this.state.count}</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Incrémenter
+        </button>
+      </div>
+    );
+  }
+}
+
+function App() {
+  return <Counter />;
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche un compteur qui s’incrémente au clic.</p>
+
+    <h2>🔹 Exemple 5 : Bouton réutilisable</h2>
+    <p>Crée un composant bouton personnalisable :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+function Button({ text, color }) {
+  return <button style={{ backgroundColor: color }}>{text}</button>;
+}
+
+function App() {
+  return (
+    <div>
+      <Button text="Cliquez-moi" color="blue" />
+      <Button text="Annuler" color="red" />
+    </div>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche deux boutons avec différents textes et couleurs.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Props manquants</strong>: Fournis tous les props requis ou utilise <code>defaultProps</code>.</li>
+      <li><strong>Utilisation de <code>this</code> dans les composants fonctionnels</strong>: <code>this</code> est réservé aux classes.</li>
+      <li><strong>Oubli de <code>super()</code></strong>: Les constructeurs de classe doivent appeler <code>super(props)</code>.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée un projet React avec <code>npx create-react-app mon-app</code>.<br>
+    2. Crée un composant fonctionnel <code>UserCard</code> qui affiche un nom et un email via props.<br>
+    3. Crée un composant de classe <code>UserBio</code> qui affiche les mêmes informations avec un état initial.<br>
+    4. Crée un fichier texte expliquant en 3 phrases la différence entre composants fonctionnels et de classe.</p>
+
+    <a href="react3.html" class="btn">⬅️ Chapitre 3 : JSX et rendu</a>
+    <a href="reat5.html" class="btn">➡️ Chapitre 5 : State et props</a>
+  </main>
+
+  <footer>
+    <p><a href="../index .html">← Retour au menu React</a></p>
+  </footer>
+</body>
+</html>

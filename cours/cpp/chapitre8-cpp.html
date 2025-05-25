@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 8 - Pointeurs et références</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 8 : Pointeurs et références ⚙️</h1>
+    <p>Travaille directement avec la mémoire de ton programme.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un pointeur ?</h2>
+    <p>Un pointeur est comme une flèche qui indique où se trouve une valeur dans la mémoire de l’ordinateur.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+int main() {
+    int nombre = 42;
+    int* pointeur = &nombre; // Stocke l'adresse de nombre
+    cout << "Valeur : " << *pointeur << endl; // Affiche 42
+    return 0;
+}
+</code></pre>
+    <p><code>&nombre</code> donne l’adresse, <code>*pointeur</code> donne la valeur à cette adresse.</p>
+
+    <h2>📌 Références</h2>
+    <p>Une référence est un autre nom pour une variable existante.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+int main() {
+    int age = 25;
+    int& ref = age; // ref est un alias pour age
+    ref = 30;
+    cout << "Age : " << age << endl; // Affiche 30
+    return 0;
+}
+</code></pre>
+
+    <h2>💻 Passage par adresse</h2>
+    <p>Les pointeurs permettent de modifier des variables dans une fonction.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+void augmenter(int* ptr) {
+    *ptr += 10;
+}
+
+int main() {
+    int valeur = 20;
+    augmenter(&valeur);
+    cout << "Valeur : " << valeur << endl; // Affiche 30
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une fonction qui échange les valeurs de deux variables en utilisant des pointeurs.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+void echanger(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main() {
+    int x = 5, y = 10;
+    cout << "Avant : x = " << x << ", y = " << y << endl;
+    echanger(&x, &y);
+    cout << "Après : x = " << x << ", y = " << y << endl;
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre9-cpp.html" class="btn">➡️ Chapitre 9 : Structures et énumérations</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre7-cpp.html">← Chapitre 7 : Tableaux et chaînes de caractères</a> |
+      <a href="index.html">Retour au menu C++</a>
+    </p>
+  </footer>
+</body>
+</html>

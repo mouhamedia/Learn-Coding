@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 3 - Opérateurs</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #306998;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #306998;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #306998;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #306998;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 3 : Opérateurs 🔢</h1>
+    <p>Apprends à manipuler des données avec les opérateurs en JavaScript.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Types d’opérateurs</h2>
+    <p>Les opérateurs permettent d’effectuer des calculs, des comparaisons, ou de combiner des conditions :</p>
+    <ul>
+      <li><strong>Arithmétiques</strong> : <code>+</code> (addition), <code>-</code> (soustraction), <code>*</code> (multiplication), <code>/</code> (division), <code>%</code> (modulo), <code>**</code> (puissance)</li>
+      <li><strong>Comparaison</strong> : <code>==</code> (égalité), <code>===</code> (égalité stricte), <code>!=</code> (différence), <code>!==</code> (différence stricte), <code>></code>, <code><</code>, <code>>=</code>, <code><=</code></li>
+      <li><strong>Logiques</strong> : <code>&&</code> (ET), <code>||</code> (OU), <code>!</code> (NON)</li>
+    </ul>
+
+    <h2>💻 Exemple</h2>
+    <p>Voici comment utiliser les opérateurs :</p>
+    <pre><code>
+let a = 10, b = 5;
+console.log("Somme :", a + b); // Affiche : 15
+console.log("Modulo :", a % b); // Affiche : 0
+console.log("Égalité stricte :", a === b); // Affiche : false
+console.log("Condition :", a > b && b > 0); // Affiche : true
+    </code></pre>
+    <p><strong>Essaie ici :</strong></p>
+    <button onclick="testerOperateurs()">Tester les opérateurs</button>
+    <p id="operateursResultat">Résultat : </p>
+    <script>
+      function testerOperateurs() {
+        let a = 10, b = 5;
+        document.getElementById("operateursResultat").innerText = 
+          `Résultat : Somme : ${a + b}, Modulo : ${a % b}, Égalité stricte : ${a === b}, Condition : ${a > b && b > 0}`;
+      }
+    </script>
+
+    <h2>🔹 Différence entre == et ===</h2>
+    <p><code>==</code> compare les valeurs après conversion de type, tandis que <code>===</code> compare les valeurs et les types.</p>
+    <pre><code>
+console.log(5 == "5"); // Affiche : true
+console.log(5 === "5"); // Affiche : false
+    </code></pre>
+
+    <h2>📝 Exercice</h2>
+    <p>Crée un script qui vérifie si un nombre est pair (utilise <code>%</code>) et supérieur à 10, puis affiche un message dans la console avec :</p>
+    <pre><code>
+console.log("Le nombre est pair et supérieur à 10");
+    </code></pre>
+
+    <a href="chapitre4-js.html" class="btn">➡️ Chapitre 4 : Conditions</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu JavaScript</a></p>
+  </footer>
+</body>
+</html>

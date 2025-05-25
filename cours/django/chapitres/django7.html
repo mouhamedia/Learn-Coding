@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 7 - Modèles et base de données (ORM)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #092e20;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #092e20;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #092e20;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #092e20;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 7 : Modèles et base de données (ORM) 📚</h1>
+    <p>Apprends à manipuler les données avec l’ORM de Django pour interagir avec la base.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que l’ORM de Django ?</h2>
+    <p>L’ORM (Object-Relational Mapping) de Django permet de représenter les tables de la base de données comme des classes Python. Chaque modèle correspond à une table, et chaque instance à une ligne.</p>
+    <p><strong>Avantages de l’ORM :</strong></p>
+    <ul>
+      <li>Syntaxe intuitive (ex. <code>Article.objects.all()</code>).</li>
+      <li>Gestion des relations (ex. clés étrangères).</li>
+      <li>Protection contre les injections SQL.</li>
+    </ul>
+
+    <h2>🔹 Exemple 1 : Créer un modèle</h2>
+    <p>Modifie <code>blog/models.py</code>:</p>
+    <pre><code>
+from django.db import models
+
+class Article(models.Model):
+    titre = models.CharField(max_length=255)
+    contenu = models.TextField()
+    date_creation = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.titre
+    </code></pre>
+    <p>Crée une migration:</p>
+    <pre><code>
+python manage.py makemigrations
+    </code></pre>
+    <p>Applique la migration:</p>
+    <pre><code>
+python manage.py migrate
+    </code></pre>
+    <p><strong>Résultat</strong>: Crée une table <code>blog_article</code> avec les colonnes <code>titre</code>, <code>contenu</code>, et <code>date_creation</code>.</p>
+
+    <h2>🔹 Exemple 2 : Récupérer des données</h2>
+    <p>Modifie <code>blog/views.py</code>:</p>
+    <pre><code>
+from django.shortcuts import render
+from .models import Article
+
+def articles(request):
+    articles = Article.objects.all()
+    return render(request, 'blog/articles.html', {'articles': articles})
+    </code></pre>
+    <p>Modifie <code>blog/templates/blog/articles.html</code>:</p>
+    <pre><code>
+<h1>Articles</h1>
+<ul>
+{% for article in articles %}
+    <li>{{ article.titre }} ({{ article.date_creation }})</li>
+{% empty %}
+    <li>Aucun article.</li>
+{% endfor %}
+</ul>
+    </code></pre>
+    <p><strong>Résultat</strong>: <code>/blog/articles/</code> affiche tous les articles.</p>
+
+    <h2>🔹 Exemple 3 : Créer un enregistrement</h2>
+    <p>Ajoute une vue pour créer un article:</p>
+    <pre><code>
+def ajouter_article(request):
+    if request.method == 'POST':
+        titre = request.POST['titre']
+        contenu = request.POST['contenu']
+        Article.objects.create(titre=titre, contenu=contenu)
+        return redirect('articles')
+    return render(request, 'blog/ajouter_article.html')
+    </code></pre>
+    <p>Crée <code>blog/templates/blog/ajouter_article.html</code>:</p>
+    <pre><code>
+<form method="post">
+    {% csrf_token %}
+    <label>Titre :</label>
+    <input type="text" name="titre">
+    <label>Contenu :</label>
+    <textarea name="contenu"></textarea>
+    <button type="submit">Ajouter</button>
+</form>
+    </code></pre>
+    <p>Modifie <code>blog/urls.py</code>:</p>
+    <pre><code>
+urlpatterns = [
+    path('articles/', views.articles, name='articles'),
+    path('articles/ajouter/', views.ajouter_article, name='ajouter_article'),
+]
+    </code></pre>
+    <p><strong>Résultat</strong>: <code>/blog/articles/ajouter/</code> permet de créer un article.</p>
+
+    <h2>🔹 Exemple 4 : Requêtes avancées</h2>
+    <p>Modifie <code>articles</code> pour filtrer:</p>
+    <pre><code>
+def articles(request):
+    articles = Article.objects.filter(titre__contains='test')
+    return render(request, 'blog/articles.html', {'articles': articles})
+    </code></pre>
+    <p><strong>Résultat</strong>: N’affiche que les articles contenant "test" dans le titre.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Migration non appliquée</strong>: Exécute <code>makemigrations</code> et <code>migrate</code>.</li>
+      <li><strong>Modèle non importé</strong>: Vérifie <code>from .models import Article</code>.</li>
+      <li><strong>CSRF manquant</strong>: Ajoute <code>{% csrf_token %}</code> dans les formulaires POST.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée un modèle <code>Produit</code> dans <code>articles/models.py</code> avec <code>nom</code> et <code>prix</code>.<br>
+    2. Crée et applique les migrations.<br>
+    3. Crée une vue pour lister tous les produits.<br>
+    4. Crée un formulaire pour ajouter un produit.<br>
+    5. Configure les URLs et teste la création et l’affichage.</p>
+
+    <a href="django8.html" class="btn">➡️ Chapitre 8 : Formulaires et validation</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Django</a></p>
+  </footer>
+</body>
+</html>

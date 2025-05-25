@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 7 - Tableaux</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 7 : Tableaux ☕</h1>
+    <p>Stocke plusieurs valeurs dans une seule variable.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un tableau ?</h2>
+    <p>Un tableau est une liste de valeurs du même type, comme une rangée de boîtes numérotées.</p>
+    <pre><code>
+public class Tableaux {
+    public static void main(String[] args) {
+        int[] nombres = {1, 2, 3, 4, 5};
+        System.out.println("Premier élément : " + nombres[0]);
+    }
+}
+</code></pre>
+
+    <h2>📌 Parcourir un tableau</h2>
+    <p>Utilise une boucle pour accéder à chaque élément.</p>
+    <pre><code>
+public class ParcoursTableau {
+    public static void main(String[] args) {
+        int[] notes = {12, 15, 18};
+        for (int i = 0; i < notes.length; i++) {
+            System.out.println("Note " + i + " : " + notes[i]);
+        }
+    }
+}
+</code></pre>
+
+    <h2>💻 Boucle for-each</h2>
+    <p>Une manière plus simple de parcourir un tableau :</p>
+    <pre><code>
+public class ForEach {
+    public static void main(String[] args) {
+        String[] fruits = {"Pomme", "Banane", "Orange"};
+        for (String fruit : fruits) {
+            System.out.println("Fruit : " + fruit);
+        }
+    }
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui calcule la somme des éléments d’un tableau de nombres.</p>
+    <pre><code>
+public class SommeTableau {
+    public static void main(String[] args) {
+        int[] nombres = {10, 20, 30, 40};
+        int somme = 0;
+        for (int nombre : nombres) {
+            somme += nombre;
+        }
+        System.out.println("Somme : " + somme);
+    }
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a> !</p>
+
+    <a href="chapitre8-java.html" class="btn">➡️ Chapitre 8 : Introduction à la POO en Java</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre6-java.html">← Chapitre 6 : Méthodes</a> |
+      <a href="index.html">Retour au menu Java</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 13 - Exceptions</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 13 : Exceptions ☕</h1>
+    <p>Gère les erreurs dans ton programme.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une exception ?</h2>
+    <p>Une exception est une erreur qui se produit pendant l’exécution, comme diviser par zéro.</p>
+
+    <h2>📌 Gérer les exceptions</h2>
+    <p>Utilise <code>try</code> et <code>catch</code> pour gérer les erreurs.</p>
+    <pre><code>
+public class Division {
+    public static void main(String[] args) {
+        try {
+            int a = 10, b = 0;
+            int resultat = a / b;
+            System.out.println(resultat);
+        } catch (ArithmeticException e) {
+            System.out.println("Erreur : Division par zéro !");
+        }
+    }
+}
+</code></pre>
+
+    <h2>💻 Bloc <code>finally</code></h2>
+    <p>Le bloc <code>finally</code> s’exécute toujours, erreur ou pas.</p>
+    <pre><code>
+public class TestFinally {
+    public static void main(String[] args) {
+        try {
+            int[] tab = {1};
+            System.out.println(tab[10]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Erreur : Index hors limites.");
+        } finally {
+            System.out.println("Ce code s'exécute toujours.");
+        }
+    }
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui divise deux nombres saisis et gère l’erreur de division par zéro.</p>
+    <pre><code>
+public class DivisionSecurisee {
+    public static void main(String[] args) {
+        try {
+            int a = 20, b = 0;
+            int resultat = a / b;
+            System.out.println("Résultat : " + resultat);
+        } catch (ArithmeticException e) {
+            System.out.println("Impossible de diviser par zéro !");
+        }
+    }
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a> !</p>
+
+    <a href="chapitre14-java.html" class="btn">➡️ Chapitre 14 : Packages</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre12-java.html">← Chapitre 12 : Abstraction et interfaces</a> |
+      <a href="index.html">Retour au menu Java</a>
+    </p>
+  </footer>
+</body>
+</html>

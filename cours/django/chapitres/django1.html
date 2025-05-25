@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 1 - Introduction à Django</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #092e20;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #092e20;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #092e20;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #092e20;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 1 : Introduction à Django 💡</h1>
+    <p>Découvre Django, un framework Python puissant pour créer des applications web modernes et sécurisées.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que Django ?</h2>
+    <p>Django est un framework web open-source écrit en Python, créé en 2005 par Adrian Holovaty et Simon Willison. Il suit le principe "DRY" (Don’t Repeat Yourself) et est conçu pour accélérer le développement d’applications web robustes.</p>
+    <p><strong>Caractéristiques principales :</strong></p>
+    <ul>
+      <li><strong>Modèle MVT</strong> : Organise le code en Modèles (données), Vues (logique), et Templates (interface).</li>
+      <li><strong>ORM intégré</strong> : Simplifie l’interaction avec les bases de données en représentant les tables comme des classes Python.</li>
+      <li><strong>Système de templates</strong> : Permet de créer des interfaces dynamiques avec une syntaxe claire.</li>
+      <li><strong>Admin automatique</strong> : Génère une interface d’administration pour gérer les données.</li>
+      <li><strong>Sécurité intégrée</strong> : Protège contre les attaques CSRF, XSS, et SQL injection.</li>
+    </ul>
+    <p><strong>Exemple</strong> : Django peut être utilisé pour créer un blog, une boutique en ligne, ou une API REST en quelques heures.</p>
+
+    <h2>🔹 Pourquoi choisir Django ?</h2>
+    <p>Django est apprécié pour sa simplicité et sa robustesse :</p>
+    <ul>
+      <li><strong>Productivité</strong> : Fournit des outils prêts à l’emploi (authentification, formulaires, migrations).</li>
+      <li><strong>Sécurité</strong> : Mécanismes intégrés pour protéger les applications.</li>
+      <li><strong>Communauté</strong> : Documentation officielle détaillée (<a href="https://docs.djangoproject.com">docs.djangoproject.com</a>) et nombreux packages.</li>
+      <li><strong>Écosystème</strong> : Compatible avec des outils comme Django REST Framework pour les API ou Wagtail pour les CMS.</li>
+    </ul>
+    <p><strong>Exemple d’utilisation</strong> : Des sites comme Instagram, Pinterest, et Mozilla utilisent Django pour leur backend.</p>
+
+    <h2>🔹 Exemple pratique : Structure d’un projet Django</h2>
+    <p>Lorsque tu crées un projet Django, voici la structure typique :</p>
+    <pre><code>
+monprojet/
+├── manage.py                # Script pour gérer le projet
+├── monprojet/
+│   ├── __init__.py          # Indique que c’est un module Python
+│   ├── settings.py          # Configuration du projet (base de données, apps)
+│   ├── urls.py              # Définition des routes (URLs)
+│   ├── wsgi.py              # Point d’entrée pour le déploiement
+├── db.sqlite3               # Base de données par défaut (SQLite)
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>manage.py</code> : Utilisé pour lancer le serveur, exécuter des migrations, ou créer des applications.</li>
+      <li><code>settings.py</code> : Contient les configurations comme la base de données et les applications installées.</li>
+      <li><code>urls.py</code> : Associe les URLs aux vues.</li>
+    </ul>
+
+    <h2>🔹 Exemple pratique : Première page</h2>
+    <p>Voici un aperçu d’une vue simple dans Django (détaillé dans les chapitres suivants) :</p>
+    <pre><code>
+# monprojet/views.py
+from django.http import HttpResponse
+
+def accueil(request):
+    return HttpResponse("Bienvenue sur mon site Django !")
+    </code></pre>
+    <p>Et la configuration des URLs :</p>
+    <pre><code>
+# monprojet/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.accueil, name='accueil'),
+]
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>HttpResponse</code> : Retourne une réponse HTTP simple.</li>
+      <li><code>path('', ...)</code> : Associe l’URL racine (<code>/</code>) à la vue <code>accueil</code>.</li>
+    </ul>
+    <p><strong>Résultat</strong> : En lançant le serveur avec <code>python manage.py runserver</code>, <code>http://localhost:8000</code> affiche "Bienvenue sur mon site Django !".</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Python non installé</strong> : Assure-toi d’avoir Python 3.9+ avant de commencer.</li>
+      <li><strong>Ignorer la documentation</strong> : La doc officielle est essentielle pour comprendre les fonctionnalités.</li>
+      <li><strong>Code désorganisé</strong> : Suis le modèle MVT pour garder ton projet clair.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Visite <a href="https://www.djangoproject.com">djangoproject.com</a> et lis la section "Overview". Note trois fonctionnalités de Django qui te semblent utiles.<br>
+    2. Vérifie que Python est installé avec <code>python --version</code>. Si ce n’est pas le cas, installe-le depuis <a href="https://www.python.org">python.org</a>.<br>
+    3. Crée un fichier texte et décris en 3 phrases pourquoi tu veux apprendre Django (ex. pour créer un blog, une API, etc.).</p>
+
+    <a href="django2.html" class="btn">➡️ Chapitre 2 : Installation de Django</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Django</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 1 - Introduction à React</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background-color: #4a54f1;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(74, 84, 241, 0.4);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f0f4ff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(74, 84, 241, 0.15);
+    }
+    h1, h2 {
+      color: #2c3e95;
+    }
+    pre {
+      background: #e6eaff;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #4a54f1;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+    }
+    a {
+      color: #4a54f1;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 1 : Introduction à React 🚀</h1>
+    <p>Découvre React, une bibliothèque JavaScript puissante pour créer des interfaces utilisateur modernes et interactives.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu'est-ce que React ?</h2>
+    <p>React est une bibliothèque JavaScript open-source créée par Facebook en 2013. Elle est utilisée pour construire des interfaces utilisateur (UI) dynamiques, principalement pour des applications web à page unique (SPA). React se concentre sur la création de composants réutilisables qui rendent le développement plus rapide et maintenable.</p>
+    <p><strong>Caractéristiques principales :</strong></p>
+    <ul>
+      <li><strong>Composants</strong>: Blocs de code indépendants pour construire l’UI (ex. boutons, formulaires).</li>
+      <li><strong>Virtual DOM</strong>: Améliore les performances en mettant à jour uniquement les parties modifiées de la page.</li>
+      <li><strong>JSX</strong>: Syntaxe semblable à HTML pour écrire des interfaces dans JavaScript.</li>
+      <li><strong>Unidirectionnel</strong>: Flux de données prévisible, facilitant le débogage.</li>
+    </ul>
+    <p><strong>Exemple</strong>: Une application React peut afficher un tableau de bord avec des widgets interactifs, comme un compteur ou une liste de tâches.</p>
+
+    <h2>🔹 Pourquoi choisir React ?</h2>
+    <p>React est populaire pour sa simplicité et sa flexibilité :</p>
+    <ul>
+      <li><strong>Productivité</strong>: Les composants réutilisables réduisent la duplication de code.</li>
+      <li><strong>Performance</strong>: Le Virtual DOM optimise les mises à jour de l’interface.</li>
+      <li><strong>Communauté</strong>: Une vaste communauté et des outils comme React Router et Redux.</li>
+      <li><strong>Écosystème</strong>: Compatible avec des frameworks comme Next.js pour le rendu côté serveur.</li>
+    </ul>
+    <p><strong>Exemple d’utilisation</strong>: React est utilisé par Netflix, Airbnb, et Instagram pour créer des interfaces fluides et performantes.</p>
+
+    <h2>🔹 Exemple 1 : Premier composant React</h2>
+    <p>Voici un composant simple qui affiche un message :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+function App() {
+  return <h1>Bienvenue dans React !</h1>;
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Explication</strong>:</p>
+    <ul>
+      <li><code>import React</code>: Importe la bibliothèque React.</li>
+      <li><code>function App</code>: Définit un composant fonctionnel.</li>
+      <li><code>return</code>: Utilise JSX pour retourner du HTML.</li>
+    </ul>
+    <p><strong>Résultat</strong>: Après avoir créé un projet avec <code>npx create-react-app mon-app</code> et lancé <code>npm start</code>, accède à <code>http://localhost:3000</code> pour voir “Bienvenue dans React !”.</p>
+
+    <h2>🔹 Exemple 2 : Composant avec variable</h2>
+    <p>Un composant peut utiliser des variables JavaScript :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+function App() {
+  const nom = 'Alice';
+  return <h1>Salut, {nom} !</h1>;
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche “Salut, Alice !”.</p>
+
+    <h2>🔹 Exemple 3 : Liste avec map()</h2>
+    <p>Afficher une liste dynamique :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+function App() {
+  const fruits = ['Pomme', 'Banane', 'Orange'];
+  return (
+    <ul>
+      {fruits.map((fruit, index) => (
+        <li key={index}>{fruit}</li>
+      ))}
+    </ul>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche une liste à puces : Pomme, Banane, Orange.</p>
+
+    <h2>🔹 Exemple 4 : Composant imbriqué</h2>
+    <p>Créer un composant réutilisable :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+function Welcome() {
+  return <h2>Bienvenue !</h2>;
+}
+
+function App() {
+  return (
+    <div>
+      <h1>Mon App</h1>
+      <Welcome />
+    </div>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche “Mon App” suivi de “Bienvenue !”.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Oublier d’importer React</strong>: JSX nécessite <code>import React from 'react'</code>.</li>
+      <li><strong>Mauvais ID dans index.html</strong>: Assure-toi que <code>&lt;div id="root"&gt;</code> existe dans <code>public/index.html</code>.</li>
+      <li><strong>Syntaxe JSX incorrecte</strong>: Utilise <code>className</code> au lieu de <code>class</code>.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Visite <a href="https://react.dev">react.dev</a> et lis la section “Getting Started”. Note trois fonctionnalités de React qui te semblent utiles.<br>
+    2. Ouvre un terminal et vérifie que Node.js est installé avec <code>node --version</code>. Si ce n’est pas le cas, installe-le (<a href="https://nodejs.org">nodejs.org</a>).<br>
+    3. Crée un fichier texte et décris en 3 phrases pourquoi tu veux apprendre React (ex. pour créer une app interactive, une SPA, etc.).</p>
+
+    <a href="react2.html" class="btn">➡️ Chapitre 2 : Installation et configuration</a>
+  </main>
+
+  <footer>
+    <p><a href="../index .html">← Retour au menu React</a></p>
+  </footer>
+</body>
+</html>

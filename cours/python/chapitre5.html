@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 5 - Fonctions</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 5 : Fonctions 🛠</h1>
+    <p>Organise ton code en blocs réutilisables avec les fonctions.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une fonction ?</h2>
+    <p>Une fonction est un bloc de code que tu peux appeler à tout moment pour effectuer une tâche spécifique. Elle permet de rendre ton code plus clair et réutilisable.</p>
+    <p>Pour définir une fonction, utilise le mot-clé <code>def</code> :</p>
+    <pre><code>
+def saluer():
+    print("Bonjour, monde !")
+saluer()  # Appelle la fonction
+</code></pre>
+
+    <h2>📌 Fonctions avec paramètres</h2>
+    <p>Tu peux passer des informations à une fonction via des <strong>paramètres</strong>.</p>
+    <pre><code>
+def saluer_personne(nom):
+    print("Bonjour,", nom)
+saluer_personne("Alice")  # Affiche : Bonjour, Alice
+</code></pre>
+
+    <h2>💻 Valeur de retour</h2>
+    <p>Une fonction peut renvoyer un résultat avec <code>return</code>.</p>
+    <pre><code>
+def carre(nombre):
+    return nombre * nombre
+resultat = carre(5)
+print(resultat)  # Affiche : 25
+</code></pre>
+
+    <h2>📌 Paramètres par défaut</h2>
+    <p>Tu peux définir des valeurs par défaut pour les paramètres :</p>
+    <pre><code>
+def saluer_personne(nom="inconnu"):
+    print("Bonjour,", nom)
+saluer_personne()        # Affiche : Bonjour, inconnu
+saluer_personne("Bob")  # Affiche : Bonjour, Bob
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une fonction qui calcule l’aire d’un rectangle (longueur × largeur) et l’utilise pour afficher l’aire de plusieurs rectangles.</p>
+    <pre><code>
+def aire_rectangle(longueur, largeur):
+    return longueur * largeur
+print(aire_rectangle(5, 3))  # Affiche : 15
+print(aire_rectangle(10, 4)) # Affiche : 40
+</code></pre>
+    <p>Teste ce code sur <a href="https://replit.com" target="_blank">Replit</a> !</p>
+
+    <a href="chapitre6.html" class="btn">➡️ Chapitre 6 : Listes, tuples et dictionnaires</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre4.html">← Chapitre 4 : Boucles (for, while)</a> |
+      <a href="index.html">Retour au menu Python</a>
+    </p>
+  </footer>
+</body>
+</html>

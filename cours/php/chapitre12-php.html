@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapitre 12 - Introduction à MySQL avec PHP</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #003049;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f0fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #003049;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    .navigation a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .navigation a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+      background-color: #f7f9ff;
+    }
+    footer a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 12 : Introduction à MySQL avec PHP 🐘</h1>
+    <p>Connecte PHP à une base de données MySQL.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Configurer MySQL</h2>
+    <p>Assure-toi que MySQL est installé (via XAMPP ou localement). Crée une base de données <code>myapp</code> et une table <code>users</code> :</p>
+    <pre><code>CREATE DATABASE myapp;
+USE myapp;
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100)
+);
+</code></pre>
+
+    <h2>📌 Connexion à MySQL</h2>
+    <p>Utilise <code>mysqli</code> ou <code>PDO</code> pour te connecter. Voici un exemple avec <code>mysqli</code> :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Connexion MySQL&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Connexion à MySQL&lt;/h1&gt;
+  &lt;?php
+    $host = &quot;localhost&quot;;
+    $user = &quot;root&quot;;
+    $pass = &quot;&quot;; // Remplace par ton mot de passe
+    $db = &quot;myapp&quot;;
+    $conn = new mysqli($host, $user, $pass, $db);
+    if ($conn-&gt;connect_error) {
+        die(&quot;Connexion échouée : &quot; . $conn-&gt;connect_error);
+    }
+    echo &quot;&lt;p&gt;Connexion réussie !&lt;/p&gt;&quot;;
+    $conn-&gt;close();
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste via <code>http://localhost/mysql.php</code> après avoir configuré MySQL.</p>
+
+    <h2>💻 Exemple pratique : Afficher les utilisateurs</h2>
+    <p>Crée un fichier <code>users.php</code> pour lister les utilisateurs :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Liste des utilisateurs&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Utilisateurs&lt;/h1&gt;
+  &lt;?php
+    $conn = new mysqli(&quot;localhost&quot;, &quot;root&quot;, &quot;&quot;, &quot;myapp&quot;);
+    if ($conn-&gt;connect_error) {
+        die(&quot;Connexion échouée : &quot; . $conn-&gt;connect_error);
+    }
+    $result = $conn-&gt;query(&quot;SELECT * FROM users&quot;);
+    if ($result-&gt;num_rows > 0) {
+        echo &quot;&lt;ul&gt;&quot;;
+        while ($row = $result-&gt;fetch_assoc()) {
+            echo &quot;&lt;li&gt;&quot; . $row[&quot;name&quot;] . &quot; (&quot; . $row[&quot;email&quot;] . &quot;)&lt;/li&gt;&quot;;
+        }
+        echo &quot;&lt;/ul&gt;&quot;;
+    } else {
+        echo &quot;&lt;p&gt;Aucun utilisateur.&lt;/p&gt;&quot;;
+    }
+    $conn-&gt;close();
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Insère des données dans <code>users</code> via phpMyAdmin, puis teste via <code>http://localhost/users.php</code>.</p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise <code>PDO</code> pour une meilleure portabilité et sécurité.</li>
+          <li>Ferme la connexion avec <code>$conn->close()</code> après usage.</li>
+          <li>Stocke les informations de connexion dans un fichier séparé (voir Chapitre 14).</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="chapitre11-php.html">← Chapitre précédent</a>
+      <a href="chapitre13-php.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="index.html">Retour au menu PHP</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

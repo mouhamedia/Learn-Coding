@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 7 - Vue Router : navigation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #42b883;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(66, 184, 131, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+    }
+    main h2 {
+      color: #1b684f;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #42b883;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f7f2;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #2a9a78;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 7 : Vue Router : navigation</h1>
+    <p>Apprends à configurer et utiliser Vue Router pour la navigation dans une application Vue.js.</p>
+  </header>
+
+  <main>
+    <h2>Qu’est-ce que Vue Router ?</h2>
+    <p>Vue Router est la bibliothèque officielle pour gérer la navigation côté client dans une application Vue.js. Elle permet de créer des applications à page unique (SPA) avec des routes dynamiques.</p>
+
+    <h2>Installation et configuration</h2>
+    <p>Pour utiliser Vue Router, installe-le avec <code>npm install vue-router@4</code>, puis configure les routes dans un fichier dédié.</p>
+    <pre><code>// src/router/index.js
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../views/Home.vue';
+import About from '../views/About.vue';
+
+const routes = [
+  { path: '/', component: Home },
+  { path: '/about', component: About }
+];
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+});
+
+export default router;
+</code></pre>
+    <p>Intègre le routeur dans ton application principale :</p>
+    <pre><code>// src/main.js
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+
+createApp(App).use(router).mount('#app');
+</code></pre>
+
+    <h2>Utilisation de router-link et router-view</h2>
+    <p><code>&lt;router-link&gt;</code> crée des liens de navigation, et <code>&lt;router-view&gt;</code> affiche le composant correspondant à la route actuelle.</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;nav&gt;
+      &lt;router-link to="/"&gt;Accueil&lt;/router-link&gt;
+      &lt;router-link to="/about"&gt;À propos&lt;/router-link&gt;
+    &lt;/nav&gt;
+    &lt;router-view /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {};
+&lt;/script&gt;
+</code></pre>
+
+    <h2>Routes dynamiques</h2>
+    <p>Les routes dynamiques utilisent des paramètres, comme <code>/user/:id</code>, pour afficher du contenu spécifique.</p>
+    <pre><code>&lt;!-- router/index.js --&gt;
+const routes = [
+  { path: '/user/:id', component: User }
+];
+
+&lt;!-- User.vue --&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;h2&gt;Profil utilisateur {{ $route.params.id }}&lt;/h2&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {};
+&lt;/script&gt;
+</code></pre>
+
+    <h2>Navigation programmatique</h2>
+    <p>Tu peux naviguer par programme avec <code>router.push</code> ou <code>router.replace</code>.</p>
+    <pre><code>&lt;template&gt;
+  &lt;button @click="goToUser"&gt;Voir l’utilisateur 1&lt;/button&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  methods: {
+    goToUser() {
+      this.$router.push('/user/1');
+    }
+  }
+};
+&lt;/script&gt;
+</code></pre>
+
+    <h2>Exemple pratique : Application SPA</h2>
+    <p>Voici une application avec plusieurs pages et une route dynamique :</p>
+    <pre><code>&lt;!-- router/index.js --&gt;
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../views/Home.vue';
+import About from '../views/About.vue';
+import User from '../views/User.vue';
+
+const routes = [
+  { path: '/', component: Home },
+  { path: '/about', component: About },
+  { path: '/user/:id', component: User }
+];
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+});
+
+export default router;
+
+&lt;!-- App.vue --&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;nav&gt;
+      &lt;router-link to="/"&gt;Accueil&lt;/router-link&gt;
+      &lt;router-link to="/about"&gt;À propos&lt;/router-link&gt;
+      &lt;router-link to="/user/1"&gt;Utilisateur 1&lt;/router-link&gt;
+    &lt;/nav&gt;
+    &lt;router-view /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {};
+&lt;/script&gt;
+&lt;style scoped&gt;
+nav a {
+  margin-right: 1rem;
+  color: #42b883;
+  text-decoration: none;
+}
+nav a:hover {
+  color: #2a9a78;
+}
+&lt;/style&gt;
+
+&lt;!-- Home.vue --&gt;
+&lt;template&gt;
+  &lt;h2&gt;Bienvenue sur la page d’accueil !&lt;/h2&gt;
+&lt;/template&gt;
+
+&lt;!-- About.vue --&gt;
+&lt;template&gt;
+  &lt;h2&gt;À propos de nous&lt;/h2&gt;
+&lt;/template&gt;
+
+&lt;!-- User.vue --&gt;
+&lt;template&gt;
+  &lt;h2&gt;Profil utilisateur {{ $route.params.id }}&lt;/h2&gt;
+&lt;/template&gt;
+</code></pre>
+    <p>Cette application permet de naviguer entre les pages et d’afficher un profil utilisateur basé sur un paramètre d’URL.</p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise des routes nommées pour plus de clarté.</li>
+          <li>Active le chargement paresseux (<code>component: () => import('../views/About.vue')</code>) pour les grandes applications.</li>
+          <li>Implémente des gardes de navigation pour protéger certaines routes (ex. : authentification).</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="vue6.html">← Chapitre précédent</a>
+      <a href="vue8.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

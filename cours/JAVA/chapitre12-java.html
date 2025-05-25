@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 12 - Abstraction et interfaces</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 12 : Abstraction et interfaces ☕</h1>
+    <p>Définit des modèles pour tes classes avec l’abstraction.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Classes abstraites</h2>
+    <p>Une classe abstraite est un modèle que d’autres classes doivent compléter.</p>
+    <pre><code>
+public abstract class Forme {
+    public abstract double aire();
+}
+
+public class Rectangle extends Forme {
+    private double longueur, largeur;
+
+    public Rectangle(double l, double w) {
+        longueur = l;
+        largeur = w;
+    }
+
+    @Override
+    public double aire() {
+        return longueur * largeur;
+    }
+
+    public static void main(String[] args) {
+        Rectangle rect = new Rectangle(5, 3);
+        System.out.println("Aire du rectangle : " + rect.aire());
+    }
+}
+</code></pre>
+
+    <h2>📌 Interfaces</h2>
+    <p>Une interface définit des méthodes que les classes doivent implémenter.</p>
+    <pre><code>
+public interface Dessinable {
+    void dessiner();
+}
+
+public class Cercle implements Dessinable {
+    public void dessiner() {
+        System.out.println("Dessine un cercle.");
+    }
+
+    public static void main(String[] args) {
+        Cercle cercle = new Cercle();
+        cercle.dessiner();
+    }
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une interface <code>Movable</code> avec une méthode <code>deplacer</code>, et implémente-la dans une classe <code>Voiture</code>.</p>
+    <pre><code>
+public interface Movable {
+    void deplacer();
+}
+
+public class Voiture implements Movable {
+    private String marque;
+
+    public Voiture(String m) {
+        marque = m;
+    }
+
+    public void deplacer() {
+        System.out.println(marque + " se déplace.");
+    }
+
+    public static void main(String[] args) {
+        Voiture voiture = new Voiture("Toyota");
+        voiture.deplacer();
+    }
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a> !</p>
+
+    <a href="chapitre13-java.html" class="btn">➡️ Chapitre 13 : Exceptions</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre11-java.html">← Chapitre 11 : Polymorphisme</a> |
+      <a href="index.html">Retour au menu Java</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapitre 2 - Premier script PHP</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #003049;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f0fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #003049;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #002030;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    .navigation a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .navigation a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+      background-color: #f7f9ff;
+    }
+    footer a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 2 : Premier script PHP 🐘</h1>
+    <p>Crée et exécute ton premier script PHP pour afficher du contenu dynamique.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Structure d’un script PHP</h2>
+    <p>Un script PHP commence par <code>&lt;?php</code> et se termine par <code>?&gt;</code>. Le code à l’intérieur est exécuté par le serveur, et le résultat (souvent du HTML) est envoyé au navigateur.</p>
+
+    <h2>📌 Écrire un script simple</h2>
+    <p>Crée un fichier <code>hello.php</code> avec ce code :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Premier script PHP&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Bienvenue !&lt;/h1&gt;
+  &lt;?php
+    echo "Ceci est généré par PHP !";
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p><strong>Explications :</strong></p>
+    <ul>
+      <li><code>echo</code> affiche du texte ou du HTML dans la page.</li>
+      <li>Le code PHP est intégré dans une page HTML.</li>
+      <li>Place ce fichier dans <code>C:\xampp\htdocs</code> (si tu utilises XAMPP) et accède à <code>http://localhost/hello.php</code>.</li>
+    </ul>
+
+    <h2>💻 Tester ton script</h2>
+    <p>Pour exécuter :
+      <ol>
+        <li>Démarre Apache via XAMPP.</li>
+        <li>Place <code>hello.php</code> dans le dossier <code>htdocs</code>.</li>
+        <li>Ouvre <code>http://localhost/hello.php</code> dans ton navigateur.</li>
+      </ol>
+      Tu verras une page avec un titre “Bienvenue !” et le texte “Ceci est généré par PHP !”.
+    </p>
+
+    <h2>🛠 Exercice pratique : Page personnalisée</h2>
+    <p>Crée un fichier <code>welcome.php</code> qui affiche un message de bienvenue avec ton nom :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Message personnalisé&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;?php
+    $name = "TonNom"; // Remplace par ton nom
+    echo "&lt;h1&gt;Bienvenue, $name !&lt;/h1&gt;";
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste-le via <code>http://localhost/welcome.php</code>. Le résultat sera, par exemple, “Bienvenue, Jean !”.</p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise des fichiers avec l’extension <code>.php</code>.</li>
+          <li>Assure-toi que ton serveur (Apache) est en cours d’exécution.</li>
+          <li>Évite d’oublier <code>?&gt;</code> si tu mélanges PHP et HTML, bien que ce soit facultatif à la fin d’un fichier.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="chapitre1-php.html">← Chapitre précédent</a>
+      <a href="chapitre3-php.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="index.html">Retour au menu PHP</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

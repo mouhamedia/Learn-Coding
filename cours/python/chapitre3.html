@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 3 - Conditions (if, elif, else)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 3 : Conditions (if, elif, else) ⚖️</h1>
+    <p>Apprends à prendre des décisions dans ton code avec les structures conditionnelles.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une condition ?</h2>
+    <p>Les conditions permettent à ton programme de choisir quoi faire en fonction d’une situation. En Python, on utilise les mots-clés <code>if</code>, <code>elif</code> (optionnel), et <code>else</code> (optionnel) pour créer des blocs conditionnels.</p>
+    <p>Une condition repose sur une <strong>expression booléenne</strong> qui retourne <code>True</code> ou <code>False</code>.</p>
+    <pre><code>
+age = 18
+if age >= 18:
+    print("Tu es majeur !")
+</code></pre>
+    <p>Dans cet exemple, si <code>age >= 18</code> est vrai, le message s’affiche. Sinon, rien ne se passe.</p>
+
+    <h2>📌 Syntaxe des conditions</h2>
+    <p>Voici la structure de base :</p>
+    <pre><code>
+if condition:
+    # Code à exécuter si la condition est vraie
+elif autre_condition:  # Optionnel
+    # Code à exécuter si l’autre condition est vraie
+else:                 # Optionnel
+    # Code à exécuter si aucune condition n’est vraie
+</code></pre>
+    <p><strong>Exemple complet :</strong></p>
+    <pre><code>
+note = 85
+if note >= 90:
+    print("Excellent !")
+elif note >= 70:
+    print("Bien joué !")
+else:
+    print("Il faut travailler davantage.")
+</code></pre>
+    <p>Ici, si <code>note >= 90</code>, le programme affiche "Excellent !". Si <code>note >= 70</code>, il affiche "Bien joué !". Sinon, il affiche "Il faut travailler davantage."</p>
+
+    <h2>💻 Opérateurs de comparaison</h2>
+    <p>Les conditions utilisent des opérateurs pour comparer des valeurs :</p>
+    <ul>
+      <li><code>==</code> : Égal à</li>
+      <li><code>!=</code> : Différent de</li>
+      <li><code>&gt;</code> : Supérieur à</li>
+      <li><code>&lt;</code> : Inférieur à</li>
+      <li><code>&gt;=</code> : Supérieur ou égal à</li>
+      <li><code>&lt;=</code> : Inférieur ou égal à</li>
+    </ul>
+    <p>Tu peux aussi combiner des conditions avec des opérateurs logiques :</p>
+    <ul>
+      <li><code>and</code> : Vrai si les deux conditions sont vraies</li>
+      <li><code>or</code> : Vrai si au moins une condition est vraie</li>
+      <li><code>not</code> : Inverse une condition</li>
+    </ul>
+    <pre><code>
+age = 16
+permis = False
+if age >= 18 and permis:
+    print("Tu peux conduire !")
+else:
+    print("Tu ne peux pas encore conduire.")
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui demande à l’utilisateur son âge (avec <code>input()</code>) et affiche s’il est mineur, majeur, ou senior (65 ans ou plus).</p>
+    <pre><code>
+age = int(input("Quel est ton âge ? "))
+if age >= 65:
+    print("Tu es senior !")
+elif age >= 18:
+    print("Tu es majeur !")
+else:
+    print("Tu es mineur !")
+</code></pre>
+    <p>Teste ce code sur <a href="https://replit.com" target="_blank">Replit</a> !</p>
+
+    <a href="chapitre4.html" class="btn">➡️ Chapitre 4 : Boucles (for, while)</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre2.html">← Chapitre 2 : Variables et types</a> |
+      <a href="index.html">Retour au menu Python</a>
+    </p>
+  </footer>
+</body>
+</html>

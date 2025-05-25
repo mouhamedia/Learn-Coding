@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 15 - Fichiers</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 15 : Fichiers ⚙️</h1>
+    <p>Lis et écris des données dans des fichiers.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Écrire dans un fichier</h2>
+    <p>Utilise <code>ofstream</code> pour écrire du texte dans un fichier.</p>
+    <pre><code>
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    ofstream fichier("sortie.txt");
+    if (fichier.is_open()) {
+        fichier << "Bonjour, C++ !" << endl;
+        fichier.close();
+    } else {
+        cout << "Erreur d'ouverture." << endl;
+    }
+    return 0;
+}
+</code></pre>
+
+    <h2>📌 Lire un fichier</h2>
+    <p>Utilise <code>ifstream</code> pour lire un fichier.</p>
+    <pre><code>
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main() {
+    ifstream fichier("sortie.txt");
+    string ligne;
+    if (fichier.is_open()) {
+        while (getline(fichier, ligne)) {
+            cout << ligne << endl;
+        }
+        fichier.close();
+    } else {
+        cout << "Erreur d'ouverture." << endl;
+    }
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui écrit une liste de noms dans un fichier et les lit ensuite.</p>
+    <pre><code>
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main() {
+    ofstream fichierEcriture("noms.txt");
+    if (fichierEcriture.is_open()) {
+        fichierEcriture << "Alice\nBob" << endl;
+        fichierEcriture.close();
+    }
+
+    ifstream fichierLecture("noms.txt");
+    string nom;
+    if (fichierLecture.is_open()) {
+        while (getline(fichierLecture, nom)) {
+            cout << "Nom : " << nom << endl;
+        }
+        fichierLecture.close();
+    }
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code on <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre16-cpp.html" class="btn">➡️ Chapitre 16 : Notions avancées</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre14-cpp.html">← Chapitre 14 : Polymorphisme</a> |
+      <a href="index.html">Retour au menu C++</a>
+    </p>
+  </footer>
+</body>
+</html>

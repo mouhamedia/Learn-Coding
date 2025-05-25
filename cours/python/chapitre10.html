@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 10 - Projet final : mini-application Python</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 10 : Projet final : mini-application Python 🎉</h1>
+    <p>Mets en pratique tout ce que tu as appris avec une application de gestion de tâches.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Objectif du projet</h2>
+    <p>Crée une application qui permet d’ajouter, afficher, et supprimer des tâches, en les sauvegardant dans un fichier. Ce projet combine variables, boucles, fonctions, listes, fichiers, et gestion des erreurs.</p>
+
+    <h2>📌 Structure du programme</h2>
+    <p>Voici le code complet pour une application de gestion de tâches :</p>
+    <pre><code>
+def ajouter_tache(taches, tache):
+    taches.append(tache)
+    print(f"Tâche '{tache}' ajoutée.")
+
+def afficher_taches(taches):
+    if not taches:
+        print("Aucune tâche.")
+    else:
+        for i, tache in enumerate(taches, 1):
+            print(f"{i}. {tache}")
+
+def supprimer_tache(taches, numero):
+    try:
+        taches.pop(numero - 1)
+        print("Tâche supprimée.")
+    except IndexError:
+        print("Numéro invalide.")
+
+def sauvegarder_taches(taches, fichier="taches.txt"):
+    with open(fichier, "w") as f:
+        for tache in taches:
+            f.write(tache + "\n")
+
+def charger_taches(fichier="taches.txt"):
+    taches = []
+    try:
+        with open(fichier, "r") as f:
+            taches = [ligne.strip() for ligne in f]
+    except FileNotFoundError:
+        print("Aucun fichier de tâches trouvé.")
+    return taches
+
+def main():
+    taches = charger_taches()
+    while True:
+        print("\n1. Ajouter une tâche")
+        print("2. Afficher les tâches")
+        print("3. Supprimer une tâche")
+        print("4. Quitter")
+        choix = input("Choisis une option (1-4) : ")
+
+        if choix == "1":
+            tache = input("Entrez la tâche : ")
+            ajouter_tache(taches, tache)
+            sauvegarder_taches(taches)
+        elif choix == "2":
+            afficher_taches(taches)
+        elif choix == "3":
+            afficher_taches(taches)
+            try:
+                numero = int(input("Entrez le numéro de la tâche à supprimer : "))
+                supprimer_tache(taches, numero)
+                sauvegarder_taches(taches)
+            except ValueError:
+                print("Entrez un numéro valide.")
+        elif choix == "4":
+            print("Au revoir !")
+            break
+        else:
+            print("Option invalide.")
+
+if __name__ == "__main__":
+    main()
+</code></pre>
+
+    <h2>💻 Comment ça fonctionne ?</h2>
+    <ul>
+      <li><code>ajouter_tache</code> : Ajoute une tâche à la liste.</li>
+      <li><code>afficher_taches</code> : Affiche toutes les tâches avec un numéro.</li>
+      <li><code>supprimer_tache</code> : Supprime une tâche par son numéro.</li>
+      <li><code>sauvegarder_taches</code> et <code>charger_taches</code> : Gèrent la persistance des données dans un fichier.</li>
+      <li><code>main</code> : Boucle principale avec un menu interactif.</li>
+    </ul>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Teste le programme ci-dessus sur <a href="https://replit.com" target="_blank">Replit</a>. Ensuite, ajoute une fonctionnalité pour marquer une tâche comme terminée (par exemple, ajouter "[Terminé]" à la tâche).</p>
+
+    <p><strong>Conseil :</strong> Modifie <code>ajouter_tache</code> pour inclure un statut, et crée une fonction pour modifier ce statut.</p>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre9.html">← Chapitre 9 : Programmation orientée objet (POO)</a> |
+      <a href="index.html">Retour au menu Python</a>
+    </p>
+  </footer>
+</body>
+</html>

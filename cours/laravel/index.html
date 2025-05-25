@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Laravel - Framework PHP</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: #003049;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+      background-color: #e8f1fc;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Cours Laravel</h1>
+    <p>Apprends le framework PHP le plus populaire étape par étape.</p>
+  </header>
+
+  <main class="card-grid">
+    <a class="card" href="chapitres/laravel1.html"><h3>Chapitre 1</h3><p>Introduction à Laravel</p></a>
+    <a class="card" href="chapitres/laravel2.html"><h3>Chapitre 2</h3><p>Installation de Laravel</p></a>
+    <a class="card" href="chapitres/laravel3.html"><h3>Chapitre 3</h3><p>Les routes</p></a>
+    <a class="card" href="chapitres/laravel4.html"><h3>Chapitre 4</h3><p>Les vues avec Blade</p></a>
+    <a class="card" href="chapitres/laravel5.html"><h3>Chapitre 5</h3><p>Les contrôleurs</p></a>
+    <a class="card" href="chapitres/laravel6.html"><h3>Chapitre 6</h3><p>Modèles et base de données (Eloquent)</p></a>
+    <a class="card" href="chapitres/laravel7.html"><h3>Chapitre 7</h3><p>Les migrations</p></a>
+    <a class="card" href="chapitres/laravel8.html"><h3>Chapitre 8</h3><p>Formulaires et validation</p></a>
+    <a class="card" href="chapitres/laravel9.html"><h3>Chapitre 9</h3><p>Middleware</p></a>
+    <a class="card" href="chapitres/laravel10.html"><h3>Chapitre 10</h3><p>Authentification et sécurité</p></a>
+  </main>
+
+  <footer>
+    <p><a href="../../index.html">← Retour à l'accueil</a></p>
+  </footer>
+
+</body>
+</html>

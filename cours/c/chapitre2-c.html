@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 2 - Variables et types de données</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 2 : Variables et types de données 📚</h1>
+    <p>Apprends à stocker et manipuler des données avec les variables en C.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une variable ?</h2>
+    <p>Une variable est un espace en mémoire pour stocker une valeur. En C, tu dois déclarer le type de la variable avant de l’utiliser.</p>
+    <pre><code>
+#include <stdio.h>
+
+int main() {
+    int age = 25;
+    float prix = 19.99;
+    printf("Âge : %d, Prix : %.2f\n", age, prix);
+    return 0;
+}
+</code></pre>
+    <p><code>%d</code> est pour les entiers, <code>%.2f</code> pour les flottants avec 2 décimales.</p>
+
+    <h2>📌 Types de données</h2>
+    <p>Les principaux types en C sont :</p>
+    <ul>
+      <li><code>int</code> : Entier (ex. : <code>42</code>, <code>-10</code>).</li>
+      <li><code>float</code> : Flottant à simple précision (ex. : <code>3.14</code>).</li>
+      <li><code>double</code> : Flottant à double précision (plus précis).</li>
+      <li><code>char</code> : Caractère (ex. : <code>'A'</code>).</li>
+    </ul>
+
+    <h2>💻 Entrée et sortie</h2>
+    <p>Utilise <code>scanf</code> pour lire l’entrée utilisateur et <code>printf</code> pour afficher.</p>
+    <pre><code>
+#include <stdio.h>
+
+int main() {
+    int age;
+    printf("Entrez votre âge : ");
+    scanf("%d", &age);
+    printf("Vous avez %d ans.\n", age);
+    return 0;
+}
+</code></pre>
+    <p><strong>Note :</strong> Le <code>&</code> devant <code>age</code> indique l’adresse mémoire de la variable.</p>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui demande le nom et l’âge de l’utilisateur, puis affiche un message comme : <code>Bonjour Alice, vous avez 25 ans.</code></p>
+    <pre><code>
+#include <stdio.h>
+
+int main() {
+    char nom[50];
+    int age;
+    printf("Entrez votre nom : ");
+    scanf("%s", nom);
+    printf("Entrez votre âge : ");
+    scanf("%d", &age);
+    printf("Bonjour %s, vous avez %d ans.\n", nom, age);
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre3-c.html" class="btn">➡️ Chapitre 3 : Conditions et boucles</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre1-c.html">← Chapitre 1 : Introduction au langage C</a> |
+      <a href="index.html">Retour au menu C</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 6 - Fonctions</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #306998;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #306998;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #306998;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #306998;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 6 : Fonctions ⚙️</h1>
+    <p>Apprends à organiser ton code avec des fonctions réutilisables.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les fonctions</h2>
+    <p>Une fonction est un bloc de code que tu peux appeler plusieurs fois. Elle peut accepter des paramètres et retourner une valeur.</p>
+    <pre><code>
+function saluer(nom) {
+  return "Bonjour, " + nom + " !";
+}
+console.log(saluer("Alice")); // Affiche : Bonjour, Alice !
+    </code></pre>
+
+    <h2>🔹 Fonctions fléchées</h2>
+    <p>Les fonctions fléchées sont une syntaxe plus concise pour écrire des fonctions.</p>
+    <pre><code>
+const addition = (a, b) => a + b;
+console.log(addition(3, 4)); // Affiche : 7
+    </code></pre>
+    <p><strong>Essaie ici :</strong></p>
+    <input type="text" id="nomInput" placeholder="Entre ton nom">
+    <button onclick="afficherSalutation()">Saluer</button>
+    <p id="salutationResultat">Résultat : </p>
+    <script>
+      function saluer(nom) {
+        return "Bonjour, " + nom + " !";
+      }
+      function afficherSalutation() {
+        let nom = document.getElementById("nomInput").value;
+        document.getElementById("salutationResultat").innerText = saluer(nom);
+      }
+    </script>
+
+    <h2>📝 Exercice</h2>
+    <p>Crée une fonction qui calcule le carré d’un nombre et affiche le résultat sur la page ou dans la console avec :</p>
+    <pre><code>
+function carre(nombre) {
+  return nombre * nombre;
+}
+    </code></pre>
+
+    <a href="chapitre7-js.html" class="btn">➡️ Chapitre 7 : Manipulation du DOM</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu JavaScript</a></p>
+  </footer>
+</body>
+</html> 

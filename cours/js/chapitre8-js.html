@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 8 - Événements</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #306998;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #306998;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #306998;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #306998;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 8 : Événements 🖱️</h1>
+    <p>Apprends à réagir aux actions des utilisateurs avec les événements.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les événements</h2>
+    <p>Les événements permettent de réagir aux actions des utilisateurs, comme un clic, une saisie, ou un survol. Tu peux utiliser <code>onclick</code> ou <code>addEventListener</code>.</p>
+    <pre><code>
+<input type="text" id="entree" placeholder="Tape ici">
+<script>
+document.getElementById("entree").addEventListener("input", function() {
+  console.log("Tu tapes :", this.value);
+});
+</script>
+    </code></pre>
+    <p><strong>Essaie ici :</strong></p>
+    <input type="text" id="entree" placeholder="Tape ici">
+    <p id="entreeResultat">Résultat : </p>
+    <script>
+      document.getElementById("entree").addEventListener("input", function() {
+        document.getElementById("entreeResultat").innerText = "Tu tapes : " + this.value;
+      });
+    </script>
+
+    <h2>🔹 Autres événements</h2>
+    <p>Exemples d’événements : <code>click</code>, <code>dblclick</code> (double-clic), <code>mouseover</code> (survol), <code>change</code> (changement de valeur).</p>
+    <pre><code>
+document.getElementById("monBouton").addEventListener("dblclick", function() {
+  alert("Double-clic détecté !");
+});
+    </code></pre>
+
+    <h2>📝 Exercice</h2>
+    <p>Crée un bouton qui affiche une alerte lors d’un double-clic (<code>dblclick</code>) avec :</p>
+    <pre><code>
+alert("Double-clic !");
+    </code></pre>
+
+    <a href="chapitre9-js.html" class="btn">➡️ Chapitre 9 : Objets et tableaux</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu JavaScript</a></p>
+  </footer>
+</body>
+</html>

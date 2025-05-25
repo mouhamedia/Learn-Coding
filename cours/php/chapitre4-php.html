@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapitre 4 - Opérateurs</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #003049;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f0fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #003049;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #002030;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    .navigation a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .navigation a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+      background-color: #f7f9ff;
+    }
+    footer a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 4 : Opérateurs 🐘</h1>
+    <p>Découvre les opérateurs pour manipuler des données en PHP.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Opérateurs arithmétiques</h2>
+    <p>Utilisés pour les calculs mathématiques :</p>
+    <ul>
+      <li><code>+</code> : Addition</li>
+      <li><code>-</code> : Soustraction</li>
+      <li><code>*</code> : Multiplication</li>
+      <li><code>/</code> : Division</li>
+      <li><code>%</code> : Modulo</li>
+    </ul>
+    <pre><code>&lt;?php
+$a = 10;
+$b = 3;
+echo "Addition : " . ($a + $b) . "&lt;br&gt;";
+echo "Modulo : " . ($a % $b) . "&lt;br&gt;";
+?&gt;
+</code></pre>
+
+    <h2>📌 Opérateurs de comparaison</h2>
+    <p>Pour comparer des valeurs :</p>
+    <ul>
+      <li><code>==</code> : Égal</li>
+      <li><code>===</code> : Identique (valeur et type)</li>
+      <li><code>!=</code> : Différent</li>
+      <li><code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code> : Comparaisons</li>
+    </ul>
+    <pre><code>&lt;?php
+$x = 5;
+$y = "5";
+echo ($x == $y) ? "Égal" : "Non égal"; // Vrai
+echo "&lt;br&gt;";
+echo ($x === $y) ? "Identique" : "Non identique"; // Faux
+?&gt;
+</code></pre>
+
+    <h2>💻 Exemple pratique : Calculatrice simple</h2>
+    <p>Crée un fichier <code>calc.php</code> pour effectuer des calculs :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Calculatrice PHP&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;?php
+    $num1 = 15;
+    $num2 = 4;
+    echo "&lt;h1&gt;Calculs&lt;/h1&gt;";
+    echo "&lt;p&gt;Addition : $num1 + $num2 = " . ($num1 + $num2) . "&lt;/p&gt;";
+    echo "&lt;p&gt;Division : $num1 / $num2 = " . ($num1 / $num2) . "&lt;/p&gt;";
+    echo "&lt;p&gt;Est-ce que $num1 &gt; $num2 ? " . ($num1 > $num2 ? "Oui" : "Non") . "&lt;/p&gt;";
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste via <code>http://localhost/calc.php</code>. Résultat :</p>
+    <pre><code>Calculs
+Addition : 15 + 4 = 19
+Division : 15 / 4 = 3.75
+Est-ce que 15 > 4 ? Oui
+</code></pre>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise <code>===</code> pour éviter les conversions de type inattendues.</li>
+          <li>Vérifie les divisions par zéro avant d’effectuer une opération.</li>
+          <li>Combine les opérateurs avec des parenthèses pour clarifier l’ordre des opérations.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="chapitre3-php.html">← Chapitre précédent</a>
+      <a href="chapitre5-php.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="index.html">Retour au menu PHP</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

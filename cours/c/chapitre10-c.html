@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 10 - Projet final : mini-application en C</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 10 : Projet final : mini-application en C 🎉</h1>
+    <p>Crée une application de gestion de contacts en utilisant les concepts de POO, structures, et fichiers.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Objectif du projet</h2>
+    <p>Construis une application qui permet d’ajouter, d’afficher, et de supprimer des contacts, en les sauvegardant dans un fichier. Ce projet utilise des structures pour simuler la POO, des fichiers pour la persistance, et des macros pour simplifier le code.</p>
+
+    <h2>📌 Code complet</h2>
+    <pre><code>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define MAX_NOM 50
+#define MAX_CONTACTS 100
+
+typedef struct {
+    char nom[MAX_NOM];
+    int age;
+} Contact;
+
+typedef struct {
+    Contact contacts[MAX_CONTACTS];
+    int nombre;
+} Gestionnaire;
+
+void contact_init(Contact *c, char *nom, int age) {
+    strcpy(c->nom, nom);
+    c->age = age;
+}
+
+void gestionnaire_init(Gestionnaire *g) {
+    g->nombre = 0;
+}
+
+void ajouter_contact(Gestionnaire *g, char *nom, int age) {
+    if (g->nombre < MAX_CONTACTS) {
+        contact_init(&g->contacts[g->nombre], nom, age);
+        g->nombre++;
+        printf("Contact ajouté.\n");
+    } else {
+        printf("Liste pleine !\n");
+    }
+}
+
+void afficher_contacts(Gestionnaire *g) {
+    if (g->nombre == 0) {
+        printf("Aucun contact.\n");
+        return;
+    }
+    for (int i = 0; i < g->nombre; i++) {
+        printf("%d. %s, %d ans\n", i + 1, g->contacts[i].nom, g->contacts[i].age);
+    }
+}
+
+void supprimer_contact(Gestionnaire *g, int index) {
+    if (index < 1 || index > g->nombre) {
+        printf("Index invalide.\n");
+        return;
+    }
+    for (int i = index - 1; i < g->nombre - 1; i++) {
+        g->contacts[i] = g->contacts[i + 1];
+    }
+    g->nombre--;
+    printf("Contact supprimé.\n");
+}
+
+void sauvegarder_contacts(Gestionnaire *g, char *fichier) {
+    FILE *f = fopen(fichier, "w");
+    if (!f) {
+        printf("Erreur d'ouverture du fichier.\n");
+        return;
+    }
+    for (int i = 0; i < g->nombre; i++) {
+        fprintf(f, "%s,%d\n", g->contacts[i].nom, g->contacts[i].age);
+    }
+    fclose(f);
+}
+
+void charger_contacts(Gestionnaire *g, char *fichier) {
+    FILE *f = fopen(fichier, "r");
+    if (!f) {
+        printf("Fichier non trouvé.\n");
+        return;
+    }
+    char nom[MAX_NOM];
+    int age;
+    while (fscanf(f, "%[^,],%d\n", nom, &age) == 2) {
+        ajouter_contact(g, nom, age);
+    }
+    fclose(f);
+}
+
+int main() {
+    Gestionnaire g;
+    gestionnaire_init(&g);
+    charger_contacts(&g, "contacts.txt");
+
+    while (1) {
+        printf("\n1. Ajouter un contact\n2. Afficher les contacts\n3. Supprimer un contact\n4. Quitter\n");
+        int choix;
+        scanf("%d", &choix);
+        getchar(); // Nettoie le buffer
+
+        if (choix == 1) {
+            char nom[MAX_NOM];
+            int age;
+            printf("Nom : ");
+            fgets(nom, MAX_NOM, stdin);
+            nom[strcspn(nom, "\n")] = 0; // Supprime le \n
+            printf("Âge : ");
+            scanf("%d", &age);
+            getchar();
+            ajouter_contact(&g, nom, age);
+            sauvegarder_contacts(&g, "contacts.txt");
+        } else if (choix == 2) {
+            afficher_contacts(&g);
+        } else if (choix == 3) {
+            afficher_contacts(&g);
+            printf("Entrez le numéro du contact à supprimer : ");
+            int index;
+            scanf("%d", &index);
+            getchar();
+            supprimer_contact(&g, index);
+            sauvegarder_contacts(&g, "contacts.txt");
+        } else if (choix == 4) {
+            printf("Au revoir !\n");
+            break;
+        } else {
+            printf("Choix invalide.\n");
+        }
+    }
+    return 0;
+}
+</code></pre>
+
+    <h2>💻 Comment ça fonctionne ?</h2>
+    <ul>
+      <li><code>Contact</code> : Structure représentant un contact (nom, âge).</li>
+      <li><code>Gestionnaire</code> : Structure simulant un objet avec une liste de contacts.</li>
+      <li>Fonctions comme <code>ajouter_contact</code> et <code>afficher_contacts</code> agissent comme des méthodes.</li>
+      <li><code>sauvegarder_contacts</code> et <code>charger_contacts</code> utilisent des fichiers pour la persistance.</li>
+      <li>Macros (<code>MAX_NOM</code>, <code>MAX_CONTACTS</code>) simplifient les constantes.</li>
+    </ul>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Teste le programme ci-dessus sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a>. Ajoute une fonctionnalité pour rechercher un contact par nom.</p>
+    <p><strong>Conseil :</strong> Crée une fonction <code>rechercher_contact</code> qui parcourt <code>g->contacts</code> et utilise <code>strcmp</code>.</p>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre9-c.html">← Chapitre 9 : Préprocesseur et macros</a> |
+      <a href="index.html">Retour au menu C</a>
+    </p>
+  </footer>
+</body>
+</html>

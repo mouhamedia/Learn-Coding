@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 9 - Routing avec React Router</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background-color: #4a54f1;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(74, 84, 241, 0.4);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f0f4ff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(74, 84, 241, 0.15);
+    }
+    h1, h2 {
+      color: #2c3e95;
+    }
+    pre {
+      background: #e6eaff;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #4a54f1;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+    }
+    a {
+      color: #4a54f1;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Routing avec React Router 🛤️</h1>
+    <p>Apprends à créer une navigation fluide dans une application React avec React Router.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu'est-ce que React Router ?</h2>
+    <p>React Router est une bibliothèque qui permet la navigation côté client dans les applications React, offrant une expérience de navigation sans rechargement de page. Elle utilise des composants comme <code>BrowserRouter</code>, <code>Route</code>, et <code>Link</code> pour gérer les routes.</p>
+    <p><strong>Caractéristiques principales :</strong></p>
+    <ul>
+      <li><strong>BrowserRouter</strong>: Enveloppe l’application pour activer le routage.</li>
+      <li><strong>Route</strong>: Associe un chemin URL à un composant.</li>
+      <li><strong>Link</strong>: Crée des liens de navigation.</li>
+      <li><strong>Routes dynamiques</strong>: Utilise des paramètres (ex. <code>:id</code>).</li>
+    </ul>
+
+    <h2>🔹 Pourquoi utiliser React Router ?</h2>
+    <p>React Router permet de construire des applications à page unique (SPA) avec une navigation intuitive, comme passer d’une page d’accueil à une page de profil, tout en gardant l’état de l’application intact.</p>
+    <p><strong>Exemple</strong>: Une application avec des pages “Accueil”, “À propos” et des pages dynamiques comme “/posts/:id”.</p>
+
+    <h2>🔹 Exemple 1 : Routage de base</h2>
+    <p>Configure une navigation simple :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+
+function Home() {
+  return <h2>Accueil</h2>;
+}
+
+function About() {
+  return <h2>À propos</h2>;
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav>
+        <Link to="/">Accueil</Link> | <Link to="/about">À propos</Link>
+      </nav>
+      <Route exact path="/" component={Home} />
+      <Route path="/about" component={About} />
+    </BrowserRouter>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Setup</strong>: <code>npm install react-router-dom</code></p>
+    <p><strong>Explication</strong>:</p>
+    <ul>
+      <li><code>BrowserRouter</code>: Active le routage.</li>
+      <li><code>Link</code>: Crée des liens cliquables.</li>
+      <li><code>Route</code>: Affiche le composant correspondant à l’URL.</li>
+    </ul>
+    <p><strong>Résultat</strong>: Navigue entre “Accueil” et “À propos” à <code>http://localhost:3000</code>.</p>
+
+    <h2>🔹 Exemple 2 : Route dynamique avec paramètres</h2>
+    <p>Utilise <code>useParams</code> pour les routes dynamiques :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+import { BrowserRouter, Route, Link, useParams } from 'react-router-dom';
+
+function Post() {
+  const { id } = useParams();
+  return <h2>Poste #{id}</h2>;
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav>
+        <Link to="/post/1">Poste 1</Link> | <Link to="/post/2">Poste 2</Link>
+      </nav>
+      <Route path="/post/:id" component={Post} />
+    </BrowserRouter>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche “Poste #1” ou “Poste #2” selon l’URL.</p>
+
+    <h2>🔹 Exemple 3 : Routes imbriquées</h2>
+    <p>Crée des sous-routes :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+
+function Dashboard() {
+  return (
+    <div>
+      <h2>Tableau de bord</h2>
+      <nav>
+        <Link to="/dashboard/profile">Profil</Link> | <Link to="/dashboard/settings">Paramètres</Link>
+      </nav>
+      <Route path="/dashboard/profile" render={() => <h3>Profil</h3>} />
+      <Route path="/dashboard/settings" render={() => <h3>Paramètres</h3>} />
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Link to="/dashboard">Tableau de bord</Link>
+      <Route path="/dashboard" component={Dashboard} />
+    </BrowserRouter>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche des sous-pages dans le tableau de bord.</p>
+
+    <h2>🔹 Exemple 4 : Redirection</h2>
+    <p>Redirige les utilisateurs :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
+
+function App() {
+  const isAuthenticated = false;
+
+  return (
+    <BrowserRouter>
+      <nav>
+        <Link to="/home">Accueil</Link> | <Link to="/private">Privé</Link>
+      </nav>
+      <Route path="/home" render={() => <h2>Accueil</h2>} />
+      <Route
+        path="/private"
+        render={() => (isAuthenticated ? <h2>Privé</h2> : <Redirect to="/home" />)}
+      />
+    </BrowserRouter>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Redirige vers “Accueil” si non authentifié.</p>
+
+    <h2>🔹 Exemple 5 : Route protégée</h2>
+    <p>Protège une route :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
+
+function ProtectedRoute({ component: Component, isAuthenticated, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        isAuthenticated ? <Component {...props} /> : <Redirect to="/login" />
+      }
+    />
+  );
+}
+
+function Private() {
+  return <h2>Contenu privé</h2>;
+}
+
+function Login() {
+  return <h2>Connexion</h2>;
+}
+
+function App() {
+  const isAuthenticated = false;
+
+  return (
+    <BrowserRouter>
+      <nav>
+        <Link to="/private">Privé</Link> | <Link to="/login">Connexion</Link>
+      </nav>
+      <ProtectedRoute
+        path="/private"
+        component={Private}
+        isAuthenticated={isAuthenticated}
+      />
+      <Route path="/login" component={Login} />
+    </BrowserRouter>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche “Connexion” si non authentifié.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Oubli de <code>exact</code></strong>: Sans <code>exact</code>, plusieurs routes peuvent s’afficher.</li>
+      <li><strong>Imports incorrects</strong>: Importe <code>Link</code> depuis <code>react-router-dom</code>.</li>
+      <li><strong>Manque de <code>react-router-dom</code></strong>: Installe la bibliothèque avant utilisation.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée un projet React avec <code>npx create-react-app mon-app</code>.<br>
+    2. Installe <code>react-router-dom</code>.<br>
+    3. Crée une application <code>Blog</code> avec des routes pour l’accueil, une liste de posts, et les détails d’un post (<code>/posts/:id</code>).<br>
+    4. Crée un fichier texte expliquant en 3 phrases ce que fait <code>useParams</code>.</p>
+
+    <a href="react8.html" class="btn">⬅️ Chapitre 8 : Hooks React</a>
+    <a href="react10.html" class="btn">➡️ Chapitre 10 : Gestion d’état avancée</a>
+  </main>
+
+  <footer>
+    <p><a href="../index .html">← Retour au menu React</a></p>
+  </footer>
+</body>
+</html>

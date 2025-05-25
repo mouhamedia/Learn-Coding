@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 7 - Les migrations</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 7 : Les migrations 🗄️</h1>
+    <p>Apprends à créer et gérer la structure de ta base de données avec les migrations de Laravel.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une migration ?</h2>
+    <p>Les migrations sont des fichiers PHP qui définissent la structure de la base de données (tables, colonnes, index). Elles permettent de versionner le schéma de la base, facilitant les modifications et le travail en équipe.</p>
+    <p><strong>Avantages</strong> :</p>
+    <ul>
+      <li>Code plutôt que SQL brut : Plus lisible et maintenable.</li>
+      <li>Commandes Artisan : <code>migrate</code>, <code>rollback</code>, <code>refresh</code>.</li>
+      <li>Portabilité : Fonctionne avec MySQL, PostgreSQL, SQLite, etc.</li>
+    </ul>
+    <p><strong>Exemple</strong> : Une migration peut créer une table <code>produits</code> avec des colonnes pour le nom et le prix.</p>
+
+    <h2>🔹 Créer une migration</h2>
+    <p>Utilise Artisan pour générer une migration :</p>
+    <pre><code>
+php artisan make:migration create_produits_table
+    </code></pre>
+    <p>Cela crée un fichier dans <code>database/migrations/</code> (ex. : <code>2025_05_24_create_produits_table.php</code>) :</p>
+    <pre><code>
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateProduitsTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('produits', function (Blueprint $table) {
+            $table->id();
+            $table->string('nom');
+            $table->decimal('prix', 8, 2);
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('produits');
+    }
+}
+    </code></pre>
+    <p><strong>Explications</strong> :</p>
+    <ul>
+      <li><code>up()</code> : Définit ce qui se passe quand la migration est exécutée.</li>
+      <li><code>down()</code> : Annule la migration (supprime la table).</li>
+      <li><code>$table->id()</code> : Crée une colonne <code>id</code> auto-incrémentée (clé primaire).</li>
+      <li><code>$table->string('nom')</code> : Colonne texte (VARCHAR).</li>
+      <li><code>$table->decimal('prix', 8, 2)</code> : Colonne pour prix (ex. : 999999.99).</li>
+      <li><code>$table->timestamps()</code> : Colonnes <code>created_at</code> et <code>updated_at</code>.</li>
+    </ul>
+
+    <h2>🔹 Exécuter les migrations</h2>
+    <p>Applique les migrations avec :</p>
+    <pre><code>
+php artisan migrate
+    </code></pre>
+    <p><strong>Résultat</strong> : Crée la table <code>produits</code> dans la base de données.</p>
+    <p><strong>Autres commandes utiles</strong> :</p>
+    <ul>
+      <li><code>php artisan migrate:rollback</code> : Annule la dernière migration.</li>
+      <li><code>php artisan migrate:refresh</code> : Supprime et recrée toutes les tables.</li>
+      <li><code>php artisan migrate:status</code> : Vérifie quelles migrations sont appliquées.</li>
+    </ul>
+    <p><strong>Exemple</strong> : Annuler la migration :</p>
+    <pre><code>
+php artisan migrate:rollback
+    </code></pre>
+    <p><strong>Résultat</strong> : Supprime la table <code>produits</code>.</p>
+
+    <h2>🔹 Modifier une table existante</h2>
+    <p>Pour ajouter une colonne à une table existante, crée une nouvelle migration :</p>
+    <pre><code>
+php artisan make:migration add_description_to_produits_table
+    </code></pre>
+    <p>Modifie le fichier généré :</p>
+    <pre><code>
+class AddDescriptionToProduitsTable extends Migration
+{
+    public function up()
+    {
+        Schema::table('produits', function (Blueprint $table) {
+            $table->text('description')->nullable();
+        });
+    }
+
+    public function down()
+    {
+        Schema::table('produits', function (Blueprint $table) {
+            $table->dropColumn('description');
+        });
+    }
+}
+    </code></pre>
+    <p><strong>Résultat</strong> : Ajoute une colonne <code>description</code> à la table <code>produits</code> après <code>php artisan migrate</code>.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Base de données non configurée</strong> : Vérifie <code>.env</code> et crée la base de données.</li>
+      <li><strong>Conflit de migrations</strong> : Assure-toi que les noms de tables/colonnes sont uniques.</li>
+      <li><strong>Migration non réversible</strong> : Définis toujours une méthode <code>down()</code> claire.</li>
+      <li><strong>Table existante</strong> : Si une migration échoue car la table existe, utilise <code>Schema::dropIfExists</code> ou supprime manuellement.</li>
+    </ul>
+      
+    <h2>📝 Exercice</h2>
+    <p>1. Crée une migration pour une table <code>categories</code> avec <code>id</code>, <code>nom</code> (string), <code>description</code> (text, nullable), et <code>timestamps</code>.<br>
+    2. Exécute la migration et vérifie la table dans phpMyAdmin.<br>
+    3. Crée une migration pour ajouter une colonne <code>actif</code> (boolean) à <code>categories</code>.<br>
+    4. Teste <code>php artisan migrate:rollback</code> pour annuler la dernière migration, puis relance <code>php artisan migrate</code>.<br>
+    5. (Bonus) Crée une migration pour une table <code>commentaires</code> avec une clé étrangère vers <code>articles</code>.</p>
+
+    <a href="laravel8.html" class="btn">➡️ Chapitre 8 : Formulaires et validation</a>
+  </main>
+    
+  <footer>
+    <p><a href="../index.html">← Retour au menu Laravel</a></p>
+  </footer>
+</body>
+</html>

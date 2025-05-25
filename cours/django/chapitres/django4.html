@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 4 - Applications et structure du projet</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #092e20;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #092e20;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #092e20;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #092e20;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 4 : Applications et structure du projet 🗂️</h1>
+    <p>Apprends à créer des applications Django et à organiser ton projet efficacement.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une application Django ?</h2>
+    <p>Une application Django est un module autonome qui gère une fonctionnalité spécifique (ex. un blog, une boutique). Un projet peut contenir plusieurs applications, chacune avec ses propres modèles, vues, et templates.</p>
+    <p><strong>Avantages des applications :</strong></p>
+    <ul>
+      <li><strong>Modularité</strong> : Réutilise une application dans d’autres projets.</li>
+      <li><strong>Organisation</strong> : Sépare les fonctionnalités pour un code clair.</li>
+      <li><strong>Collaboration</strong> : Chaque développeur peut travailler sur une application différente.</li>
+    </ul>
+
+    <h2>🔹 Exemple 1 : Créer une application</h2>
+    <p>Dans le dossier du projet (<code>monprojet</code>), crée une application :</p>
+    <pre><code>
+python manage.py startapp blog
+    </code></pre>
+    <p><strong>Résultat</strong> : Crée un dossier <code>blog</code> avec :</p>
+    <pre><code>
+blog/
+├── __init__.py
+├── admin.py
+├── apps.py
+├── migrations/
+│   ├── __init__.py
+├── models.py
+├── tests.py
+├── views.py
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>models.py</code> : Définit les modèles (tables de la base).</li>
+      <li><code>views.py</code> : Contient les vues (logique des pages).</li>
+      <li><code>admin.py</code> : Configure l’interface d’administration.</li>
+    </ul>
+
+    <h2>🔹 Exemple 2 : Enregistrer l’application</h2>
+    <p>Ajoute l’application au projet dans <code>monprojet/settings.py</code> :</p>
+    <pre><code>
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'blog.apps.BlogConfig',  # Ajout de l’application
+]
+    </code></pre>
+    <p><strong>Explication</strong> : <code>BlogConfig</code> est défini dans <code>blog/apps.py</code>. Cela indique à Django d’inclure l’application.</p>
+    <p><strong>Résultat</strong> : L’application <code>blog</code> est reconnue par le projet.</p>
+
+    <h2>🔹 Exemple 3 : Créer une vue simple</h2>
+    <p>Modifie <code>blog/views.py</code> :</p>
+    <pre><code>
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("Bienvenue sur le blog !")
+    </code></pre>
+    <p>Crée <code>blog/urls.py</code> :</p>
+    <pre><code>
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='blog_index'),
+]
+    </code></pre>
+    <p>Inclus les URLs dans <code>monprojet/urls.py</code> :</p>
+    <pre><code>
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('blog/', include('blog.urls')),
+]
+    </code></pre>
+    <p><strong>Résultat</strong> : <code>http://localhost:8000/blog/</code> affiche "Bienvenue sur le blog !".</p>
+
+    <h2>🔹 Exemple 4 : Organiser les templates</h2>
+    <p>Crée un dossier <code>blog/templates/blog/</code> et un fichier <code>index.html</code> :</p>
+    <pre><code>
+<!-- blog/templates/blog/index.html -->
+<h1>Mon blog</h1>
+<p>Bienvenue sur la page d’accueil du blog.</p>
+    </code></pre>
+    <p>Modifie <code>blog/views.py</code> :</p>
+    <pre><code>
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'blog/index.html')
+    </code></pre>
+    <p><strong>Résultat</strong> : <code>/blog/</code> affiche la page HTML au lieu d’un texte brut.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Application non enregistrée</strong> : Vérifie <code>INSTALLED_APPS</code> dans <code>settings.py</code>.</li>
+      <li><strong>URLs mal configurées</strong> : Assure-toi que <code>include()</code> est correct dans <code>urls.py</code>.</li>
+      <li><strong>Template introuvable</strong> : Place les templates dans le bon dossier (<code>app/templates/app/</code>).</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée une application nommée <code>articles</code> avec <code>python manage.py startapp</code>.<br>
+    2. Enregistre-la dans <code>settings.py</code>.<br>
+    3. Crée une vue dans <code>articles/views.py</code> qui retourne "Liste des articles".<br>
+    4. Configure <code>articles/urls.py</code> et inclus-la dans <code>monprojet/urls.py</code> pour que <code>/articles/</code> affiche la vue.<br>
+    5. Crée un template <code>articles/templates/articles/index.html</code> et modifie la vue pour l’utiliser.</p>
+
+    <a href="django5.html" class="btn">➡️ Chapitre 5 : Les URLs et vues</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Django</a></p>
+  </footer>
+</body>
+</html>

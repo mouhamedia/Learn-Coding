@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapitre 2 - Variables et Types</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 2 : Variables et Types</h1>
+    <p>Découvre comment stocker des données avec les variables et les types en C#.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les variables</h2>
+    <p>Une variable est un espace nommé pour stocker une donnée.</p>
+    <p>Exemple :</p>
+    <pre><code>int age = 25;
+string prenom = "Alice";
+bool estConnecte = true;
+</code></pre>
+
+    <h2>🔹 Les types principaux</h2>
+    <ul>
+      <li><code>int</code> : entier (ex : 10)</li>
+      <li><code>double</code> : nombre décimal (ex : 3.14)</li>
+      <li><code>string</code> : chaîne de caractères (ex : "Bonjour")</li>
+      <li><code>bool</code> : booléen vrai/faux</li>
+      <li><code>char</code> : caractère unique (ex : 'A')</li>
+    </ul>
+
+    <h2>💻 Exemple complet</h2>
+    <pre><code>
+using System;
+
+class Program {
+  static void Main() {
+    int age = 30;
+    string nom = "Sophie";
+    bool estEtudiant = false;
+
+    Console.WriteLine("Nom : " + nom);
+    Console.WriteLine("Âge : " + age);
+    Console.WriteLine("Étudiant ? " + estEtudiant);
+  }
+}
+    </code></pre>
+
+    <h2>🧪 Exercice</h2>
+    <p>Crée un programme qui déclare 3 variables différentes et les affiche.</p>
+
+    <a href="chapitre3-cs.html" class="btn">➡️ Chapitre 3 : Opérateurs et Expressions</a>
+  </main>
+
+  <footer>
+    <p><a href="indexcs.html">← Retour au chapitre 1</a></p>
+  </footer>
+</body>
+</html>

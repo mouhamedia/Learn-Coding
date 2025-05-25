@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 6 - Listes, tuples et dictionnaires</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 6 : Listes, tuples et dictionnaires 📋</h1>
+    <p>Stocke et organise des données avec ces structures puissantes.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les listes</h2>
+    <p>Une liste est une collection ordonnée et modifiable d’éléments.</p>
+    <pre><code>
+fruits = ["pomme", "banane", "orange"]
+print(fruits[0])  # Affiche : pomme
+fruits.append("fraise")  # Ajoute fraise
+print(fruits)     # Affiche : ['pomme', 'banane', 'orange', 'fraise']
+</code></pre>
+    <p>Méthodes courantes : <code>append()</code>, <code>remove()</code>, <code>pop()</code>, <code>len()</code>.</p>
+
+    <h2>📌 Les tuples</h2>
+    <p>Un tuple est une collection ordonnée mais non modifiable.</p>
+    <pre><code>
+coordonnees = (10, 20)
+print(coordonnees[1])  # Affiche : 20
+# coordonnees[0] = 5  # Erreur : tuples non modifiables
+</code></pre>
+
+    <h2>💻 Les dictionnaires</h2>
+    <p>Un dictionnaire stocke des paires clé-valeur.</p>
+    <pre><code>
+personne = {"nom": "Alice", "age": 25}
+print(personne["nom"])  # Affiche : Alice
+personne["ville"] = "Paris"  # Ajoute une clé
+print(personne)  # Affiche : {'nom': 'Alice', 'age': 25, 'ville': 'Paris'}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une liste de courses, ajoute un élément, supprime un élément, et affiche la liste. Ensuite, crée un dictionnaire avec des informations sur un produit.</p>
+    <pre><code>
+courses = ["pain", "lait", "œufs"]
+courses.append("fromage")
+courses.remove("lait")
+print(courses)
+
+produit = {"nom": "pain", "prix": 2.5, "quantité": 3}
+print(produit["prix"])
+</code></pre>
+    <p>Teste ce code sur <a href="https://replit.com" target="_blank">Replit</a> !</p>
+
+    <a href="chapitre7.html" class="btn">➡️ Chapitre 7 : Fichiers (lecture/écriture)</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre5.html">← Chapitre 5 : Fonctions</a> |
+      <a href="index.html">Retour au menu Python</a>
+    </p>
+  </footer>
+</body>
+</html>

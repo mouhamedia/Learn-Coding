@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapitre 10 - Sessions et Cookies</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #003049;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f0fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #003049;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    .navigation a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .navigation a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+      background-color: #f7f9ff;
+    }
+    footer a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 10 : Sessions et Cookies 🐘</h1>
+    <p>Gère l’état des utilisateurs avec les sessions et cookies.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Sessions</h2>
+    <p>Les sessions stockent des données côté serveur pour un utilisateur pendant sa visite. Utilise <code>session_start()</code> pour démarrer une session.</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Session PHP&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;?php
+    session_start();
+    if (!isset($_SESSION[&quot;visits&quot;])) {
+        $_SESSION[&quot;visits&quot;] = 1;
+    } else {
+        $_SESSION[&quot;visits&quot;]++;
+    }
+    echo &quot;&lt;p&gt;Nombre de visites : &quot; . $_SESSION[&quot;visits&quot;] . &quot;&lt;/p&gt;&quot;;
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste via <code>http://localhost/session.php</code>. Rafraîchis la page pour voir le compteur augmenter.</p>
+
+    <h2>📌 Cookies</h2>
+    <p>Les cookies stockent des données côté client, souvent pour des préférences à long terme.</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Cookie PHP&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;?php
+    $cookie_name = &quot;user&quot;;
+    if (!isset($_COOKIE[$cookie_name])) {
+        setcookie($cookie_name, &quot;Jean&quot;, time() + (86400 * 30)); // 30 jours
+        echo &quot;&lt;p&gt;Cookie créé !&lt;/p&gt;&quot;;
+    } else {
+        echo &quot;&lt;p&gt;Bienvenue, &quot; . $_COOKIE[$cookie_name] . &quot; !&lt;/p&gt;&quot;;
+    }
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste via <code>http://localhost/cookie.php</code>. Le cookie persiste entre les sessions.</p>
+
+    <h2>💻 Exemple pratique : Préférences utilisateur</h2>
+    <p>Crée un fichier <code>preferences.php</code> pour sauvegarder une préférence de thème :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Préférences&lt;/title&gt;
+  &lt;style&gt;
+    body { background: &lt;?php echo isset($_COOKIE[&quot;theme&quot;]) &amp;&amp; $_COOKIE[&quot;theme&quot;] == &quot;dark&quot; ? &quot;#333&quot; : &quot;#fff&quot;; ?&gt;; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Choisir un thème&lt;/h1&gt;
+  &lt;form method=&quot;post&quot; action=&quot;&quot;&gt;
+    &lt;label&gt;
+      &lt;input type=&quot;radio&quot; name=&quot;theme&quot; value=&quot;light&quot; checked&gt; Clair
+    &lt;/label&gt;
+    &lt;label&gt;
+      &lt;input type=&quot;radio&quot; name=&quot;theme&quot; value=&quot;dark&quot;&gt; Sombre
+    &lt;/label&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Appliquer&quot;&gt;
+  &lt;/form&gt;
+  &lt;?php
+    if ($_SERVER[&quot;REQUEST_METHOD&quot;] == &quot;POST&quot;) {
+        $theme = isset($_POST[&quot;theme&quot;]) ? $_POST[&quot;theme&quot;] : &quot;light&quot;;
+        setcookie(&quot;theme&quot;, $theme, time() + (86400 * 30));
+        header(&quot;Location: preferences.php&quot;); // Recharge la page
+    }
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste via <code>http://localhost/preferences.php</code>. Change le thème pour voir l’effet persister.</p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Toujours appeler <code>session_start()</code> au début du script.</li>
+          <li>Utilise <code>header()</code> après <code>setcookie()</code> pour éviter les erreurs.</li>
+          <li>Limite la durée des cookies pour des raisons de confidentialité.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="chapitre9-php.html">← Chapitre précédent</a>
+      <a href="chapitre11-php.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="index.html">Retour au menu PHP</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

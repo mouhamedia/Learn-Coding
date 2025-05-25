@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 5 - Boucles</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #306998;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #306998;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #306998;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #306998;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 5 : Boucles 🔄</h1>
+    <p>Apprends à répéter des actions avec les boucles en JavaScript.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les boucles</h2>
+    <p>Les boucles permettent d’exécuter du code plusieurs fois. JavaScript propose trois types principaux :</p>
+    <ul>
+      <li><code>for</code> : Pour un nombre défini d’itérations</li>
+      <li><code>while</code> : Tant qu’une condition est vraie</li>
+      <li><code>do...while</code> : Exécute au moins une fois</li>
+    </ul>
+
+    <h2>💻 Exemple : Boucle for</h2>
+    <pre><code>
+for (let i = 1; i <= 5; i++) {
+  console.log("Tour :", i);
+}
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche les numéros de 1 à 5 dans la console.</p>
+
+    <h2>💻 Exemple : Boucle while</h2>
+    <pre><code>
+let i = 1;
+while (i <= 5) {
+  console.log("Tour :", i);
+  i++;
+}
+    </code></pre>
+    <p><strong>Essaie ici :</strong></p>
+    <button onclick="afficherBoucle()">Afficher boucle</button>
+    <p id="boucleResultat">Résultat : </p>
+    <script>
+      function afficherBoucle() {
+        let resultat = "";
+        for (let i = 1; i <= 5; i++) {
+          resultat += "Tour : " + i + "<br>";
+        }
+        document.getElementById("boucleResultat").innerHTML = "Résultat : <br>" + resultat;
+      }
+    </script>
+
+    <h2>📝 Exercice</h2>
+    <p>Crée un script qui affiche la table de multiplication de 7 (de 1 à 10) dans la console ou sur la page avec :</p>
+    <pre><code>
+for (let i = 1; i <= 10; i++) {
+  console.log("7 x", i, "=", 7 * i);
+}
+    </code></pre>
+
+    <a href="chapitre6-js.html" class="btn">➡️ Chapitre 6 : Fonctions</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu JavaScript</a></p>
+  </footer>
+</body>
+</html>

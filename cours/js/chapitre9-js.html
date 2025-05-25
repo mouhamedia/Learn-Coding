@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 9 - Objets et tableaux</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #306998;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #306998;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #306998;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #306998;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Objets et tableaux 📚</h1>
+    <p>Apprends à organiser des données complexes avec les tableaux et les objets.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Tableaux</h2>
+    <p>Les tableaux stockent des listes de valeurs que tu peux modifier ou parcourir.</p>
+    <pre><code>
+let fruits = ["pomme", "banane"];
+fruits.push("orange");
+console.log(fruits); // Affiche : ["pomme", "banane", "orange"]
+console.log(fruits[0]); // Affiche : pomme
+    </code></pre>
+
+    <h2>🔹 Objets</h2>
+    <p>Les objets stockent des données avec des clés et peuvent inclure des fonctions (méthodes).</p>
+    <pre><code>
+let personne = {
+  nom: "Alice",
+  age: 25,
+  saluer: function() { return "Bonjour, " + this.nom; }
+};
+console.log(personne.nom); // Affiche : Alice
+console.log(personne.saluer()); // Affiche : Bonjour, Alice
+    </code></pre>
+    <p><strong>Essaie ici :</strong></p>
+    <button onclick="afficherTableau()">Afficher tableau</button>
+    <p id="tableauResultat">Résultat : </p>
+    <script>
+      function afficherTableau() {
+        let fruits = ["pomme", "banane"];
+        fruits.push("orange");
+        document.getElementById("tableauResultat").innerText = "Résultat : " + fruits.join(", ");
+      }
+    </script>
+
+    <h2>📝 Exercice</h2>
+    <p>Crée un tableau d’objets représentant des étudiants (avec nom et note), puis affiche leurs noms dans la console ou sur la page avec :</p>
+    <pre><code>
+let etudiants = [
+  { nom: "Alice", note: 85 },
+  { nom: "Bob", note: 90 }
+];
+    </code></pre>
+
+    <a href="chapitre10-js.html" class="btn">➡️ Chapitre 10 : Projet mini-calculatrice</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu JavaScript</a></p>
+  </footer>
+</body>
+</html>

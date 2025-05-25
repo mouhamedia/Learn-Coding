@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 17 - Introduction au Java GUI</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 17 : Introduction au Java GUI ☕</h1>
+    <p>Crée des interfaces graphiques avec Swing.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un GUI ?</h2>
+    <p>Un GUI (Graphical User Interface) permet de créer des fenêtres, boutons, et autres éléments interactifs.</p>
+
+    <h2>📌 Créer une fenêtre</h2>
+    <p>Utilise <code>JFrame</code> pour créer une fenêtre simple.</p>
+    <pre><code>
+import javax.swing.*;
+
+public class Fenetre {
+    public static void main(String[] args) {
+        JFrame fenetre = new JFrame("Ma Fenêtre");
+        fenetre.setSize(300, 200);
+        fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fenetre.setVisible(true);
+    }
+}
+</code></pre>
+
+    <h2>💻 Ajouter un bouton</h2>
+    <p>Ajoute un bouton avec <code>JButton</code> et gère son clic.</p>
+    <pre><code>
+import javax.swing.*;
+import java.awt.event.*;
+
+public class Bouton {
+    public static void main(String[] args) {
+        JFrame fenetre = new JFrame("Bouton");
+        fenetre.setSize(300, 200);
+        fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JButton bouton = new JButton("Cliquez-moi");
+        bouton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Bouton cliqué !");
+            }
+        });
+        fenetre.add(bouton);
+        fenetre.setVisible(true);
+    }
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une fenêtre avec un bouton qui affiche ton nom dans la console.</p>
+    <pre><code>
+import javax.swing.*;
+import java.awt.event.*;
+
+public class MonBouton {
+    public static void main(String[] args) {
+        JFrame fenetre = new JFrame("Mon Bouton");
+        fenetre.setSize(300, 200);
+        fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

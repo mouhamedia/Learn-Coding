@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 2 - Premier programme Java</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 2 : Premier programme Java ☕</h1>
+    <p>Crée et exécute ton premier programme Java avec "Hello World".</p>
+  </header>
+
+  <main>
+    <h2>🔹 Structure d’un programme Java</h2>
+    <p>Un programme Java est organisé en classes. La méthode <code>main</code> est le point d’entrée exécuté par la JVM.</p>
+    <pre><code>
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+</code></pre>
+    <p><strong>Explications :</strong></p>
+    <ul>
+      <li><code>public class HelloWorld</code> : Nom de la classe, doit correspondre au nom du fichier (<code>HelloWorld.java</code>).</li>
+      <li><code>public static void main(String[] args)</code> : Méthode principale, point d’entrée.</li>
+      <li><code>System.out.println</code> : Affiche du texte avec un saut de ligne.</li>
+    </ul>
+
+    <h2>📌 Compilation et exécution</h2>
+    <p>Pour exécuter un programme Java :</p>
+    <ol>
+      <li>Enregistre le code dans un fichier <code>HelloWorld.java</code>.</li>
+      <li>Compile avec : <code>javac HelloWorld.java</code> (crée <code>HelloWorld.class</code>).</li>
+      <li>Exécute avec : <code>java HelloWorld</code>.</li>
+    </ol>
+    <p>En ligne, utilise <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a>.</p>
+
+    <h2>💻 Utiliser les arguments</h2>
+    <p>La méthode <code>main</code> peut accepter des arguments via <code>String[] args</code>.</p>
+    <pre><code>
+public class Bonjour {
+    public static void main(String[] args) {
+        if (args.length > 0) {
+            System.out.println("Bonjour, " + args[0] + " !");
+        } else {
+            System.out.println("Bonjour, inconnu !");
+        }
+    }
+}
+</code></pre>
+    <p>Exécute avec : <code>java Bonjour Alice</code> pour afficher "Bonjour, Alice !".</p>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui utilise un argument pour afficher une salutation personnalisée.</p>
+    <pre><code>
+public class Salutation {
+    public static void main(String[] args) {
+        String nom = args.length > 0 ? args[0] : "inconnu";
+        System.out.println("Salut, " + nom + " ! Bienvenue en Java.");
+    }
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a> !</p>
+
+    <a href="chapitre3-java.html" class="btn">➡️ Chapitre 3 : Variables et types de données</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre1-java.html">← Chapitre 1 : Introduction à Java</a> |
+      <a href="index.html">Retour au menu Java</a>
+    </p>
+  </footer>
+</body>
+</html>

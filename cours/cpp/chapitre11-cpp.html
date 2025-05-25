@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 11 - Constructeurs et destructeurs</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 11 : Constructeurs et destructeurs ⚙️</h1>
+    <p>Initialise et nettoie tes objets automatiquement.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un constructeur ?</h2>
+    <p>Un constructeur est une fonction spéciale qui s’exécute quand un objet est créé, pour lui donner des valeurs initiales.</p>
+    <pre><code>
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Voiture {
+public:
+    string marque;
+    Voiture(string m) {
+        marque = m;
+        cout << "Voiture créée : " << marque << endl;
+    }
+};
+
+int main() {
+    Voiture v("Toyota");
+    return 0;
+}
+</code></pre>
+
+    <h2>📌 Destructeurs</h2>
+    <p>Un destructeur s’exécute quand un objet est détruit, pour libérer des ressources.</p>
+    <pre><code>
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Voiture {
+public:
+    string marque;
+    Voiture(string m) {
+        marque = m;
+        cout << "Voiture créée : " << marque << endl;
+    }
+    ~Voiture() {
+        cout << "Voiture détruite : " << marque << endl;
+    }
+};
+
+int main() {
+    Voiture v("Honda");
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une classe <code>Personne</code> avec un constructeur qui initialise le nom et un destructeur qui affiche un message.</p>
+    <pre><code>
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Personne {
+public:
+    string nom;
+    Personne(string n) {
+        nom = n;
+        cout << "Personne créée : " << nom << endl;
+    }
+    ~Personne() {
+        cout << "Personne détruite : " << nom << endl;
+    }
+};
+
+int main() {
+    Personne p("Alice");
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre12-cpp.html" class="btn">➡️ Chapitre 12 : Encapsulation</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre10-cpp.html">← Chapitre 10 : Introduction à la POO</a> |
+      <a href="index.html">Retour au menu C++</a>
+    </p>
+  </footer>
+</body>
+</html>

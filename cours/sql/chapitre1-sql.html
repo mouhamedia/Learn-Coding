@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 1 - Introduction au SQL et aux bases de données</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 1 : Introduction au SQL et aux bases de données 💡</h1>
+    <p>SQL est un langage utilisé pour gérer et manipuler des bases de données relationnelles.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu'est-ce que SQL ?</h2>
+    <p>SQL (Structured Query Language) est un langage standard pour interagir avec des bases de données relationnelles. Il permet de créer, modifier, et interroger des données.</p>
+    <ul>
+      <li>Utilisé dans des SGBD comme MySQL, PostgreSQL, SQL Server</li>
+      <li>Basé sur des tables avec des lignes et colonnes</li>
+      <li>Langage déclaratif : on décrit "quoi" obtenir, pas "comment"</li>
+    </ul>
+
+    <h2>🔹 Concepts de base</h2>
+    <p>Une base de données relationnelle organise les données en tables, liées par des clés (primaires ou étrangères).</p>
+    <p>Exemple d'une table <code>Utilisateurs</code> :</p>
+    <pre><code>
+id  | nom       | age
+----|-----------|-----
+1   | Alice     | 25
+2   | Bob       | 30
+    </code></pre>
+    <p><strong>Note</strong> : Chaque ligne est un enregistrement, et chaque colonne est un champ.</p>
+
+    <h2>📝 Exercice</h2>
+    <p>Installe un SGBD (comme MySQL ou SQLite) et connecte-toi à l'interface (par exemple, via MySQL Workbench ou la ligne de commande). Affiche la liste des bases de données avec la commande :</p>
+    <pre><code>
+SHOW DATABASES;
+    </code></pre>
+
+    <a href="chapitre2-sql.html" class="btn">➡️ Chapitre 2 : Création de bases de données et tables</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu SQL</a></p>
+  </footer>
+</body>
+</html>

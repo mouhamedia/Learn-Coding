@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 7 - Chaînes de caractères</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 7 : Chaînes de caractères 🔤</h1>
+    <p>Manipule du texte avec les chaînes de caractères en C.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une chaîne ?</h2>
+    <p>En C, une chaîne est un tableau de caractères terminé par <code>\0</code> (caractère nul).</p>
+    <pre><code>
+#include <stdio.h>
+
+int main() {
+    char message[] = "Bonjour";
+    printf("%s\n", message);
+    return 0;
+}
+</code></pre>
+
+    <h2>📌 Bibliothèque <code>string.h</code></h2>
+    <p>Utilise des fonctions comme <code>strlen</code>, <code>strcpy</code>, <code>strcmp</code>.</p>
+    <pre><code>
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char texte[] = "Bonjour";
+    printf("Longueur : %zu\n", strlen(texte));
+    char copie[50];
+    strcpy(copie, texte);
+    printf("Copie : %s\n", copie);
+    return 0;
+}
+</code></pre>
+
+    <h2>💻 Saisie de chaînes</h2>
+    <p>Utilise <code>fgets</code> pour une saisie sécurisée (évite <code>gets</code>).</p>
+    <pre><code>
+#include <stdio.h>
+
+int main() {
+    char nom[50];
+    printf("Entrez votre nom : ");
+    fgets(nom, 50, stdin);
+    nom[strcspn(nom, "\n")] = 0; // Supprime \n
+    printf("Salut, %s !\n", nom);
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui inverse une chaîne de caractères saisie par l’utilisateur.</p>
+    <pre><code>
+#include <stdio.h>
+#include <string.h>
+
+void inverser_chaine(char *chaine) {
+    int longueur = strlen(chaine);
+    for (int i = 0, j = longueur - 1; i < j; i++, j--) {
+        char temp = chaine[i];
+        chaine[i] = chaine[j];
+        chaine[j] = temp;
+    }
+}
+
+int main() {
+    char texte[50];
+    printf("Entrez une chaîne : ");
+    fgets(texte, 50, stdin);
+    texte[strcspn(texte, "\n")] = 0;
+    inverser_chaine(texte);
+    printf("Chaîne inversée : %s\n", texte);
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre8-c.html" class="btn">➡️ Chapitre 8 : Programmation orientée objet en C</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre6-c.html">← Chapitre 6 : Structures et fichiers</a> |
+      <a href="index.html">Retour au menu C</a>
+    </p>
+  </footer>
+</body>
+</html>

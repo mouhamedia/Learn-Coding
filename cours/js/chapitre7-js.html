@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 7 - Manipulation du DOM</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #306998;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #306998;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #306998;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #306998;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 7 : Manipulation du DOM 🌐</h1>
+    <p>Apprends à modifier les éléments d’une page web avec JavaScript.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Le DOM</h2>
+    <p>Le DOM (Document Object Model) permet à JavaScript de manipuler les éléments HTML, comme le texte, les styles, ou les attributs.</p>
+    <p>Tu peux sélectionner des éléments avec des méthodes comme <code>getElementById</code> ou <code>querySelector</code>.</p>
+    <pre><code>
+<p id="monTexte">Texte initial</p>
+<button onclick="changer()">Changer</button>
+<script>
+function changer() {
+  document.getElementById("monTexte").innerText = "Texte modifié !";
+  document.getElementById("monTexte").style.color = "blue";
+}
+</script>
+    </code></pre>
+    <p><strong>Essaie ici :</strong></p>
+    <p id="monTexte">Texte initial</p>
+    <button onclick="changer()">Changer</button>
+    <script>
+      function changer() {
+        document.getElementById("monTexte").innerText = "Texte modifié !";
+        document.getElementById("monTexte").style.color = "blue";
+      }
+    </script>
+
+    <h2>🔹 Autres méthodes</h2>
+    <p>Tu peux aussi utiliser <code>querySelector</code> pour sélectionner des éléments par classe, balise, ou autre sélecteur CSS.</p>
+    <pre><code>
+document.querySelector(".maClasse").style.backgroundColor = "yellow";
+    </code></pre>
+
+    <h2>📝 Exercice</h2>
+    <p>Crée un bouton qui change la couleur de fond de la page (par exemple, en rouge) avec :</p>
+    <pre><code>
+document.body.style.backgroundColor = "red";
+    </code></pre>
+
+    <a href="chapitre8-js.html" class="btn">➡️ Chapitre 8 : Événements</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu JavaScript</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 10 - Gestion d’état avancée</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background-color: #4a54f1;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(74, 84, 241, 0.4);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f0f4ff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(74, 84, 241, 0.15);
+    }
+    h1, h2 {
+      color: #2c3e95;
+    }
+    pre {
+      background: #e6eaff;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #4a54f1;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+    }
+    a {
+      color: #4a54f1;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 10 : Gestion d’état avancée 📈</h1>
+    <p>Apprends à gérer l’état global avec Context API et Redux pour des applications React complexes.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu'est-ce que la gestion d’état avancée ?</h2>
+    <p>La gestion d’état avancée permet de partager et de synchroniser des données entre plusieurs composants dans une application React. La <strong>Context API</strong> est une solution intégrée pour les états globaux simples, tandis que <strong>Redux</strong> offre une gestion centralisée pour les applications complexes.</p>
+    <p><strong>Caractéristiques principales :</strong></p>
+    <ul>
+      <li><strong>Context API</strong>: Fournit un état accessible à plusieurs composants via un <code>Provider</code>.</li>
+      <li><strong>Redux</strong>: Centralise l’état dans un store avec des actions et des reducers.</li>
+      <li><strong>Utilisation</strong>: Context pour les petits projets, Redux pour les grands.</li>
+    </ul>
+
+    <h2>🔹 Pourquoi utiliser Context API ou Redux ?</h2>
+    <p>Ces outils évitent de passer des props à travers de nombreux composants (prop drilling) et permettent de gérer des états globaux comme l’authentification, les thèmes, ou les paniers d’achat de manière efficace.</p>
+    <p><strong>Exemple</strong>: Basculer un thème sombre/clair avec Context ou gérer un compteur global avec Redux.</p>
+
+    <h2>🔹 Exemple 1 : Bascule de thème avec Context API</h2>
+    <p>Utilise Context pour gérer un thème :</p>
+    <pre><code>
+// src/App.js
+import React, { createContext, useContext, useState } from 'react';
+
+const ThemeContext = createContext();
+
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('light');
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+function ThemeToggle() {
+  const { theme, setTheme } = useContext(ThemeContext);
+  return (
+    <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+      Basculer vers {theme === 'light' ? 'sombre' : 'clair'}
+    </button>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <ThemeToggle />
+    </ThemeProvider>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Explication</strong>:</p>
+    <ul>
+      <li><code>createContext</code>: Crée un contexte pour le thème.</li>
+      <li><code>Provider</code>: Fournit l’état à tous les composants enfants.</li>
+      <li><code>useContext</code>: Accède à l’état dans <code>ThemeToggle</code>.</li>
+    </ul>
+    <p><strong>Résultat</strong>: Bascule entre “sombre” et “clair” au clic à <code>http://localhost:3000</code>.</p>
+
+    <h2>🔹 Exemple 2 : Compteur avec Redux</h2>
+    <p>Configure Redux pour un compteur :</p>
+    <pre><code>
+// src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import App from './App';
+
+const initialState = { count: 0 };
+
+function reducer(state = initialState, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    default:
+      return state;
+  }
+}
+
+const store = createStore(reducer);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+
+// src/App.js
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+function App() {
+  const count = useSelector((state) => state.count);
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      <p>Compte : {count}</p>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Incrémenter</button>
+    </div>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Setup</strong>: <code>npm install redux react-redux</code></p>
+    <p><strong>Résultat</strong>: Incrémente un compteur global.</p>
+
+    <h2>🔹 Exemple 3 : Context avec plusieurs consommateurs</h2>
+    <p>Gère plusieurs données avec Context :</p>
+    <pre><code>
+// src/App.js
+import React, { createContext, useContext, useState } from 'react';
+
+const UserContext = createContext();
+
+function UserProvider({ children }) {
+  const [user, setUser] = useState({ name: 'Alice', loggedIn: false });
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
+}
+
+function UserInfo() {
+  const { user } = useContext(UserContext);
+  return <p>Nom : {user.name}</p>;
+}
+
+function LoginButton() {
+  const { user, setUser } = useContext(UserContext);
+  return (
+    <button onClick={() => setUser({ ...user, loggedIn: !user.loggedIn })}>
+      {user.loggedIn ? 'Déconnexion' : 'Connexion'}
+    </button>
+  );
+}
+
+function App() {
+  return (
+    <UserProvider>
+      <UserInfo />
+      <LoginButton />
+    </UserProvider>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche le nom et bascule l’état de connexion.</p>
+
+    <h2>🔹 Exemple 4 : Redux avec useSelector et useDispatch</h2>
+    <p>Utilise les hooks Redux :</p>
+    <pre><code>
+// src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import App from './App';
+
+const initialState = { count: 0 };
+
+function reducer(state = initialState, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    case 'DECREMENT':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+}
+
+const store = createStore(reducer);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+
+// src/App.js
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+function App() {
+  const count = useSelector((state) => state.count);
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      <p>Compte : {count}</p>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Incrémenter</button>
+      <button onClick={() => dispatch({ type: 'DECREMENT' })}>Décrémenter</button>
+    </div>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Incrémente ou décrémente le compteur.</p>
+
+    <h2>🔹 Exemple 5 : Combinaison Context et Redux</h2>
+    <p>Utilise Context pour le thème et Redux pour le compteur :</p>
+    <pre><code>
+// src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import App from './App';
+
+const initialState = { count: 0 };
+
+function reducer(state = initialState, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    default:
+      return state;
+  }
+}
+
+const store = createStore(reducer);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+
+// src/App.js
+import React, { createContext, useContext, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+const ThemeContext = createContext();
+
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('light');
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+function Counter() {
+  const count = useSelector((state) => state.count);
+  const dispatch = useDispatch();
+  const { theme } = useContext(ThemeContext);
+
+  return (
+    <div style={{ background: theme === 'light' ? '#fff' : '#333', color: theme === 'light' ? '#000' : '#fff' }}>
+      <p>Compte : {count}</p>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Incrémenter</button>
+    </div>
+  );
+}
+
+function ThemeToggle() {
+  const { setTheme, theme } = useContext(ThemeContext);
+  return (
+    <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+      Basculer vers {theme === 'light' ? 'sombre' : 'clair'}
+    </button>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <Counter />
+      <ThemeToggle />
+    </ThemeProvider>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Gère le thème et le compteur indépendamment.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Surutilisation de Redux</strong>: Utilise Context pour les états simples.</li>
+      <li><strong>Oubli du Provider</strong>: Sans <code>Provider</code>, <code>useContext</code> renvoie <code>undefined</code>.</li>
+      <li><strong>Configuration Redux incorrecte</strong>: Vérifie les reducers et le store.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée un projet React avec <code>npx create-react-app mon-app</code>.<br>
+    2. Crée une application <code>Cart</code> utilisant Context API pour gérer un panier (ajout/suppression d’articles).<br>
+    3. Affiche le nombre total d’articles dans le panier.<br>
+    4. Crée un fichier texte expliquant en 3 phrases la différence entre Context API et Redux.</p>
+
+    <a href="react9.html" class="btn">⬅️ Chapitre 9 : Routing avec React Router</a>
+  </main>
+
+  <footer>
+ <p><a href="../index .html">← Retour au menu React</a></p>
+  </footer>
+</body>
+</html>

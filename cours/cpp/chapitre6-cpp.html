@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 6 - Fonctions</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 6 : Fonctions ⚙️</h1>
+    <p>Organise ton code avec des fonctions réutilisables.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une fonction ?</h2>
+    <p>Une fonction est comme une recette : un ensemble d’instructions que tu peux utiliser plusieurs fois.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+void saluer() {
+    cout << "Bonjour, tout le monde !" << endl;
+}
+
+int main() {
+    saluer();
+    return 0;
+}
+</code></pre>
+
+    <h2>📌 Fonctions avec paramètres</h2>
+    <p>Tu peux envoyer des valeurs à une fonction pour qu’elle les utilise.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+void saluerPersonne(string nom) {
+    cout << "Salut, " << nom << " !" << endl;
+}
+
+int main() {
+    saluerPersonne("Alice");
+    return 0;
+}
+</code></pre>
+
+    <h2>💻 Fonctions avec retour</h2>
+    <p>Une fonction peut renvoyer un résultat avec <code>return</code>.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+int carre(int nombre) {
+    return nombre * nombre;
+}
+
+int main() {
+    int resultat = carre(5);
+    cout << "Carré de 5 : " << resultat << endl;
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une fonction qui calcule le factoriel d’un nombre (ex. : 5! = 5 * 4 * 3 * 2 * 1).</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+int factoriel(int n) {
+    int resultat = 1;
+    for (int i = 1; i <= n; i++) {
+        resultat *= i;
+    }
+    return resultat;
+}
+
+int main() {
+    cout << "Factoriel de 5 : " << factoriel(5) << endl;
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre7-cpp.html" class="btn">➡️ Chapitre 7 : Tableaux et chaînes de caractères</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre5-cpp.html">← Chapitre 5 : Structures de contrôle</a> |
+      <a href="index.html">Retour au menu C++</a>
+    </p>
+  </footer>
+</body>
+</html>

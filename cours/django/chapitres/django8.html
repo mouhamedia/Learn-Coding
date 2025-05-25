@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 8 - Formulaires et validation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #092e20;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #092e20;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #092e20;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #092e20;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 8 : Formulaires et validation 📝</h1>
+    <p>Apprends à créer des formulaires et à valider les données pour une application sécurisée.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Pourquoi les formulaires et la validation ?</h2>
+    <p>Les formulaires permettent aux utilisateurs d’envoyer des données (ex. ajouter un article). La validation garantit que ces données sont correctes et sécurisées avant traitement.</p>
+    <p><strong>Fonctionnalités de Django :</strong></p>
+    <ul>
+      <li>Formulaires automatisés avec <code>forms.ModelForm</code>.</li>
+      <li>Validation intégrée (ex. <code>required</code>, <code>max_length</code>).</li>
+      <li>Protection CSRF automatique.</li>
+    </ul>
+
+    <h2>🔹 Exemple 1 : Formulaire simple</h2>
+    <p>Crée <code>blog/forms.py</code>:</p>
+    <pre><code>
+from django import forms
+
+class ArticleForm(forms.Form):
+    titre = forms.CharField(max_length=255, required=True)
+    contenu = forms.CharField(widget=forms.Textarea, required=False)
+    </code></pre>
+    <p>Modifie <code>blog/views.py</code>:</p>
+    <pre><code>
+from django.shortcuts import render, redirect
+from .forms import ArticleForm
+
+def ajouter_article(request):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            titre = form.cleaned_data['titre']
+            contenu = form.cleaned_data['contenu']
+            Article.objects.create(titre=titre, contenu=contenu)
+            return redirect('articles')
+    else:
+        form = ArticleForm()
+    return render(request, 'blog/ajouter_article.html', {'form': form})
+    </code></pre>
+    <p>Crée <code>blog/templates/blog/ajouter_article.html</code>:</p>
+    <pre><code>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Ajouter</button>
+</form>
+    </code></pre>
+    <p><strong>Résultat</strong>: <code>/blog/articles/ajouter/</code> affiche un formulaire validé.</p>
+
+    <h2>🔹 Exemple 2 : Formulaire basé sur un modèle</h2>
+    <p>Modifie <code>blog/forms.py</code>:</p>
+    <pre><code>
+from django import forms
+from .models import Article
+
+class ArticleModelForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = ['titre', 'contenu']
+    </code></pre>
+    <p>Modifie <code>blog/views.py</code>:</p>
+    <pre><code>
+def ajouter_article_model(request):
+    if request.method == 'POST':
+        form = ArticleModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('articles')
+    else:
+        form = ArticleModelForm()
+    return render(request, 'blog/ajouter_article.html', {'form': form})
+    </code></pre>
+    <p>Modifie <code>blog/urls.py</code>:</p>
+    <pre><code>
+urlpatterns = [
+    path('articles/ajouter-model/', views.ajouter_article_model, name='ajouter_article_model'),
+]
+    </code></pre>
+    <p><strong>Résultat</strong>: Simplifie la création d’articles en utilisant le modèle.</p>
+
+    <h2>🔹 Exemple 3 : Afficher les erreurs</h2>
+    <p>Modifie <code>ajouter_article.html</code>:</p>
+    <pre><code>
+<form method="post">
+    {% csrf_token %}
+    {% if form.errors %}
+        <ul>
+        {% for field, errors in form.errors.items %}
+            <li>{{ field }} : {{ errors|join:", " }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {{ form.as_p }}
+    <button type="submit">Ajouter</button>
+</form>
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche les erreurs de validation (ex. titre vide).</p>
+
+    <h2>🔹 Exemple 4 : Validation personnalisée</h2>
+    <p>Ajoute une règle dans <code>ArticleForm</code>:</p>
+    <pre><code>
+def clean_titre(self):
+    titre = self.cleaned_data['titre']
+    if 'test' in titre.lower():
+        raise forms.ValidationError("Le titre ne peut pas contenir 'test'.")
+    return titre
+    </code></pre>
+    <p><strong>Résultat</strong>: Bloque les titres contenant "test".</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>CSRF manquant</strong>: Toujours inclure <code>{% csrf_token %}</code>.</li>
+      <li><strong>Formulaire non validé</strong>: Vérifie <code>form.is_valid()</code> avant de sauvegarder.</li>
+      <li><strong>Champs manquants</strong>: Définis tous les champs nécessaires dans <code>ModelForm</code>.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée un formulaire <code>ProduitForm</code> pour <code>nom</code> et <code>prix</code>.<br>
+    2. Crée une vue pour ajouter un produit avec validation.<br>
+    3. Crée un template avec affichage des erreurs.<br>
+    4. Crée un <code>ProduitModelForm</code> basé sur le modèle <code>Produit</code>.<br>
+    5. Teste les deux formulaires.</p>
+
+    <a href="django9.html" class="btn">➡️ Chapitre 9 : Administration Django</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Django</a></p>
+  </footer>
+</body>
+</html>

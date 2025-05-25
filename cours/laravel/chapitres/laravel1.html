@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 1 - Introduction à Laravel</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 1 : Introduction à Laravel 💡</h1>
+    <p>Découvre Laravel, un framework PHP puissant pour créer des applications web modernes et performantes.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu'est-ce que Laravel ?</h2>
+    <p>Laravel est un framework PHP open-source créé par Taylor Otwell en 2011. Il est conçu pour simplifier le développement d'applications web en fournissant une syntaxe claire et des outils prêts à l'emploi.</p>
+    <p><strong>Caractéristiques principales :</strong></p>
+    <ul>
+      <li><strong>Modèle MVC</strong> : Organise le code en Modèles (données), Vues (interface), et Contrôleurs (logique).</li>
+      <li><strong>Eloquent ORM</strong> : Simplifie l'interaction avec les bases de données en représentant les tables comme des objets PHP.</li>
+      <li><strong>Blade</strong> : Un moteur de templates pour créer des vues dynamiques avec une syntaxe simple.</li>
+      <li><strong>Artisan</strong> : Une interface en ligne de commande pour automatiser des tâches comme la création de fichiers ou la gestion de la base de données.</li>
+    </ul>
+    <p><strong>Exemple</strong> : Une application Laravel peut gérer un blog avec des articles, des commentaires, et un système de connexion, tout en restant facile à maintenir.</p>
+
+    <h2>🔹 Pourquoi choisir Laravel ?</h2>
+    <p>Laravel est populaire car il réduit le temps de développement tout en offrant des fonctionnalités robustes :</p>
+    <ul>
+      <li><strong>Productivité</strong> : Des outils comme les migrations et les routes prêtes à l'emploi accélèrent le développement.</li>
+      <li><strong>Sécurité</strong> : Protection intégrée contre les attaques CSRF (Cross-Site Request Forgery) et XSS (Cross-Site Scripting).</li>
+      <li><strong>Communauté</strong> : Une vaste communauté et une documentation détaillée (<a href="https://laravel.com/docs">laravel.com/docs</a>) facilitent l'apprentissage.</li>
+      <li><strong>Écosystème</strong> : Packages comme Laravel Breeze pour l'authentification ou Laravel Nova pour les tableaux de bord.</li>
+    </ul>
+    <p><strong>Exemple d'utilisation</strong> : Laravel est utilisé par des entreprises comme BBC, Pfizer, ou des startups pour créer des applications web complexes.</p>
+
+    <h2>🔹 Exemple pratique : Structure d’un projet Laravel</h2>
+    <p>Quand tu crées un projet Laravel, voici à quoi ressemble la structure des dossiers :</p>
+    <pre><code>
+mon-projet/
+├── app/                    # Contient les modèles, contrôleurs, et logique métier
+├── config/                 # Fichiers de configuration (base de données, mail, etc.)
+├── database/               # Migrations et graines pour la base de données
+├── public/                 # Fichiers accessibles publiquement (CSS, JS, images)
+├── resources/              # Vues Blade et fichiers sources (CSS, JS)
+├── routes/                 # Définition des routes (web.php, api.php)
+├── .env                    # Configuration de l'environnement (base de données, clés)
+├── composer.json           # Dépendances PHP
+├── artisan                 # Commande Artisan pour gérer le projet
+    </code></pre>
+    <p><strong>Explication</strong> : Chaque dossier a un rôle spécifique. Par exemple, <code>routes/web.php</code> définit les URL de ton application, et <code>resources/views/</code> contient les templates Blade.</p>
+
+    <h2>🔹 Exemple pratique : Première route</h2>
+    <p>Voici un exemple simple de route dans <code>routes/web.php</code> pour afficher un message :</p>
+    <pre><code>
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return 'Bienvenue sur mon site Laravel !';
+});
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>Route::get</code> définit une route pour les requêtes HTTP GET.</li>
+      <li><code>'/'</code> est l'URL de la page d'accueil.</li>
+      <li>La fonction anonyme retourne un message affiché dans le navigateur.</li>
+    </ul>
+    <p><strong>Résultat</strong> : Si tu lances ton serveur avec <code>php artisan serve</code> et accèdes à <code>http://localhost:8000</code>, tu verras "Bienvenue sur mon site Laravel !".</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Environnement non configuré</strong> : Assure-toi que PHP, Composer, et MySQL sont installés avant de commencer.</li>
+      <li><strong>Ignorer la documentation</strong> : La doc officielle est ton meilleur allié pour comprendre les fonctionnalités.</li>
+      <li><strong>Code désorganisé</strong> : Suis le modèle MVC pour garder ton projet clair et maintenable.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Visite <a href="https://laravel.com">laravel.com</a> et lis la section "Getting Started". Note trois fonctionnalités de Laravel qui te semblent utiles.<br>
+    2. Ouvre un terminal et vérifie que Composer est installé avec <code>composer --version</code>. Si ce n’est pas le cas, installe-le (<a href="https://getcomposer.org">getcomposer.org</a>).<br>
+    3. Crée un fichier texte et décris en 3 phrases pourquoi tu veux apprendre Laravel (par exemple, pour créer un blog, une API, etc.).</p>
+
+    <a href="laravel2.html" class="btn">➡️ Chapitre 2 : Installation de Laravel</a

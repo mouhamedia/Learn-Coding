@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 6 - Méthodes</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 6 : Méthodes ☕</h1>
+    <p>Organise ton code avec des méthodes réutilisables.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu Jonas une méthode ?</h2>
+    <p>Une méthode est un bloc de code qui effectue une tâche spécifique et que tu peux appeler plusieurs fois.</p>
+    <pre><code>
+public class Methodes {
+    public static void saluer() {
+        System.out.println("Bonjour, tout le monde !");
+    }
+
+    public static void main(String[] args) {
+        saluer();
+    }
+}
+</code></pre>
+
+    <h2>📌 Méthodes avec paramètres</h2>
+    <p>Tu peux passer des valeurs à une méthode pour la rendre plus flexible.</p>
+    <pre><code>
+public class Salutation {
+    public static void saluerPersonne(String nom) {
+        System.out.println("Bonjour, " + nom + " !");
+    }
+
+    public static void main(String[] args) {
+        saluerPersonne("Alice");
+    }
+}
+</code></pre>
+
+    <h2>💻 Méthodes avec retour</h2>
+    <p>Une méthode peut renvoyer une valeur avec <code>return</code>.</p>
+    <pre><code>
+public class Calcul {
+    public static int carre(int nombre) {
+        return nombre * nombre;
+    }
+
+    public static void main(String[] args) {
+        int resultat = carre(5);
+        System.out.println("Carré de 5 : " + resultat);
+    }
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une méthode qui calcule le cube d’un nombre (nombre * nombre * nombre).</p>
+    <pre><code>
+public class Cube {
+    public static int calculerCube(int nombre) {
+        return nombre * nombre * nombre;
+    }
+
+    public static void main(String[] args) {
+        int resultat = calculerCube(3);
+        System.out.println("Cube de 3 : " + resultat);
+    }
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a> !</p>
+
+    <a href="chapitre7-java.html" class="btn">➡️ Chapitre 7 : Tableaux</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre5-java.html">← Chapitre 5 : Structures de contrôle</a> |
+      <a href="index.html">Retour au menu Java</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 9 - Collections</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Collections 📚</h1>
+    <p>Apprends à gérer des données dynamiques avec <code>List</code> et <code>Dictionary</code>.</p>
+  </header>
+
+  <main>
+    <h2>🔹 La classe List</h2>
+    <p><code>List<T></code> est une collection dynamique qui peut être agrandie ou réduite.</p>
+    <pre><code>
+using System;
+using System.Collections.Generic;
+
+class Program {
+  static void Main() {
+    List<string> fruits = new List<string> { "pomme", "banane" };
+    fruits.Add("orange");
+    foreach (string fruit in fruits) {
+      Console.WriteLine(fruit);
+    }
+  }
+}
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche chaque fruit sur une ligne.</p>
+
+    <h2>🔹 La classe Dictionary</h2>
+    <p><code>Dictionary<TKey, TValue></code> stocke des paires clé-valeur.</p>
+    <pre><code>
+using System;
+using System.Collections.Generic;
+
+class Program {
+  static void Main() {
+    Dictionary<string, int> ages = new Dictionary<string, int>();
+    ages.Add("Alice", 25);
+    ages.Add("Bob", 30);
+    Console.WriteLine($"Âge d'Alice : {ages["Alice"]}");
+  }
+}
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche "Âge d'Alice : 25".</p>
+
+    <h2>🧪 Exercice</h2>
+    <p>Crée une <code>List</code> de nombres, ajoute 3 nombres, et affiche leur moyenne avec une boucle <code>foreach</code>.</p>
+
+    <a href="chapitre10-cs.html" class="btn">➡️ Chapitre 10 : Gestion des exceptions</a>
+  </main>
+
+  <footer>
+    <p><a href="indexcs.html">← Retour au menu C#</a></p>
+  </footer>
+</body>
+</html>

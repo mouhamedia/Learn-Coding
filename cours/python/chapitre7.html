@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 7 - Fichiers (lecture/écriture)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 7 : Fichiers (lecture/écriture) 📂</h1>
+    <p>Apprends à lire et écrire des données dans des fichiers.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Écrire dans un fichier</h2>
+    <p>Utilise <code>open()</code> avec le mode <code>"w"</code> pour écrire dans un fichier.</p>
+    <pre><code>
+with open("mon_fichier.txt", "w") as fichier:
+    fichier.write("Bonjour, monde !\n")
+    fichier.write("Ceci est une autre ligne.")
+</code></pre>
+    <p>Le mode <code>"w"</code> crée ou remplace le fichier. <code>with</code> ferme automatiquement le fichier.</p>
+
+    <h2>📌 Lire un fichier</h2>
+    <p>Utilise le mode <code>"r"</code> pour lire un fichier.</p>
+    <pre><code>
+with open("mon_fichier.txt", "r") as fichier:
+    contenu = fichier.read()
+    print(contenu)
+</code></pre>
+    <p>Pour lire ligne par ligne :</p>
+    <pre><code>
+with open("mon_fichier.txt", "r") as fichier:
+    for ligne in fichier:
+        print(ligne.strip())  # strip() enlève les sauts de ligne
+</code></pre>
+
+    <h2>💻 Ajouter à un fichier</h2>
+    <p>Utilise le mode <code>"a"</code> pour ajouter du contenu sans écraser.</p>
+    <pre><code>
+with open("mon_fichier.txt", "a") as fichier:
+    fichier.write("\nNouvelle ligne ajoutée.")
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui écrit une liste de courses dans un fichier, puis lit et affiche son contenu.</p>
+    <pre><code>
+courses = ["pain", "lait", "œufs"]
+with open("courses.txt", "w") as fichier:
+    for item in courses:
+        fichier.write(item + "\n")
+
+with open("courses.txt", "r") as fichier:
+    print(fichier.read())
+</code></pre>
+    <p>Teste ce code sur <a href="https://replit.com" target="_blank">Replit</a> !</p>
+
+    <a href="chapitre8.html" class="btn">➡️ Chapitre 8 : Exceptions (gestion des erreurs)</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre6.html">← Chapitre 6 : Listes, tuples et dictionnaires</a> |
+      <a href="index.html">Retour au menu Python</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 2 - Installation et configuration</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background-color: #4a54f1;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(74, 84, 241, 0.4);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f0f4ff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(74, 84, 241, 0.15);
+    }
+    h1, h2 {
+      color: #2c3e95;
+    }
+    pre {
+      background: #e6eaff;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #4a54f1;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-right: 1rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+    }
+    a {
+      color: #4a54f1;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 2 : Installation et configuration 🛠️</h1>
+    <p>Apprends à configurer ton environnement de développement pour créer des applications React performantes.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Pourquoi configurer un environnement React ?</h2>
+    <p>Pour développer avec React, tu as besoin d’un environnement avec Node.js, un gestionnaire de paquets (npm), et des outils comme <code>create-react-app</code>. Une configuration correcte garantit un développement fluide et des tests efficaces.</p>
+    <p><strong>Outils nécessaires :</strong></p>
+    <ul>
+      <li><strong>Node.js</strong> : Exécute JavaScript côté serveur et gère les dépendances.</li>
+      <li><strong>npm</strong> : Installe les bibliothèques React et autres paquets.</li>
+      <li><strong>create-react-app</strong> : Crée une structure de projet préconfigurée.</li>
+      <li><strong>Éditeur de code</strong> : VS Code avec extensions comme ESLint et Prettier.</li>
+    </ul>
+
+    <h2>🔹 Exemple 1 : Créer un projet React</h2>
+    <p>Utilise <code>create-react-app</code> pour démarrer un projet :</p>
+    <pre><code>npx create-react-app mon-app
+cd mon-app
+npm start</code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>npx</code> : Exécute <code>create-react-app</code> sans installation globale.</li>
+      <li><code>mon-app</code> : Nom du projet.</li>
+      <li><code>npm start</code> : Lance le serveur de développement à <code>http://localhost:3000</code>.</li>
+    </ul>
+    <p><strong>Résultat</strong> : Ouvre <code>http://localhost:3000</code> pour voir l’application React par défaut.</p>
+
+    <h2>🔹 Exemple 2 : Structure du projet</h2>
+    <p>Voici la structure générée par <code>create-react-app</code> :</p>
+    <pre><code>mon-app/
+├── node_modules/           # Dépendances
+├── public/                 # Fichiers statiques
+│   ├── index.html          # Page HTML principale
+│   ├── favicon.ico         # Icône du site
+├── src/                    # Code source
+│   ├── App.js              # Composant principal
+│   ├── index.js            # Point d’entrée
+├── package.json            # Configuration et dépendances
+├── README.md               # Documentation</code></pre>
+    <p><strong>Résultat</strong> : <code>src/App.js</code> contient le composant principal, rendu dans <code>public/index.html</code>.</p>
+
+    <h2>🔹 Exemple 3 : Personnaliser index.html</h2>
+    <p>Modifie <code>public/index.html</code> pour changer le titre :</p>
+    <pre><code>&lt;!-- public/index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Ma Première App React&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p><strong>Résultat</strong> : Le titre de la page devient “Ma Première App React”.</p>
+
+    <h2>🔹 Exemple 4 : Installer une bibliothèque</h2>
+    <p>Ajoute <code>react-icons</code> pour utiliser des icônes :</p>
+    <pre><code>npm install react-icons</code></pre>
+    <p>Utilise une icône dans <code>src/App.js</code> :</p>
+    <pre><code>// src/App.js
+import { FaHeart } from 'react-icons/fa';
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Mon App&lt;/h1&gt;
+      &lt;FaHeart /&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code></pre>
+    <p><strong>Résultat</strong> : Affiche un cœur à côté de “Mon App”.</p>
+
+    <h2>🔹 Exemple 5 : Configurer ESLint</h2>
+    <p>Installe ESLint pour vérifier le code :</p>
+    <pre><code>npm init @eslint/config</code></pre>
+    <p>Suis les invites pour configurer React et JSX. Résultat : ESLint signale les erreurs de code dans VS Code.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Node.js absent</strong> : Installe Node.js depuis <a href="https://nodejs.org">nodejs.org</a>.</li>
+      <li><strong>Mauvais répertoire</strong> : Exécute <code>npm start</code> dans le dossier du projet.</li>
+      <li><strong>Port occupé</strong> : Si <code>localhost:3000</code> est utilisé, change le port avec <code>PORT=3001 npm start</code>.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>
+      1. Crée un projet React avec <code>create-react-app</code>.<br>
+      2. Modifie <code>public/index.html</code> pour ajouter un titre personnalisé et un favicon.<br>
+      3. Installe <code>axios</code> (<code>npm install axios</code>) et vérifie qu’il est dans <code>package.json</code>.<br>
+      4. Crée un fichier texte expliquant en 3 phrases ce que fait <code>npm start</code>.
+    </p>
+
+    <a href="react1.html" class="btn">⬅️ Chapitre 1 : Introduction à React</a>
+    <a href="react3.html" class="btn">➡️ Chapitre 3 : JSX et rendu</a>
+  </main>
+
+  <footer>
+    <p><a href="../index .html">← Retour au menu React</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapitre 5 - Structures de contrôle</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #003049;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f0fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #003049;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #002030;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    .navigation a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .navigation a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+      background-color: #f7f9ff;
+    }
+    footer a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 5 : Structures de contrôle 🐘</h1>
+    <p>Utilise les conditions et boucles pour contrôler le flux de ton programme.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Conditions (if, else)</h2>
+    <p>Les instructions <code>if</code> exécutent du code si une condition est vraie.</p>
+    <pre><code>&lt;?php
+$age = 18;
+if ($age >= 18) {
+    echo "Vous êtes majeur.";
+} else {
+    echo "Vous êtes mineur.";
+}
+?&gt;
+</code></pre>
+
+    <h2>📌 Boucles</h2>
+    <p>Les boucles répètent du code. Exemples :</p>
+    <ul>
+      <li><strong>for</strong> : Pour un nombre fixe d’itérations.</li>
+      <li><strong>while</strong> : Tant qu’une condition est vraie.</li>
+    </ul>
+    <pre><code>&lt;?php
+// Boucle for
+for ($i = 1; $i <= 5; $i++) {
+    echo "Numéro : $i&lt;br&gt;";
+}
+
+// Boucle while
+$count = 1;
+while ($count <= 3) {
+    echo "Compteur : $count&lt;br&gt;";
+    $count++;
+}
+?&gt;
+</code></pre>
+
+    <h2>💻 Exemple pratique : Tableau de multiplication</h2>
+    <p>Crée un fichier <code>multiplication.php</code> qui affiche le tableau de multiplication de 5 :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Tableau de multiplication&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Tableau de 5&lt;/h1&gt;
+  &lt;?php
+    $number = 5;
+    for ($i = 1; $i <= 10; $i++) {
+        $result = $number * $i;
+        echo "$number x $i = $result&lt;br&gt;";
+    }
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste via <code>http://localhost/multiplication.php</code>. Résultat :</p>
+    <pre><code>Tableau de 5
+5 x 1 = 5
+5 x 2 = 10
+...
+5 x 10 = 50
+</code></pre>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise des conditions claires pour éviter les erreurs logiques.</li>
+          <li>Assure-toi que les boucles ont une condition d’arrêt pour éviter les boucles infinies.</li>
+          <li>Indente correctement ton code pour plus de lisibilité.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="chapitre4-php.html">← Chapitre précédent</a>
+      <a href="chapitre6-php.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="index.html">Retour au menu PHP</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

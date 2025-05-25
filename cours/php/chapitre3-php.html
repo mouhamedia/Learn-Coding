@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapitre 3 - Variables et types</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #003049;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f0fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #003049;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #002030;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    .navigation a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .navigation a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+      background-color: #f7f9ff;
+    }
+    footer a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 3 : Variables et types 🐘</h1>
+    <p>Apprends à utiliser les variables et les types de données en PHP.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Déclarer des variables</h2>
+    <p>En PHP, une variable commence par <code>$</code> suivi d’un nom. Aucun type n’est requis, car PHP est faiblement typé.</p>
+    <pre><code>&lt;?php
+$name = "Jean";
+$age = 25;
+$price = 19.99;
+$isStudent = true;
+?&gt;
+</code></pre>
+
+    <h2>📌 Types de données</h2>
+    <p>PHP supporte plusieurs types :
+      <ul>
+        <li><strong>String</strong> : Texte (ex. : <code>"Bonjour"</code>).</li>
+        <li><strong>Integer</strong> : Nombre entier (ex. : <code>42</code>).</li>
+        <li><strong>Float</strong> : Nombre décimal (ex. : <code>3.14</code>).</li>
+        <li><strong>Boolean</strong> : Vrai ou faux (<code>true</code>, <code>false</code>).</li>
+        <li><strong>Array</strong> : Liste (voir Chapitre 7).</li>
+        <li><strong>Null</strong> : Absence de valeur (<code>null</code>).</li>
+      </ul>
+    </p>
+
+    <h2>💻 Vérifier les types</h2>
+    <p>Utilise <code>gettype()</code> ou <code>var_dump()</code> pour inspecter une variable :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Types PHP&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;?php
+    $name = "Marie";
+    $age = 30;
+    $price = 9.99;
+    echo "Type de \$name : " . gettype($name) . "&lt;br&gt;";
+    echo "Type de \$age : " . gettype($age) . "&lt;br&gt;";
+    echo "Type de \$price : " . gettype($price) . "&lt;br&gt;";
+    var_dump($name);
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p><strong>Résultat dans le navigateur :</strong></p>
+    <pre><code>Type de $name : string
+Type de $age : integer
+Type de $price : double
+string(5) "Marie"
+</code></pre>
+
+    <h2>🛠 Exercice pratique : Afficher un profil</h2>
+    <p>Crée un fichier <code>profile.php</code> qui affiche les informations d’un utilisateur :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Profil utilisateur&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;?php
+    $name = "Alex";
+    $age = 22;
+    $isStudent = true;
+    echo "&lt;h1&gt;Profil&lt;/h1&gt;";
+    echo "&lt;p&gt;Nom : $name&lt;/p&gt;";
+    echo "&lt;p&gt;Âge : $age ans&lt;/p&gt;";
+    echo "&lt;p&gt;Étudiant : " . ($isStudent ? "Oui" : "Non") . "&lt;/p&gt;";
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste via <code>http://localhost/profile.php</code>. Résultat :</p>
+    <pre><code>Profil
+Nom : Alex
+Âge : 22 ans
+Étudiant : Oui
+</code></pre>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise des noms de variables clairs et descriptifs.</li>
+          <li>Évite les caractères spéciaux dans les noms de variables (sauf <code>_</code>).</li>
+          <li>Utilise <code>var_dump</code> pour déboguer les variables pendant le développement.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="chapitre2-php.html">← Chapitre précédent</a>
+      <a href="chapitre4-php.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="index.html">Retour au menu PHP</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

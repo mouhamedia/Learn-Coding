@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 8 - Programmation orientée objet en C</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 8 : Programmation orientée objet en C 🏗</h1>
+    <p>Simule les concepts de la POO en C avec des structures et des pointeurs.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que la POO en C ?</h2>
+    <p>Le langage C n’a pas de support natif pour la programmation orientée objet (POO) comme C++ ou Java. Cependant, tu peux simuler des concepts comme les objets, l’encapsulation, et l’héritage en utilisant des <code>struct</code>, des pointeurs, et des fonctions.</p>
+    <p>Un <code>struct</code> peut représenter un objet, avec des champs pour les attributs et des fonctions pour les méthodes.</p>
+    <pre><code>
+#include <stdio.h>
+#include <string.h>
+
+typedef struct {
+    char nom[50];
+    int age;
+} Chien;
+
+void chien_aboyer(Chien *chien) {
+    printf("%s dit : Wouf !\n", chien->nom);
+}
+
+int main() {
+    Chien mon_chien;
+    strcpy(mon_chien.nom, "Rex");
+    mon_chien.age = 3;
+    chien_aboyer(&mon_chien);
+    return 0;
+}
+</code></pre>
+    <p>Dans cet exemple, <code>Chien</code> est une structure (comme une classe), et <code>chien_aboyer</code> est une fonction qui agit comme une méthode.</p>
+
+    <h2>📌 Encapsulation</h2>
+    <p>L’encapsulation consiste à regrouper les données et les fonctions qui les manipulent. En C, tu peux utiliser des pointeurs pour passer la structure à ses "méthodes".</p>
+    <pre><code>
+#include <stdio.h>
+
+typedef struct {
+    int longueur;
+    int largeur;
+} Rectangle;
+
+void rectangle_init(Rectangle *rect, int l, int lrg) {
+    rect->longueur = l;
+    rect->largeur = lrg;
+}
+
+int rectangle_aire(Rectangle *rect) {
+    return rect->longueur * rect->largeur;
+}
+
+int main() {
+    Rectangle mon_rect;
+    rectangle_init(&mon_rect, 5, 3);
+    printf("Aire : %d\n", rectangle_aire(&mon_rect)); // Affiche : Aire : 15
+    return 0;
+}
+</code></pre>
+
+    <h2>💻 Simuler l’héritage</h2>
+    <p>Pour simuler l’héritage, tu peux inclure une structure de base dans une structure dérivée.</p>
+    <pre><code>
+#include <stdio.h>
+
+typedef struct {
+    char nom[50];
+} Animal;
+
+typedef struct {
+    Animal animal; // "Héritage"
+    int nombre_pattes;
+} Chien;
+
+void animal_init(Animal *a, char *nom) {
+    strcpy(a->nom, nom);
+}
+
+void chien_init(Chien *c, char *nom, int pattes) {
+    animal_init(&c->animal, nom);
+    c->nombre_pattes = pattes;
+}
+
+void chien_afficher(Chien *c) {
+    printf("Chien : %s, %d pattes\n", c->animal.nom, c->nombre_pattes);
+}
+
+int main() {
+    Chien mon_chien;
+    chien_init(&mon_chien, "Rex", 4);
+    chien_afficher(&mon_chien); // Affiche : Chien : Rex, 4 pattes
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une structure <code>Voiture</code> avec des attributs <code>marque</code> et <code>vitesse</code>, et une fonction <code>afficher_voiture</code> qui affiche ses informations.</p>
+    <pre><code>
+#include <stdio.h>
+#include <string.h>
+
+typedef struct {
+    char marque[50];
+    int vitesse;
+} Voiture;
+
+void voiture_init(Voiture *v, char *marque, int vitesse) {
+    strcpy(v->marque, marque);
+    v->vitesse = vitesse;
+}
+
+void afficher_voiture(Voiture *v) {
+    printf("Voiture : %s, Vitesse : %d km/h\n", v->marque, v->vitesse);
+}
+
+int main() {
+    Voiture ma_voiture;
+    voiture_init(&ma_voiture, "Toyota", 180);
+    afficher_voiture(&ma_voiture);
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre9-c.html" class="btn">➡️ Chapitre 9 : Préprocesseur et macros</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre7-c.html">← Chapitre 7 : Chaînes de caractères</a> |
+      <a href="index.html">Retour au menu C</a>
+    </p>
+  </footer>
+</body>
+</html>

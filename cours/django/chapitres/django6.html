@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 6 - Templates avec Django</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #092e20;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #092e20;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: monospace;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #092e20;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #092e20;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 6 : Templates avec Django 🖼️</h1>
+    <p>Apprends à créer des interfaces dynamiques avec le système de templates de Django.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un template Django ?</h2>
+    <p>Les templates Django sont des fichiers HTML enrichis avec une syntaxe spéciale pour afficher des données dynamiques et ajouter de la logique (conditions, boucles). Ils sont stockés dans <code>app/templates/app/</code> et rendus par les vues.</p>
+    <p><strong>Avantages des templates :</strong></p>
+    <ul>
+      <li>Syntaxe simple (ex. <code>{{ variable }}</code> pour afficher une variable).</li>
+      <li>Directives puissantes (<code>{% if %}</code>, <code>{% for %}</code>).</li>
+      <li>Réutilisation via l’héritage et les inclusions.</li>
+    </ul>
+
+    <h2>🔹 Exemple 1 : Template simple</h2>
+    <p>Crée <code>blog/templates/blog/accueil.html</code>:</p>
+    <pre><code>&lt;h1&gt;Bienvenue, {{ nom }} !&lt;/h1&gt;</code></pre>
+    <p>Modifie <code>blog/views.py</code>:</p>
+    <pre><code>from django.shortcuts import render
+
+def accueil(request):
+    return render(request, 'blog/accueil.html', {'nom': 'Alice'})</code></pre>
+
+    <h2>🔹 Exemple 2 : Utiliser des conditions</h2>
+    <p>Modifie <code>accueil.html</code>:</p>
+    <pre><code>&lt;h1&gt;Bienvenue, {{ nom }} !&lt;/h1&gt;
+{% if nom == 'Admin' %}
+    &lt;p&gt;Vous êtes administrateur.&lt;/p&gt;
+{% else %}
+    &lt;p&gt;Vous êtes un utilisateur standard.&lt;/p&gt;
+{% endif %}</code></pre>
+
+    <h2>🔹 Exemple 3 : Boucle avec une liste</h2>
+    <p>Crée <code>blog/templates/blog/articles.html</code>:</p>
+    <pre><code>&lt;h1&gt;Liste des articles&lt;/h1&gt;
+&lt;ul&gt;
+{% for article in articles %}
+    &lt;li&gt;{{ article.titre }}&lt;/li&gt;
+{% empty %}
+    &lt;li&gt;Aucun article disponible.&lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;</code></pre>
+
+    <p>Modifie <code>blog/views.py</code>:</p>
+    <pre><code>def articles(request):
+    articles = [
+        {'titre': 'Article 1'},
+        {'titre': 'Article 2'},
+    ]
+    return render(request, 'blog/articles.html', {'articles': articles})</code></pre>
+
+    <p>Modifie <code>blog/urls.py</code>:</p>
+    <pre><code>from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.accueil, name='accueil'),
+    path('articles/', views.articles, name='articles'),
+]</code></pre>
+
+    <h2>🔹 Exemple 4 : Héritage de templates</h2>
+    <p>Crée <code>blog/templates/base.html</code>:</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;{% block title %}Mon Blog{% endblock %}&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Mon Blog&lt;/h1&gt;
+    &lt;/header&gt;
+    {% block content %}
+    {% endblock %}
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <p>Modifie <code>accueil.html</code> pour étendre <code>base.html</code>:</p>
+    <pre><code>{% extends 'base.html' %}
+
+{% block title %}Accueil{% endblock %}
+{% block content %}
+&lt;h1&gt;Bienvenue, {{ nom }} !&lt;/h1&gt;
+{% endblock %}</code></pre>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Template introuvable</strong>: Vérifie le chemin dans <code>render</code>.</li>
+      <li><strong>Variable non définie</strong>: Assure-toi de passer toutes les variables nécessaires dans le dictionnaire de <code>render</code>.</li>
+      <li><strong>Syntaxe incorrecte</strong>: Utilise <code>{% %}</code> pour les balises de logique, <code>{{ }}</code> pour les variables.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>
+      1. Crée un template <code>articles/templates/articles/liste.html</code> pour une liste de produits.<br>
+      2. Crée une vue dans <code>articles/views.py</code> avec une liste statique de produits.<br>
+      3. Configure une URL pour <code>/articles/liste/</code>.<br>
+      4. Crée un template <code>base.html</code> avec un bloc <code>content</code> et fais étendre <code>liste.html</code> ce template.<br>
+      5. Ajoute une condition pour afficher "Aucun produit" si la liste est vide.
+    </p>
+
+    <a href="django7.html" class="btn">➡️ Chapitre 7 : Modèles et base de données (ORM)</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Django</a></p>
+  </footer>
+</body>
+</html>

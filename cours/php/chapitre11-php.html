@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapitre 11 - Fichiers</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #003049;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f0fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #003049;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    .navigation a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .navigation a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+      background-color: #f7f9ff;
+    }
+    footer a {
+      color: #003049;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #002030;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 11 : Fichiers 🐘</h1>
+    <p>Apprends à lire et écrire des fichiers avec PHP.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Lire un fichier</h2>
+    <p>Utilise <code>file_get_contents</code> pour lire un fichier entier ou <code>fopen/fread</code> pour un contrôle plus précis.</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Lire un fichier&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Contenu du fichier&lt;/h1&gt;
+  &lt;?php
+    $file = &quot;example.txt&quot;;
+    if (file_exists($file)) {
+        $content = file_get_contents($file);
+        echo &quot;&lt;pre&gt;$content&lt;/pre&gt;&quot;;
+    } else {
+        echo &quot;&lt;p&gt;Fichier non trouvé.&lt;/p&gt;&quot;;
+    }
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Crée un fichier <code>example.txt</code> avec du texte, place-le dans <code>htdocs</code>, et teste via <code>http://localhost/read.php</code>.</p>
+
+    <h2>📌 Écrire dans un fichier</h2>
+    <p>Utilise <code>file_put_contents</code> pour écrire facilement.</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Écrire un fichier&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Écrire dans un fichier&lt;/h1&gt;
+  &lt;?php
+    $file = &quot;output.txt&quot;;
+    $data = &quot;Bonjour, PHP !\n&quot;;
+    if (file_put_contents($file, $data, FILE_APPEND)) {
+        echo &quot;&lt;p&gt;Données écrites dans $file.&lt;/p&gt;&quot;;
+    } else {
+        echo &quot;&lt;p&gt;Erreur lors de l’écriture.&lt;/p&gt;&quot;;
+    }
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste via <code>http://localhost/write.php</code>. Vérifie <code>output.txt</code> dans <code>htdocs</code>.</p>
+
+    <h2>💻 Exemple pratique : Journal de visites</h2>
+    <p>Crée un fichier <code>visits.php</code> pour enregistrer les visites :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Journal de visites&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Journal de visites&lt;/h1&gt;
+  &lt;?php
+    $log_file = &quot;visits.log&quot;;
+    $visit = date(&quot;Y-m-d H:i:s&quot;) . &quot; - Visite depuis &quot; . $_SERVER[&quot;REMOTE_ADDR&quot;] . &quot;\n&quot;;
+    file_put_contents($log_file, $visit, FILE_APPEND);
+    $logs = file_get_contents($log_file);
+    echo &quot;&lt;pre&gt;$logs&lt;/pre&gt;&quot;;
+  ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Teste via <code>http://localhost/visits.php</code>. Chaque visite ajoute une ligne à <code>visits.log</code>.</p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Vérifie l’existence d’un fichier avec <code>file_exists</code> avant de lire.</li>
+          <li>Utilise <code>FILE_APPEND</code> pour ajouter des données sans écraser le fichier.</li>
+          <li>Assure-toi que le dossier a les permissions d’écriture (777 sur Linux).</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="chapitre10-php.html">← Chapitre précédent</a>
+      <a href="chapitre12-php.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="index.html">Retour au menu PHP</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

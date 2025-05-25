@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 5 - Les contrôleurs</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 5 : Les contrôleurs 🎮</h1>
+    <p>Apprends à organiser la logique de ton application avec des contrôleurs dans Laravel.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un contrôleur ?</h2>
+    <p>Dans le modèle MVC (Modèle-Vue-Contrôleur), les contrôleurs gèrent la logique métier. Ils reçoivent les requêtes des routes, traitent les données, et renvoient une réponse (souvent une vue). Les contrôleurs sont stockés dans <code>app/Http/Controllers/</code>.</p>
+    <p><strong>Rôle</strong> :</p>
+    <ul>
+      <li>Valider les entrées utilisateur.</li>
+      <li>Interagir avec les modèles (base de données).</li>
+      <li>Préparer les données pour les vues.</li>
+    </ul>
+    <p><strong>Exemple</strong> : Un contrôleur peut récupérer une liste d’articles depuis la base de données et l’envoyer à une vue pour affichage.</p>
+
+    <h2>🔹 Créer un contrôleur</h2>
+    <p>Utilise Artisan pour générer un contrôleur :</p>
+    <pre><code>
+php artisan make:controller ArticleController
+    </code></pre>
+    <p>Cela crée <code>app/Http/Controllers/ArticleController.php</code> :</p>
+    <pre><code>
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ArticleController extends Controller
+{
+    //
+}
+    </code></pre>
+    <p>Ajoute une méthode pour afficher un message :</p>
+    <pre><code>
+public function index()
+{
+    return 'Liste des articles';
+}
+    </code></pre>
+    <p>Lie la route dans <code>routes/web.php</code> :</p>
+    <pre><code>
+use App\Http\Controllers\ArticleController;
+
+Route::get('/articles', [ArticleController::class, 'index']);
+    </code></pre>
+    <p><strong>Résultat</strong> : Une requête à <code>/articles</code> affiche "Liste des articles".</p>
+
+    <h2>🔹 Contrôleurs avec vues</h2>
+    <p>Les contrôleurs renvoient souvent des vues avec des données. Crée <code>resources/views/articles/index.blade.php</code> :</p>
+    <pre><code>
+<h1>Articles</h1>
+<ul>
+    @foreach($articles as $article)
+        <li>{{ $article }}</li>
+    @endforeach
+</ul>
+    </code></pre>
+    <p>Modifie le contrôleur :</p>
+    <pre><code>
+public function index()
+{
+    $articles = ['Article 1', 'Article 2', 'Article 3'];
+    return view('articles.index', ['articles' => $articles]);
+}
+    </code></pre>
+    <p><strong>Résultat</strong> : <code>/articles</code> affiche une liste à puces des articles.</p>
+
+    <h2>🔹 Contrôleurs avec paramètres</h2>
+    <p>Les contrôleurs peuvent recevoir des paramètres depuis l’URL.</p>
+    <p><strong>Exemple</strong> : Afficher un article spécifique :</p>
+    <pre><code>
+public function show($id)
+{
+    return view('articles.show', ['id' => $id]);
+}
+    </code></pre>
+    <p>Crée <code>resources/views/articles/show.blade.php</code> :</p>
+    <pre><code>
+<h1>Article #{{ $id }}</h1>
+<p>Ceci est l’article numéro {{ $id }}.</p>
+    </code></pre>
+    <p>Ajoute la route :</p>
+    <pre><code>
+Route::get('/article/{id}', [ArticleController::class, 'show']);
+    </code></pre>
+    <p><strong>Résultat</strong> : <code>/article/42</code> affiche "Article #42".</p>
+    <p><strong>Exemple avec contrainte</strong> :</p>
+    <pre><code>
+Route::get('/article/{id}', [ArticleController::class, 'show'])->where('id', '[0-9]+');
+    </code></pre>
+    <p><strong>Résultat</strong> : Seuls les ID numériques sont acceptés.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Importation manquante</strong> : Ajoute <code>use App\Http\Controllers\ArticleController;</code> dans <code>web.php</code>.</li>
+      <li><strong>Méthode introuvable</strong> : Vérifie le nom de la méthode dans la route (ex. : <code>index</code>, pas <code>Index</code>).</li>
+      <li><strong>Vue manquante</strong> : Assure-toi que la vue existe dans <code>resources/views/</code>.</li>
+      <li><strong>Paramètre non passé</strong> : Passe toutes les variables nécessaires à la vue.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée un contrôleur <code>ProduitController</code> avec Artisan.<br>
+    2. Ajoute une méthode <code>index</code> qui passe une liste de produits (ex. : <code>['Livre', 'Stylo']</code>) à une vue <code>produits/index.blade.php</code>.<br>
+    3. Crée une méthode <code>show</code> qui accepte un paramètre <code>id</code> et affiche une vue <code>produits/show.blade.php</code> avec l’ID.<br>
+    4. Définis les routes correspondantes dans <code>web.php</code> et restreins <code>id</code> aux chiffres.<br>
+    5. Teste <code>/produits</code> et <code>/produit/123</code> dans ton navigateur.<br>
+    6. (Bonus) Ajoute une méthode <code>create</code> qui affiche un formulaire vide dans une vue <code>produits/create.blade.php</code>.</p>
+
+    <a href="laravel6.html" class="btn">➡️ Chapitre 6 : Modèles et base de données (Eloquent)</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Laravel</a></p>
+  </footer>
+</body>
+</html>

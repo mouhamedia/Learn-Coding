@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 1 - Introduction à Node.js</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #026e00;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(2, 110, 0, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #e8f9e6cc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    main h2 {
+      color: #026e00;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #026e00;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e8f9e6;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #026e00;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #026e00;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #014d00;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #026e00;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #014d00;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 1 : Introduction à Node.js</h1>
+    <p>Découvre les bases de Node.js, une plateforme pour exécuter JavaScript côté serveur.</p>
+  </header>
+
+  <main>
+    <h2>Qu’est-ce que Node.js ?</h2>
+    <p>Node.js est une plateforme open-source qui permet d’exécuter du JavaScript en dehors du navigateur, en utilisant le moteur V8 de Google Chrome. Il est idéal pour créer des applications serveur rapides et évolutives.</p>
+
+    <h2>Pourquoi utiliser Node.js ?</h2>
+    <p>Node.js est populaire pour :</p>
+    <ul>
+      <li><strong>Performance</strong> : Son modèle non bloquant et événementiel le rend rapide.</li>
+      <li><strong>Écosystème</strong> : Un vaste écosystème de modules via npm.</li>
+      <li><strong>JavaScript partout</strong> : Utilise le même langage pour le client et le serveur.</li>
+      <li><strong>Communauté</strong> : Une large communauté et des frameworks comme Express.js.</li>
+    </ul>
+
+    <h2>Comment fonctionne Node.js ?</h2>
+    <p>Node.js utilise un modèle asynchrone basé sur des événements. Les opérations d’entrée/sortie (comme la lecture de fichiers ou les requêtes réseau) sont non bloquantes, permettant de gérer plusieurs tâches simultanément.</p>
+    <pre><code>console.log('Début');
+setTimeout(() => {
+  console.log('Tâche asynchrone');
+}, 1000);
+console.log('Fin');
+</code></pre>
+    <p>Sortie :</p>
+    <pre><code>Début
+Fin
+Tâche asynchrone
+</code></pre>
+    <p>Dans cet exemple, <code>setTimeout</code> est asynchrone, permettant à <code>Fin</code> de s’afficher avant la tâche différée.</p>
+
+    <h2>Exemple pratique : Hello World</h2>
+    <p>Voici un exemple simple de script Node.js :</p>
+    <pre><code>// hello.js
+console.log('Hello, Node.js !');
+</code></pre>
+    <p>Pour exécuter ce script, enregistre-le dans un fichier <code>hello.js</code> et utilise la commande :</p>
+    <pre><code>node hello.js
+</code></pre>
+    <p>Sortie : <code>Hello, Node.js !</code></p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Assure-toi d’avoir une version récente de Node.js (au moins 18.x) pour bénéficier des dernières fonctionnalités.</li>
+          <li>Comprends le modèle asynchrone pour éviter les erreurs courantes.</li>
+          <li>Utilise un éditeur comme VS Code avec des extensions Node.js pour une meilleure expérience.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="../index.html">← Retour à l'accueil</a>
+      <a href="node2.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 5 - State et props</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background-color: #4a54f1;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(74, 84, 241, 0.4);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f0f4ff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(74, 84, 241, 0.15);
+    }
+    h1, h2 {
+      color: #2c3e95;
+    }
+    pre {
+      background: #e6eaff;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #4a54f1;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+    }
+    a {
+      color: #4a54f1;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 5 : State et props 📊</h1>
+    <p>Maîtrise la gestion des données dynamiques avec le state et la transmission de données avec les props.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu'est-ce que le state et les props ?</h2>
+    <p>Le <strong>state</strong> est un objet interne qui stocke les données dynamiques d’un composant, permettant à l’interface de réagir aux interactions utilisateur. Les <strong>props</strong> sont des données passées de manière externe à un composant pour le personnaliser, et elles sont immuables dans le composant qui les reçoit.</p>
+    <p><strong>Caractéristiques principales :</strong></p>
+    <ul>
+      <li><strong>State</strong>: Géré avec <code>useState</code> (composants fonctionnels) ou <code>this.setState</code> (classes).</li>
+      <li><strong>Props</strong>: Transmis du parent au composant enfant, comme des paramètres de fonction.</li>
+      <li><strong>Mises à jour</strong>: Modifier le state déclenche un re-rendu, mais pas les props.</li>
+    </ul>
+
+    <h2>🔹 Pourquoi utiliser state et props ?</h2>
+    <p>Le state permet de rendre les composants interactifs (ex. formulaires, compteurs), tandis que les props favorisent la réutilisabilité en rendant les composants configurables. Ensemble, ils structurent le flux de données dans une application React.</p>
+    <p><strong>Exemple</strong>: Un composant <code>TodoList</code> peut utiliser le state pour gérer une liste de tâches et les props pour afficher les détails d’une tâche spécifique.</p>
+
+    <h2>🔹 Exemple 1 : Compteur avec useState</h2>
+    <p>Crée un compteur interactif avec <code>useState</code> :</p>
+    <pre><code>
+// src/App.js
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Compte : {count}</p>
+      <button onClick={() => setCount(count + 1)}>Incrémenter</button>
+    </div>
+  );
+}
+
+export default Counter;
+    </code></pre>
+    <p><strong>Explication</strong>:</p>
+    <ul>
+      <li><code>useState(0)</code>: Initialise <code>count</code> à 0 et fournit <code>setCount</code> pour le mettre à jour.</li>
+      <li><code>onClick</code>: Appelle <code>setCount</code> pour incrémenter <code>count</code>.</li>
+    </ul>
+    <p><strong>Résultat</strong>: Affiche un compteur qui s’incrémente au clic sur <code>http://localhost:3000</code>.</p>
+
+    <h2>🔹 Exemple 2 : Passer le state via props</h2>
+    <p>Transmet le state d’un parent à un composant enfant :</p>
+    <pre><code>
+// src/App.js
+import React, { useState } from 'react';
+
+function Display({ count }) {
+  return <p>Compte actuel : {count}</p>;
+}
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <Display count={count} />
+      <button onClick={() => setCount(count + 1)}>Incrémenter</button>
+    </div>
+  );
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche “Compte actuel : {valeur}” qui se met à jour au clic.</p>
+
+    <h2>🔹 Exemple 3 : Basculer l’état (toggle)</h2>
+    <p>Gère un état booléen pour afficher/masquer du texte :</p>
+    <pre><code>
+// src/App.js
+import React, { useState } from 'react';
+
+function Toggle() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setIsVisible(!isVisible)}>
+        {isVisible ? 'Masquer' : 'Afficher'}
+      </button>
+      {isVisible && <p>Contenu visible !</p>}
+    </div>
+  );
+}
+
+export default Toggle;
+    </code></pre>
+    <p><strong>Résultat</strong>: Alterne entre afficher et masquer “Contenu visible !”.</p>
+
+    <h2>🔹 Exemple 4 : State dans un composant de classe</h2>
+    <p>Utilise <code>setState</code> dans une classe :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+class CounterClass extends React.Component {
+  state = { count: 0 };
+
+  render() {
+    return (
+      <div>
+        <p>Compte : {this.state.count}</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Incrémenter
+        </button>
+      </div>
+    );
+  }
+}
+
+export default CounterClass;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche un compteur qui s’incrémente au clic.</p>
+
+    <h2>🔹 Exemple 5 : Gérer un formulaire</h2>
+    <p>Utilise le state pour un champ de formulaire :</p>
+    <pre><code>
+// src/App.js
+import React, { useState } from 'react';
+
+function Form() {
+  const [input, setInput] = useState('');
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <p>Entrée : {input}</p>
+    </div>
+  );
+}
+
+export default Form;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche le texte saisi dans l’input en temps réel.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Mutation directe du state</strong>: Utilise <code>setCount</code> au lieu de modifier <code>count</code> directement.</li>
+      <li><strong>Surutilisation du state</strong>: Passe les données via props si elles ne changent pas dans le composant.</li>
+      <li><strong>Oubli de l’état initial</strong>: Fournis toujours une valeur initiale à <code>useState</code>.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée un projet React avec <code>npx create-react-app mon-app</code>.<br>
+    2. Crée un composant <code>TodoList</code> qui utilise <code>useState</code> pour ajouter et afficher des tâches.<br>
+    3. Ajoute un bouton pour supprimer une tâche spécifique.<br>
+    4. Crée un fichier texte expliquant en 3 phrases la différence entre state et props.</p>
+
+    <a href="react4.html" class="btn">⬅️ Chapitre 4 : Composants fonctionnels et classes</a>
+    <a href="react6.html" class="btn">➡️ Chapitre 6 : Gestion des événements</a>
+  </main>
+
+  <footer>
+    <p><a href="../index .html">← Retour au menu React</a></p>
+  </footer>
+</body>
+</html>

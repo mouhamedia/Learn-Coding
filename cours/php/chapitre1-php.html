@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 1 - Introduction à PHP</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: #003049;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 1 : Introduction à PHP 🐘</h1>
+    <p>Découvre PHP, le langage pour créer des sites web dynamiques.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que PHP ?</h2>
+    <p>PHP (Hypertext Preprocessor) est un langage de programmation utilisé pour créer des sites web dynamiques. Il s’exécute sur un serveur et génère du HTML envoyé au navigateur. Exemples d’utilisation :</p>
+    <ul>
+      <li>Sites comme WordPress ou Facebook.</li>
+      <li>Formulaires interactifs.</li>
+      <li>Gestion de bases de données.</li>
+    </ul>
+    <p>C’est comme un chef cuisinier qui prépare une page web sur mesure avant de la servir !</p>
+
+    <h2>📌 Comment fonctionne PHP ?</h2>
+    <p>PHP s’exécute côté serveur :</p>
+    <ol>
+      <li>L’utilisateur demande une page (ex. : <code>index.php</code>).</li>
+      <li>Le serveur exécute le code PHP et produit du HTML.</li>
+      <li>Le navigateur affiche la page.</li>
+    </ol>
+
+    <h2>💻 Installer un environnement PHP</h2>
+    <p>Pour coder en PHP, tu as besoin d’un serveur avec PHP :</p>
+    <ul>
+      <li><strong>Windows/Mac</strong> : Installe <a href="https://www.apachefriends.org" target="_blank">XAMPP</a> ou <a href="http://www.wampserver.com" target="_blank">WAMP</a>.</li>
+      <li><strong>Linux</strong> : Installe Apache et PHP (ex. : <code>sudo apt install php</code>).</li>
+      <li><strong>En ligne</strong> : Utilise <a href="https://onlinephp.io" target="_blank">OnlinePHP</a>.</li>
+    </ul>
+    <p>Pour tester avec XAMPP :</p>
+    <ol>
+      <li>Installe XAMPP et démarre Apache.</li>
+      <li>Place tes fichiers <code>.php</code> dans <code>C:\xampp\htdocs</code>.</li>
+      <li>Accède via <code>http://localhost/monfichier.php</code>.</li>
+    </ol>
+
+    <h2>📥 Premier aperçu d’un script</h2>
+    <p>Voici un script PHP simple :</p>
+    <pre><code>
+&lt;
+echo "Bonjour, PHP !";
+?&gt;
+</code></pre>
+    <p><strong>Explications :</strong></p>
+    <ul>
+      <li><code><?php</code> : Ouvre le code PHP.</li>
+      <li><code>echo</code> : Affiche du texte dans la page.</li>
+      <li><code>?></code> : Ferme le code PHP.</li>
+    </ul>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un fichier <code>test.php</code>, affiche "Bienvenue sur mon site !" et teste-le avec XAMPP ou OnlinePHP.</p>
+    <pre><code>
+<pre><code>
+&lt;?php
+echo "Bonjour, PHP !";
+?&gt;
+</code></pre>
+
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinephp.io" target="_blank">OnlinePHP</a> !</p>
+
+    <a href="chapitre2-php.html" class="btn">➡️ Chapitre 2 : Premier script PHP</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="index.html">Retour au menu PHP</a>
+    </p>
+  </footer>
+</body>
+</html>

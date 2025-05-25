@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 10 - Composition API et bonnes pratiques</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #42b883;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(66, 184, 131, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+    }
+    main h2 {
+      color: #1b684f;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #42b883;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f7f2;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #2a9a78;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 10 : Composition API et bonnes pratiques</h1>
+    <p>Découvre la Composition API de Vue 3 et les meilleures pratiques pour un code robuste.</p>
+  </header>
+
+  <main>
+    <h2>Qu’est-ce que la Composition API ?</h2>
+    <p>La Composition API, introduite dans Vue 3, est une alternative à l’Options API. Elle permet d’organiser la logique des composants par fonctionnalité plutôt que par type (data, methods, etc.), offrant plus de flexibilité et de réutilisabilité.</p>
+
+    <h2>Utilisation de la Composition API</h2>
+    <p>La Composition API peut être utilisée via la fonction <code>setup</code> ou la syntaxe <code>&lt;script setup&gt;</code>. Voici un exemple avec <code>setup</code> :</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;p&gt;Compteur : {{ count }}&lt;/p&gt;
+    &lt;button @click="increment"&gt;Incrémenter&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { ref } from 'vue';
+export default {
+  setup() {
+    const count = ref(0);
+    const increment = () => {
+      count.value++;
+    };
+    return { count, increment };
+  }
+};
+&lt;/script&gt;
+&lt;style scoped&gt;
+button {
+  padding: 0.5rem 1rem;
+  background-color: #42b883;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+button:hover {
+  background-color: #2a9a78;
+}
+&lt;/style&gt;
+</code></pre>
+    <p>Et avec la syntaxe <code>&lt;script setup&gt;</code>, plus concise :</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;p&gt;Compteur : {{ count }}&lt;/p&gt;
+    &lt;button @click="increment"&gt;Incrémenter&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script setup&gt;
+import { ref } from 'vue';
+const count = ref(0);
+const increment = () => {
+  count.value++;
+};
+&lt;/script&gt;
+&lt;style scoped&gt;
+button {
+  padding: 0.5rem 1rem;
+  background-color: #42b883;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+button:hover {
+  background-color: #2a9a78;
+}
+&lt;/style&gt;
+</code></pre>
+
+    <h2>Concepts clés : ref, reactive, computed, watch</h2>
+    <p>La Composition API repose sur plusieurs fonctions clés :</p>
+    <ul>
+      <li><strong>ref</strong> : Crée une valeur réactive unique (accès via <code>.value</code>).</li>
+      <li><strong>reactive</strong> : Crée un objet réactif.</li>
+      <li><strong>computed</strong> : Crée une propriété calculée réactive.</li>
+      <li><strong>watch</strong> : Observe les changements d’une valeur réactive.</li>
+    </ul>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;input v-model="inputValue" placeholder="Tapez quelque chose" /&gt;
+    &lt;p&gt;Longueur doublée : {{ doubleLength }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script setup&gt;
+import { ref, computed, watch } from 'vue';
+const inputValue = ref('');
+const doubleLength = computed(() => inputValue.value.length * 2);
+watch(inputValue, (newValue) => {
+  console.log('Nouvelle valeur :', newValue);
+});
+&lt;/script&gt;
+&lt;style scoped&gt;
+input {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+&lt;/style&gt;
+</code></pre>
+
+    <h2>Composables : réutilisation de la logique</h2>
+    <p>Les composables sont des fonctions qui encapsulent une logique réutilisable, comme un compteur ou une gestion d’API.</p>
+    <pre><code>// src/composables/useCounter.js
+import { ref } from 'vue';
+
+export function useCounter() {
+  const count = ref(0);
+  const increment = () => count.value++;
+  const decrement = () => count.value--;
+  return { count, increment, decrement };
+}
+
+&lt;!-- Component.vue --&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;p&gt;Compteur : {{ count }}&lt;/p&gt;
+    &lt;button @click="increment"&gt;Incrémenter&lt;/button&gt;
+    &lt;button @click="decrement"&gt;Décrémenter&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script setup&gt;
+import { useCounter } from '../composables/useCounter';
+const { count, increment, decrement } = useCounter();
+&lt;/script&gt;
+&lt;style scoped&gt;
+button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #42b883;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+button:hover {
+  background-color: #2a9a78;
+}
+&lt;/style&gt;
+</code></pre>
+
+    <h2>Exemple pratique : Liste de tâches</h2>
+    <p>Voici une liste de tâches utilisant la Composition API avec <code>&lt;script setup&gt;</code> :</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;input v-model="newTask" placeholder="Ajouter une tâche" @keyup.enter="addTask"&gt;
+    &lt;ul&gt;
+      &lt;li v-for="task in tasks" :key="task.id"&gt;
+        &lt;span :class="{ completed: task.completed }"&gt;{{ task.text }}&lt;/span&gt;
+        &lt;button @click="toggleTask(task)"&gt;Basculer&lt;/button&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script setup&gt;
+import { ref } from 'vue';
+const newTask = ref('');
+const tasks = ref([
+  { id: 1, text: 'Apprendre la Composition API', completed: false },
+  { id: 2, text: 'Créer une app', completed: false }
+]);
+const addTask = () => {
+  if (newTask.value) {
+    tasks.value.push({ id: tasks.value.length + 1, text: newTask.value, completed: false });
+    newTask.value = '';
+  }
+};
+const toggleTask = (task) => {
+  task.completed = !task.completed;
+};
+&lt;/script&gt;
+&lt;style scoped&gt;
+.completed {
+  text-decoration: line-through;
+  color: #888;
+}
+button {
+  margin-left: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background-color: #42b883;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+button:hover {
+  background-color: #2a9a78;
+}
+&lt;/style&gt;
+</code></pre>
+    <p>Cet exemple montre une liste de tâches interactive, avec ajout et basculement de l’état des tâches, tout en utilisant la Composition API.</p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Préférer <code>&lt;script setup&gt;</code> pour un code plus concis et lisible.</li>
+          <li>Utiliser des composables pour organiser la logique réutilisable.</li>
+          <li>Combiner la Composition API avec TypeScript pour une meilleure sécurité de type.</li>
+          <li>Optimiser les performances avec <code>v-memo</code> ou le chargement paresseux des composants.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="vue9.html">← Chapitre précédent</a>
+      <a href="../index.html">Retour à l’accueil →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

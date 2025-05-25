@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 16 - Notions avancées</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 16 : Notions avancées ⚙️</h1>
+    <p>Explore des concepts puissants comme les templates et la STL.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Templates</h2>
+    <p>Les templates permettent de créer des fonctions ou classes qui fonctionnent avec n’importe quel type de données.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+template <typename T>
+T maximum(T a, T b) {
+    return a > b ? a : b;
+}
+
+int main() {
+    cout << "Max int : " << maximum(5, 3) << endl;
+    cout << "Max double : " << maximum(5.5, 3.2) << endl;
+    return 0;
+}
+</code></pre>
+
+    <h2>📌 STL : Vector</h2>
+    <p>La bibliothèque STL (Standard Template Library) offre des structures comme <code>vector</code>, une liste dynamique.</p>
+    <pre><code>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> nombres = {1, 2, 3};
+    nombres.push_back(4);
+    for (int n : nombres) {
+        cout << n << " ";
+    }
+    cout << endl;
+    return 0;
+}
+</code></pre>
+
+    <h2>💻 STL : Map</h2>
+    <p>Une <code>map</code> associe des clés à des valeurs, comme un dictionnaire.</p>
+    <pre><code>
+#include <iostream>
+#include <map>
+#include <string>
+using namespace std;
+
+int main() {
+    map<string, int> ages;
+    ages["Alice"] = 25;
+    ages["Bob"] = 30;
+    cout << "Âge d'Alice : " << ages["Alice"] << endl;
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui utilise un <code>vector</code> pour stocker des notes et calcule leur moyenne.</p>
+    <pre><code>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> notes = {12, 15, 18};
+    int somme = 0;
+    for (int note : notes) {
+        somme += note;
+    }
+    float moyenne = (float)somme / notes.size();
+    cout << "Moyenne : " << moyenne << endl;
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code on <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre15-cpp.html">← Chapitre 15 : Fichiers</a> |
+      <a href="index.html">Retour au menu C++</a>
+    </p>
+  </footer>
+</body>
+</html>

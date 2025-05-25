@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 8 - Routing avec Express</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #026e00;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(2, 110, 0, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #e8f9e6cc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    main h2 {
+      color: #026e00;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #026e00;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e8f9e6;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #026e00;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #026e00;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #014d00;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #026e00;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #014d00;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 8 : Routing avec Express</h1>
+    <p>Apprends à gérer les routes et les requêtes HTTP avec Express.js.</p>
+  </header>
+
+  <main>
+    <h2>Qu’est-ce que le routing ?</h2>
+    <p>Le routing dans Express définit comment le serveur répond aux différentes requêtes HTTP (GET, POST, etc.) sur des URLs spécifiques.</p>
+
+    <h2>Définir des routes</h2>
+    <p>Express permet de définir des routes avec des méthodes comme <code>app.get</code>, <code>app.post</code>, etc.</p>
+    <pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+  res.send('Page d’accueil');
+});
+
+app.get('/contact', (req, res) => {
+  res.send('Page de contact');
+});
+
+app.listen(port, () => {
+  console.log(`Serveur démarré sur http://localhost:${port}`);
+});
+</code></pre>
+    <p>Visite <code>http://localhost:3000</code> ou <code>/contact</code> pour voir les réponses.</p>
+
+    <h2>Paramètres de route</h2>
+    <p>Tu peux capturer des paramètres dynamiques dans les URLs avec <code>:param</code>.</p>
+    <pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/user/:id', (req, res) => {
+  const userId = req.params.id;
+  res.send(`Profil de l’utilisateur ${userId}`);
+});
+
+app.listen(port, () => {
+  console.log(`Serveur démarré sur http://localhost:${port}`);
+});
+</code></pre>
+    <p>Visite <code>http://localhost:3000/user/123</code> pour voir “Profil de l’utilisateur 123”.</p>
+
+    <h2>Exemple pratique : Gestion de tâches</h2>
+    <p>Voici une API pour gérer une liste de tâches avec GET et POST :</p>
+    <pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+app.use(express.json()); // Pour parser le JSON
+
+let tasks = [
+  { id: 1, text: 'Apprendre Express', done: false }
+];
+
+app.get('/api/tasks', (req, res) => {
+  res.json(tasks);
+});
+
+app.post('/api/tasks', (req, res) => {
+  const newTask = {
+    id: tasks.length + 1,
+    text: req.body.text,
+    done: false
+  };
+  tasks.push(newTask);
+  res.status(201).json(newTask);
+});
+
+app.listen(port, () => {
+  console.log(`Serveur démarré sur http://localhost:${port}`);
+});
+</code></pre>
+    <p>Teste avec :
+      <ul>
+        <li><code>curl http://localhost:3000/api/tasks</code> pour lister les tâches.</li>
+        <li><code>curl -X POST -H "Content-Type: application/json" -d '{"text":"Nouvelle tâche"}' http://localhost:3000/api/tasks</code> pour ajouter une tâche.</li>
+      </ul>
+    </p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise <code>express.json()</code> pour gérer les requêtes POST avec JSON.</li>
+          <li>Valide les données des requêtes POST pour éviter les erreurs.</li>
+          <li>Organise les routes complexes dans des fichiers séparés (voir Chapitre 9).</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="node7.html">← Chapitre précédent</a>
+      <a href="node9.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

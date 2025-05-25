@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 10 - Héritage</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 10 : Héritage ☕</h1>
+    <p>Partage des caractéristiques entre classes avec l’héritage.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que l’héritage ?</h2>
+    <p>L’héritage permet à une classe (sous-classe) de réutiliser le code d’une autre classe (superclasse).</p>
+
+    <h2>📌 Utiliser <code>extends</code></h2>
+    <p>Une classe hérite d’une autre avec <code>extends</code>.</p>
+    <pre><code>
+public class Vehicule {
+    protected String marque;
+
+    public Vehicule(String m) {
+        marque = m;
+    }
+
+    public void afficher() {
+        System.out.println("Marque : " + marque);
+    }
+}
+
+public class Moto extends Vehicule {
+    public Moto(String m) {
+        super(m);
+    }
+
+    public static void main(String[] args) {
+        Moto maMoto = new Moto("Yamaha");
+        maMoto.afficher();
+    }
+}
+</code></pre>
+
+    <h2>💻 Mot-clé <code>super</code></h2>
+    <p>Appelle le constructeur de la superclasse.</p>
+    <pre><code>
+public class Vehicule {
+    protected String marque;
+
+    public Vehicule(String m) {
+        marque = m;
+    }
+}
+
+public class Voiture extends Vehicule {
+    private int portes;
+
+    public Voiture(String m, int p) {
+        super(m);
+        portes = p;
+    }
+
+    public void afficher() {
+        System.out.println("Voiture : " + marque + ", Portes : " + portes);
+    }
+
+    public static void main(String[] args) {
+        Voiture maVoiture = new Voiture("Toyota", 4);
+        maVoiture.afficher();
+    }
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une classe <code>Animal</code> et une sous-classe <code>Chien</code> qui hérite de ses attributs.</p>
+    <pre><code>
+public class Animal {
+    protected String nom;
+
+    public Animal(String n) {
+        nom = n;
+    }
+}
+
+public class Chien extends Animal {
+    public Chien(String n) {
+        super(n);
+    }
+
+    public void aboyer() {
+        System.out.println(nom + " dit : Wouf !");
+    }
+
+    public static void main(String[] args) {
+        Chien monChien = new Chien("Rex");
+        monChien.aboyer();
+    }
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a> !</p>
+
+    <a href="chapitre11-java.html" class="btn">➡️ Chapitre 11 : Polymorphisme</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre9-java.html">← Chapitre 9 : Encapsulation</a> |
+      <a href="index.html">Retour au menu Java</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 1 - Introduction à JavaScript</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #306998;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #306998;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #306998;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #306998;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 1 : Introduction à JavaScript 📜</h1>
+    <p>JavaScript est un langage puissant pour rendre tes pages web interactives et dynamiques.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu'est-ce que JavaScript ?</h2>
+    <p>JavaScript est un langage de programmation qui s'exécute dans les navigateurs pour ajouter de l'interactivité aux pages web. Il permet de modifier le contenu d'une page, de répondre aux actions des utilisateurs (comme les clics ou la saisie), et de communiquer avec des serveurs.</p>
+    <p>Exemples d'utilisation :</p>
+    <ul>
+      <li>Créer des formulaires interactifs</li>
+      <li>Animer des éléments sur une page</li>
+      <li>Développer des applications web complexes (ex. : Google Maps, Netflix)</li>
+    </ul>
+
+    <h2>📌 Pourquoi apprendre JavaScript ?</h2>
+    <ul>
+      <li>Essentiel pour le développement web moderne</li>
+      <li>Compatible avec tous les navigateurs</li>
+      <li>Polyvalent : utilisé côté client (navigateur) et serveur (avec Node.js)</li>
+      <li>Grande communauté avec de nombreuses ressources</li>
+    </ul>
+
+    <h2>💻 Premier programme JavaScript</h2>
+    <p>Voici un programme simple qui change le texte d'une page lorsqu'on clique sur un bouton :</p>
+    <pre><code>
+&lt;p id="demo"&gt;Texte initial&lt;/p&gt;
+&lt;button onclick="changerTexte()"&gt;Changer le texte&lt;/button&gt;
+&lt;script&gt;
+  function changerTexte() {
+    document.getElementById("demo").innerText = "JavaScript en action !";
+  }
+&lt;/script&gt;
+    </code></pre>
+    <p>Ce code utilise une fonction JavaScript pour modifier le contenu d'un paragraphe.</p>
+
+    <p><strong>Essaie ici :</strong></p>
+    <p id="demo">Texte initial</p>
+    <button onclick="changerTexte()">Changer le texte</button>
+    <script>
+      function changerTexte() {
+        document.getElementById("demo").innerText = "JavaScript en action !";
+      }
+    </script>
+
+    <h2>📥 Configurer ton environnement</h2>
+    <p>Pour coder en JavaScript, tu as besoin d’un éditeur de texte (comme VS Code) et d’un navigateur (Chrome, Firefox). Tu peux aussi tester ton code en ligne sur :</p>
+    <ul>
+      <li><a href="https://jsfiddle.net" target="_blank">JSFiddle</a></li>
+      <li><a href="https://codepen.io" target="_blank">CodePen</a></li>
+      <li><a href="https://replit.com" target="_blank">Replit</a></li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>Crée une page HTML avec un bouton qui affiche une alerte avec le message :</p>
+    <pre><code>alert("Bonjour, JavaScript !");</code></pre>
+
+    <a href="chapitre2-js.html" class="btn">➡️ Chapitre 2 : Variables et types</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu JavaScript</a></p>
+  </footer>
+</body>
+</html>

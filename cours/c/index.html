@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Cours de C</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: #003049;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cours de C 💻</h1>
+    <p>Apprends les bases et les concepts avancés du langage C, étape par étape.</p>
+  </header>
+
+  <main class="card-grid">
+    <a class="card" href="chapitre1-c.html"><h3>Chapitre 1</h3><p>Introduction au langage C</p></a>
+    <a class="card" href="chapitre2-c.html"><h3>Chapitre 2</h3><p>Variables et types de données</p></a>
+    <a class="card" href="chapitre3-c.html"><h3>Chapitre 3</h3><p>Conditions et boucles</p></a>
+    <a class="card" href="chapitre4-c.html"><h3>Chapitre 4</h3><p>Fonctions en C</p></a>
+    <a class="card" href="chapitre5-c.html"><h3>Chapitre 5</h3><p>Tableaux et pointeurs</p></a>
+    <a class="card" href="chapitre6-c.html"><h3>Chapitre 6</h3><p>Structures et fichiers</p></a>
+    <a class="card" href="chapitre7-c.html"><h3>Chapitre 7</h3><p>Chaînes de caractères</p></a>
+    <a class="card" href="chapitre8-c.html"><h3>Chapitre 8</h3><p>Programmation orientée objet en C</p></a>
+    <a class="card" href="chapitre9-c.html"><h3>Chapitre 9</h3><p>Préprocesseur et macros</p></a>
+    <a class="card" href="chapitre10-c.html"><h3>Chapitre 10</h3><p>Projet final : mini-application en C</p></a>
+  </main>
+
+  <footer>
+    <p><a href="../../index.html">← Retour à l'accueil</a></p>
+  </footer>
+</body>
+</html>

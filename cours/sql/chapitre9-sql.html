@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 9 - Fonctions d'agrégation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Fonctions d'agrégation 📊</h1>
+    <p>Apprends à analyser les données avec <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, etc.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Fonctions d'agrégation</h2>
+    <p>Les fonctions d'agrégation calculent des valeurs sur un ensemble de lignes :</p>
+    <ul>
+      <li><code>COUNT</code> : Compte les lignes</li>
+      <li><code>SUM</code> : Calcule la somme</li>
+      <li><code>AVG</code> : Calcule la moyenne</li>
+      <li><code>MIN</code>, <code>MAX</code> : Trouve les valeurs minimales/maximales</li>
+    </ul>
+
+    <h2>🔹 Exemple</h2>
+    <pre><code>
+SELECT COUNT(*) AS nombre_etudiants
+FROM Etudiants;
+
+SELECT AVG(age) AS age_moyen
+FROM Etudiants;
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche le nombre total d'étudiants et leur âge moyen.</p>
+
+    <h2>🔹 Groupement avec GROUP BY</h2>
+    <p>Utilise <code>GROUP BY</code> pour agréger par catégorie.</p>
+    <pre><code>
+SELECT annee, COUNT(*) AS nombre_livres
+FROM Livres
+GROUP BY annee;
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche le nombre de livres par année de publication.</p>
+
+    <h2>📝 Exercice</h2>
+    <p>Écris une requête pour compter le nombre de livres dans la table "Livres" et une autre pour calculer l'année de publication moyenne avec <code>AVG</code>.</p>
+
+    <a href="chapitre10-sql.html" class="btn">➡️ Chapitre 10 : Gestion des utilisateurs et permissions</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu SQL</a></p>
+  </footer>
+</body>
+</html>

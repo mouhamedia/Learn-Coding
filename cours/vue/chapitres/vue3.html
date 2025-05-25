@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 3 - Structure d’un composant Vue.js</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #42b883;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(66, 184, 131, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+    }
+    main h2 {
+      color: #1b684f;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #42b883;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f7f2;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #2a9a78;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 3 : Structure d’un composant</h1>
+    <p>Comprendre les bases d’un composant Vue.js et son organisation.</p>
+  </header>
+
+  <main>
+    <h2>Qu’est-ce qu’un composant Vue.js ?</h2>
+    <p>Un composant Vue.js est une unité réutilisable qui encapsule une partie de l’interface utilisateur (UI) et sa logique. Les composants sont au cœur de Vue.js, permettant de construire des applications modulaires et maintenables. Chaque composant peut inclure du HTML, du CSS et du JavaScript, organisés de manière cohérente.</p>
+
+    <h2>Les trois parties principales d’un composant</h2>
+    <p>Dans Vue 3, un composant est généralement défini dans un fichier avec l’extension <code>.vue</code> (Single-File Component, SFC). Un SFC est divisé en trois sections :</p>
+    <ul>
+      <li><strong>Template</strong> : Contient le HTML et les directives Vue pour décrire l’interface.</li>
+      <li><strong>Script</strong> : Contient la logique JavaScript (Options API ou Composition API).</li>
+      <li><strong>Style</strong> : Contient le CSS pour styliser le composant.</li>
+    </ul>
+
+    <h2>Exemple d’un composant simple</h2>
+    <p>Voici un exemple de composant Vue.js nommé <code>HelloWorld.vue</code> :</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h1&gt;{{ message }}&lt;/h1&gt;
+    &lt;button @click="updateMessage"&gt;Changer le message&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: 'HelloWorld',
+  data() {
+    return {
+      message: 'Bienvenue dans Vue.js !'
+    };
+  },
+  methods: {
+    updateMessage() {
+      this.message = 'Vous avez cliqué sur le bouton !';
+    }
+  }
+};
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+h1 {
+  color: #42b883;
+}
+button {
+  padding: 0.5rem 1rem;
+  background-color: #2a9a78;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #1b684f;
+}
+&lt;/style&gt;
+</code></pre>
+
+    <h2>Explication des sections</h2>
+    <p><strong>Template</strong> : La section <code>&lt;template&gt;</code> définit la structure HTML. Ici, on utilise une interpolation <code>{{ message }}</code> pour afficher une donnée dynamique et une directive <code>@click</code> pour lier un événement à une méthode.</p>
+    <p><strong>Script</strong> : La section <code>&lt;script&gt;</code> utilise l’Options API. On définit :
+      <ul>
+        <li><code>name</code> : Le nom du composant (optionnel, mais utile pour le débogage).</li>
+        <li><code>data</code> : Une fonction qui retourne les données réactives du composant.</li>
+        <li><code>methods</code> : Les fonctions qui gèrent les interactions, comme <code>updateMessage</code>.</li>
+      </ul>
+    </p>
+    <p><strong>Style</strong> : La section <code>&lt;style&gt;</code> avec l’attribut <code>scoped</code> garantit que le CSS s’applique uniquement à ce composant, évitant les conflits avec d’autres parties de l’application.</p>
+
+    <div class="tip">
+      <p><strong>Astuce</strong> : L’attribut <code>scoped</code> dans la balise <code>&lt;style&gt;</code> est une fonctionnalité puissante de Vue.js. Il génère des sélecteurs uniques pour éviter que le CSS d’un composant n’affecte d’autres composants.</p>
+    </div>
+
+    <h2>Exemple pratique : Compteur simple</h2>
+    <p>Voici un exemple de composant qui implémente un compteur :</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;p&gt;Compteur : {{ count }}&lt;/p&gt;
+    &lt;button @click="increment"&gt;Incrémenter&lt;/button&gt;
+    &lt;button @click="decrement"&gt;Décrémenter&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: 'Counter',
+  data() {
+    return {
+      count: 0
+    };
+  },
+  methods: {
+    increment() {
+      this.count++;
+    },
+    decrement() {
+      this.count--;
+    }
+  }
+};
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+p {
+  font-size: 1.2rem;
+  color: #333;
+}
+button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #42b883;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+button:hover {
+  background-color: #2a9a78;
+}
+&lt;/style&gt;
+</code></pre>
+
+    <p>Dans cet exemple, le composant <code>Counter</code> utilise une donnée réactive <code>count</code> et deux méthodes pour incrémenter ou décrémenter cette valeur. Le template affiche la valeur actuelle et lie les boutons aux méthodes via la directive <code>@click</code>.</p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Nommez vos composants de manière claire et descriptive (ex. : <code>Counter</code>, <code>UserCard</code>).</li>
+          <li>Utilisez toujours <code>scoped</code> pour le CSS sauf si vous avez besoin de styles globaux.</li>
+          <li>Structurez votre code de manière lisible en séparant bien les sections <code>template</code>, <code>script</code>, et <code>style</code>.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="vue2.html">← Chapitre précédent</a>
+      <a href="vue4.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

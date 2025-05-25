@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 10 - Gestion des exceptions</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 10 : Gestion des exceptions 🛑</h1>
+    <p>Apprends à gérer les erreurs dans ton code avec <code>try-catch</code>.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les exceptions</h2>
+    <p>Les exceptions sont des erreurs qui se produisent pendant l’exécution. Utilise <code>try-catch</code> pour les gérer.</p>
+    <pre><code>
+using System;
+
+class Program {
+  static void Main() {
+    try {
+      int[] nombres = { 1, 2, 3 };
+      Console.WriteLine(nombres[5]); // Erreur : index hors limites
+    } catch (IndexOutOfRangeException) {
+      Console.WriteLine("Erreur : Index hors limites !");
+    }
+  }
+}
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche "Erreur : Index hors limites !".</p>
+
+    <h2>🔹 Plusieurs catch et finally</h2>
+    <p>Tu peux gérer différents types d’exceptions et exécuter du code avec <code>finally</code>.</p>
+    <pre><code>
+using System;
+
+class Program {
+  static void Main() {
+    try {
+      Console.Write("Entrez un nombre : ");
+      string input = Console.ReadLine();
+      int nombre = int.Parse(input);
+      Console.WriteLine($"Nombre : {nombre}");
+    } catch (FormatException) {
+      Console.WriteLine("Erreur : Entrée invalide !");
+    } catch (Exception ex) {
+      Console.WriteLine($"Erreur générale : {ex.Message}");
+    } finally {
+      Console.WriteLine("Opération terminée.");
+    }
+  }
+}
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche un message d’erreur si l’entrée n’est pas un nombre, et "Opération terminée" dans tous les cas.</p>
+
+    <h2>🧪 Exercice</h2>
+    <p>Crée un programme qui demande à l’utilisateur un nombre et utilise <code>try-catch</code> pour gérer une entrée invalide (par exemple, des lettres).</p>
+
+    <a href="indexcs.html" class="btn">↩️ Retour au sommaire</a>
+  </main>
+
+  <footer>
+    <p><a href="indexcs.html">← Retour au menu C#</a></p>
+  </footer>
+</body>
+</html>

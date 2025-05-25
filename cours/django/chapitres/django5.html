@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 5 - Les URLs et vues</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #092e20;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #092e20;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #092e20;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #092e20;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 5 : Les URLs et vues 🛤️</h1>
+    <p>Apprends à associer des URLs à des vues pour gérer les requêtes HTTP dans Django.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une vue et une URL ?</h2>
+    <p>Dans Django, une <strong>vue</strong> est une fonction ou classe Python qui traite une requête HTTP et retourne une réponse (ex. une page HTML). Une <strong>URL</strong> associe un chemin (ex. <code>/blog/</code>) à une vue via le fichier <code>urls.py</code>.</p>
+    <p><strong>Rôle des URLs :</strong></p>
+    <ul>
+      <li>Définissent les points d’accès de l’application.</li>
+      <li>Peuvent inclure des paramètres dynamiques (ex. <code>/article/42/</code>).</li>
+      <li>Supportent les noms de routes pour des liens réutilisables.</li>
+    </ul>
+
+    <h2>🔹 Exemple 1 : Vue simple</h2>
+    <p>Modifie <code>blog/views.py</code> :</p>
+    <pre><code>
+from django.http import HttpResponse
+
+def accueil(request):
+    return HttpResponse("Page d’accueil du blog")
+    </code></pre>
+    <p>Configure <code>blog/urls.py</code> :</p>
+    <pre><code>
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.accueil, name='accueil'),
+]
+    </code></pre>
+    <p>Inclus dans <code>monprojet/urls.py</code> :</p>
+    <pre><code>
+from django.urls import path, include
+
+urlpatterns = [
+    path('blog/', include('blog.urls')),
+]
+    </code></pre>
+    <p><strong>Résultat</strong> : <code>/blog/</code> affiche "Page d’accueil du blog".</p>
+
+    <h2>🔹 Exemple 2 : Vue avec paramètre</h2>
+    <p>Ajoute une vue avec un paramètre dans <code>blog/views.py</code> :</p>
+    <pre><code>
+def article(request, article_id):
+    return HttpResponse(f"Article numéro {article_id}")
+    </code></pre>
+    <p>Modifie <code>blog/urls.py</code> :</p>
+    <pre><code>
+urlpatterns = [
+    path('', views.accueil, name='accueil'),
+    path('article/<int:article_id>/', views.article, name='article'),
+]
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code><int:article_id></code> : Capture un entier dans l’URL.</li>
+      <li><code>article_id</code> : Passé comme argument à la vue.</li>
+    </ul>
+    <p><strong>Résultat</strong> : <code>/blog/article/42/</code> affiche "Article numéro 42".</p>
+
+    <h2>🔹 Exemple 3 : Vue basée sur une classe</h2>
+    <p>Crée une vue basée sur une classe dans <code>blog/views.py</code> :</p>
+    <pre><code>
+from django.views import View
+from django.http import HttpResponse
+
+class SalutView(View):
+    def get(self, request, nom="Visiteur"):
+        return HttpResponse(f"Salut, {nom} !")
+    </code></pre>
+    <p>Modifie <code>blog/urls.py</code> :</p>
+    <pre><code>
+urlpatterns = [
+    path('', views.accueil, name='accueil'),
+    path('article/<int:article_id>/', views.article, name='article'),
+    path('salut/<str:nom>/', views.SalutView.as_view(), name='salut'),
+]
+    </code></pre>
+    <p><strong>Résultat</strong> : <code>/blog/salut/Alice/</code> affiche "Salut, Alice !".</p>
+
+    <h2>🔹 Exemple 4 : Redirection</h2>
+    <p>Ajoute une vue pour rediriger dans <code>blog/views.py</code> :</p>
+    <pre><code>
+from django.shortcuts import redirect
+
+def rediriger(request):
+    return redirect('accueil')
+    </code></pre>
+    <p>Modifie <code>blog/urls.py</code> :</p>
+    <pre><code>
+urlpatterns = [
+    path('', views.accueil, name='accueil'),
+    path('rediriger/', views.rediriger, name='rediriger'),
+]
+    </code></pre>
+    <p><strong>Résultat</strong> : <code>/blog/rediriger/</code> redirige vers <code>/blog/</code>.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>URL non trouvée (404)</strong> : Vérifie les chemins dans <code>urls.py</code>.</li>
+      <li><strong>Nom de route manquant</strong> : Toujours définir <code>name</code> pour les redirections.</li>
+      <li><strong>Paramètre incorrect</strong> : Assure-toi que le type (<code>int</code>, <code>str</code>) correspond à l’URL.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée une vue dans <code>articles/views.py</code> qui affiche "Liste des articles".<br>
+    2. Configure une URL pour <code>/articles/</code> dans <code>articles/urls.py</code>.<br>
+    3. Crée une vue avec un paramètre <code>categorie</code> qui affiche "Catégorie : [nom]".<br>
+    4. Ajoute une URL <code>/articles/categorie/<str:nom>/</code>.<br>
+    5. Crée une vue de redirection de <code>/articles/ancien/</code> vers <code>/articles/</code>.</p>
+
+    <a href="django6.html" class="btn">➡️ Chapitre 6 : Templates avec Django</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Django</a></p>
+  </footer>
+</body>
+</html>

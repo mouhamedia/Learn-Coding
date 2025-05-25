@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 6 - Composants : création et communication</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #42b883;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(66, 184, 131, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+    }
+    main h2 {
+      color: #1b684f;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #42b883;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f7f2;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #2a9a78;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 6 : Composants : création et communication</h1>
+    <p>Apprends à créer des composants réutilisables et à gérer la communication entre eux.</p>
+  </header>
+
+  <main>
+    <h2>Création d’un composant</h2>
+    <p>Les composants Vue.js sont des unités réutilisables combinant HTML, JavaScript, et CSS. Ils sont généralement définis dans des fichiers <code>.vue</code> (Single-File Components).</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h3&gt;{{ title }}&lt;/h3&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  name: 'SimpleComponent',
+  props: ['title']
+};
+&lt;/script&gt;
+&lt;style scoped&gt;
+h3 {
+  color: #42b883;
+}
+&lt;/style&gt;
+</code></pre>
+    <p>Ce composant accepte une prop <code>title</code> et l’affiche dans un <code>h3</code>.</p>
+
+    <h2>Communication via props</h2>
+    <p>Les props permettent de passer des données d’un composant parent à un composant enfant.</p>
+    <pre><code>&lt;template&gt;
+  &lt;child-component :message="parentMessage" /&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import ChildComponent from './ChildComponent.vue';
+export default {
+  components: { ChildComponent },
+  data() {
+    return {
+      parentMessage: 'Salut depuis le parent !'
+    };
+  }
+};
+&lt;/script&gt;
+
+&lt;!-- ChildComponent.vue --&gt;
+&lt;template&gt;
+  &lt;p&gt;{{ message }}&lt;/p&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  props: ['message']
+};
+&lt;/script&gt;
+</code></pre>
+
+    <h2>Communication via événements</h2>
+    <p>Les composants enfants peuvent envoyer des données au parent en émettant des événements avec <code>$emit</code>.</p>
+    <pre><code>&lt;!-- ChildComponent.vue --&gt;
+&lt;template&gt;
+  &lt;button @click="$emit('custom-event', 'Message du fils')"&gt;Envoyer&lt;/button&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  emits: ['custom-event']
+};
+&lt;/script&gt;
+
+&lt;!-- ParentComponent.vue --&gt;
+&lt;template&gt;
+  &lt;child-component @custom-event="handleEvent" /&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import ChildComponent from './ChildComponent.vue';
+export default {
+  components: { ChildComponent },
+  methods: {
+    handleEvent(message) {
+      console.log('Événement reçu :', message);
+    }
+  }
+};
+&lt;/script&gt;
+</code></pre>
+
+    <h2>Utilisation des slots</h2>
+    <p>Les slots permettent d’injecter du contenu dynamique dans un composant.</p>
+    <pre><code>&lt;!-- Card.vue --&gt;
+&lt;template&gt;
+  &lt;div class="card"&gt;
+    &lt;slot&gt;Contenu par défaut&lt;/slot&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;style scoped&gt;
+.card {
+  border: 1px solid #42b883;
+  padding: 1rem;
+  border-radius: 8px;
+}
+&lt;/style&gt;
+
+&lt;!-- Parent.vue --&gt;
+&lt;template&gt;
+  &lt;card&gt;
+    &lt;h3&gt;Titre personnalisé&lt;/h3&gt;
+    &lt;p&gt;Contenu personnalisé.&lt;/p&gt;
+  &lt;/card&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import Card from './Card.vue';
+export default {
+  components: { Card }
+};
+&lt;/script&gt;
+</code></pre>
+
+    <h2>Exemple pratique : Liste de tâches</h2>
+    <p>Voici un exemple avec un composant parent (<code>TaskList</code>) et un composant enfant (<code>TaskItem</code>) :</p>
+    <pre><code>&lt;!-- TaskItem.vue --&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;span :class="{ completed: task.completed }"&gt;{{ task.text }}&lt;/span&gt;
+    &lt;button @click="$emit('toggle', task.id)"&gt;Basculer&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  props: ['task'],
+  emits: ['toggle']
+};
+&lt;/script&gt;
+&lt;style scoped&gt;
+.completed {
+  text-decoration: line-through;
+  color: #888;
+}
+button {
+  margin-left: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background-color: #42b883;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+button:hover {
+  background-color: #2a9a78;
+}
+&lt;/style&gt;
+
+&lt;!-- TaskList.vue --&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;task-item
+      v-for="task in tasks"
+      :key="task.id"
+      :task="task"
+      @toggle="toggleTask"
+    /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import TaskItem from './TaskItem.vue';
+export default {
+  components: { TaskItem },
+  data() {
+    return {
+      tasks: [
+        { id: 1, text: 'Tâche 1', completed: false },
+        { id: 2, text: 'Tâche 2', completed: false }
+      ]
+    };
+  },
+  methods: {
+    toggleTask(id) {
+      const task = this.tasks.find(t => t.id === id);
+      task.completed = !task.completed;
+    }
+  }
+};
+&lt;/script&gt;
+</code></pre>
+    <p>Cet exemple montre comment un composant enfant émet un événement pour modifier l’état dans le parent.</p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Valide les props avec des types et des valeurs par défaut.</li>
+          <li>Déclare explicitement les événements émis avec <code>emits</code>.</li>
+          <li>Utilise des slots pour des composants flexibles et réutilisables.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="vue5.html">← Chapitre précédent</a>
+      <a href="vue7.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

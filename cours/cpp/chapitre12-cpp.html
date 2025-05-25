@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 12 - Encapsulation</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 12 : Encapsulation ⚙️</h1>
+    <p>Protège les données de tes objets avec l’encapsulation.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que l’encapsulation ?</h2>
+    <p>L’encapsulation consiste à cacher les données d’un objet et à ne les modifier qu’avec des méthodes spéciales.</p>
+
+    <h2>📌 Attributs privés</h2>
+    <p>Utilise <code>private</code> pour empêcher l’accès direct aux attributs.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+class Compte {
+private:
+    double solde;
+
+public:
+    Compte(double s) {
+        solde = s;
+    }
+};
+</code></pre>
+
+    <h2>💻 Getters et setters</h2>
+    <p>Les getters récupèrent une valeur, les setters la modifient.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+class Compte {
+private:
+    double solde;
+
+public:
+    Compte(double s) {
+        solde = s;
+    }
+    double getSolde() {
+        return solde;
+    }
+    void setSolde(double s) {
+        if (s >= 0) {
+            solde = s;
+        }
+    }
+};
+
+int main() {
+    Compte c(100.0);
+    c.setSolde(150.0);
+    cout << "Solde : " << c.getSolde() << endl;
+    return 0;
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée une classe <code>Etudiant</code> avec un attribut privé <code>note</code> et des getters/setters.</p>
+    <pre><code>
+#include <iostream>
+using namespace std;
+
+class Etudiant {
+private:
+    int note;
+
+public:
+    Etudiant(int n) {
+        note = n;
+    }
+    int getNote() {
+        return note;
+    }
+    void setNote(int n) {
+        if (n >= 0 && n <= 20) {
+            note = n;
+        }
+    }
+};
+
+int main() {
+    Etudiant e(15);
+    e.setNote(18);
+    cout << "Note : " << e.getNote() << endl;
+    return 0;
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://onlinegdb.com" target="_blank">OnlineGDB</a> !</p>
+
+    <a href="chapitre13-cpp.html" class="btn">➡️ Chapitre 13 : Héritage</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre11-cpp.html">← Chapitre 11 : Constructeurs et destructeurs</a> |
+      <a href="index.html">Retour au menu C++</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 5 - Événements et gestion du formulaire</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #42b883;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(66, 184, 131, 0.4);
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+    }
+    main h2 {
+      color: #1b684f;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    main p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    main pre {
+      background: #f7f9ff;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 4px solid #42b883;
+    }
+    main code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tip {
+      background: #e6f7f2;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid #2a9a78;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+    .navigation a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 #ddd;
+    }
+    footer a {
+      color: #42b883;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #2a9a78;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 5 : Événements et gestion du formulaire</h1>
+    <p>Apprends à gérer les interactions utilisateur et les formulaires avec Vue.js.</p>
+  </header>
+
+  <main>
+    <h2>Gérer les événements avec v-on</h2>
+    <p>La directive <code>v-on</code> (raccourci <code>@</code>) permet de lier des événements DOM, comme les clics ou les pressions de touches, à des méthodes dans ton composant.</p>
+    <pre><code>&lt;template&gt;
+  &lt;button @click="sayHello"&gt;Cliquez-moi&lt;/button&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  methods: {
+    sayHello() {
+      alert('Bonjour depuis Vue.js !');
+    }
+  }
+};
+&lt;/script&gt;
+</code></pre>
+    <p>Dans cet exemple, un clic sur le bouton déclenche la méthode <code>sayHello</code>.</p>
+
+    <h2>Modificateurs d’événements</h2>
+    <p>Vue.js propose des modificateurs pour simplifier la gestion des événements, comme <code>.stop</code> (arrête la propagation) ou <code>.prevent</code> (empêche le comportement par défaut).</p>
+    <pre><code>&lt;template&gt;
+  &lt;div @click="outerClick"&gt;
+    &lt;button @click.stop="innerClick"&gt;Clic interne&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  methods: {
+    outerClick() {
+      console.log('Clic externe');
+    },
+    innerClick() {
+      console.log('Clic interne');
+    }
+  }
+};
+&lt;/script&gt;
+</code></pre>
+    <p>Le modificateur <code>.stop</code> empêche le clic sur le bouton de déclencher l’événement du <code>div</code> parent.</p>
+
+    <h2>Gestion des formulaires avec v-model</h2>
+    <p>La directive <code>v-model</code> synchronise les données des formulaires avec l’état du composant, créant une liaison bidirectionnelle pour les inputs, checkboxes, et selects.</p>
+    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;input type="text" v-model="username" placeholder="Nom d’utilisateur" /&gt;
+    &lt;p&gt;Nom saisi : {{ username }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      username: ''
+    };
+  }
+};
+&lt;/script&gt;
+</code></pre>
+
+    <h2>Exemple pratique : Formulaire d’inscription</h2>
+    <p>Voici un formulaire complet avec différents types de champs :</p>
+    <pre><code>&lt;template&gt;
+  &lt;form @submit.prevent="submitForm"&gt;
+    &lt;div&gt;
+      &lt;label&gt;Nom :&lt;/label&gt;
+      &lt;input v-model="form.name" placeholder="Entrez votre nom" /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;label&gt;Email :&lt;/label&gt;
+      &lt;input v-model="form.email" type="email" placeholder="Entrez votre email" /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;label&gt;&lt;input type="checkbox" v-model="form.newsletter"&gt; S’abonner à la newsletter&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;label&gt;Rôle :&lt;/label&gt;
+      &lt;select v-model="form.role"&gt;
+        &lt;option value="user"&gt;Utilisateur&lt;/option&gt;
+        &lt;option value="admin"&gt;Administrateur&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+    &lt;button type="submit"&gt;S’inscrire&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      form: {
+        name: '',
+        email: '',
+        newsletter: false,
+        role: 'user'
+      }
+    };
+  },
+  methods: {
+    submitForm() {
+      console.log('Données du formulaire :', this.form);
+    }
+  }
+};
+&lt;/script&gt;
+&lt;style scoped&gt;
+div {
+  margin-bottom: 1rem;
+}
+label {
+  display: inline-block;
+  width: 100px;
+}
+button {
+  padding: 0.5rem 1rem;
+  background-color: #42b883;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+button:hover {
+  background-color: #2a9a78;
+}
+&lt;/style&gt;
+</code></pre>
+    <p>Ce formulaire utilise <code>v-model</code> pour lier les champs et <code>@submit.prevent</code> pour gérer la soumission sans recharger la page.</p>
+
+    <div class="tip">
+      <p><strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Utilise <code>.prevent</code> pour éviter le rechargement lors de la soumission de formulaires.</li>
+          <li>Valide les données avant soumission (ex. : vérifier que l’email est valide).</li>
+          <li>Utilise des modificateurs comme <code>.enter</code> pour des interactions spécifiques.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="navigation">
+      <a href="vue4.html">← Chapitre précédent</a>
+      <a href="vue6.html">Chapitre suivant →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+    <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p>
+  </footer>
+</body>
+</html>

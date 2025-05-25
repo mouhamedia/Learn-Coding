@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 4 - Les vues avec Blade</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: monospace;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 4 : Les vues avec Blade 🖼️</h1>
+    <p>Apprends à créer des pages dynamiques avec Blade, le moteur de templates de Laravel.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que Blade ?</h2>
+    <p>Blade est le moteur de templates de Laravel. Il permet de créer des vues dynamiques avec une syntaxe simple, tout en intégrant du PHP. Les fichiers Blade ont l’extension <code>.blade.php</code> et sont stockés dans <code>resources/views/</code>.</p>
+    <p><strong>Avantages de Blade :</strong></p>
+    <ul>
+      <li>Syntaxe claire avec des directives comme <code>@if</code>, <code>@foreach</code>.</li>
+      <li>Protection contre les attaques XSS grâce à l’échappement automatique des variables.</li>
+      <li>Réutilisation du code avec les layouts et les partials.</li>
+    </ul>
+    <p><strong>Exemple :</strong> Une vue Blade peut afficher un nom passé par une route ou montrer une liste d’articles depuis une base de données.</p>
+
+    <h2>🔹 Créer une vue simple</h2>
+    <p>Crée un fichier <code>resources/views/bienvenue.blade.php</code> :</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Bienvenue&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Bienvenue, {{ '$nom' }} !&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+    <p>Modifie <code>routes/web.php</code> :</p>
+    <pre><code>Route::get('/bienvenue/{nom}', function ($nom) {
+    return view('bienvenue', ['nom' => $nom]);
+});</code></pre>
+
+    <h2>🔹 Directives Blade</h2>
+    <p><strong>Exemple 1 : Condition avec @if</strong></p>
+    <pre><code>&lt;h1&gt;Salut, {{ '$nom' }} !&lt;/h1&gt;
+@if($nom == 'Admin')
+    &lt;p&gt;Accès administrateur&lt;/p&gt;
+@else
+    &lt;p&gt;Utilisateur standard&lt;/p&gt;
+@endif</code></pre>
+
+    <p><strong>Exemple 2 : Boucle avec @foreach</strong></p>
+    <pre><code>&lt;ul&gt;
+@foreach($articles as $article)
+    &lt;li&gt;{{ '$article' }}&lt;/li&gt;
+@endforeach
+&lt;/ul&gt;
+
+@empty($articles)
+    &lt;p&gt;Aucun article disponible.&lt;/p&gt;
+@endempty</code></pre>
+    <p>Route associée :</p>
+    <pre><code>Route::get('/articles', function () {
+    $articles = ['Article 1', 'Article 2', 'Article 3'];
+    return view('articles', ['articles' => $articles]);
+});</code></pre>
+
+    <p><strong>Exemple 3 : Inclusion d’un partial</strong></p>
+    <p>Fichier <code>resources/views/partials/entete.blade.php</code> :</p>
+    <pre><code>&lt;header&gt;
+    &lt;h1&gt;Mon site&lt;/h1&gt;
+&lt;/header&gt;</code></pre>
+
+    <p>Et dans une vue :</p>
+    <pre><code>@include('partials.entete')
+&lt;p&gt;Contenu de la page&lt;/p&gt;</code></pre>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Variable non définie</strong> : Toutes les variables doivent être passées via <code>view()</code>.</li>
+      <li><strong>Syntaxe incorrecte</strong> : Utilise <code>{{ }}</code> pour afficher une variable.</li>
+      <li><strong>Nom de vue incorrect</strong> : Utilise <code>view('nom')</code> sans extension.</li>
+      <li><strong>XSS</strong> : Utilise <code>{{ }}</code> au lieu de <code>{!! !!}</code> sauf si tu es certain du contenu.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <ol>
+      <li>Crée une vue <code>liste.blade.php</code> qui affiche une liste de produits (ex : <code>['Livre', 'Stylo', 'Cahier']</code>) avec <code>@foreach</code>.</li>
+      <li>Ajoute <code>@if</code> pour afficher "Liste vide" si aucun produit.</li>
+      <li>Crée un partial <code>footer.blade.php</code> avec un copyright et inclus-le.</li>
+      <li>Crée une route <code>/produits</code> et passe les produits à la vue.</li>
+      <li><strong>Bonus</strong> : Affiche <code>$titre</code> avec <code>@isset</code>.</li>
+    </ol>
+
+    <a href="laravel5.html" class="btn">➡️ Chapitre 5 : Les contrôleurs</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Laravel</a></p>
+  </footer>
+</body>
+</html>

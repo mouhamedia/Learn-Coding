@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 5 - Structures de contrôle</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #003049; color: white; padding: 2rem; text-align: center; }
+    main { max-width: 800px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h1, h2 { color: #003049; }
+    pre { background: #eee; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    .btn { display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem; background-color: #003049; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 5 : Structures de contrôle ☕</h1>
+    <p>Prends des décisions et répète des actions dans ton code.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les conditions</h2>
+    <p>Les conditions permettent d’exécuter du code si une situation est vraie. Utilise <code>if</code>, <code>else</code>, et <code>switch</code>.</p>
+    <pre><code>
+public class Condition {
+    public static void main(String[] args) {
+        int age = 16;
+        if (age >= 18) {
+            System.out.println("Vous êtes majeur.");
+        } else {
+            System.out.println("Vous êtes mineur.");
+        }
+    }
+}
+</code></pre>
+
+    <h2>📌 Les boucles</h2>
+    <p>Les boucles répètent du code plusieurs fois :</p>
+    <ul>
+      <li><code>for</code> : Pour un nombre précis de répétitions.</li>
+      <li><code>while</code> : Tant qu’une condition est vraie.</li>
+      <li><code>do-while</code> : Exécute au moins une fois.</li>
+    </ul>
+    <pre><code>
+public class Boucle {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Numéro : " + i);
+        }
+    }
+}
+</code></pre>
+
+    <h2>💻 Exemple avec switch</h2>
+    <p>Le <code>switch</code> est utile pour plusieurs choix :</p>
+    <pre><code>
+public class Jour {
+    public static void main(String[] args) {
+        int jour = 3;
+        switch (jour) {
+            case 1:
+                System.out.println("Lundi");
+                break;
+            case 2:
+                System.out.println("Mardi");
+                break;
+            case 3:
+                System.out.println("Mercredi");
+                break;
+            default:
+                System.out.println("Jour inconnu");
+        }
+    }
+}
+</code></pre>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui affiche la table de multiplication d’un nombre (par exemple, 7).</p>
+    <pre><code>
+public class TableMultiplication {
+    public static void main(String[] args) {
+        int nombre = 7;
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(nombre + " x " + i + " = " + (nombre * i));
+        }
+    }
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a> !</p>
+
+    <a href="chapitre6-java.html" class="btn">➡️ Chapitre 6 : Méthodes</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="chapitre4-java.html">← Chapitre 4 : Opérateurs</a> |
+      <a href="index.html">Retour au menu Java</a>
+    </p>
+  </footer>
+</body>
+</html>

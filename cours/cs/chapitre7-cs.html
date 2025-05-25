@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 7 - Tableaux</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 7 : Tableaux 📚</h1>
+    <p>Apprends à stocker et manipuler des listes de données avec les tableaux.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les tableaux</h2>
+    <p>Les tableaux stockent une liste de valeurs du même type avec une taille fixe.</p>
+    <pre><code>
+using System;
+
+class Program {
+  static void Main() {
+    int[] nombres = { 1, 2, 3, 4, 5 };
+    Console.WriteLine($"Premier élément : {nombres[0]}");
+    Console.WriteLine($"Taille : {nombres.Length}");
+  }
+}
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche :
+      <br>Premier élément : 1
+      <br>Taille : 5
+    </p>
+
+    <h2>🔹 Parcourir un tableau</h2>
+    <p>Utilise une boucle pour accéder à tous les éléments.</p>
+    <pre><code>
+using System;
+
+class Program {
+  static void Main() {
+    string[] fruits = { "pomme", "banane", "orange" };
+    foreach (string fruit in fruits) {
+      Console.WriteLine(fruit);
+    }
+  }
+}
+    </code></pre>
+    <p><strong>Résultat</strong> : Affiche chaque fruit sur une ligne.</p>
+
+    <h2>🧪 Exercice</h2>
+    <p>Crée un tableau de 5 nombres, puis affiche leur somme en utilisant une boucle <code>for</code>.</p>
+
+    <a href="chapitre8-cs.html" class="btn">➡️ Chapitre 8 : Classes et objets</a>
+  </main>
+
+  <footer>
+    <p><a href="indexcs.html">← Retour au menu C#</a></p>
+  </footer>
+</body>
+</html>

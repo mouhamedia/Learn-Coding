@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 7 - Cycle de vie des composants</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background-color: #4a54f1;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(74, 84, 241, 0.4);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #dcdcdccc;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f0f4ff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(74, 84, 241, 0.15);
+    }
+    h1, h2 {
+      color: #2c3e95;
+    }
+    pre {
+      background: #e6eaff;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #4a54f1;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 1.8rem;
+      font-size: 1rem;
+      background-color: #f7f9ff;
+      color: #444;
+    }
+    a {
+      color: #4a54f1;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 7 : Cycle de vie des composants ⏳</h1>
+    <p>Comprends les phases du cycle de vie des composants React pour gérer leur création, mise à jour et suppression.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu'est-ce que le cycle de vie des composants ?</h2>
+    <p>Chaque composant React passe par des phases : <strong>montage</strong> (création), <strong>mise à jour</strong> (changements d’état ou de props), et <strong>démontage</strong> (suppression). Ces phases permettent d’exécuter du code à des moments précis, comme initialiser des données ou nettoyer des ressources.</p>
+    <p><strong>Caractéristiques principales :</strong></p>
+    <ul>
+      <li><strong>Montage</strong>: Le composant est créé et inséré dans le DOM.</li>
+      <li><strong>Mise à jour</strong>: Le composant se re-rend en réponse à des changements.</li>
+      <li><strong>Démontage</strong>: Le composant est retiré du DOM.</li>
+      <li><strong>Outils</strong>: Méthodes de classe (<code>componentDidMount</code>) ou hooks (<code>useEffect</code>).</li>
+    </ul>
+
+    <h2>🔹 Pourquoi gérer le cycle de vie ?</h2>
+    <p>Le cycle de vie permet d’effectuer des tâches comme charger des données à l’initialisation, réagir aux mises à jour, ou libérer des ressources (ex. timers) pour éviter les fuites mémoire.</p>
+    <p><strong>Exemple</strong>: Charger des données d’une API lors du montage et arrêter un minuteur lors du démontage.</p>
+
+    <h2>🔹 Exemple 1 : Chargement de données au montage</h2>
+    <p>Utilise <code>useEffect</code> pour charger des données :</p>
+    <pre><code>
+// src/App.js
+import React, { useState, useEffect } from 'react';
+
+function DataFetcher() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts/1')
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
+
+  return <p>{data ? data.title : 'Chargement...'}</p>;
+}
+
+export default DataFetcher;
+    </code></pre>
+    <p><strong>Explication</strong>:</p>
+    <ul>
+      <li><code>useEffect</code>: Exécuté après le montage (tableau vide <code>[]</code>).</li>
+      <li><code>fetch</code>: Charge les données d’une API.</li>
+      <li><code>setData</code>: Met à jour l’état pour afficher le titre.</li>
+    </ul>
+    <p><strong>Résultat</strong>: Affiche le titre du post ou “Chargement...” à <code>http://localhost:3000</code>.</p>
+
+    <h2>🔹 Exemple 2 : componentDidMount dans une classe</h2>
+    <p>Charge des données avec une classe :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+class DataFetcherClass extends React.Component {
+  state = { data: null };
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/posts/1')
+      .then((res) => res.json())
+      .then((data) => this.setState({ data }));
+  }
+
+  render() {
+    return <p>{this.state.data ? this.state.data.title : 'Chargement...'}</p>;
+  }
+}
+
+export default DataFetcherClass;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche le titre du post après chargement.</p>
+
+    <h2>🔹 Exemple 3 : Nettoyage avec useEffect</h2>
+    <p>Utilise <code>useEffect</code> pour nettoyer un minuteur :</p>
+    <pre><code>
+// src/App.js
+import React, { useEffect } from 'react';
+
+function Timer() {
+  useEffect(() => {
+    const timer = setInterval(() => {
+      console.log('Tick');
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return <p>Regarde la console pour les ticks !</p>;
+}
+
+export default Timer;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche “Tick” toutes les secondes dans la console, arrêté au démontage.</p>
+
+    <h2>🔹 Exemple 4 : Mise à jour avec componentDidUpdate</h2>
+    <p>Réagit aux changements de props dans une classe :</p>
+    <pre><code>
+// src/App.js
+import React from 'react';
+
+class Profile extends React.Component {
+  state = { message: '' };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.name !== this.props.name) {
+      this.setState({ message: `Nom changé : ${this.props.name}` });
+    }
+  }
+
+  render() {
+    return <p>{this.state.message}</p>;
+  }
+}
+
+function App() {
+  return <Profile name="Alice" />;
+}
+
+export default App;
+    </code></pre>
+    <p><strong>Résultat</strong>: Affiche un message lors du changement de <code>name</code>.</p>
+
+    <h2>🔹 Exemple 5 : Abonnement avec useEffect</h2>
+    <p>Gère un abonnement avec nettoyage :</p>
+    <pre><code>
+// src/App.js
+import React, { useState, useEffect } from 'react';
+
+function Subscriber() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setCount((c) => c + 1);
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return <p>Compte : {count}</p>;
+}
+
+export default Subscriber;
+    </code></pre>
+    <p><strong>Résultat</strong>: Incrémente le compteur chaque seconde, arrêté au démontage.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Oubli du nettoyage</strong>: Sans retour dans <code>useEffect</code>, les timers ou abonnements causent des fuites mémoire.</li>
+      <li><strong>Boucles infinies</strong>: Omettre le tableau de dépendances dans <code>useEffect</code> peut provoquer des re-rendus incessants.</li>
+      <li><strong>Utilisation de méthodes de classe dans les fonctions</strong>: <code>componentDidMount</code> n’existe pas dans les composants fonctionnels.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Crée un projet React avec <code>npx create-react-app mon-app</code>.<br>
+    2. Crée un composant <code>Clock</code> qui affiche l’heure actuelle, mise à jour chaque seconde avec <code>useEffect</code>.<br>
+    3. Assure-toi que le minuteur est nettoyé au démontage.<br>
+    4. Crée un fichier texte expliquant en 3 phrases ce que fait <code>useEffect</code>.</p>
+
+    <a href="react6.html" class="btn">⬅️ Chapitre 6 : Gestion des événements</a>
+    <a href="react8.html" class="btn">➡️ Chapitre 8 : Hooks React</a>
+  </main>
+
+  <footer>
+    
+     <p><a href="../index .html">← Retour au menu React</a></p>
+  </footer>
+</body>
+</html>

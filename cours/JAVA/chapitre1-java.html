@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 1 - Introduction à Java</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 1 : Introduction à Java ☕</h1>
+    <p>Découvre les bases de Java, un langage puissant et orienté objet.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que Java ?</h2>
+    <p>Java est un langage de programmation orienté objet, créé en 1995 par Sun Microsystems (maintenant Oracle). Il est connu pour :</p>
+    <ul>
+      <li>Sa portabilité : "Écris une fois, exécute partout" grâce à la JVM (Java Virtual Machine).</li>
+      <li>Ses usages : applications web, mobiles (Android), jeux, et entreprise.</li>
+      <li>Sa robustesse : gestion des erreurs et sécurité intégrées.</li>
+    </ul>
+
+    <h2>📌 Pourquoi apprendre Java ?</h2>
+    <ul>
+      <li>Populaire dans l’industrie (Android, serveurs, big data).</li>
+      <li>Excellent pour apprendre la programmation orientée objet.</li>
+      <li>Grande communauté et nombreuses bibliothèques.</li>
+    </ul>
+
+    <h2>💻 Installer le JDK</h2>
+    <p>Pour programmer en Java, tu as besoin du Java Development Kit (JDK) :</p>
+    <ul>
+      <li><strong>Windows/Mac/Linux</strong> : Télécharge le JDK sur <a href="https://www.oracle.com/java/technologies/downloads/" target="_blank">le site d’Oracle</a> ou utilise OpenJDK.</li>
+      <li>Configure la variable d’environnement <code>JAVA_HOME</code> et ajoute <code>bin</code> au PATH.</li>
+      <li>Vérifie l’installation : <code>java -version</code> et <code>javac -version</code> dans un terminal.</li>
+      <li><strong>En ligne</strong> : Utilise <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a>.</li>
+    </ul>
+
+    <h2>📥 Structure d’un programme Java</h2>
+    <p>Un programme Java est organisé en classes. Voici un exemple simple :</p>
+    <pre><code>
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Bonjour, monde !");
+    }
+}
+</code></pre>
+    <p><strong>Explications :</strong></p>
+    <ul>
+      <li><code>public class Main</code> : Définit une classe nommée <code>Main</code>.</li>
+      <li><code>public static void main</code> : Point d’entrée du programme.</li>
+      <li><code>System.out.println</code> : Affiche du texte dans la console.</li>
+    </ul>
+    <p>Pour compiler et exécuter : <code>javac Main.java</code> puis <code>java Main</code>.</p>
+
+    <h2>🛠 Exercice pratique</h2>
+    <p>Crée un programme qui affiche ton nom et une courte présentation.</p>
+    <pre><code>
+public class Presentation {
+    public static void main(String[] args) {
+        System.out.println("Je m'appelle Alice et je commence à apprendre Java !");
+    }
+}
+</code></pre>
+    <p>Teste ce code sur <a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a> !</p>
+
+    <a href="chapitre2-java.html" class="btn">➡️ Chapitre 2 : Premier programme Java</a>
+  </main>
+
+  <footer>
+    <p>
+      <a href="index.html">Retour au menu Java</a>
+    </p>
+  </footer>
+</body>
+</html>

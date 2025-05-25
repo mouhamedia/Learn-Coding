@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapitre 10 - Authentification et sécurité</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #003049;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003049;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #003049;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #003049;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 10 : Authentification et sécurité 🔐</h1>
+    <p>Apprends à implémenter un système d’authentification et à sécuriser ton application Laravel contre les attaques courantes.</p>
+  </header>
+
+  <main>
+    <h2>🔹 Pourquoi l’authentification et la sécurité ?</h2>
+    <p>L’authentification permet de vérifier l’identité des utilisateurs (connexion, inscription, déconnexion) et de restreindre l’accès à certaines parties de l’application. La sécurité protège contre des menaces comme les attaques CSRF, XSS, ou les injections SQL, garantissant la fiabilité et la confidentialité des données.</p>
+    <p><strong>Fonctionnalités clés de Laravel :</strong></p>
+    <ul>
+      <li><strong>Authentification intégrée</strong> : Packages comme <code>laravel/breeze</code> ou <code>laravel/ui</code> pour une mise en place rapide.</li>
+      <li><strong>Middleware <code>auth</code></strong> : Restreint l’accès aux utilisateurs connectés.</li>
+      <li><strong>Protection CSRF</strong> : Token automatique pour sécuriser les formulaires.</li>
+      <li><strong>Échappement XSS</strong> : Blade échappe les données par défaut.</li>
+      <li><strong>Hachage des mots de passe</strong> : Stockage sécurisé avec <code>bcrypt</code>.</li>
+    </ul>
+
+    <h2>🔹 Exemple 1 : Installer Laravel Breeze</h2>
+    <p><code>laravel/breeze</code> est un package simple pour ajouter l’authentification (inscription, connexion, réinitialisation de mot de passe). Installe-le dans ton projet :</p>
+    <pre><code>
+composer require laravel/breeze --dev
+php artisan breeze:install
+npm install && npm run dev
+php artisan migrate
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>composer require laravel/breeze</code> : Ajoute Breeze comme dépendance.</li>
+      <li><code>breeze:install</code> : Configure les routes, vues, contrôleurs, et migrations pour l’authentification.</li>
+      <li><code>npm install && npm run dev</code> : Compile les assets CSS et JavaScript (ex. Tailwind CSS).</li>
+      <li><code>php artisan migrate</code> : Crée la table <code>users</code> pour stocker les utilisateurs.</li>
+    </ul>
+    <p><strong>Résultat</strong> : Ton application inclut maintenant des pages pour <code>/login</code>, <code>/register</code>, <code>/dashboard</code>, et <code>/logout</code>. Accède à <code>http://localhost:8000/register</code> pour tester l’inscription.</p>
+
+    <h2>🔹 Exemple 2 : Protéger une route avec le middleware auth</h2>
+    <p>Crée une route protégée qui n’est accessible qu’aux utilisateurs connectés. Modifie <code>routes/web.php</code> :</p>
+    <pre><code>
+use Illuminate\Support\Facades\Route;
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth');
+    </code></pre>
+    <p>Crée <code>resources/views/dashboard.blade.php</code> :</p>
+    <pre><code>
+<h1>Tableau de bord</h1>
+<p>Bienvenue, {{ auth()->user()->name }} !</p>
+<a href="{{ route('logout') }}">Se déconnecter</a>
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>middleware('auth')</code> : Vérifie si un utilisateur est connecté. Sinon, redirige vers <code>/login</code>.</li>
+      <li><code>auth()->user()->name</code> : Récupère le nom de l’utilisateur connecté.</li>
+      <li><code>route('logout')</code> : Utilise une route nommée pour la déconnexion (fournie par Breeze).</li>
+    </ul>
+    <p><strong>Résultat</strong> : Accède à <code>/dashboard</code> après connexion pour voir un message personnalisé. Sans connexion, tu es redirigé vers la page de login.</p>
+
+    <h2>🔹 Exemple 3 : Formulaire de connexion personnalisé</h2>
+    <p>Breeze fournit des vues par défaut, mais tu peux les personnaliser. Modifie <code>resources/views/auth/login.blade.php</code> pour un formulaire simplifié :</p>
+    <pre><code>
+<x-guest-layout>
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
+        <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" value="{{ old('email') }}" required>
+            @error('email')
+                <span style="color: red;">{{ $message }}</span>
+            @enderror
+        </div>
+        <div>
+            <label for="password">Mot de passe</label>
+            <input id="password" type="password" name="password" required>
+            @error('password')
+                <span style="color: red;">{{ $message }}</span>
+            @enderror
+        </div>
+        <button type="submit">Se connecter</button>
+    </form>
+</x-guest-layout>
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>@csrf</code> : Ajoute un token pour sécuriser le formulaire.</li>
+      <li><code>old('email')</code> : Restaure l’email saisi en cas d’erreur.</li>
+      <li><code>@error</code> : Affiche les messages d’erreur (ex. "Email invalide").</li>
+      <li><code>x-guest-layout</code> : Composant Blade fourni par Breeze pour une mise en page cohérente.</li>
+    </ul>
+    <p><strong>Résultat</strong> : La page <code>/login</code> affiche un formulaire stylisé. Une tentative avec des identifiants incorrects montre des erreurs.</p>
+
+    <h2>🔹 Exemple 4 : Afficher les informations de l’utilisateur</h2>
+    <p>Crée une route pour afficher le profil de l’utilisateur connecté. Ajoute dans <code>routes/web.php</code> :</p>
+    <pre><code>
+Route::get('/profil', function () {
+    return view('profil', ['user' => auth()->user()]);
+})->middleware('auth');
+    </code></pre>
+    <p>Crée <code>resources/views/profil.blade.php</code> :</p>
+    <pre><code>
+<h1>Mon profil</h1>
+<p>Nom : {{ $user->name }}</p>
+<p>Email : {{ $user->email }}</p>
+<p>Inscrit le : {{ $user->created_at->format('d/m/Y') }}</p>
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>auth()->user()</code> : Récupère l’objet utilisateur connecté.</li>
+      <li><code>created_at->format</code> : Formate la date d’inscription.</li>
+      <li><code>middleware('auth')</code> : Garantit que seul l’utilisateur connecté voit son profil.</li>
+    </ul>
+    <p><strong>Résultat</strong> : <code>/profil</code> affiche les détails de l’utilisateur (nom, email, date d’inscription).</p>
+
+    <h2>🔹 Exemple 5 : Sécuriser les formulaires contre CSRF</h2>
+    <p>Laravel protège automatiquement les formulaires avec un token CSRF. Voici un exemple de formulaire sécurisé pour mettre à jour le nom de l’utilisateur :</p>
+    <p>Crée <code>resources/views/profil/edit.blade.php</code> :</p>
+    <pre><code>
+<h1>Modifier mon profil</h1>
+<form method="POST" action="/profil/update">
+    @csrf
+    @method('PATCH')
+    <label>Nouveau nom :</label>
+    <input type="text" name="name" value="{{ auth()->user()->name }}">
+    @error('name')
+        <span style="color: red;">{{ $message }}</span>
+    @enderror
+    <button type="submit">Mettre à jour</button>
+</form>
+    </code></pre>
+    <p>Ajoute une route et un contrôleur :</p>
+    <pre><code>
+php artisan make:controller ProfilController
+    </code></pre>
+    <p>Modifie <code>app/Http/Controllers/ProfilController.php</code> :</p>
+    <pre><code>
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ProfilController extends Controller
+{
+    public function edit()
+    {
+        return view('profil.edit');
+    }
+
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+        ]);
+
+        auth()->user()->update($validated);
+        return redirect('/profil')->with('success', 'Profil mis à jour !');
+    }
+}
+    </code></pre>
+    <p>Ajoute les routes dans <code>routes/web.php</code> :</p>
+    <pre><code>
+Route::get('/profil/edit', [App\Http\Controllers\ProfilController::class, 'edit'])->middleware('auth');
+Route::patch('/profil/update', [App\Http\Controllers\ProfilController::class, 'update'])->middleware('auth');
+    </code></pre>
+    <p><strong>Explication</strong> :</p>
+    <ul>
+      <li><code>@csrf</code> : Protège contre les attaques CSRF.</li>
+      <li><code>@method('PATCH')</code> : Simule une requête PATCH pour la mise à jour.</li>
+      <li><code>with('success')</code> : Affiche un message flash après la mise à jour.</li>
+    </ul>
+    <p><strong>Résultat</strong> : L’utilisateur peut modifier son nom à <code>/profil/edit</code>, et le changement est sécurisé.</p>
+
+    <h2>🔹 Mesures de sécurité intégrées</h2>
+    <p>Laravel offre plusieurs protections par défaut :</p>
+    <ul>
+      <li><strong>CSRF</strong> : Tous les formulaires POST, PUT, PATCH, et DELETE nécessitent un token <code>@csrf</code>.</li>
+      <li><strong>XSS</strong> : Blade échappe les données avec <code>{{ }}</code> pour éviter l’exécution de scripts malveillants.</li>
+      <li><strong>Injection SQL</strong> : Eloquent utilise des requêtes préparées pour sécuriser les interactions avec la base.</li>
+      <li><strong>Hachage des mots de passe</strong> : Les mots de passe sont hachés avec <code>bcrypt</code> avant stockage.</li>
+    </ul>
+    <p><strong>Exemple de hachage</strong> : Dans <code>app/Models/User.php</code>, Laravel gère automatiquement le hachage :</p>
+    <pre><code>
+// Lors de l'inscription
+$user = User::create([
+    'name' => $request->name,
+    'email' => $request->email,
+    'password' => bcrypt($request->password),
+]);
+    </code></pre>
+    <p><strong>Résultat</strong> : Le mot de passe est stocké de manière sécurisée dans la base.</p>
+
+    <h2>🔹 Erreurs courantes à éviter</h2>
+    <ul>
+      <li><strong>Oubli de <code>@csrf</code></strong> : Les formulaires POST échoueront sans token CSRF.</li>
+      <li><strong>Assets non compilés</strong> : Exécute <code>npm run dev</code> après <code>breeze:install</code> pour éviter des erreurs de style.</li>
+      <li><strong>Migrations manquantes</strong> : Vérifie que <code>php artisan migrate</code> a créé la table <code>users</code>.</li>
+      <li><strong>Accès non autorisé</strong> : Toujours utiliser <code>middleware('auth')</code> pour les routes sensibles.</li>
+    </ul>
+
+    <h2>📝 Exercice</h2>
+    <p>1. Installe <code>laravel/breeze</code> dans un projet Laravel et exécute les commandes pour configurer l’authentification.<br>
+    2. Teste l’inscription et la connexion via <code>/register</code> et <code>/login</code>.<br>
+    3. Crée une route protégée <code>/mon-profil</code> qui affiche le nom, l’email, et la date d’inscription de l’utilisateur connecté.<br>
+    4. Crée un formulaire sécurisé à <code>/mon-profil/edit</code> pour permettre à l’utilisateur de modifier son nom.<br>
+    5. Ajoute un message flash pour confirmer la mise à jour du profil.<br>
+    6. Vérifie que les routes protégées redirigent vers <code>/login</code> si l’utilisateur n’est pas connecté.</p>
+
+    <a href="../index.html" class="btn">↩️ Retour au sommaire</a>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Retour au menu Laravel</a></p>
+  </footer>
+</body>
+</html>
