@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 2 - Variables et affectation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #008080;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #008080;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #008080;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #008080;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 2 : Variables et affectation 📦</h1>
+    <p>Apprends à stocker et manipuler des données avec les variables, la base de tout algorithme !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une variable ?</h2>
+    <p>Une <strong>variable</strong> est comme une boîte étiquetée où tu peux stocker une valeur (un nombre, du texte, etc.). Chaque boîte a un nom et peut contenir un type de donnée spécifique.</p>
+    <p><strong>Analogie</strong> : Imagine une étagère avec des boîtes étiquetées "âge", "nom", etc. Tu places une valeur dans chaque boîte, et tu peux la modifier ou la récupérer plus tard.</p>
+
+    <h2>🔹 Types de données</h2>
+    <p>Les variables peuvent stocker différents types de données :</p>
+    <ul>
+      <li><strong>Entier</strong> : Un nombre sans décimale (ex. : 42).</li>
+      <li><strong>Réel</strong> : Un nombre avec décimales (ex. : 3.14).</li>
+      <li><strong>Chaîne</strong> : Du texte (ex. : "Bonjour").</li>
+      <li><strong>Booléen</strong> : Vrai ou Faux.</li>
+    </ul>
+
+    <h2>🔹 L’affectation</h2>
+    <p>L’<strong>affectation</strong> consiste à mettre une valeur dans une variable avec l’opérateur <code>←</code> (en pseudo-code) ou <code>=</code> (en Python). Exemple : <code>âge ← 25</code> signifie "la variable âge prend la valeur 25".</p>
+
+    <h2>💻 Exemple pratique</h2>
+    <p>Voici un algorithme qui calcule l’âge d’une personne dans 5 ans :</p>
+    <pre><code>
+# Pseudo-code
+Algorithme CalculAgeFutur
+    Entrée : age_actuel
+    Sortie : age_futur
+    Début
+        age_futur ← age_actuel + 5
+        Afficher "Dans 5 ans, tu auras ", age_futur, " ans."
+    Fin
+
+# Python
+age_actuel = 20
+age_futur = age_actuel + 5
+print(f"Dans 5 ans, tu auras {age_futur} ans.")  # Affiche : Dans 5 ans, tu auras 25 ans.
+    </code></pre>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Une variable est un conteneur nommé pour une valeur.</li>
+      <li>Les types de données définissent ce que la variable peut contenir.</li>
+      <li>L’affectation met une valeur dans une variable.</li>
+    </ul>
+
+    <h2>🚀 Pour aller plus loin</h2>
+    <p>Essaie de modifier l’exemple pour calculer l’âge dans 10 ans, ou utilise une variable pour stocker un nom et l’afficher avec un message personnalisé.</p>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie le code Python dans un environnement :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre3.html" class="btn">➡️ Chapitre 3 : Instructions conditionnelles</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu Algorithmes</a></p>
+  </footer>
+</body>
+</html>

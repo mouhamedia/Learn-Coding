@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 1 - Qu'est-ce que la POO ?</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 1 : Qu’est-ce que la POO ? 👨‍💻</h1>
+    <p>Découvre les bases de la Programmation Orientée Objet, un moyen simple d’organiser ton code !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que la POO ?</h2>
+    <p>La Programmation Orientée Objet (POO) est une façon d’écrire du code en utilisant des <strong>objets</strong>. Un objet, c’est comme une entité qui combine :</p>
+    <ul>
+      <li>Des <strong>données</strong> (ex. : la couleur d’une voiture).</li>
+      <li>Des <strong>comportements</strong> (ex. : une voiture peut rouler).</li>
+    </ul>
+    <p>La POO est utilisée dans des langages comme Python, Java ou C++ pour rendre le code clair et réutilisable.</p>
+
+    <h2>📌 Pourquoi utiliser la POO ?</h2>
+    <ul>
+      <li><strong>Clarté</strong> : Le code est organisé comme des objets du monde réel.</li>
+      <li><strong>Réutilisation</strong> : Tu peux réutiliser des bouts de code facilement.</li>
+      <li><strong>Maintenance</strong> : Plus simple à modifier ou à corriger.</li>
+      <li><strong>Flexibilité</strong> : Adapte ton code à différents besoins.</li>
+    </ul>
+
+    <h2>💡 Concepts clés de la POO</h2>
+    <p>La POO repose sur 4 idées principales :</p>
+    <ul>
+      <li><strong>Classes et objets</strong> : Une classe est un modèle, un objet est une instance de ce modèle.</li>
+      <li><strong>Encapsulation</strong> : Protéger les données en contrôlant leur accès.</li>
+      <li><strong>Héritage</strong> : Une classe peut hériter des propriétés d’une autre.</li>
+      <li><strong>Polymorphisme</strong> : Différents objets peuvent utiliser la même méthode de façon différente.</li>
+    </ul>
+
+    <h2>💻 Premier exemple en Python</h2>
+    <p>Voici un exemple simple : une classe <code>Voiture</code> qui représente une voiture.</p>
+    <pre><code>
+class Voiture:
+    def __init__(self, marque, couleur):
+        self.marque = marque
+        self.couleur = couleur
+    
+    def rouler(self):
+        print(f"La {self.couleur} {self.marque} roule !")
+
+# Créer un objet
+ma_voiture = Voiture("Toyota", "bleue")
+ma_voiture.rouler()  # Affiche : La bleue Toyota roule !
+    </code></pre>
+    <p>Dans cet exemple, <code>Voiture</code> est une <strong>classe</strong>, et <code>ma_voiture</code> est un <strong>objet</strong>.</p>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie ce code dans un environnement Python :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre2.html" class="btn">➡️ Chapitre 2 : Classes et objets</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu POO</a></p>
+  </footer>
+</body>
+</html>

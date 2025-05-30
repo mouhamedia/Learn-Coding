@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 2 - Classes et objets</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 2 : Classes et objets 🧱</h1>
+    <p>Apprends à créer des classes et des objets pour structurer ton code comme un pro !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une classe ?</h2>
+    <p>Une <strong>classe</strong> est comme un plan ou un modèle pour créer des objets. Elle définit :</p>
+    <ul>
+      <li>Les <strong>attributs</strong> (données, comme le nom ou l’âge).</li>
+      <li>Les <strong>méthodes</strong> (actions que l’objet peut effectuer).</li>
+    </ul>
+
+    <h2>🔹 Qu’est-ce qu’un objet ?</h2>
+    <p>Un <strong>objet</strong> est une instance d’une classe, c’est-à-dire un élément créé à partir de ce plan. Par exemple, une classe <code>Personne</code> peut créer des objets comme "Alice" ou "Bob".</p>
+
+    <h2>💻 Exemple en Python</h2>
+    <p>Voici une classe <code>Personne</code> avec un attribut (nom, âge) et une méthode (se présenter) :</p>
+    <pre><code>
+class Personne:
+    def __init__(self, nom, age):
+        self.nom = nom
+        self.age = age
+    
+    def se_presenter(self):
+        print(f"Salut, je m'appelle {self.nom} et j'ai {self.age} ans.")
+
+# Créer des objets
+personne1 = Personne("Alice", 25)
+personne2 = Personne("Bob", 30)
+
+personne1.se_presenter()  # Affiche : Salut, je m'appelle Alice et j'ai 25 ans.
+personne2.se_presenter()  # Affiche : Salut, je m'appelle Bob et j'ai 30 ans.
+    </code></pre>
+    <p>Dans cet exemple, <code>Personne</code> est la classe, et <code>personne1</code> et <code>personne2</code> sont des objets.</p>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Une <strong>classe</strong> est un modèle, un <strong>objet</strong> est une instance de ce modèle.</li>
+      <li>Le constructeur <code>__init__</code> initialise les attributs d’un objet.</li>
+      <li>Les méthodes sont des fonctions définies dans une classe.</li>
+    </ul>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie ce code dans un environnement Python :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre3.html" class="btn">➡️ Chapitre 3 : Attributs et méthodes</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu POO</a></p>
+  </footer>
+</body>
+</html>

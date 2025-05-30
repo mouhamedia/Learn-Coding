@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 9 - Intégration CSS et JS</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #e44d26;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #e44d26;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #e44d26;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #e44d26;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Intégration CSS et JS 🎨🖱️</h1>
+    <p>Ajoute du style et de l’interactivité à tes pages web !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que CSS et JavaScript ?</h2>
+    <p><strong>CSS</strong> (Cascading Style Sheets) stylise les pages HTML (couleurs, tailles, etc.), tandis que <strong>JavaScript</strong> ajoute de l’interactivité (boutons cliquables, animations).</p>
+    <p><strong>Analogie</strong> : HTML est le squelette, CSS est la peinture, et JavaScript est le moteur qui anime la page.</p>
+
+    <h2>🔹 Intégrer CSS</h2>
+    <p>Tu peux ajouter CSS via :
+      <ul>
+      <li><code>&lt;style&gt;</code> dans <code>&lt;head&gt;</code>.</li>
+      <li><code>&lt;link rel="style.css" href="style.css"&gt;</code> pour un fichier externe.</li>
+      <li>Exemple : <code>style="color: blue;"</code> directement dans une balise.</li>
+    </ul>
+
+    <h2>🔹 Intégrer</h2>
+    <p>Tu peux ajouter JavaScript via :
+      <ul>
+      <li><code>&lt;script&gt;</code> dans <code>&lt;head&gt;</code> ou <code>&lt;body&gt;</code>.</li>
+      <li><code>&lt;script src="script.js"&gt;&lt;</script&gt;</code> pour un fichier externe.</li>
+      <li>Exemple : <code>onclick="maFonction()"</code> dans une balise.</li>
+    </ul>
+
+    <h2>💻 Exemple pratique</h2>
+    <p>Voici une page avec CSS et JavaScript :</p>
+    <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;CSS et JS&lt;/title&gt;
+  &lt;style&gt;
+    h1 { color: blue; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Page stylée&lt;/h1&gt;
+  &lt;button onclick="montrerMessage"&gt;Cliquez ici !&lt;/button&gt;
+  &lt;script&gt;
+    function montrerMessage() {
+      alert('Bonjour !');
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+    <p>Cet exemple affiche un titre bleu et un bouton qui montre une alerte.</p>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>CSS stylise les éléments HTML.</li>
+      <li>JavaScript ajoute de l’interactivité.</li>
+      <li>Liez les fichiers externes pour organiser le code.</li>
+    </ul>
+
+    <h2>🚀 Pour aller plus loin</h2>
+    <p>Crée un bouton qui change la couleur d’un paragraphe avec JavaScript ou stylise un tableau avec CSS.</p>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie</p> le code HTML dans un environnement :</p>
+    <ul>
+      <li><a href="https://replit.com/languages/html" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li> <a href="https://jsfiddle.net" target="_blank">JSFiddle</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="index.html" class="btn">🏁 Retour au menu principal</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu HTML</a></p>
+  </footer>
+</body>
+</html>

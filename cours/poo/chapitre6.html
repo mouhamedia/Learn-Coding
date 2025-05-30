@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 6 - Polymorphisme</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 6 : Polymorphisme 🎭</h1>
+    <p>Fais en sorte que des objets différents réagissent différemment à la même méthode !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que le polymorphisme ?</h2>
+    <p>Le <strong>polymorphisme</strong> permet à des objets de différentes classes de répondre à la même méthode de manière différente. Cela rend le code flexible.</p>
+
+    <h2>🔹 Comment ça marche ?</h2>
+    <p>Une classe fille peut redéfinir une méthode héritée pour adapter son comportement.</p>
+
+    <h2>💻 Exemple en Python</h2>
+    <p>Voici une classe <code>Animal</code> avec des classes filles <code>Chat</code> et <code>Chien</code> :</p>
+    <pre><code>
+class Animal:
+    def parler(self):
+        pass
+
+class Chat(Animal):
+    def parler(self):
+        print("Miaou !")
+
+class Chien(Animal):
+    def parler(self):
+        print("Wouf !")
+
+animaux = [Chat(), Chien()]
+for animal in animaux:
+    animal.parler()  # Affiche : Miaou ! puis Wouf !
+    </code></pre>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Le polymorphisme permet à une méthode d’avoir des comportements différents.</li>
+      <li>Les classes filles redéfinissent les méthodes du parent.</li>
+      <li>Utilisé pour écrire du code flexible et réutilisable.</li>
+    </ul>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie ce code dans un environnement Python :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre7.html" class="btn">➡️ Chapitre 7 : Constructeurs et destructeurs</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu POO</a></p>
+  </footer>
+</body>
+</html>

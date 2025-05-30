@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 5 - Héritage</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 5 : Héritage 🌳</h1>
+    <p>Réutilise du code en faisant hériter des classes les unes des autres !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que l’héritage ?</h2>
+    <p>L’<strong>héritage</strong> permet à une classe (classe fille) de récupérer les attributs et méthodes d’une autre classe (classe parent). Cela évite de réécrire du code.</p>
+
+    <h2>🔹 Comment ça marche ?</h2>
+    <p>Une classe fille est définie avec <code>class Fille(Parent):</code>. On utilise <code>super()</code> pour appeler le constructeur du parent.</p>
+
+    <h2>💻 Exemple en Python</h2>
+    <p>Voici une classe <code>Vehicule</code> (parent) et <code>Voiture</code> (fille) :</p>
+    <pre><code>
+class Vehicule:
+    def __init__(self, marque):
+        self.marque = marque
+    
+    def klaxonner(self):
+        print("Tut tut !")
+
+class Voiture(Vehicule):
+    def __init__(self, marque, couleur):
+        super().__init__(marque)
+        self.couleur = couleur
+    
+    def description(self):
+        print(f"C'est une {self.couleur} {self.marque}")
+
+ma_voiture = Voiture("Toyota", "bleue")
+ma_voiture.klaxonner()    # Affiche : Tut tut !
+ma_voiture.description()  # Affiche : C'est une bleue Toyota
+    </code></pre>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>L’héritage permet de réutiliser le code d’une classe parent.</li>
+      <li><code>super()</code> appelle les méthodes ou le constructeur du parent.</li>
+      <li>Une classe fille peut ajouter ses propres attributs/méthodes.</li>
+    </ul>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie ce code dans un environnement Python :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre6.html" class="btn">➡️ Chapitre 6 : Polymorphisme</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu POO</a></p>
+  </footer>
+</body>
+</html>

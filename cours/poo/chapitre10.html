@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 10 - Bonnes pratiques & design patterns</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 10 : Bonnes pratiques & design patterns 🌟</h1>
+    <p>Écris du code propre et découvre les design patterns pour des projets solides !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Bonnes pratiques en POO</h2>
+    <p>Pour écrire du code clair et maintenable, suis les principes <strong>SOLID</strong> :</p>
+    <ul>
+      <li><strong>S</strong> : Single Responsibility (une classe = une responsabilité).</li>
+      <li><strong>O</strong> : Open/Closed (ouvert à l’extension, fermé à la modification).</li>
+      <li><strong>L</strong> : Liskov Substitution (les sous-classes doivent être substituables).</li>
+      <li><strong>I</strong> : Interface Segregation (interfaces spécifiques, pas générales).</li>
+      <li><strong>D</strong> : Dependency Inversion (dépendre des abstractions).</li>
+    </ul>
+
+    <h2>🔹 Qu’est-ce qu’un design pattern ?</h2>
+    <p>Un <strong>design pattern</strong> est une solution standard à un problème courant. Exemple : le <strong>Singleton</strong> garantit qu’une classe n’a qu’une seule instance.</p>
+
+    <h2>💻 Exemple en Python</h2>
+    <p>Voici une implémentation du pattern <strong>Singleton</strong> :</p>
+    <pre><code>
+class Configuration:
+    _instance = None
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+    
+    def __init__(self):
+        self.param = "Config par défaut"
+
+config1 = Configuration()
+config2 = Configuration()
+print(config1 == config2)  # Affiche : True (même instance)
+print(config1.param)       # Affiche : Config par défaut
+    </code></pre>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Les principes <strong>SOLID</strong> rendent le code robuste et maintenable.</li>
+      <li>Les <strong>design patterns</strong> comme Singleton résolvent des problèmes courants.</li>
+      <li>Écris des noms clairs et commente ton code pour plus de lisibilité.</li>
+    </ul>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie ce code dans un environnement Python :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="index.html" class="btn">🏁 Retour au menu principal</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu POO</a></p>
+  </footer>
+</body>
+</html>

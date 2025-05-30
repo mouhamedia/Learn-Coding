@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 9 - Relations entre classes</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Relations entre classes 🤝</h1>
+    <p>Apprends comment les classes peuvent interagir entre elles !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Types de relations</h2>
+    <p>Les classes peuvent être liées par :</p>
+    <ul>
+      <li><strong>Association</strong> : Une classe utilise une autre (ex. : une classe <code>Ecole</code> utilise <code>Etudiant</code>).</li>
+      <li><strong>Agrégation</strong> : Une classe contient d’autres objets, mais ils peuvent exister indépendamment.</li>
+      <li><strong>Composition</strong> : Une classe possède des objets qui n’existent pas sans elle.</li>
+    </ul>
+
+    <h2>💻 Exemple en Python</h2>
+    <p>Voici une classe <code>Ecole</code> en relation d’agrégation avec <code>Etudiant</code> :</p>
+    <pre><code>
+class Etudiant:
+    def __init__(self, nom):
+        self.nom = nom
+    
+    def info(self):
+        print(f"Etudiant : {self.nom}")
+
+class Ecole:
+    def __init__(self, nom):
+        self.nom = nom
+        self.etudiants = []
+    
+    def ajouter_etudiant(self, etudiant):
+        self.etudiants.append(etudiant)
+    
+    def afficher_etudiants(self):
+        for etudiant in self.etudiants:
+            etudiant.info()
+
+ecole = Ecole("Lycée")
+etudiant1 = Etudiant("Alice")
+etudiant2 = Etudiant("Bob")
+ecole.ajouter_etudiant(etudiant1)
+ecole.ajouter_etudiant(etudiant2)
+ecole.afficher_etudiants()  # Affiche : Etudiant : Alice, Etudiant : Bob
+    </code></pre>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>L’<strong>association</strong> est une relation simple entre classes.</li>
+      <li>L’<strong>agrégation</strong> implique une relation "a-un" sans dépendance forte.</li>
+      <li>La <strong>composition</strong> lie la durée de vie des objets.</li>
+    </ul>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie ce code dans un environnement Python :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre10.html" class="btn">➡️ Chapitre 10 : Bonnes pratiques & design patterns</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu POO</a></p>
+  </footer>
+</body>
+</html>

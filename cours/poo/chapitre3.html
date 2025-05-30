@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 3 - Attributs et méthodes</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 3 : Attributs et méthodes 🛠️</h1>
+    <p>Comprends les données et les actions d’une classe pour donner vie à tes objets !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un attribut ?</h2>
+    <p>Les <strong>attributs</strong> sont les données stockées dans un objet, comme le nom ou la couleur. Il existe deux types :</p>
+    <ul>
+      <li><strong>Attributs d’instance</strong> : Propres à chaque objet.</li>
+      <li><strong>Attributs de classe</strong> : Partagés par tous les objets d’une classe.</li>
+    </ul>
+
+    <h2>🔹 Qu’est-ce qu’une méthode ?</h2>
+    <p>Les <strong>méthodes</strong> sont des fonctions définies dans une classe qui décrivent ce que l’objet peut faire.</p>
+
+    <h2>💻 Exemple en Python</h2>
+    <p>Voici une classe <code>Chien</code> avec un attribut de classe (<code>espece</code>) et une méthode (<code>aboyer</code>) :</p>
+    <pre><code>
+class Chien:
+    espece = "Canis lupus"  # Attribut de classe
+    
+    def __init__(self, nom, race):
+        self.nom = nom      # Attribut d’instance
+        self.race = race
+    
+    def aboyer(self):
+        print(f"{self.nom} dit : Wouf !")
+    
+    def info(self):
+        print(f"{self.nom} est un {self.race} de l'espèce {self.espece}")
+
+chien1 = Chien("Rex", "Berger")
+chien1.aboyer()  # Affiche : Rex dit : Wouf !
+chien1.info()    # Affiche : Rex est un Berger de l'espèce Canis lupus
+print(Chien.espece)  # Affiche : Canis lupus
+    </code></pre>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Les <strong>attributs d’instance</strong> sont définis dans <code>__init__</code>.</li>
+      <li>Les <strong>attributs de classe</strong> sont partagés par tous les objets.</li>
+      <li>Les <strong>méthodes</strong> utilisent <code>self</code> pour accéder aux attributs de l’objet.</li>
+    </ul>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie ce code dans un environnement Python :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre4.html" class="btn">➡️ Chapitre 4 : Encapsulation</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu POO</a></p>
+  </footer>
+</body>
+</html>

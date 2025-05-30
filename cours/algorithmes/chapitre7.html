@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 7 - Tous les algorithmes de tri</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #008080;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #008080;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.8rem;
+      text-align: left;
+    }
+    th {
+      background-color: #008080;
+      color: white;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #008080;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #008080;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 7 : Tous les algorithmes de tri 📈</h1>
+    <p>Organise des données efficacement avec les algorithmes de tri les plus utilisés !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un tri ?</h2>
+    <p>Un <strong>algorithme de tri</strong> ordonne les éléments d’un tableau, généralement du plus petit au plus grand. C’est essentiel pour organiser des données, comme trier des noms ou des scores.</p>
+    <p><strong>Analogie</strong> : Imagine que tu ranges des cartes numérotées mélangées sur une table dans l’ordre croissant. Chaque algorithme a une méthode différente pour y arriver.</p>
+
+    <h2>🔹 1. Tri à bulles</h2>
+    <p>Le <strong>tri à bulles</strong> compare des paires d’éléments voisins et les échange s’ils sont dans le mauvais ordre, comme des bulles qui remontent à la surface.</p>
+    <p><strong>Avantages</strong> : Simple à comprendre et à coder.</p>
+    <p><strong>Inconvénients</strong> : Lent pour de grands tableaux (complexité O(n²)).</p>
+    <pre><code>
+# Pseudo-code
+Algorithme TriBulle(tableau)
+    Début
+        n ← longueur(tableau)
+        Pour i de 0 à n-1 Faire
+            Pour j de 0 à n-i-1 Faire
+                Si tableau[j] > tableau[j+1] Alors
+                    Échanger tableau[j] et tableau[j+1]
+                FinSi
+            FinPour
+        FinPour
+    Fin
+
+# Python
+def tri_bulle(tableau):
+    n = len(tableau)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if tableau[j] > tableau[j+1]:
+                tableau[j], tableau[j+1] = tableau[j+1], tableau[j]
+    return tableau
+tab = [64, 34, 25, 12]
+print(tri_bulle(tab))  # Affiche : [12, 25, 34, 64]
+    </code></pre>
+
+    <h2>🔹 2. Tri par sélection</h2>
+    <p>Le <strong>tri par sélection</strong> trouve le plus petit élément du tableau et le place au début, puis répète pour le reste.</p>
+    <p><strong>Analogie</strong> : C’est comme choisir le plus petit livre d’une pile et le poser sur une étagère, un par un.</p>
+    <p><strong>Avantages</strong> : Intuitif, peu d’échanges.</p>
+    <p><strong>Inconvénients</strong> : Toujours O(n²), même pour des tableaux presque triés.</p>
+    <pre><code>
+# Pseudo-code
+Algorithme TriSelection(tableau)
+    Début
+        n ← longueur(tableau)
+        Pour i de 0 à n-1 Faire
+            min ← i
+            Pour j de i+1 à n-1 Faire
+                Si tableau[j] < tableau[min] Alors
+                    min ← j
+                FinSi
+            FinPour
+            Échanger tableau[i] et tableau[min]
+        FinPour
+    Fin
+
+# Python
+def tri_selection(tableau):
+    n = len(tableau)
+    for i in range(n):
+        min_idx = i
+        for j in range(i+1, n):
+            if tableau[j] < tableau[min_idx]:
+                min_idx = j
+        tableau[i], tableau[min_idx] = tableau[min_idx], tableau[i]
+    return tableau
+tab = [64, 34, 25, 12]
+print(tri_selection(tab))  # Affiche : [12, 25, 34, 64]
+    </code></pre>
+
+    <h2>🔹 3. Tri par insertion</h2>
+    <p>Le <strong>tri par insertion</strong> insère chaque élément à sa place dans une partie déjà triée du tableau.</p>
+    <p><strong>Analogie</strong> : Comme trier des cartes dans ta main, en plaçant chaque nouvelle carte au bon endroit.</p>
+    <p><strong>Avantages</strong> : Efficace pour les petits tableaux ou presque triés (O(n) dans le meilleur cas).</p>
+    <p><strong>Inconvénients</strong> : O(n²) dans le pire cas.</p>
+    <pre><code>
+# Pseudo-code
+Algorithme TriInsertion(tableau)
+    Début
+        n ← longueur(tableau)
+        Pour i de 1 à n-1 Faire
+            cle ← tableau[i]
+            j ← i - 1
+            Tant que j ≥ 0 ET tableau[j] > cle Faire
+                tableau[j+1] ← tableau[j]
+                j ← j - 1
+            FinTantQue
+            tableau[j+1] ← cle
+        FinPour
+    Fin
+
+# Python
+def tri_insertion(tableau):
+    n = len(tableau)
+    for i in range(1, n):
+        cle = tableau[i]
+        j = i - 1
+        while j >= 0 and tableau[j] > cle:
+            tableau[j+1] = tableau[j]
+            j -= 1
+        tableau[j+1] = cle
+    return tableau
+tab = [64, 34, 25, 12]
+print(tri_insertion(tab))  # Affiche : [12, 25, 34, 64]
+    </code></pre>
+
+    <h2>🔹 4. Tri rapide (QuickSort)</h2>
+    <p>Le <strong>tri rapide</strong> choisit un pivot, divise le tableau en éléments plus petits et plus grands, puis trie récursivement.</p>
+    <p><strong>Analogie</strong> : Comme diviser une pile de cartes en deux sous-piles autour d’une carte pivot, puis répéter.</p>
+    <p><strong>Avantages</strong> : Très rapide en moyenne (O(n log n)).</p>
+    <p><strong>Inconvénients</strong> : O(n²) dans le pire cas (pivot mal choisi).</p>
+    <pre><code>
+# Pseudo-code
+Algorithme TriRapide(tableau, debut, fin)
+    Début
+        Si debut < fin Alors
+            pivot ← Partition(tableau, debut, fin)
+            TriRapide(tableau, debut, pivot-1)
+            TriRapide(tableau, pivot+1, fin)
+        FinSi
+    Fin
+Algorithme Partition(tableau, debut, fin)
+    Début
+        pivot ← tableau[fin]
+        i ← debut - 1
+        Pour j de debut à fin-1 Faire
+            Si tableau[j] ≤ pivot Alors
+                i ← i + 1
+                Échanger tableau[i] et tableau[j]
+            FinSi
+        FinPour
+        Échanger tableau[i+1] et tableau[fin]
+        Retourner i+1
+    Fin
+
+# Python
+def tri_rapide(tableau, debut, fin):
+    if debut < fin:
+        pivot = partition(tableau, debut, fin)
+        tri_rapide(tableau, debut, pivot-1)
+        tri_rapide(tableau, pivot+1, fin)
+def partition(tableau, debut, fin):
+    pivot = tableau[fin]
+    i = debut - 1
+    for j in range(debut, fin):
+        if tableau[j] <= pivot:
+            i += 1
+            tableau[i], tableau[j] = tableau[j], tableau[i]
+    tableau[i+1], tableau[fin] = tableau[fin], tableau[i+1]
+    return i+1
+tab = [64, 34, 25, 12]
+tri_rapide(tab, 0, len(tab)-1)
+print(tab)  # Affiche : [12, 25, 34, 64]
+    </code></pre>
+
+    <h2>🔹 5. Tri par fusion (MergeSort)</h2>
+    <p>Le <strong>tri par fusion</strong> divise le tableau en deux moitiés, trie chaque moitié récursivement, puis fusionne les résultats.</p>
+    <p><strong>Analogie</strong> : Comme diviser un tas de cartes en deux, trier chaque tas, puis les recombiner en ordre.</p>
+    <p><strong>Avantages</strong> : Stable et efficace (O(n log n)).</p>
+    <p><strong>Inconvénients</strong> : Utilise plus de mémoire pour la fusion.</p>
+    <pre><code>
+# Pseudo-code
+Algorithme TriFusion(tableau)
+    Début
+        Si longueur(tableau) > 1 Alors
+            milieu ← longueur(tableau) / 2
+            gauche ← tableau[0 à milieu]
+            droite ← tableau[milieu à fin]
+            TriFusion(gauche)
+            TriFusion(droite)
+            Fusionner(tableau, gauche, droite)
+        FinSi
+    Fin
+Algorithme Fusionner(tableau, gauche, droite)
+    Début
+        i ← 0, j ← 0, k ← 0
+        Tant que i < longueur(gauche) ET j < longueur(droite) Faire
+            Si gauche[i] ≤ droite[j] Alors
+                tableau[k] ← gauche[i]
+                i ← i + 1
+            Sinon
+                tableau[k] ← droite[j]
+                j ← j + 1
+            FinSi
+            k ← k + 1
+        FinTantQue
+        Ajouter les éléments restants de gauche et droite
+    Fin
+
+# Python
+def tri_fusion(tableau):
+    if len(tableau) > 1:
+        milieu = len(tableau) // 2
+        gauche = tableau[:milieu]
+        droite = tableau[milieu:]
+        tri_fusion(gauche)
+        tri_fusion(droite)
+        i = j = k = 0
+        while i < len(gauche) and j < len(droite):
+            if gauche[i] <= droite[j]:
+                tableau[k] = gauche[i]
+                i += 1
+            else:
+                tableau[k] = droite[j]
+                j += 1
+            k += 1
+        while i < len(gauche):
+            tableau[k] = gauche[i]
+            i += 1
+            k += 1
+        while j < len(droite):
+            tableau[k] = droite[j]
+            j += 1
+            k += 1
+    return tableau
+tab = [64, 34, 25, 12]
+print(tri_fusion(tab))  # Affiche : [12, 25, 34, 64]
+    </code></pre>
+
+    <h2>🔹 6. Tri par tas (HeapSort)</h2>
+    <p>Le <strong>tri par tas</strong> utilise une structure de tas (arbre binaire) pour trier les éléments, en extrayant le maximum à chaque étape.</p>
+    <p><strong>Analogie</strong> : Comme organiser une compétition où le meilleur élément est toujours sélectionné en premier.</p>
+    <p><strong>Avantages</strong> : Efficace (O(n log n)), tri en place.</p>
+    <p><strong>Inconvénients</strong> : Plus complexe à coder.</p>
+    <pre><code>
+# Pseudo-code
+Algorithme TriTas(tableau)
+    Début
+        ConstruireTasMax(tableau)
+        Pour i de longueur(tableau)-1 à 1 Faire
+            Échanger tableau[0] et tableau[i]
+            Tasser(tableau, 0, i)
+        FinPour
+    Fin
+
+# Python
+def tri_tas(tableau):
+    def tasser(tableau, n, i):
+        plus_grand = i
+        gauche = 2 * i + 1
+        droite = 2 * i + 2
+        if gauche < n and tableau[gauche] > tableau[plus_grand]:
+            plus_grand = gauche
+        if droite < n and tableau[droite] > tableau[plus_grand]:
+            plus_grand = droite
+        if plus_grand != i:
+            tableau[i], tableau[plus_grand] = tableau[plus_grand], tableau[i]
+            tasser(tableau, n, plus_grand)
+    n = len(tableau)
+    for i in range(n//2-1, -1, -1):
+        tasser(tableau, n, i)
+    for i in range(n-1, 0, -1):
+        tableau[0], tableau[i] = tableau[i], tableau[0]
+        tasser(tableau, i, 0)
+    return tableau
+tab = [64, 34, 25, 12]
+print(tri_tas(tab))  # Affiche : [12, 25, 34, 64]
+    </code></pre>
+
+    <h2>🔹 7. Tri par comptage</h2>
+    <p>Le <strong>tri par comptage</strong> compte les occurrences de chaque valeur et reconstruit le tableau trié.</p>
+    <p><strong>Analogie</strong> : Comme trier des pièces de monnaie en comptant combien il y a de chaque type.</p>
+    <p><strong>Avantages</strong> : Très rapide pour des nombres dans une plage limitée (O(n+k)).</p>
+    <p><strong>Inconvénients</strong> : Nécessite une plage de valeurs connue, pas adapté aux nombres flottants.</p>
+    <pre><code>
+# Pseudo-code
+Algorithme TriComptage(tableau)
+    Début
+        max ← maximum(tableau)
+        compte ← tableau de taille max+1 initialisé à 0
+        Pour chaque élément dans tableau Faire
+            compte[élément] ← compte[élément] + 1
+        FinPour
+        k ← 0
+        Pour i de 0 à max Faire
+            Pour j de 1 à compte[i] Faire
+                tableau[k] ← i
+                k ← k + 1
+            FinPour
+        FinPour
+    Fin
+
+# Python
+def tri_comptage(tableau):
+    max_val = max(tableau)
+    compte = [0] * (max_val + 1)
+    for x in tableau:
+        compte[x] += 1
+    k = 0
+    for i in range(max_val + 1):
+        for j in range(compte[i]):
+            tableau[k] = i
+            k += 1
+    return tableau
+tab = [4, 2, 2, 8, 3, 3]
+print(tri_comptage(tab))  # Affiche : [2, 2, 3, 3, 4, 8]
+    </code></pre>
+
+    <h2>📊 Comparaison des algorithmes</h2>
+    <table>
+      <tr>
+        <th>Algorithme</th>
+        <th>Complexité (pire cas)</th>
+        <th>Complexité (meilleur cas)</th>
+        <th>Stable</th>
+        <th>En place</th>
+      </tr>
+      <tr>
+        <td>Tri à bulles</td>
+        <td>O(n²)</td>
+        <td>O(n)</td>
+        <td>Oui</td>
+        <td>Oui</td>
+      </tr>
+      <tr>
+        <td>Tri par sélection</td>
+        <td>O(n²)</td>
+        <td>O(n²)</td>
+        <td>Non</td>
+        <td>Oui</td>
+      </tr>
+      <tr>
+        <td>Tri par insertion</td>
+        <td>O(n²)</td>
+        <td>O(n)</td>
+        <td>Oui</td>
+        <td>Oui</td>
+      </tr>
+      <tr>
+        <td>Tri rapide</td>
+        <td>O(n²)</td>
+        <td>O(n log n)</td>
+        <td>Non</td>
+        <td>Oui</td>
+      </tr>
+      <tr>
+        <td>Tri par fusion</td>
+        <td>O(n log n)</td>
+        <td>O(n log n)</td>
+        <td>Oui</td>
+        <td>Non</td>
+      </tr>
+      <tr>
+        <td>Tri par tas</td>
+        <td>O(n log n)</td>
+        <td>O(n log n)</td>
+        <td>Non</td>
+        <td>Oui</td>
+      </tr>
+      <tr>
+        <td>Tri par comptage</td>
+        <td>O(n+k)</td>
+        <td>O(n+k)</td>
+        <td>Oui</td>
+        <td>Non</td>
+      </tr>
+    </table>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Les tris simples (bulles, sélection, insertion) sont faciles à coder mais lents (O(n²)).</li>
+      <li>Les tris avancés (rapide, fusion, tas) sont plus rapides (O(n log n)) mais complexes.</li>
+      <li>Le tri par comptage est idéal pour des valeurs dans une plage limitée.</li>
+      <li>Choisis l’algorithme selon la taille du tableau, la stabilité, et la mémoire disponible.</li>
+    </ul>
+
+    <h2>🚀 Pour aller plus loin</h2>
+    <p>Essaie d’implémenter un tri en ordre décroissant, ou compare les performances des algorithmes sur un grand tableau (ex. : 1000 éléments). Tu peux aussi explorer d’autres tris, comme le tri radix.</p>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie les codes Python dans un environnement :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre8.html" class="btn">➡️ Chapitre 8 : Recherches</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu Algorithmes</a></p>
+  </footer>
+</body>
+</html>

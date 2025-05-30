@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 4 - Les boucles</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #008080;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #008080;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #008080;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #008080;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 4 : Les boucles 🔄</h1>
+    <p>Répète des actions facilement avec les boucles Tant que et Pour !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une boucle ?</h2>
+    <p>Une <strong>boucle</strong> répète un bloc d’instructions tant qu’une condition est vraie ou pour un nombre défini d’itérations. C’est comme faire des tours de piste : tu continues jusqu’à un signal d’arrêt.</p>
+    <p><strong>Analogie</strong> : Imagine que tu lis un livre page par page (boucle Pour) ou que tu attends qu’il fasse beau pour sortir (boucle Tant que).</p>
+
+    <h2>🔹 Types de boucles</h2>
+    <ul>
+      <li><strong>Boucle Tant que</strong> : Répète tant qu’une condition est vraie.</li>
+      <li><strong>Boucle Pour</strong> : Répète pour un nombre fixe d’itérations.</li>
+    </ul>
+
+    <h2>💻 Exemple pratique</h2>
+    <p>Voici un algorithme pour afficher les nombres de 1 à 5 :</p>
+    <pre><code>
+# Pseudo-code
+Algorithme AfficherNombres
+    Début
+        Pour i de 1 à 5 Faire
+            Afficher i
+        FinPour
+    Fin
+
+# Python
+for i in range(1, 6):
+    print(i)  # Affiche : 1, 2, 3, 4, 5
+    </code></pre>
+    <p>Exemple avec une boucle Tant que :</p>
+    <pre><code>
+# Pseudo-code
+Algorithme CompterJusquaCinq
+    Début
+        i ← 1
+        Tant que i ≤ 5 Faire
+            Afficher i
+            i ← i + 1
+        FinTantQue
+    Fin
+
+# Python
+i = 1
+while i <= 5:
+    print(i)
+    i += 1  # Affiche : 1, 2, 3, 4, 5
+    </code></pre>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Utilise <code>Pour</code> quand le nombre d’itérations est connu.</li>
+      <li>Utilise <code>Tant que</code> quand l’arrêt dépend d’une condition.</li>
+      <li>Attention aux boucles infinies (oublier d’incrémenter <code>i</code>).</li>
+    </ul>
+
+    <h2>🚀 Pour aller plus loin</h2>
+    <p>Crée une boucle pour afficher les nombres pairs de 2 à 10, ou utilise une boucle Tant que pour compter jusqu’à ce que l’utilisateur entre "stop".</p>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie le code Python dans un environnement :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre5.html" class="btn">➡️ Chapitre 5 : Tableaux et parcours</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu Algorithmes</a></p>
+  </footer>
+</body>
+</html>

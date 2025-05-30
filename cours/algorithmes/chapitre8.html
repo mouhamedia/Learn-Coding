@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 8 - Recherches</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #008080;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #008080;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #008080;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #008080;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 8 : Recherches 🔍</h1>
+    <p>Trouve des données efficacement avec les algorithmes de recherche !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une recherche ?</h2>
+    <p>Un <strong>algorithme de recherche</strong> trouve un élément dans un tableau. C’est comme chercher un mot dans un dictionnaire.</p>
+    <p><strong>Analogie</strong> : Imagine chercher un livre spécifique dans une bibliothèque. Tu peux vérifier chaque étagère (linéaire) ou utiliser l’ordre alphabétique (dichotomique).</p>
+
+    <h2>🔹 Recherche linéaire</h2>
+    <p>La <strong>recherche linéaire</strong> vérifie chaque élément du tableau un par un jusqu’à trouver la valeur ou atteindre la fin.</p>
+
+    <h2>🔹 Recherche dichotomique</h2>
+    <p>La <strong>recherche dichotomique</strong> (ou binaire) divise le tableau trié en deux à chaque étape, ce qui est beaucoup plus rapide.</p>
+
+    <h2>💻 Exemple pratique</h2>
+    <p>Voici une recherche linéaire :</p>
+    <pre><code>
+# Pseudo-code
+Algorithme RechercheLineaire(tableau, valeur)
+    Début
+        Pour i de 0 à longueur(tableau)-1 Faire
+            Si tableau[i] = valeur Alors
+                Retourner i
+            FinSi
+        FinPour
+        Retourner -1
+    Fin
+
+# Python
+def recherche_lineaire(tableau, valeur):
+    for i in range(len(tableau)):
+        if tableau[i] == valeur:
+            return i
+    return -1
+tab = [10, 20, 30, 40]
+print(recherche_lineaire(tab, 30))  # Affiche : 2
+    </code></pre>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>La recherche linéaire est simple mais lente pour les grands tableaux.</li>
+      <li>La recherche dichotomique nécessite un tableau trié mais est plus rapide.</li>
+      <li>Retourne l’indice de l’élément ou -1 si non trouvé.</li>
+    </ul>
+
+    <h2>🚀 Pour aller plus loin</h2>
+    <p>Implémente la recherche dichotomique ou modifie l’exemple pour compter combien de fois une valeur apparaît dans le tableau.</p>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie le code Python dans un environnement :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre9.html" class="btn">➡️ Chapitre 9 : Algorithmes classiques</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu Algorithmes</a></p>
+  </footer>
+</body>
+</html>

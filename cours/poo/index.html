@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours POO</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+      color: #333;
+    }
+
+    header {
+      background: #306998;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    header p {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    main {
+      padding: 1rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-decoration: none;
+      color: #333;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #306998;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #306998;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 500px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      header p {
+        font-size: 0.9rem;
+      }
+
+      .card {
+        padding: 1rem;
+      }
+
+      .card h3 {
+        font-size: 1rem;
+      }
+
+      .card p {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cours de POO 👨‍💻</h1>
+    <p>Comprends la Programmation Orientée Objet étape par étape avec des exemples simples</p>
+  </header>
+
+  <main>
+    <div class="card-grid">
+      <a class="card" href="chapitre1.html"><h3>Chapitre 1</h3><p>Qu’est-ce que la POO ?</p></a>
+      <a class="card" href="chapitre2.html"><h3>Chapitre 2</h3><p>Classes et objets</p></a>
+      <a class="card" href="chapitre3.html"><h3>Chapitre 3</h3><p>Attributs et méthodes</p></a>
+      <a class="card" href="chapitre4.html"><h3>Chapitre 4</h3><p>Encapsulation</p></a>
+      <a class="card" href="chapitre5.html"><h3>Chapitre 5</h3><p>Héritage</p></a>
+      <a class="card" href="chapitre6.html"><h3>Chapitre 6</h3><p>Polymorphisme</p></a>
+      <a class="card" href="chapitre7.html"><h3>Chapitre 7</h3><p>Constructeurs et destructeurs</p></a>
+      <a class="card" href="chapitre8.html"><h3>Chapitre 8</h3><p>Interfaces et classes abstraites</p></a>
+      <a class="card" href="chapitre9.html"><h3>Chapitre 9</h3><p>Relations entre classes</p></a>
+      <a class="card" href="chapitre10.html"><h3>Chapitre 10</h3><p>Bonnes pratiques & design patterns</p></a>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="../../index.html">← Retour à l'accueil principal</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 5 - Tableaux et parcours</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #008080;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #008080;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #008080;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #008080;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 5 : Tableaux et parcours 📋</h1>
+    <p>Organise et manipule des listes de données avec les tableaux !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un tableau ?</h2>
+    <p>Un <strong>tableau</strong> est une liste ordonnée de valeurs, comme une rangée de casiers numérotés. Chaque casier a un indice (commençant à 0) et contient une valeur.</p>
+    <p><strong>Analogie</strong> : Imagine une étagère avec des casiers étiquetés 0, 1, 2, etc., où tu ranges des nombres ou du texte.</p>
+
+    <h2>🔹 Accéder et modifier un tableau</h2>
+    <p>Tu accèdes à un élément avec son indice (ex. : <code>tableau[0]</code>) et tu Secondary: Tu peux modifier un élément de la même manière.</p>
+
+    <h2>🔹 Parcourir un tableau</h2>
+    <p>Pour traiter tous les éléments, on utilise une boucle <code>Pour</code> ou <code>Tant que</code>.</p>
+
+    <h2>💻 Exemple pratique</h2>
+    <p>Voici un algorithme pour calculer la somme des éléments d’un tableau :</p>
+    <pre><code>
+# Pseudo-code
+Algorithme SommeTableau
+    Entrée : tableau
+    Sortie : somme
+    Début
+        somme ← 0
+        Pour chaque élément dans tableau Faire
+            somme ← somme + élément
+        FinPour
+        Afficher somme
+    Fin
+
+# Python
+tableau = [1, 2, 3, 4]
+somme = 0
+for element in tableau:
+    somme += element
+print(somme)  # Affiche : 10
+    </code></pre>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Un tableau est une collection ordonnée accessible par indices (0, 1, 2...).</li>
+      <li>Utilise une boucle pour parcourir tous les éléments.</li>
+      <li>Les tableaux sont utiles pour stocker des listes de données.</li>
+    </ul>
+
+    <h2>🚀 Pour aller plus loin</h2>
+    <p>Modifie l’exemple pour trouver le plus grand élément du tableau ou pour afficher les éléments en ordre inverse.</p>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie le code Python dans un environnement :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre6.html" class="btn">➡️ Chapitre 6 : Fonctions et sous-algorithmes</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu Algorithmes</a></p>
+  </footer>
+</body>
+</html>

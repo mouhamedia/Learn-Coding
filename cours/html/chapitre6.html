@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 6 - Les tableaux</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #e44d26;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #e44d26;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #e44d26;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #e44d26;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 6 : Les tableaux 📊</h1>
+    <p>Organise des données dans des grilles avec les tableaux HTML !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un tableau HTML ?</h2>
+    <p>Un <strong>tableau</strong> organise des données en lignes et colonnes, comme une feuille de calcul. Il utilise la balise <code>&lt;table&gt;</code>.</p>
+    <p><strong>Analogie</strong> : Un tableau est comme une grille Excel où tu places des informations dans des cases.</p>
+
+    <h2>🔹 Structure d’un tableau</h2>
+    <ul>
+      <li><code>&lt;tr&gt;</code> : Ligne du tableau.</li>
+      <li><code>&lt;th&gt;</code> : Cellule d’en-tête (souvent en gras).</li>
+      <li><code>&lt;td&gt;</code> : Cellule de données.</li>
+      <li><code>&lt;caption&gt;</code> : Titre du tableau (optionnel).</li>
+    </ul>
+
+    <h2>🔹 Attributs utiles</h2>
+    <ul>
+      <li><code>colspan</code> : Fusionne des colonnes.</li>
+      <li><code>rowspan</code> : Fusionne des lignes.</li>
+    </ul>
+
+    <h2>💻 Exemple pratique</h2>
+    <p>Voici un tableau simple :</p>
+    <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Tableau HTML&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Mon tableau&lt;/h1&gt;
+  &lt;table&gt;
+    &lt;caption&gt;Liste des étudiants&lt;/caption&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Nom&lt;/th&gt;
+      &lt;th&gt;Âge&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alice&lt;/td&gt;
+      &lt;td&gt;20&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bob&lt;/td&gt;
+      &lt;td&gt;22&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+    <p>Cet exemple affiche un tableau avec un titre et des données.</p>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Les tableaux structurent des données en grilles.</li>
+      <li><code>&lt;th&gt;</code> pour les en-têtes, <code>&lt;td&gt;</code> pour les données.</li>
+      <li><code>&lt;caption&gt;</code> améliore l’accessibilité.</li>
+    </ul>
+
+    <h2>🚀 Pour aller plus loin</h2>
+    <p>Ajoute une ligne au tableau ou utilise <code>colspan</code> pour fusionner deux cellules.</p>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie le code HTML dans un éditeur :</p>
+    <ul>
+      <li><a href="https://replit.com/languages/html" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://jsfiddle.net" target="_blank">JSFiddle</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre7.html" class="btn">➡️ Chapitre 7 : Les formulaires</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu HTML</a></p>
+  </footer>
+</body>
+</html>

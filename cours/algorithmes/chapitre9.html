@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 9 - Algorithmes classiques</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #008080;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #008080;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #008080;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #008080;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 9 : Algorithmes classiques 🌟</h1>
+    <p>Découvre des algorithmes célèbres comme le PGCD et Fibonacci !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un algorithme classique ?</h2>
+    <p>Les <strong>algorithmes classiques</strong> sont des solutions bien connues à des problèmes courants, comme calculer le PGCD ou générer la suite de Fibonacci.</p>
+    <p><strong>Analogie</strong> : Ce sont comme des outils éprouvés dans une boîte à outils, utilisés dans de nombreux programmes.</p>
+
+    <h2>🔹 PGCD (Euclide)</h2>
+    <p>L’algorithme d’Euclide calcule le plus grand commun diviseur de deux nombres en utilisant des divisions successives.</p>
+
+    <h2>🔹 Suite de Fibonacci</h2>
+    <p>La suite de Fibonacci génère des nombres où chaque terme est la somme des deux précédents (0, 1, 1, 2, 3, 5, 8...).</p>
+
+    <h2>💻 Exemple pratique</h2>
+    <p>Voici l’algorithme du PGCD d’Euclide :</p>
+    <pre><code>
+# Pseudo-code
+Algorithme PGCD(a, b)
+    Début
+        Tant que b ≠ 0 Faire
+            temp ← b
+            b ← a mod b
+            a ← temp
+        FinTantQue
+        Retourner a
+    Fin
+
+# Python
+def pgcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+print(pgcd(48, 18))  # Affiche : 6
+    </code></pre>
+    <p>Exemple pour Fibonacci :</p>
+    <pre><code>
+# Pseudo-code
+Algorithme Fibonacci(n)
+    Début
+        Si n ≤ 1 Alors
+            Retourner n
+        Sinon
+            a ← 0
+            b ← 1
+            Pour i de 2 à n Faire
+                c ← a + b
+                a ← b
+                b ← c
+            FinPour
+            Retourner b
+        FinSi
+    Fin
+
+# Python
+def fibonacci(n):
+    if n <= 1:
+        return n
+    a, b = 0, 1
+    for _ in range(2, n+1):
+        a, b = b, a + b
+    return b
+print(fibonacci(6))  # Affiche : 8
+    </code></pre>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Le PGCD d’Euclide est efficace grâce aux divisions successives.</li>
+      <li>La suite de Fibonacci peut être calculée itérativement pour plus d’efficacité.</li>
+      <li>Ces algorithmes sont utilisés dans de nombreux domaines (maths, cryptographie, etc.).</li>
+    </ul>
+
+    <h2>🚀 Pour aller plus loin</h2>
+    <p>Crée une fonction pour calculer le PPCM à partir du PGCD ou génère les 10 premiers termes de Fibonacci.</p>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie le code Python dans un environnement :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="index.html" class="btn">🏁 Retour au menu principal</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu Algorithmes</a></p>
+  </footer>
+</body>
+</html>

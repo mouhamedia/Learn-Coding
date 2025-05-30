@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 4 - Encapsulation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 4 : Encapsulation 🔒</h1>
+    <p>Protège les données de tes objets pour un code plus sûr et clair !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que l’encapsulation ?</h2>
+    <p>L’<strong>encapsulation</strong> consiste à regrouper les données (attributs) et les méthodes dans une classe, tout en contrôlant l’accès aux données. En Python, on utilise des attributs <strong>privés</strong> (avec <code>__</code>) pour les protéger.</p>
+
+    <h2>🔹 Pourquoi utiliser l’encapsulation ?</h2>
+    <ul>
+      <li>Protéger les données contre des modifications non désirées.</li>
+      <li>Rendre le code plus clair en définissant des interfaces claires (getters/setters).</li>
+    </ul>
+
+    <h2>💻 Exemple en Python</h2>
+    <p>Voici une classe <code>CompteBancaire</code> avec un solde privé :</p>
+    <pre><code>
+class CompteBancaire:
+    def __init__(self, titulaire, solde_initial):
+        self.titulaire = titulaire
+        self.__solde = solde_initial  # Attribut privé
+    
+    def deposer(self, montant):
+        if montant > 0:
+            self.__solde += montant
+            print(f"Nouveau solde : {self.__solde}")
+    
+    def retirer(self, montant):
+        if montant <= self.__solde:
+            self.__solde -= montant
+            print(f"Nouveau solde : {self.__solde}")
+        else:
+            print("Solde insuffisant.")
+    
+    def get_solde(self):
+        return self.__solde
+
+compte = CompteBancaire("Alice", 1000)
+compte.deposer(500)      # Affiche : Nouveau solde : 1500
+compte.retirer(200)      # Affiche : Nouveau solde : 1300
+print(compte.get_solde())  # Affiche : 1300
+# print(compte.__solde)   # Erreur : attribut privé
+    </code></pre>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Utilise <code>__</code> pour rendre un attribut privé.</li>
+      <li>Les <strong>getters</strong> (ex. : <code>get_solde</code>) permettent d’accéder aux données.</li>
+      <li>Les <strong>setters</strong> contrôlent les modifications.</li>
+    </ul>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie ce code dans un environnement Python :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre5.html" class="btn">➡️ Chapitre 5 : Héritage</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu POO</a></p>
+  </footer>
+</body>
+</html>

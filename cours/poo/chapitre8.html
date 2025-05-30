@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 8 - Interfaces et classes abstraites</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 8 : Interfaces et classes abstraites 📜</h1>
+    <p>Découvre comment définir des modèles pour tes classes avec les classes abstraites !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une classe abstraite ?</h2>
+    <p>Une <strong>classe abstraite</strong> est une classe qui ne peut pas être instanciée directement. Elle sert de modèle pour d’autres classes, en définissant des méthodes que les classes filles doivent implémenter.</p>
+
+    <h2>🔹 Comment ça marche ?</h2>
+    <p>En Python, on utilise le module <code>abc</code> (Abstract Base Class) et le décorateur <code>@abstractmethod</code>.</p>
+
+    <h2>💻 Exemple en Python</h2>
+    <p>Voici une classe abstraite <code>Forme</code> avec une méthode <code>aire</code> :</p>
+    <pre><code>
+from abc import ABC, abstractmethod
+
+class Forme(ABC):
+    @abstractmethod
+    def aire(self):
+        pass
+
+class Cercle(Forme):
+    def __init__(self, rayon):
+        self.rayon = rayon
+    
+    def aire(self):
+        return 3.14 * self.rayon ** 2
+
+cercle = Cercle(5)
+print(cercle.aire())  # Affiche : 78.5
+# forme = Forme()     # Erreur : ne peut pas instancier une classe abstraite
+    </code></pre>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Une classe abstraite force les classes filles à implémenter certaines méthodes.</li>
+      <li>Le module <code>abc</code> est utilisé pour définir des classes abstraites.</li>
+      <li>Les interfaces (similaires) garantissent un contrat pour les classes.</li>
+    </ul>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie ce code dans un environnement Python :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre9.html" class="btn">➡️ Chapitre 9 : Relations entre classes</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu POO</a></p>
+  </footer>
+</body>
+</html>

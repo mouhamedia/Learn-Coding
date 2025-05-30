@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 4 - Liens et images</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #e44d26;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #e44d26;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #e44d26;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #e44d26;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 4 : Liens et images 🔗🖼️</h1>
+    <p>Connecte des pages et affiche des images pour enrichir ton site !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Les hyperliens</h2>
+    <p>Les <strong>liens hypertextes</strong> permettent de naviguer entre des pages web en utilisant la balise <code>&lt;a&gt;</code> avec l’attribut <code>href</code> pour indiquer la destination.</p>
+    <p><strong>Analogie</strong> : Un lien est comme une porte qui mène à une autre pièce (une page web).</p>
+    <p>Attributs utiles :</p>
+    <ul>
+      <li><code>href</code> : URL ou chemin vers la page cible.</li>
+      <li><code>target="_blank"</code> : Ouvre le lien dans un nouvel onglet.</li>
+    </ul>
+
+    <h2>🔹 Les images</h2>
+    <p>Les <strong>images</strong> sont ajoutées avec la balise <code>&lt;img&gt;</code>, qui utilise <code>src</code> pour le chemin de l’image et <code>alt</code> pour une description textuelle (important pour l’accessibilité).</p>
+    <p>Attributs utiles :</p>
+    <ul>
+      <li><code>src</code> : Chemin ou URL de l’image.</li>
+      <li><code>alt</code> : Texte alternatif pour les lecteurs d’écran.</li>
+      <li><code>width</code> ou <code>height</code> : Taille de l’image en pixels.</li>
+    </ul>
+
+    <h2>💻 Exemple pratique</h2>
+    <p>Voici une page avec un lien et une image :</p>
+    <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Liens et images&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Ma page&lt;/h1&gt;
+  &lt;p&gt;Visitez &lt;a href="https://example.com" target="_blank"&gt;Example.com&lt;/a&gt; pour en savoir plus.&lt;/p&gt;
+  &lt;img src="https://via.placeholder.com/150" alt="Image de placeholder" width="150"&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+    <p>Cet exemple affiche un lien cliquable et une image.</p>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Les liens relient les pages avec <code>&lt;a href&gt;</code>.</li>
+      <li>Les images nécessitent un chemin valide et un texte <code>alt</code>.</li>
+      <li>Utilisez des chemins relatifs pour les fichiers locaux, absolus pour les URLs.</li>
+    </ul>
+
+    <h2>🚀 Pour aller plus loin</h2>
+    <p>Crée un lien vers une autre page de ton site (ex. : <code>chapitre5.html</code>) ou ajoute plusieurs images avec des tailles différentes.</p>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie le code HTML dans un éditeur :</p>
+    <ul>
+      <li><a href="https://replit.com/languages/html" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://jsfiddle.net" target="_blank">JSFiddle</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre5.html" class="btn">➡️ Chapitre 5 : Les listes</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu HTML</a></p>
+  </footer>
+</body>
+</html>

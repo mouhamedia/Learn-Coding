@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 8 - Les balises sémantiques</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #e44d26;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #e44d26;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #e44d26;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #e44d26;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 8 : Les balises sémantiques 🏷️</h1>
+    <p>Structure ton site avec des balises qui ont du sens !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce que la sémantique ?</h2>
+    <p>Les <strong>balises sémantiques</strong> décrivent le rôle du contenu (ex. : en-tête, navigation, article), ce qui améliore l’accessibilité et le référencement (SEO).</p>
+    <p><strong>Analogie</strong> : Les balises sémantiques sont comme des étiquettes sur des dossiers : elles indiquent clairement ce qu’il y a dedans.</p>
+
+    <h2>🔹 Balises sémantiques courantes</h2>
+    <ul>
+      <li><code>&lt;header&gt;</code> : En-tête de la page ou d’une section.</li>
+      <li><code>&lt;nav&gt;</code> : Menu de navigation.</li>
+      <li><code>&lt;article&gt;</code> : Contenu indépendant (ex. : billet de blog).</li>
+      <li><code>&lt;section&gt;</code> : Section thématique.</li>
+      <li><code>&lt;footer&gt;</code> : Pied de page.</li>
+    </ul>
+
+    <h2>💻 Exemple pratique</h2>
+    <p>Voici une page sémantique :</p>
+    <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Page sémantique&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Mon blog&lt;/h1&gt;
+  &lt;/header&gt;
+  &lt;nav&gt;
+    &lt;a href="#home"&gt;Accueil&lt;/a&gt;
+    &lt;a href="#about"&gt;À propos&lt;/a&gt;
+  &lt;/nav&gt;
+  &lt;article&gt;
+    &lt;h2&gt;Mon article&lt;/h2&gt;
+    &lt;p&gt;Ceci est un article intéressant.&lt;/p&gt;
+  &lt;/article&gt;
+  &lt;footer&gt;
+    &lt;p&gt;© 2025 Mon blog&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+    <p>Cet exemple utilise des balises sémantiques pour structurer une page.</p>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Les balises sémantiques améliorent la lisibilité et le SEO.</li>
+      <li>Utilisez <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, etc., pour clarifier la structure.</li>
+      <li>Évitez les balises génériques comme <code>&lt;div&gt;</code> quand une balise sémantique convient.</li>
+    </ul>
+
+    <h2>🚀 Pour aller plus loin</h2>
+    <p>Refactorise une page non sémantique en utilisant <code>&lt;section&gt;</code> et <code>&lt;aside&gt;</code>.</p>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie le code HTML dans un éditeur :</p>
+    <ul>
+      <li><a href="https://replit.com/languages/html" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://jsfiddle.net" target="_blank">JSFiddle</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre9.html" class="btn">➡️ Chapitre 9 : Intégration CSS et JS</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu HTML</a></p>
+  </footer>
+</body>
+</html>

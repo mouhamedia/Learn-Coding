@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 2 - Structure d’un document HTML</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #e44d26;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #e44d26;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #e44d26;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #e44d26;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 2 : Structure d’un document HTML 🏗️</h1>
+    <p>Comprends comment organiser une page HTML correctement !</p>
+  </header>
+
+  <main>
+    <h2>🔹 La structure de base</h2>
+    <p>Un document HTML suit une structure standard avec des balises principales :</p>
+    <ul>
+      <li><code>&lt;!DOCTYPE html&gt;</code> : Indique que c’est un document HTML5.</li>
+      <li><code>&lt;html&gt;</code> : Contient tout le contenu de la page.</li>
+      <li><code>&lt;head&gt;</code> : Contient les métadonnées (titre, encodage, etc.).</li>
+      <li><code>&lt;body&gt;</code> : Contient le contenu visible (textes, images, etc.).</li>
+    </ul>
+    <p><strong>Analogie</strong> : Une page HTML est comme un livre : <code>&lt;head&gt;</code> est la page de titre, et <code>&lt;body&gt;</code> est le contenu des chapitres.</p>
+
+    <h2>🔹 Les métadonnées</h2>
+    <p>Dans <code>&lt;head&gt;</code>, on trouve :</p>
+    <ul>
+      <li><code>&lt;title&gt;</code> : Le titre affiché dans l’onglet du navigateur.</li>
+      <li><code>&lt;meta charset="UTF-8"&gt;</code> : Définit l’encodage des caractères.</li>
+      <li><code>&lt;meta name="viewport"&gt;</code> : Rend la page responsive.</li>
+    </ul>
+
+    <h2>💻 Exemple pratique</h2>
+    <p>Voici un document HTML structuré :</p>
+    <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Mon site&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Bienvenue sur mon site&lt;/h1&gt;
+  &lt;p&gt;Ce site est en construction !&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+    <p>Cet exemple crée une page avec un titre et un paragraphe.</p>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Un document HTML a une structure fixe : DOCTYPE, html, head, body.</li>
+      <li>Le <code>&lt;head&gt;</code> contient les informations non visibles.</li>
+      <li>Le <code>&lt;body&gt;</code> contient tout ce que l’utilisateur voit.</li>
+    </ul>
+
+    <h2>🚀 Pour aller plus loin</h2>
+    <p>Ajoute une balise <code>&lt;meta name="description"&gt;</code> pour décrire ton site, ou modifie le titre pour inclure ton nom.</p>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie le code HTML dans un éditeur :</p>
+    <ul>
+      <li><a href="https://replit.com/languages/html" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://jsfiddle.net" target="_blank">JSFiddle</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre3.html" class="btn">➡️ Chapitre 3 : Les balises de texte</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu HTML</a></p>
+  </footer>
+</body>
+</html>

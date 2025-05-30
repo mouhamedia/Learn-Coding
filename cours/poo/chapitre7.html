@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 7 - Constructeurs et destructeurs</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #2b2d42;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2b2d42;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #2b2d42;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 7 : Constructeurs et destructeurs 🏗️</h1>
+    <p>Apprends à initialiser et nettoyer tes objets correctement !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’un constructeur ?</h2>
+    <p>Un <strong>constructeur</strong> est une méthode spéciale (<code>__init__</code> en Python) appelée lors de la création d’un objet pour initialiser ses attributs.</p>
+
+    <h2>🔹 Qu’est-ce qu’un destructeur ?</h2>
+    <p>Un <strong>destructeur</strong> (<code>__del__</code> en Python) est appelé quand un objet est supprimé pour libérer des ressources.</p>
+
+    <h2>💻 Exemple en Python</h2>
+    <p>Voici une classe <code>Livre</code> avec un constructeur et un destructeur :</p>
+    <pre><code>
+class Livre:
+    def __init__(self, titre, auteur="Inconnu"):
+        self.titre = titre
+        self.auteur = auteur
+        print(f"Livre {self.titre} créé.")
+    
+    def __del__(self):
+        print(f"Livre {self.titre} supprimé.")
+
+livre = Livre("Python 101")
+del livre  # Affiche : Livre Python 101 supprimé.
+    </code></pre>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Le constructeur <code>__init__</code> initialise les attributs d’un objet.</li>
+      <li>Le destructeur <code>__del__</code> est appelé automatiquement à la suppression.</li>
+      <li>Les paramètres par défaut (ex. : <code>auteur="Inconnu"</code>) rendent le code flexible.</li>
+    </ul>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie ce code dans un environnement Python :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre8.html" class="btn">➡️ Chapitre 8 : Interfaces et classes abstraites</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu POO</a></p>
+  </footer>
+</body>
+</html>

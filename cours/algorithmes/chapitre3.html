@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapitre 3 - Instructions conditionnelles</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #008080;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #008080;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #008080;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #008080;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapitre 3 : Instructions conditionnelles 🚦</h1>
+    <p>Prends des décisions dans tes algorithmes avec les conditions !</p>
+  </header>
+
+  <main>
+    <h2>🔹 Qu’est-ce qu’une instruction conditionnelle ?</h2>
+    <p>Une <strong>instruction conditionnelle</strong> permet d’exécuter un bloc d’instructions seulement si une condition est vraie. C’est comme un feu de circulation : si c’est vert, avance ; sinon, arrête-toi.</p>
+    <p><strong>Analogie</strong> : Imagine que tu décides quoi porter. S’il fait froid, tu prends un manteau ; sinon, un t-shirt.</p>
+
+    <h2>🔹 Syntaxe et opérateurs</h2>
+    <p>Les instructions conditionnelles utilisent des opérateurs comme :</p>
+    <ul>
+      <li><code>=</code> (égalité), <code>&gt;</code> (supérieur), <code>&lt;</code> (inférieur).</li>
+      <li><code>ET</code>, <code>OU</code>, <code>NON</code> pour combiner des conditions.</li>
+    </ul>
+    <p>Structure de base : <code>Si condition Alors ... Sinon ... FinSi</code>.</p>
+
+    <h2>💻 Exemple pratique</h2>
+    <p>Voici un algorithme pour vérifier si un nombre est positif :</p>
+    <pre><code>
+# Pseudo-code
+Algorithme EstPositif
+    Entrée : nombre
+    Début
+        Si nombre > 0 Alors
+            Afficher "Le nombre est positif."
+        Sinon Si nombre = 0 Alors
+            Afficher "Le nombre est zéro."
+        Sinon
+            Afficher "Le nombre est négatif."
+        FinSi
+    Fin
+
+# Python
+nombre = int(input("Entrez un nombre : "))
+if nombre > 0:
+    print("Le nombre est positif.")
+elif nombre == 0:
+    print("Le nombre est zéro.")
+else:
+    print("Le nombre est négatif.")
+    </code></pre>
+
+    <h2>📌 Points clés</h2>
+    <ul>
+      <li>Les conditions permettent de choisir entre plusieurs chemins.</li>
+      <li><code>elif</code> (Sinon Si) teste des conditions supplémentaires.</li>
+      <li>Les opérateurs logiques combinent plusieurs conditions.</li>
+    </ul>
+
+    <h2>🚀 Pour aller plus loin</h2>
+    <p>Modifie l’exemple pour vérifier si un nombre est pair ou impair (astuce : utilise <code>nombre % 2 == 0</code>).</p>
+
+    <h2>📥 Essaie par toi-même !</h2>
+    <p>Copie le code Python dans un environnement :</p>
+    <ul>
+      <li><a href="https://replit.com" target="_blank">Replit</a> (idéal pour mobile).</li>
+      <li><a href="https://trinket.io" target="_blank">Trinket</a> (simple et sans installation).</li>
+    </ul>
+
+    <a href="chapitre4.html" class="btn">➡️ Chapitre 4 : Les boucles</a>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Retour au menu Algorithmes</a></p>
+  </footer>
+</body>
+</html>
