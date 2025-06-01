@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
+<head>
   <meta charset="UTF-8">
   <title>Django - Framework Python</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -41,6 +43,28 @@
       padding: 2rem;
       font-size: 0.9rem;
     }
+    /* Responsive mobile */
+    @media (max-width: 600px) {
+      header {
+        padding: 1rem;
+      }
+      header h1 {
+        font-size: 1.5rem;
+      }
+      .card-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1rem;
+      }
+      .card {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+      footer {
+        padding: 1rem 0.5rem;
+        font-size: 0.95rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -66,7 +90,6 @@
   <footer>
     <p><a href="../../index.html">← Retour à l'accueil</a></p>
     <p>© 2025 Learn Coding. Créé pour les passionnés du code ❤️</p> 
-    
   </footer>
 
 </body>

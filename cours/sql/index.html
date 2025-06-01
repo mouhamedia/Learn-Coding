@@ -1,69 +1,93 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <meta charset="UTF-8">
-  <title>Cours de SQL</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: #f4f4f4;
-      color: #333;
-    }
-    header {
-      background-color: #003049;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-      padding: 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .card {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      text-decoration: none;
-      color: #003049;
-      transition: transform 0.2s, background 0.2s;
-    }
-    .card:hover {
-      transform: scale(1.03);
-      background-color: #e8f1fc; /* Bleu clair pour harmoniser avec #003049 */
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Cours Complet de SQL 📚</h1>
-    <p>Maîtrise les bases de la gestion de bases de données relationnelles.</p>
-  </header>
+  <head>
+    <meta charset="UTF-8">
+    <title>Cours de SQL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        background: #f4f4f4;
+        color: #333;
+      }
+      header {
+        background-color: #003049;
+        color: white;
+        padding: 2rem;
+        text-align: center;
+      }
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        padding: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        text-decoration: none;
+        color: #003049;
+        transition: transform 0.2s, background 0.2s;
+      }
+      .card:hover {
+        transform: scale(1.03);
+        background-color: #e8f1fc; /* Bleu clair pour harmoniser avec #003049 */
+      }
+      footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+      }
+      /* Responsive mobile */
+      @media (max-width: 600px) {
+        header {
+          padding: 1rem;
+        }
+        header h1 {
+          font-size: 1.5rem;
+        }
+        .card-grid {
+          grid-template-columns: 1fr;
+          padding: 1rem;
+          gap: 1rem;
+        }
+        .card {
+          padding: 1rem;
+          font-size: 1rem;
+        }
+        footer {
+          padding: 1rem 0.5rem;
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Cours Complet de SQL 📚</h1>
+      <p>Maîtrise les bases de la gestion de bases de données relationnelles.</p>
+    </header>
 
-  <main class="card-grid">
-    <a class="card" href="chapitre1-sql.html"><h3>Chapitre 1</h3><p>Introduction au SQL et aux bases de données</p></a>
-    <a class="card" href="chapitre2-sql.html"><h3>Chapitre 2</h3><p>Création de bases de données et tables</p></a>
-    <a class="card" href="chapitre3-sql.html"><h3>Chapitre 3</h3><p>Types de données et contraintes</p></a>
-    <a class="card" href="chapitre4-sql.html"><h3>Chapitre 4</h3><p>Insertion de données (INSERT)</p></a>
-    <a class="card" href="chapitre5-sql.html"><h3>Chapitre 5</h3><p>Sélection de données (SELECT)</p></a>
-    <a class="card" href="chapitre6-sql.html"><h3>Chapitre 6</h3><p>Mise à jour et suppression (UPDATE, DELETE)</p></a>
-    <a class="card" href="chapitre7-sql.html"><h3>Chapitre 7</h3><p>Filtres et conditions (WHERE, LIKE)</p></a>
-    <a class="card" href="chapitre8-sql.html"><h3>Chapitre 8</h3><p>Jointures entre tables (JOIN)</p></a>
-    <a class="card" href="chapitre9-sql.html"><h3>Chapitre 9</h3><p>Fonctions d'agrégation (COUNT, SUM, AVG...)</p></a>
-    <a class="card" href="chapitre10-sql.html"><h3>Chapitre 10</h3><p>Gestion des utilisateurs et permissions</p></a>
-  </main>
+    <main class="card-grid">
+      <a class="card" href="chapitre1-sql.html"><h3>Chapitre 1</h3><p>Introduction au SQL et aux bases de données</p></a>
+      <a class="card" href="chapitre2-sql.html"><h3>Chapitre 2</h3><p>Création de bases de données et tables</p></a>
+      <a class="card" href="chapitre3-sql.html"><h3>Chapitre 3</h3><p>Types de données et contraintes</p></a>
+      <a class="card" href="chapitre4-sql.html"><h3>Chapitre 4</h3><p>Insertion de données (INSERT)</p></a>
+      <a class="card" href="chapitre5-sql.html"><h3>Chapitre 5</h3><p>Sélection de données (SELECT)</p></a>
+      <a class="card" href="chapitre6-sql.html"><h3>Chapitre 6</h3><p>Mise à jour et suppression (UPDATE, DELETE)</p></a>
+      <a class="card" href="chapitre7-sql.html"><h3>Chapitre 7</h3><p>Filtres et conditions (WHERE, LIKE)</p></a>
+      <a class="card" href="chapitre8-sql.html"><h3>Chapitre 8</h3><p>Jointures entre tables (JOIN)</p></a>
+      <a class="card" href="chapitre9-sql.html"><h3>Chapitre 9</h3><p>Fonctions d'agrégation (COUNT, SUM, AVG...)</p></a>
+      <a class="card" href="chapitre10-sql.html"><h3>Chapitre 10</h3><p>Gestion des utilisateurs et permissions</p></a>
+    </main>
 
-  <footer>
-    <p><a href="../../index.html">← Retour à l'accueil</a></p>
-  </footer>
-</body>
+    <footer>
+      <p><a href="../../index.html">← Retour à l'accueil</a></p>
+    </footer>
+  </body>
 </html>
